@@ -21,7 +21,7 @@ function Detailsventas() {
 
   return (
 
-    <div className='row d-flex cuerpo'>
+    <div className='row d-flex cuerpo mt-5'>
 
 
 

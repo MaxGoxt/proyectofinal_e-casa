@@ -39,7 +39,7 @@ export const Home = () => {
     }
 
     return (
-        <div className="text-white p-5">
+        <div className="text-white p-5 my-3">
             <ul className="nav nav-pills nav-justified mb-5" id="ex1" role="tablist">
                 <li className="nav-item" role="presentation">
                     <h2 className={"nav-link " + loginST} id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
