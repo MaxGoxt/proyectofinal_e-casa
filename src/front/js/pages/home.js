@@ -55,7 +55,7 @@ export const Home = () => {
                     {store.alquileres.map((item, index) => {
                         return (
                             <div key={index} className="row ">
-                                <CardFeedAlq className="col-4" ubicacion={item.location} precio={item.price} id={item.id} />
+                                <CardFeedAlq className="col-4" ubicacion={item.location} precio={item.price} id={item.id} imageUrl={item.image_url} />
                             </div>
                         )
                     })}
@@ -64,7 +64,7 @@ export const Home = () => {
                     {store.ventas.map((item, index) => {
                         return (
                             <div key={index} className="row">
-                                <CardFeedVen className="col-4" ubicacion={item.location} precio={item.price} id={item.id} />
+                                <CardFeedVen className="col-4" ubicacion={item.location} precio={item.price} id={item.id} imageUrl={item.image_url} />
                             </div>
                         )
                     })}

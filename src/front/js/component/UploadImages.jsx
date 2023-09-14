@@ -8,7 +8,7 @@ export const UploadImages = () => {
 
     const getImages = async () => {
         try {
-            const data = await fetch(process.env.BACKEND_URL + "/houses/images/2")
+            const data = await fetch(process.env.BACKEND_URL + "/api/houses/images/2")
             const response = await data.json();
             console.log(response.results);
             setImages(response.results);
@@ -44,7 +44,7 @@ export const UploadImages = () => {
 
         try {
             const saveImage = async () => {
-                await fetch(process.env.BACKEND_URL + "/post", options);
+                await fetch(process.env.BACKEND_URL + "/api/post", options);
                 await getImages();
             }
             saveImage();
@@ -58,7 +58,7 @@ export const UploadImages = () => {
     }, [])
 
     return (
-        <div>
+        <div className='mt-5'>
             <form onSubmit={uploadImage}>
                 <input type="file" onChange={(e) => setFiles(e.target.files)} />
                 <button>Upload</button>
