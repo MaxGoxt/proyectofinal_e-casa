@@ -193,7 +193,7 @@ def editar_posteos(house_id):
     post_query = House.query.filter_by(user_id=request_body["user_id"]).filter_by(id=house_id).first()
     
      
-    #  #validamos que exista una casa
+    #  validamos que exista una casa
     if post_query is None:
         return jsonify({"msg": "Esta casa no existe"}), 404
 
