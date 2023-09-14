@@ -103,16 +103,24 @@ def consulto_un_usuario(usuario_id):
     return jsonify(response_body), 200
 
 # # # Editar datos del perfil de un usuario
-@api.route('/user/<int:user_id>', methods=['PUT'])
+@api.route('/user', methods=['PUT'])
 @jwt_required()
-def editar_perfil(user_id):
+def editar_perfil():
 
     request_body = request.get_json(force=True)
     current_user_email = get_jwt_identity()
-    perfil_query = User.query.filter_by(id=user_id).first()
+    perfil_query = User.query.filter_by(email=current_user_email).first()
 
     if "name" in request_body:
-        perfil_query.title = request_body["name"]
+        perfil_query.name = request_body["name"]
+    if "lastname" in request_body:
+        perfil_query.lastname = request_body["lastname"]
+    if "password" in request_body:
+        perfil_query.password = request_body["password"]
+    if "phone_number" in request_body:
+        perfil_query.phone_number = request_body["phone_number"]
+    if "is_admin" in request_body:
+        perfil_query.is_admin = request_body["is_admin"]
 
     db.session.commit()
     return jsonify({"msg": "Tu perfil fue editado con éxito"}), 200

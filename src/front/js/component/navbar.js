@@ -1,16 +1,17 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
+import logoecasa from "../../img/logoe-casa.png";
 
 export const Navbar = () => {
 
 	const { store, actions } = useContext(Context);
 
 	return (
-		<nav className="navbar navbar-light bg-light">
+		<nav className="fixed-top navbar navbar-light bg-light">
 			<div className="container">
 				<Link to="/">
-					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
+					<img className="ms-2" src={logoecasa} alt="logo ecasa" style={{ width: "30px" }} />
 				</Link>
 				{store.auth ?
 					<div className="ml-auto">
@@ -20,8 +21,8 @@ export const Navbar = () => {
 					</div>
 					:
 					<div className="ml-auto">
-						<Link to="/signup">
-							<button className="btn btn-primary">Registrate</button>
+						<Link to="/login">
+							<button className="btn btn-primary">Iniciar sesión</button>
 						</Link>
 					</div>
 				}</div>
