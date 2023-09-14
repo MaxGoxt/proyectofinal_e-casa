@@ -22,7 +22,7 @@ function Details() {
 
       <div className="col-12" style={{ width: "90rem" }}>
         <Link to={"/"}><button type="submit" className="btn text-white bg-azul-oscuro  rounded-pill w-25 my-4">Volver</button></Link>
-        <img src="https://www.decorablog.com/wp-content/2011/06/Casa-lujosa-Singapur-3.jpg" className="card-img-top" alt="..." />
+        <img src={store.casa.image_url}className="card-img-top" alt="..." />
         <div className="card-body">
           <h2 className="card-title">{store.casa.title}</h2>
 
