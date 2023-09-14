@@ -10,7 +10,7 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
     phone_number = db.Column(db.String(30), nullable=False)
-    account_creation_date = db.Column(db.String(40), nullable=False)
+    account_creation_date = db.Column(db.String(40), nullable=True)
     is_admin = db.Column(db.Boolean(), nullable=False)
     
     houses = db.relationship('House', backref='user', lazy=True)
@@ -72,6 +72,7 @@ class House(db.Model):
         return {
             "id": self.id,
             "title": self.title,
+            "description": self.description,
             "category": self.category,
             "image_url": self.image_url,
             "user_id": self.user_id,
