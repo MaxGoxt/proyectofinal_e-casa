@@ -201,6 +201,8 @@ def editar_posteos(house_id):
 
     if "title" in request_body:
         post_query.title = request_body["title"]
+    if "description" in request_body:
+        post_query.description = request_body["description"]
     if "category" in request_body:
         post_query.category = request_body["category"]
     # if "image_id" in body:
