@@ -22,7 +22,7 @@ function Details() {
 
       <div className="col-12" style={{ width: "90rem" }}>
         <Link to={"/"}><button type="submit" className="btn text-white bg-azul-oscuro  rounded-pill w-25 my-4">Volver</button></Link>
-        <img src={store.casa.image_url}className="card-img-top" alt="..." />
+        <img src={store.casa.image_url} className="card-img-top" alt="..." />
         <div className="card-body">
           <h2 className="card-title">{store.casa.title}</h2>
 
@@ -34,16 +34,15 @@ function Details() {
         </div>
         <ul className="list-group list-group-flush">
           <div className='d-flex justify-content-between'>
-            <p className='ms-3'><strong>${store.casa.price} Mensual<br /> </strong><p className='disponible'>Disponible ahora</p></p><button type="submit" className="btn text-white bg-azul-oscuro  mx-auto rounded-pill w-25 my-4 me-3 ">Alquilar</button>
+            <p className='ms-3'><strong>${store.casa.price} Mensual </strong></p> <br />
+            
+             <p className='disponible'>Disponible ahora</p>
+             <button type="submit" className="btn text-white bg-azul-oscuro  mx-auto rounded-pill w-25 my-4 me-3 ">Alquilar</button>
           </div>
-          <li className="list-group-item bg-celeste-claro mt-4">Hermoso y amplio estudio de 40m2 para 4 personas, situado en el lomo de Punta Ballena, un lugar único y de los más bellos del país.
-
-            Desde un patio generoso propio con piscina, se obtienen unas increíbles vistas al mar y a Punta del Este.
-
-            Cuenta con servicio de mucama diario incluido. </li>
+          <li className="list-group-item bg-celeste-claro mt-4"><p>{store.casa.description}</p></li>
           <div className='d-flex mt-4'>
             <div className='ms-3'>
-              <li className="list-group-item duenio">Dueño: Pablo Bullor <br />
+              <li className="list-group-item duenio"><p>Dueño: Pablo Bullor</p> <br />
                 <p className='registro'>Se registró en mayo del 2015</p>
               </li>
             </div>
