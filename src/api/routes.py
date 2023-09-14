@@ -195,12 +195,14 @@ def editar_posteos(house_id):
     post_query = House.query.filter_by(user_id=request_body["user_id"]).filter_by(id=house_id).first()
     
      
-    #  #validamos que exista una casa
+    #  validamos que exista una casa
     if post_query is None:
         return jsonify({"msg": "Esta casa no existe"}), 404
 
     if "title" in request_body:
         post_query.title = request_body["title"]
+    if "description" in request_body:
+        post_query.description = request_body["description"]
     if "category" in request_body:
         post_query.category = request_body["category"]
     # if "image_id" in body:

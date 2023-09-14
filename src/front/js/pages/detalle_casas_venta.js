@@ -24,14 +24,9 @@ function Detailsventas() {
     <div className='row d-flex cuerpo mt-5'>
 
 
-
-
-
-
-
       <div className="col-12" style={{ width: "90rem" }}>
         <Link to={"/"}><button type="submit" className="btn text-white bg-azul-oscuro  rounded-pill w-25 my-4">Volver</button></Link>
-        <img src="https://www.decorablog.com/wp-content/2011/06/Casa-lujosa-Singapur-3.jpg" className="card-img-top" alt="..." />
+        <img src={store.casa.image_url} className="card-img-top" alt="..." />
         <div className="card-body">
           <h2 className="card-title">{store.casa.title}</h2>
 
@@ -43,13 +38,9 @@ function Detailsventas() {
         </div>
         <ul className="list-group list-group-flush">
           <div className='d-flex justify-content-between'>
-            <p className='ms-3'><strong>U$S {store.casa.price}<br /> </strong><p className='disponible'>Disponible ahora</p></p><button type="submit" className="btn text-white bg-azul-oscuro  mx-auto rounded-pill w-25 my-4 me-3 ">Comprar</button>
+            <p className='ms-3'><strong>U$S {store.casa.price}<br /> </strong><p className='disponible'>Disponible ahora</p></p><button type="submit" className="btn text-white bg-azul-oscuro  mx-auto rounded-pill w-25 my-4 me-3 ">Contacto</button>
           </div>
-          <li className="list-group-item bg-celeste-claro mt-4">Hermoso y amplio estudio de 40m2 para 4 personas, situado en el lomo de Punta Ballena, un lugar único y de los más bellos del país.
-
-            Desde un patio generoso propio con piscina, se obtienen unas increíbles vistas al mar y a Punta del Este.
-
-            Cuenta con servicio de mucama diario incluido. </li>
+          <li className="list-group-item bg-celeste-claro mt-4">{store.casa.description} </li>
           <div className='d-flex mt-4'>
             <div className='ms-3'>
               <li className="list-group-item duenio">Dueño: Pablo Bullor <br />

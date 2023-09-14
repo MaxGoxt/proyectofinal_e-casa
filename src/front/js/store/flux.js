@@ -20,7 +20,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			alquileres : [],
 			ventas : [],
 			casa: {},
-			auth : false
+			auth : false,
+			perfil:{}
 		},
 		actions: {
 
@@ -106,10 +107,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 				getPerfil: async () => {
 					try {
 						let data = await axios.get(process.env.BACKEND_URL + '/api/perfil',
+						
 						{
 							headers : {"Authorization" : "Bearer " + localStorage.getItem('token')}
 						})
-						console.log(data);
+						setStore({perfil: data.data})
+						console.log(getStore().perfil);
+						
 						return true
 					} catch (error) {
 						console.log(error);
@@ -189,7 +193,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			}
 
-		}
+		},
+
+		
 	}
 }};
 
