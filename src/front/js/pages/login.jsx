@@ -17,7 +17,7 @@ export const Login = () => {
         let logged = await actions.login(email, contrasena);
         if (logged === true) {
             navigate("/")
-            await actions.getPerfil(email, contrasena);
+            
         }
     }
 

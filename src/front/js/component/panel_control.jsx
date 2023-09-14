@@ -1,9 +1,11 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import diego from "../../img/diego.jpg";
+import { Context } from '../store/appContext';
 
 
 export const PanelCtrl = () => {
+    const { store, actions } = useContext(Context)
     return (
         <div className="bg-celeste-claro py-2 fixed-bottom mt-auto text-center azul-oscuro d-flex justify-content-around">
             <i style={{ fontSize: "40px" }} className="fa-regular fa-heart"></i>
