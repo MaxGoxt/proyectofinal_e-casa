@@ -15,7 +15,7 @@ export const CardFeedVen = (props) => {
                     <strong className="card-title">{props.ubicacion}</strong>
                     <p className="card-text">US$ {props.precio}</p>
                 </div>
-                <div className="d-flex justify-content-between px-1">
+                <div className="d-flex justify-content-between px-1 ">
                     <i className="fa-regular fa-heart"></i>
                     <Link to={"/detailsventas/" + props.id}><p>Ver detalles</p></Link>
                 </div>
