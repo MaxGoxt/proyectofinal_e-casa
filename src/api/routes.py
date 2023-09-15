@@ -279,14 +279,30 @@ def eliminar_casa_favorita(casa_id):
 def save_post():
     image = request.files.get('image')  # Obtén la imagen
     json_data = json.loads(request.form.get('json_data'))  # Obtén la cadena JSON
-    print(json_data)
+
+    user_id = json_data.get('user_id', None)
+    print(user_id)
+
+    error_index_dosent_exist = f"El usuario con id {json_data.get('user_id', None)},  no existe" 
+    error_index_not_received = "El user_id no fue enviado" 
+
+    if user_id is None:
+        return jsonify({ "msg": error_index_not_received })
+
+    user = User.query.filter_by(id = user_id).first()
+
+    if user is None:
+        return jsonify({ "msg": error_index_dosent_exist })
+
+    print("pre print user")
+    print(user)
 
     house = House(
         title=json_data.get("title", None),
         category=json_data.get("category", None),
         image_url="no image",
         description=json_data.get("description", None),
-        user_id=json_data.get("user_id", None),
+        user_id=user_id,
         location=json_data.get("location", None),
         number_of_rooms=json_data.get("number_of_rooms", None),
         number_of_bathrooms=json_data.get("number_of_bathrooms", None),
@@ -320,16 +336,6 @@ def deleteHouse(id):
 
     return jsonify({ "is_removed": is_removed }), 200
 
-@api.route("/houses/images/<int:house_id>", methods=['GET'])
-def handle_call_house_images(house_id):
-    images_query = Image.query.filter_by(house_id = house_id)
-    if images_query == []:
-        return jsonify({ "msg": "There is not images" })
-    
-    response = list(map(lambda user: user.serialize(), images_query))
-
-    return jsonify({ "results": response })
-
 @api.route("/gethouses/rent", methods=['GET'])
 def getHousesToRent():
     alquiler = House.query.filter_by(category="Alquiler")
@@ -342,6 +348,16 @@ def getHousesToBuy():
     alquiler = House.query.filter_by(category="Venta")
     response = list(map(lambda user: user.serialize(), alquiler))
     
+    return jsonify({ "results": response }), 200
+
+@api.route("/gethouses", methods=['GET'])
+def getAllTheHouses():
+    houses = House.query.all()
+    response = list(map(lambda user: user.serialize(), houses))
+
+    if response == None:
+        return jsonify({ "msg": "The house dosen´t exist" }), 404
+
     return jsonify({ "results": response }), 200
 
 @api.route("/gethouse/<int:id>", methods=['GET'])
