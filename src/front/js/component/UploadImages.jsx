@@ -9,7 +9,7 @@ export const UploadImages = () => {
     const getImages = async () => {
         console.log("cambiar id de la imagen a pedir")
         try {
-            const data = await fetch(process.env.BACKEND_URL + "/gethouse/1")
+            const data = await fetch(process.env.BACKEND_URL + "/api/gethouse/1")
             const response = await data.json();
             console.log(response.results.image_url);
             setImages(response.results.image_url);
