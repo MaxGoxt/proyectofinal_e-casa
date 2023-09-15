@@ -21,7 +21,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			ventas : [],
 			casa: {},
 			auth : false,
-			perfil:{}
+			perfil:{},
+			favoritos:[]
 		},
 		actions: {
 
@@ -202,7 +203,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				{
 					headers : {"Authorization" : "Bearer " + localStorage.getItem('token')}
 				})
-				console.log(data.data);
+				console.log(data.data.results);
+				setStore({"favoritos": data.data.results})
 
 			} catch (error) {
 				console.log(error);
@@ -210,7 +212,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				// 	alert(error.response.data.msj)
 				// }
 				return false
-
 
 		}
 

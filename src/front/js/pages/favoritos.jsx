@@ -21,12 +21,15 @@ export const Favoritos = () => {
     return (
         <div className= "mt-5">
         <h1>Tus favoritos</h1>
+        {store.favoritos.map((item, index) => {
+                        return (
+                            <div key={index}>
+                                <CardFav titulo={item.houseId.title} ubicacion={item.houseId.location} id={index} imageUrl={item.houseId.image_url} />
+                            </div>
+                        )
+                    })}
 
-        <CardFav/>
-        <CardFav/>
-        <CardFav/>
-        <CardFav/>
-        <CardFav/>
+        
 
         </div>
     );
