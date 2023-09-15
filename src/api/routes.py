@@ -276,12 +276,14 @@ def eliminar_casa_favorita(casa_id):
 
 
 @api.route("/post", methods=['POST'])
+@jwt_required()
 def save_post():
     image = request.files.get('image')  # Obtén la imagen
     json_data = json.loads(request.form.get('json_data'))  # Obtén la cadena JSON
 
-    user_id = json_data.get('user_id', None)
-    print(user_id)
+    current_user_email = get_jwt_identity()
+    user = User.query.filter_by(email = current_user_email).first()
+    user_id = user.id
 
     error_index_dosent_exist = f"El usuario con id {json_data.get('user_id', None)},  no existe" 
     error_index_not_received = "El user_id no fue enviado" 
@@ -293,9 +295,6 @@ def save_post():
 
     if user is None:
         return jsonify({ "msg": error_index_dosent_exist })
-
-    print("pre print user")
-    print(user)
 
     house = House(
         title=json_data.get("title", None),
