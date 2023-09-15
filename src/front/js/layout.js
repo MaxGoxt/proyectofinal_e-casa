@@ -14,6 +14,8 @@ import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import Perfil from "./pages/perfilUsuario";
 import { Upload } from "./pages/Upload.jsx";
+import { Favoritos } from "./pages/favoritos.jsx";
+
 
 
 //create your first component
@@ -40,6 +42,8 @@ const Layout = () => {
                         <Route element={<Upload />} path="/upload" />
                         <Route element={<Detailsventas />} path="/detailsventas/:id" />
                         <Route element={<Perfil />} path="/perfil" />
+                        <Route element={<Favoritos />} path="/favoritos" />
+
                     </Routes>
                     <Footer />
                 </ScrollToTop>
