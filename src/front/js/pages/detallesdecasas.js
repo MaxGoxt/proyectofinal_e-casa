@@ -20,7 +20,7 @@ function Details() {
   return (
     <div className='row d-flex cuerpo mt-5'>
 
-      <div className="col-12" style={{ width: "90rem" }}>
+      <div className="col-12 bg-white" style={{ width: "90rem" }}>
         <Link to={"/"}><button type="submit" className="btn text-white bg-azul-oscuro  rounded-pill w-25 my-4">Volver</button></Link>
         <img src={store.casa.image_url} className="card-img-top" alt="..." />
         <div className="card-body">

@@ -22,7 +22,7 @@ export const Login = () => {
     }
 
     return (
-        <div className="mt-5">
+        <div className="mt-5 bg-white container">
             <Link to={"/"}>
                 <div className="d-flex justify-content-center">
                     <img src={logoecasa} alt="logo ecasa" style={{ width: "55px" }}/>

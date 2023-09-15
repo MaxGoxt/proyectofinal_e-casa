@@ -37,7 +37,7 @@ function Singup() {
 
   return (
    
-    <form className='container' onSubmit={handleSubmit}>
+    <form className='container mt-5 bg-white' onSubmit={handleSubmit}>
       <h1 className='d-flex justify-content-start mb-4'>Regístrate</h1>
       <div className=''>
     <div className="mb-3 texto-amarillo">
