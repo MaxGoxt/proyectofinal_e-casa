@@ -139,7 +139,7 @@ export const UploadImages = () => {
     }, [])
 
     return (
-        <div className="mt-5">
+        <div className="mt-5 bg-celeste-claro">
             <form onSubmit={uploadImage} className="d-flex flex-column align-items-center mt-4">
                 <img src={images !== "" ? images : "https://www.eclosio.ong/wp-content/uploads/2018/08/default.png"} />
                 <label htmlFor="file" className="mt-2">
