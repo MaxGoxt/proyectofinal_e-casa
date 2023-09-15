@@ -28,7 +28,7 @@ function Perfil() {
 
     return (
     
-        <form className='container mt-5' onSubmit={handleSubmit}>
+        <form className='container pb-3 bg-celeste-claro mt-5' onSubmit={handleSubmit}>
             <Link to={"/"}><button type="submit" className="btn text-white bg-azul-oscuro  rounded-pill  my-4"><i class="fa-solid fa-xmark"></i></button></Link>
 
             <div className='ms-3 d-flex  justify-content-center me-4'>
@@ -38,8 +38,8 @@ function Perfil() {
 
                 <div className=' justify-content-center'>
                     <img src={diego} style={{ width: "100px", height: "100px" }} className="rounded-circle " alt="..." />
-                    <p className='m-auto'>{store.perfil.name}</p>
-                    <p className='registro'>{store.perfil.email}</p>
+                    <strong><p className='m-auto'>{store.perfil.name}</p></strong>
+                    <strong><p className='registro'>{store.perfil.email}</p></strong>
 
                     
                 </div>

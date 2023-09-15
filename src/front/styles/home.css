@@ -6,8 +6,19 @@
     on that page only (the ones not reused in other pages).
 */
 body{
-    background-color: #f2f7ff;
+    
+    background-attachment: fixed;
+    background-size: cover;
+    background-image: url("https://d2p0bx8wfdkjkb.cloudfront.net/static/properties/TBCZYOYRXE/M9O3IRQ7R3/dnHhvJnfVK/2b3889fa-453f-4352-a98a-ba2563424788.jpeg");
+    
 }
+
+.padd{
+    padding-top: 10rem;
+    
+}
+
+
 
 .texto-amarillo{
     color: #fdbe34;
@@ -27,6 +38,7 @@ body{
 
 .bg-celeste-claro{
     background-color: #f2f7ff;
+    opacity: 1;
 }
 .duenio{
     display: contents;

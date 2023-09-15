@@ -9,9 +9,9 @@ export const CardFeedVen = (props) => {
     const { store, actions } = useContext(Context)
     return (
         <div style={{width: "18rem"}}>
-            <img src={props.imageUrl} className="card-img-top " alt="..."/>
-            <div className="azul-oscuro mb-5">
-                <div className="d-flex justify-content-between">
+            <img src={props.imageUrl} className="card-img-top" alt="..."/>
+            <div className="azul-oscuro mb-5 bg-white rounded p-2">
+                <div className="d-flex justify-content-between ">
                     <strong className="card-title">{props.ubicacion}</strong>
                     <p className="card-text">US$ {props.precio}</p>
                 </div>
