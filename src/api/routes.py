@@ -287,13 +287,11 @@ def save_post():
     error_index_not_received = "El user_id no fue enviado" 
 
     if user_id is None:
-        print("hola")
         return jsonify({ "msg": error_index_not_received })
 
     user = User.query.filter_by(id = user_id).first()
 
     if user is None:
-        print("hola 2")
         return jsonify({ "msg": error_index_dosent_exist })
 
     print("pre print user")
