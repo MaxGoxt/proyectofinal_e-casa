@@ -21,7 +21,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			ventas : [],
 			casa: {},
 			auth : false,
-			perfil:{}
+			perfil:{},
+			favoritos:[]
 		},
 		actions: {
 
@@ -194,6 +195,29 @@ const getState = ({ getStore, getActions, setStore }) => {
 			}
 
 		},
+
+		getFavoritos: async ()=>{
+			
+			try {
+				let data = await axios.get(process.env.BACKEND_URL + '/api/usuario/favorito',
+				{
+					headers : {"Authorization" : "Bearer " + localStorage.getItem('token')}
+				})
+				console.log(data.data.results);
+				setStore({"favoritos": data.data.results})
+
+			} catch (error) {
+				console.log(error);
+				// if (error.response.status === 404) {
+				// 	alert(error.response.data.msj)
+				// }
+				return false
+
+		}
+
+	},
+
+
 
 		
 	}

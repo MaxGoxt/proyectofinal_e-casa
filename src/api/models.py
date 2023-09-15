@@ -12,6 +12,7 @@ class User(db.Model):
     phone_number = db.Column(db.String(30), nullable=False)
     account_creation_date = db.Column(db.String(40), nullable=True)
     is_admin = db.Column(db.Boolean(), nullable=False)
+    usuario_favoritos = db.relationship('Favorites', backref='user', lazy=True)
     
     houses = db.relationship('House', backref='user', lazy=True)
 
@@ -29,6 +30,7 @@ class User(db.Model):
             "phoneNumber": self.phone_number,
             "is_admin": self.is_admin,
             "accountCreationDate": self.account_creation_date,
+            "usuario_favoritos": list(map(lambda item: item.serialize(),self.usuario_favoritos))
             # do not serialize the password, its a security breach
         }
 
@@ -115,8 +117,10 @@ class Favorites(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     house_id = db.Column(db.Integer, db.ForeignKey('house.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    
 
-    userId = db.relationship("User")
+
+    # userId = db.relationship("User")
     houseId = db.relationship("House")
 
 
@@ -127,5 +131,5 @@ class Favorites(db.Model):
         return {
             "id": self.id,
             "userId": self.user_id,
-            "houseId": self.house_id,
+            "houseId": None if self.houseId is None else self.houseId.serialize(),
         }
