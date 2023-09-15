@@ -124,7 +124,7 @@ class Favorites(db.Model):
     houseId = db.relationship("House")
 
 
-    def __repr__(self):git co
+    def __repr__(self):
         return f'<Favorites {self.id}>'
 
     def serialize(self):
