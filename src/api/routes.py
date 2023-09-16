@@ -146,6 +146,38 @@ def protected():
 
     return jsonify({"results": response}), 200
 
+# Ruta protegida de casas de los usuario
+
+@api.route("/user/houses/<int:owner_id>", methods=["GET"])
+def owner_properties(owner_id):
+    user = User.query.filter_by(id = owner_id).first()
+
+    if user is None:
+        return jsonify({ "msg": "El usuario no existe" }), 404
+
+    houses = House.query.filter_by(user_id = owner_id).all()
+    
+    response = list(map(lambda favoritos: favoritos.serialize(), houses))
+    if response == [] or response is None:
+        return jsonify({ "msg": "El usuario no tiene casas" }), 404
+
+    return jsonify({ "results": response }), 200
+
+@api.route("/user/houses", methods=["GET"])
+@jwt_required()
+def get_current_user_houses():
+    current_user_email = get_jwt_identity()
+
+    user = User.query.filter_by(email = current_user_email).first()
+
+    houses = House.query.filter_by(user_id = user.id).all()
+
+    response = list(map(lambda favoritos: favoritos.serialize(), houses))
+    if response == [] or response is None:
+        return jsonify({ "msg": "El usuario no tiene casas" }), 404
+
+    return jsonify({ "results": response })
+
 #  Agregar casas a favorito
 
 @api.route('/favoritos/house', methods=['POST'])
