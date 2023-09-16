@@ -83,6 +83,16 @@ def crear_registro():
 
     return jsonify(nuevo_usuario.serialize()),200
 
+# Obtener el perfild del usuario logeado
+@api.route('/current_user', methods=['GET'])
+@jwt_required()
+def get_current_user_info():
+    current_user_email = get_jwt_identity()
+
+    user = User.query.filter_by(email = current_user_email).first()
+
+    return jsonify({ "results": user.serialize() })
+
 # Obtener el perfil de un usuario
 
 @api.route('/user/<int:usuario_id>', methods=['GET'])
@@ -127,6 +137,23 @@ def editar_perfil():
     db.session.commit()
     return jsonify({"msg": "Tu perfil fue editado con éxito"}), 200
     
+
+@api.route("/profile_picture", methods=["POST"])
+@jwt_required()
+def set_user_image():
+    image = request.files.get('image')  # Obtén la imagen
+    
+    current_user_email = get_jwt_identity()
+
+    user = User.query.filter_by(email = current_user_email).first()
+
+    result = cloudinary.uploader.upload(image)
+
+    user.profile_picture = result['secure_url']
+    
+    db.session.commit()
+
+    return jsonify({ "msg": "La imagen fue añadida con exito"}), 200
 
 
 # Ruta protegida de favoritos

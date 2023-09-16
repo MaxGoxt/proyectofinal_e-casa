@@ -9,6 +9,7 @@ class User(db.Model):
     lastname = db.Column(db.String(25), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(80), unique=False, nullable=False)
+    profile_picture = db.Column(db.String(300), nullable=True)
     phone_number = db.Column(db.String(30), nullable=False)
     account_creation_date = db.Column(db.String(40), nullable=True)
     is_admin = db.Column(db.Boolean(), nullable=False)
@@ -25,6 +26,7 @@ class User(db.Model):
             "id": self.id,
             "name": self.name,
             "lastname": self.lastname,
+            "profile_picture": self.profile_picture,
             "email": self.email,
             "password": self.password,
             "phoneNumber": self.phone_number,
