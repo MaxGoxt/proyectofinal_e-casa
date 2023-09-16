@@ -146,7 +146,7 @@ def protected():
 
     return jsonify({"results": response}), 200
 
-# Ruta protegida de casas de los usuario
+# Obtener todas las casas de un usuario en especifico
 
 @api.route("/user/houses/<int:owner_id>", methods=["GET"])
 def owner_properties(owner_id):
@@ -162,6 +162,8 @@ def owner_properties(owner_id):
         return jsonify({ "msg": "El usuario no tiene casas" }), 404
 
     return jsonify({ "results": response }), 200
+
+# Obtener todas las casas del usuario logeado
 
 @api.route("/user/houses", methods=["GET"])
 @jwt_required()
