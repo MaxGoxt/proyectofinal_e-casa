@@ -17,7 +17,6 @@ class User(db.Model):
     
     houses = db.relationship('House', backref='user', lazy=True)
 
-
     def __repr__(self):
         return f'<User {self.email}>'
 
