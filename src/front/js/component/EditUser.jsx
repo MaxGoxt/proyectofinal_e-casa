@@ -6,7 +6,7 @@ export const EditUser = () => {
 
     const getUserProfileImage = async () => {
         const options = {
-            headers: { "Authorization": "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NDgyNjc1OCwianRpIjoiMzE2M2JkZTgtODEzYS00NTM5LWJiNmMtMmVhMWU4YmNlZTg1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImRAZ21haWwuY29tIiwibmJmIjoxNjk0ODI2NzU4LCJleHAiOjE2OTQ4Mjc2NTh9.GvWoPl3RaS9xXEptx05r1YPeHIccUDauYMst8SoVBrA" },
+            headers: { "Authorization": "Bearer " + localStorage.getItem('token') },
             method: "GET",
         }
 
@@ -35,7 +35,7 @@ export const EditUser = () => {
 
         const options = {
             body: formData,
-            headers: { "Authorization": "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY5NDgyNjc1OCwianRpIjoiMzE2M2JkZTgtODEzYS00NTM5LWJiNmMtMmVhMWU4YmNlZTg1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6ImRAZ21haWwuY29tIiwibmJmIjoxNjk0ODI2NzU4LCJleHAiOjE2OTQ4Mjc2NTh9.GvWoPl3RaS9xXEptx05r1YPeHIccUDauYMst8SoVBrA" },
+            headers: { "Authorization": "Bearer " + localStorage.getItem('token') },
             method: "POST",
         }
 
