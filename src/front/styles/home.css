@@ -6,11 +6,28 @@
     on that page only (the ones not reused in other pages).
 */
 body{
-    
+    /*
     background-attachment: fixed;
     background-size: cover;
-    background-image: url("https://d2p0bx8wfdkjkb.cloudfront.net/static/properties/TBCZYOYRXE/M9O3IRQ7R3/dnHhvJnfVK/2b3889fa-453f-4352-a98a-ba2563424788.jpeg");
-    
+     background-image: url("https://d2p0bx8wfdkjkb.cloudfront.net/static/properties/TBCZYOYRXE/M9O3IRQ7R3/dnHhvJnfVK/2b3889fa-453f-4352-a98a-ba2563424788.jpeg");
+    */
+    background-color: #f2f7ff;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.nav-container {
+    box-sizing: border-box;
+    margin: 0 40px;
+}
+
+.container-alquileres {
+    box-sizing: border-box;
+    margin: 0 40px
+}
+
+.card-container {
+    max-width: 300px;
+    width: 300px;
 }
 
 .padd{
@@ -61,4 +78,29 @@ body{
     justify-content: center;
 }
 
+@media all and (max-width: 1300px) {
+
+}
+
+@media all and (max-width: 900px) {
+    .nav-container {
+        margin: 0 20px;
+    }
+    .container-alquileres {
+        margin: 0 20px;
+    }
+}
+
+
+@media all and (max-width: 640px) {
+    .hero-image {
+        height: 200px !important;
+    }
+    .nav-container {
+        margin: 0 20px;
+    }
+    .container-alquileres {
+        margin: 0 8px;
+    }
+}
 
