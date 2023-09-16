@@ -35,9 +35,9 @@ function Details() {
         <ul className="list-group list-group-flush">
           <div className='d-flex justify-content-between'>
             <p className='ms-3'><strong>${store.casa.price} Mensual </strong></p> <br />
-            
-             <p className='disponible'>Disponible ahora</p>
-             <button type="submit" className="btn text-white bg-azul-oscuro  mx-auto rounded-pill w-25 my-4 me-3 ">Alquilar</button>
+
+            <p className='disponible'>Disponible ahora</p>
+            <button type="submit" className="btn text-white bg-azul-oscuro  mx-auto rounded-pill w-25 my-4 me-3 ">Alquilar</button>
           </div>
           <li className="list-group-item bg-celeste-claro mt-4"><p>{store.casa.description}</p></li>
           <div className='d-flex mt-4'>
@@ -67,10 +67,9 @@ function Details() {
 
         </div>
 
-      </div>{
-        store.auth ?
-          <PanelCtrl /> : null
-      }</div>
+      </div>
+      <PanelCtrl />
+    </div>
   );
 };
 
