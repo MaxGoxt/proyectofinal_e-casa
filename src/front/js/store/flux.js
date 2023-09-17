@@ -706,7 +706,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 			},
-
 			getVentas: async () => {
 				try {
 					let data = await axios.get(process.env.BACKEND_URL + '/api/gethouses/sell')

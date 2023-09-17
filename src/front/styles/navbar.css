@@ -1,0 +1,5 @@
+@media all and (max-width: 748px) {
+    .nav_upload_house {
+        display: none;
+    }
+}
