@@ -3,6 +3,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
 import { CardFav } from "../component/card_favorito.jsx"
+import { PanelCtrl } from "../component/panel_control.jsx";
 
 
 
@@ -11,6 +12,11 @@ export const Favoritos = () => {
     useEffect(() => {
         actions.getFavoritos()
       }, [])
+
+      const handleEliminarFavorito = (id) => {
+        // Llama a la acción para eliminar un favorito
+        actions.eliminarFavorito(id);
+      };
   
 
 
@@ -23,11 +29,14 @@ export const Favoritos = () => {
                         return (
                             <div key={index}>
                                 <CardFav titulo={item.houseId.title} ubicacion={item.houseId.location} id={index} imageUrl={item.houseId.image_url} />
+                                onEliminarFavorito={() => handleEliminarFavorito(index)} 
                             </div>
+
+                            
                         )
                     })}
 
-        
+            <PanelCtrl/>
 
         </div>
     );
