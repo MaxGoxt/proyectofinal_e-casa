@@ -1,4 +1,18 @@
+.otherplaces {
+    margin: 0 40px;
+}
+
+@media all and (max-width: 900px) {
+    .otherplaces {
+        margin: 0 20px;
+    }
+}
+
 @media all and (max-width: 748px) {
+    .otherplaces {
+        margin: 0 8px;
+    }
+
     .nav_upload_house {
         display: none;
     }

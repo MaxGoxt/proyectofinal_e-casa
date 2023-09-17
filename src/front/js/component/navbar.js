@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Context } from "../store/appContext";
 import logoecasa from "../../img/logoe-casa.png";
 import "../../styles/navbar.css";
@@ -9,9 +9,16 @@ const defaultUserImage = "https://www.svgrepo.com/show/335455/profile-default.sv
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
 
+
+	const route = useLocation();
+
+	useEffect(() => {
+		console.log(route);
+	}, [])
+
 	return (
 		<nav className="fixed-top d-block navbar navbar-light bg-light">
-			<div className="d-flex justify-content-between align-items-center" style={{ margin: "0 40px" }}>
+			<div className={`d-flex ${!route.pathname.includes("details") ? "otherplaces" : "container"} justify-content-between align-items-center`}>
 				<Link to="/" className="text-decoration-none text-dark d-flex align-items-end">
 					<img className="mx-2" src={logoecasa} alt="logo ecasa" style={{ width: "40px" }} />
 					<span className="fs-4">E-CASA</span>
@@ -46,6 +53,6 @@ export const Navbar = () => {
 					}
 				</div>
 			</div>
-		</nav>
+		</nav >
 	);
 };
