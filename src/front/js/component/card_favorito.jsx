@@ -11,7 +11,6 @@ export const CardFav = (props) => {
     
     const [isFavorito, setIsFavorito] = useState(true);
 
-    // const [allFavoritesRemoved, setAllFavoritesRemoved] = useState(false);
 
     const toggleFavorito = () => {
       setIsFavorito(!isFavorito);
@@ -21,23 +20,11 @@ export const CardFav = (props) => {
       }
     };
 
-    // useEffect(() => {
-    //     // Verifica si no hay más favoritos
-    //     setAllFavoritesRemoved(store.favoritos.length === 0);
-    // }, [store.favoritos]);
-
 
 
 
     return (
     <>
-
-
-            {/* {allFavoritesRemoved && (
-                <div className="no-favorites-message">
-                    NO TIENES MÁS FAVORITOS
-                </div>
-            )} */}
 
 
             <div className="card mb-3" style={{ maxWidth: "440px" }}>
