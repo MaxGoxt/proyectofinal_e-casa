@@ -561,7 +561,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					"wifi": false
 				}
 			],
-			casa: {},
+			casa: {
+				"category": "Venta",
+				"description": "Melo",
+				"id": 18,
+				"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/aoteeureorya8aioyhkm.webp",
+				"location": "Melo, Cerro Largo",
+				"numberOfBathrooms": 2,
+				"numberOfRooms": 1,
+				"parking": true,
+				"price": 20000,
+				"title": "Melo",
+				"user_id": 1,
+				"virified_account": true,
+				"wifi": false
+			},
 			auth: false,
 			perfil: {},
 			favoritos: []
