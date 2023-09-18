@@ -17,6 +17,7 @@ import { Upload } from "./pages/Upload.jsx";
 import { Favoritos } from "./pages/favoritos.jsx";
 import { EditUserView } from "./pages/EditUserView.jsx"
 import PerfilProp from "./pages/perfilPropietario";
+import {Propiedades} from "./pages/propiedades.jsx";
 
 
 //create your first component
@@ -46,7 +47,7 @@ const Layout = () => {
                         <Route element={<Perfil />} path="/perfil" />
                         <Route element={<Favoritos />} path="/favoritos" />
                         <Route element={<PerfilProp />} path="/perfilprop" />
-
+                        <Route element={<Propiedades />} path="/mis-propiedades" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>
