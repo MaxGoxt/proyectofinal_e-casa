@@ -17,6 +17,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// 		initial: "white"
 			// 	}
 			// ]
+			propietario: [],
 			alquileres: [
 				{
 					"category": "Alquiler",
@@ -561,10 +562,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 					"wifi": false
 				}
 			],
-			casa: {},
+			casa: {
+				"category": "Venta",
+				"description": "Melo",
+				"id": 18,
+				"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/aoteeureorya8aioyhkm.webp",
+				"location": "Melo, Cerro Largo",
+				"numberOfBathrooms": 2,
+				"numberOfRooms": 1,
+				"parking": true,
+				"price": 20000,
+				"title": "Melo",
+				"user_id": 1,
+				"virified_account": true,
+				"wifi": false
+			},
 			auth: false,
 			perfil: {},
-			favoritos: []
+			favoritos: [],
+			casaPropietario:[]
 		},
 		actions: {
 
@@ -761,8 +777,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getPerfilProp: async (id) => {
 				try {
 					let data = await axios.get(process.env.BACKEND_URL + '/api/user/' + id)
-					// setStore({ alquileres: data.data.results });
-					console.log(data.data.results);
+					setStore({ propietario: data.data.results });
+					console.log(data.data);
+				} catch (error) {
+					console.log(error);
+					
+					return false
+				}
+
+			},
+			getCasasProp: async (id) => {
+				try {
+					let data = await axios.get(process.env.BACKEND_URL + '/api/user/houses/' + id)
+					setStore({ casaPropietario: data.data.results });
+					console.log(data.data);
 				} catch (error) {
 					console.log(error);
 					
@@ -770,7 +798,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 			}
-
 
 
 
