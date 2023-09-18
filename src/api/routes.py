@@ -174,7 +174,7 @@ def protected():
     favoritos=Favorites.query.filter_by(user_id = user.id).all()
     response = list(map(lambda favoritos: favoritos.serialize(), favoritos))
     if response == []:
-        return jsonify({"msg": "El usuario no tiene favoritos ingresados"})
+        return jsonify({"msg": "El usuario no tiene favoritos ingresados"}), 404
 
 
     return jsonify({"results": response}), 200
@@ -196,7 +196,7 @@ def owner_properties(owner_id):
 
     return jsonify({ "results": response }), 200
 
-# Obtener todas las casas del usuario logeado
+# Obtener todas las casas del usuario logueado
 
 @api.route("/user/houses", methods=["GET"])
 @jwt_required()

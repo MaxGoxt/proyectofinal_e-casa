@@ -18,7 +18,9 @@ export const Favoritos = () => {
     return (
         <div className= "mt-5 pt-3">
         <h1 className= "text-black">Tus favoritos</h1>
-        {store.favoritos.map((item, index) => {
+        {store.favoritos == "El usuario no tiene favoritos ingresados"? 
+            <h2 className= "text-black">{store.favoritos}</h2>:
+            store.favoritos.map((item, index) => {
                         return (
                             <div key={index}>
                                 <CardFav titulo={item.houseId.title} ubicacion={item.houseId.location} id={item.houseId.id} imageUrl={item.houseId.image_url} />

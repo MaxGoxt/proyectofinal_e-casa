@@ -763,9 +763,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ "favoritos": data.data.results })
 
 				} catch (error) {
-					console.log(error);
+					console.log(error.response);
 					// if (error.response.status === 404) {
-					// 	alert(error.response.data.msj)
+						setStore({"favoritos": error.response.data.msg})
 					// }
 					return false
 
