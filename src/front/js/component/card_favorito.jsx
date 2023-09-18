@@ -8,14 +8,14 @@ import  { useState, useEffect, useContext } from 'react';
 export const CardFav = (props) => {
     const { store, actions } = useContext(Context)
     
-    const [isFavorito, setIsFavorito] = useState(false);
+    const [isFavorito, setIsFavorito] = useState(true);
 
     const toggleFavorito = () => {
       setIsFavorito(!isFavorito);
-      if (isFavorito) {
-        // Llama a la función para eliminar el favorito
-        props.eliminar_casa_favorita(props.id);
-      }
+    //   if (isFavorito) {
+    //     // Llama a la función para eliminar el favorito
+    //     props.eliminar_casa_favorita(props.id);
+    //   }
 
     };
 
@@ -35,9 +35,10 @@ export const CardFav = (props) => {
                     </div>
                     <div className="d-flex justify-content-between px-1 float-end">
                         <p className="card-text"><small className="text-body-secondary">{props.ubicacion}</small></p>
-                        <button onClick={toggleFavorito} className="btn" >
-                            <i style={{ fontSize: "20px", color: isFavorito ? 'red' : 'black' }} className="fa-regular fa-heart px-3 px-1 "></i>
-                        </button>
+                        <button onClick={toggleFavorito} className="btn" > { isFavorito?
+                            <i style={{ fontSize: "20px", color: "red" }} className="fa-solid fa-heart px-3 px-1 "></i> :
+                            <i style={{ fontSize: "20px", color: "red" }} className="fa-regular fa-heart px-3 px-1 "></i>
+                        }</button>
                     </div>
                 </div>
             </div>

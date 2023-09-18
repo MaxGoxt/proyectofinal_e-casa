@@ -15,7 +15,7 @@ import { Footer } from "./component/footer";
 import Perfil from "./pages/perfilUsuario";
 import { Upload } from "./pages/Upload.jsx";
 import { Favoritos } from "./pages/favoritos.jsx";
-
+import { EditUserView } from "./pages/EditUserView.jsx"
 
 
 //create your first component
@@ -40,6 +40,7 @@ const Layout = () => {
                         <Route element={<Singup />} path="/signup" />
                         <Route element={<Details />} path="/details/:id" />
                         <Route element={<Upload />} path="/upload" />
+                        <Route element={<EditUserView />} path="/edituser" />
                         <Route element={<Detailsventas />} path="/detailsventas/:id" />
                         <Route element={<Perfil />} path="/perfil" />
                         <Route element={<Favoritos />} path="/favoritos" />

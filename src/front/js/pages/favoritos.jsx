@@ -29,7 +29,7 @@ export const Favoritos = () => {
                         return (
                             <div key={index}>
                                 <CardFav titulo={item.houseId.title} ubicacion={item.houseId.location} id={index} imageUrl={item.houseId.image_url} />
-                                onEliminarFavorito={() => handleEliminarFavorito(index)} 
+                               {() => handleEliminarFavorito(index)} 
                             </div>
 
                             
