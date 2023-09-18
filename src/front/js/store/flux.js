@@ -696,9 +696,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return true
 				} catch (error) {
 					console.log(error);
-					if (error.response.status === 404) {
-						alert(error.response.data.msg)
-					}
+					// if (error.response.status === 404) {
+					// 	alert(error.response.data.msg)
+					// }
 					return false
 				}
 			},
@@ -765,9 +765,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ "favoritos": data.data.results })
 
 				} catch (error) {
-					console.log(error);
+					console.log(error.response);
 					// if (error.response.status === 404) {
-					// 	alert(error.response.data.msj)
+						setStore({"favoritos": error.response.data.msg})
 					// }
 					return false
 
@@ -797,7 +797,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false
 				}
 
-			}
+			},
+			deleteFavoritos: async (casa_id) => {
+				try {
+					// fetching data from the backend
+					const resp = await fetch(process.env.BACKEND_URL + '/api/favoritos/house/'+ casa_id, {
+						method: "DELETE",
+						headers: {
+							"Authorization": "Bearer " + localStorage.getItem('token')
+						}
+					});
+					const data = await resp.json()
+					console.log(data);
+					// don't forget to return something, that is how the async resolves
+					return data;
+				} catch (error) {
+					console.log("Error loading message from backend", error)
+				}
+			},
 
 
 
