@@ -27,7 +27,7 @@ export const Navbar = () => {
 					<Link to="/upload" className="text-dark fw-bold text-decoration-none me-3 nav_upload_house">
 						<button type="button" className="btn btn-outline-success text-grey" style={{ fontSize: "16px" }}>Subé tu casa a E-CASA</button>
 					</Link>
-					{!store.auth
+					{store.auth
 						? <div className="btn-group">
 							<div type="button" className="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
 								<img src={store.perfil?.data?.profile_picture != undefined ? store.perfil?.data?.profile_picture : defaultUserImage} alt="profile_picture" width="32" />
