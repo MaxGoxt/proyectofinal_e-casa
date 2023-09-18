@@ -16,6 +16,7 @@ import Perfil from "./pages/perfilUsuario";
 import { Upload } from "./pages/Upload.jsx";
 import { Favoritos } from "./pages/favoritos.jsx";
 import { EditUserView } from "./pages/EditUserView.jsx"
+import PerfilProp from "./pages/perfilPropietario";
 
 
 //create your first component
@@ -44,6 +45,7 @@ const Layout = () => {
                         <Route element={<Detailsventas />} path="/detailsventas/:id" />
                         <Route element={<Perfil />} path="/perfil" />
                         <Route element={<Favoritos />} path="/favoritos" />
+                        <Route element={<PerfilProp />} path="/perfilprop" />
 
                     </Routes>
                     <Footer />

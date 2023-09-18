@@ -46,7 +46,7 @@ function Perfil() {
 
                 <div className='ms-3   justify-content-center mt-5'>
                     <li className="list-group-item duenio">
-                        <Link to={"/"}><i className="fa-regular fa-heart"></i></Link><br/>
+                        <Link to={"/favoritos"}><i className="fa-regular fa-heart"></i></Link><br/>
                         <Link to={"/"}><i className="fa-solid fa-gears my-3"></i></Link>
                     </li>
                 </div>

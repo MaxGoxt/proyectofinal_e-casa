@@ -10,8 +10,12 @@ function Details() {
   const { store, actions } = useContext(Context)
   let param = useParams()
   useEffect(() => {
-    // actions.getAlquileres()
-    actions.getDetalles(param.id)
+    const getPerfil=async()=>{
+      
+     await actions.getPerfilProp(store.casa.user_id)
+     await actions.getDetalles(param.id)
+    }
+    getPerfil()
   }, [])
 
 
@@ -42,7 +46,7 @@ function Details() {
 
           <p className="text-white bg-azul-oscuro d-flex details-btn justify-content-center btn my-4">{store.casa.category}</p>
           <h6 className='disponible'>Localización: {store.casa.location}</h6>
-          <p className="card-text"><strong>Alojamiento entero: departamento con servicios incluidos. <br />Anfitrión: Armando A.</strong></p>
+          <p className="card-text"><strong>Alojamiento entero: departamento con servicios incluidos. <br />Anfitrión: {store.propietario.name}</strong></p>
           <p className='detalle'>{store.casa.numberOfRooms} Habitaciones - {store.casa.numberOfBathrooms} Baños - 250mt2 </p>
 
         </div>
@@ -52,12 +56,12 @@ function Details() {
               <p className='mb-0'><strong>${store.casa.price} Mensual </strong></p>
               <p className='disponible mb-0'>Disponible ahora</p>
             </div>
-            <button type="submit" className="btn text-white bg-azul-oscuro  mx-auto rounded my-4 me-3 details-btn">Alquilar</button>
+            <Link to={"/perfilprop"}><button type="submit" className="btn text-white bg-azul-oscuro  mx-auto rounded my-4 me-3 details-btn">Alquilar</button></Link>
           </div>
           <li className="list-group-item details-list-group bg-celeste-claro mt-4 ms-0 ps-0"><p className="ps-0 ms-0">{store.casa.description}</p></li>
           <div className='d-flex mt-2 '>
             <div className=''>
-              <li className="list-group-item details-list-group duenio"><p>Dueño: Pablo Bullor</p> <br />
+              <li className="list-group-item details-list-group duenio"><p>Dueño: {store.propietario.name}</p> <br />
                 <p className='registro'>Se registró en mayo del 2015</p>
               </li>
             </div>

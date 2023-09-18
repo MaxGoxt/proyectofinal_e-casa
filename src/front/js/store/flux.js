@@ -17,6 +17,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// 		initial: "white"
 			// 	}
 			// ]
+			propietario: [],
 			alquileres: [
 				{
 					"category": "Alquiler",
@@ -578,7 +579,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			auth: false,
 			perfil: {},
-			favoritos: []
+			favoritos: [],
+			casaPropietario:[]
 		},
 		actions: {
 
@@ -772,7 +774,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 			},
+			getPerfilProp: async (id) => {
+				try {
+					let data = await axios.get(process.env.BACKEND_URL + '/api/user/' + id)
+					setStore({ propietario: data.data.results });
+					console.log(data.data);
+				} catch (error) {
+					console.log(error);
+					
+					return false
+				}
 
+			},
+			getCasasProp: async (id) => {
+				try {
+					let data = await axios.get(process.env.BACKEND_URL + '/api/user/houses/' + id)
+					setStore({ casaPropietario: data.data.results });
+					console.log(data.data);
+				} catch (error) {
+					console.log(error);
+					
+					return false
+				}
+
+			},
 			deleteFavoritos: async (casa_id) => {
 				try {
 					// fetching data from the backend
