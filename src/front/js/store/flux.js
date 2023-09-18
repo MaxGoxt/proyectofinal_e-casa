@@ -17,12 +17,554 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// 		initial: "white"
 			// 	}
 			// ]
-			alquileres : [],
-			ventas : [],
+			alquileres: [
+				{
+					"category": "Alquiler",
+					"description": "Melo",
+					"id": 1,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873944/yfsd0ivntxrgifwgsbgx.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Alquiler",
+					"description": "Melo",
+					"id": 2,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873944/wzawxlmlfpqmwwgjyxdd.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Alquiler",
+					"description": "Melo",
+					"id": 3,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/ae7yjjicl4biriwbfchs.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Alquiler",
+					"description": "Melo",
+					"id": 4,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/wc5jvjnpv8t4egwzkkz8.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Alquiler",
+					"description": "Melo",
+					"id": 5,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/duozkj3ehfvji9zoeiuq.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Alquiler",
+					"description": "Melo",
+					"id": 6,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/aoteeureorya8aioyhkm.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Alquiler",
+					"description": "Melo",
+					"id": 7,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873944/yfsd0ivntxrgifwgsbgx.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Alquiler",
+					"description": "Melo",
+					"id": 8,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873944/wzawxlmlfpqmwwgjyxdd.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Alquiler",
+					"description": "Melo",
+					"id": 9,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/ae7yjjicl4biriwbfchs.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Alquiler",
+					"description": "Melo",
+					"id": 10,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/wc5jvjnpv8t4egwzkkz8.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Alquiler",
+					"description": "Melo",
+					"id": 11,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/duozkj3ehfvji9zoeiuq.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Alquiler",
+					"description": "Melo",
+					"id": 12,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/aoteeureorya8aioyhkm.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Alquiler",
+					"description": "Melo",
+					"id": 13,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873944/yfsd0ivntxrgifwgsbgx.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Alquiler",
+					"description": "Melo",
+					"id": 14,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873944/wzawxlmlfpqmwwgjyxdd.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Alquiler",
+					"description": "Melo",
+					"id": 15,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/ae7yjjicl4biriwbfchs.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Alquiler",
+					"description": "Melo",
+					"id": 16,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/wc5jvjnpv8t4egwzkkz8.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Alquiler",
+					"description": "Melo",
+					"id": 17,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/duozkj3ehfvji9zoeiuq.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Alquiler",
+					"description": "Melo",
+					"id": 18,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/aoteeureorya8aioyhkm.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				}
+			],
+			ventas: [
+				{
+					"category": "Venta",
+					"description": "Melo",
+					"id": 1,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873944/yfsd0ivntxrgifwgsbgx.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Venta",
+					"description": "Melo",
+					"id": 2,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873944/wzawxlmlfpqmwwgjyxdd.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Venta",
+					"description": "Melo",
+					"id": 3,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/ae7yjjicl4biriwbfchs.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Venta",
+					"description": "Melo",
+					"id": 4,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/wc5jvjnpv8t4egwzkkz8.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Venta",
+					"description": "Melo",
+					"id": 5,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/duozkj3ehfvji9zoeiuq.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Venta",
+					"description": "Melo",
+					"id": 6,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/aoteeureorya8aioyhkm.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Venta",
+					"description": "Melo",
+					"id": 7,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873944/yfsd0ivntxrgifwgsbgx.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Venta",
+					"description": "Melo",
+					"id": 8,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873944/wzawxlmlfpqmwwgjyxdd.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Venta",
+					"description": "Melo",
+					"id": 9,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/ae7yjjicl4biriwbfchs.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Venta",
+					"description": "Melo",
+					"id": 10,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/wc5jvjnpv8t4egwzkkz8.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Venta",
+					"description": "Melo",
+					"id": 11,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/duozkj3ehfvji9zoeiuq.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Venta",
+					"description": "Melo",
+					"id": 12,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/aoteeureorya8aioyhkm.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Venta",
+					"description": "Melo",
+					"id": 13,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873944/yfsd0ivntxrgifwgsbgx.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Venta",
+					"description": "Melo",
+					"id": 14,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873944/wzawxlmlfpqmwwgjyxdd.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Venta",
+					"description": "Melo",
+					"id": 15,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/ae7yjjicl4biriwbfchs.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Venta",
+					"description": "Melo",
+					"id": 16,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/wc5jvjnpv8t4egwzkkz8.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Venta",
+					"description": "Melo",
+					"id": 17,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/duozkj3ehfvji9zoeiuq.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				},
+				{
+					"category": "Venta",
+					"description": "Melo",
+					"id": 18,
+					"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/aoteeureorya8aioyhkm.webp",
+					"location": "Melo, Cerro Largo",
+					"numberOfBathrooms": 2,
+					"numberOfRooms": 1,
+					"parking": true,
+					"price": 20000,
+					"title": "Melo",
+					"user_id": 1,
+					"virified_account": true,
+					"wifi": false
+				}
+			],
 			casa: {},
-			auth : false,
-			perfil:{},
-			favoritos:[]
+			auth: false,
+			perfil: {},
+			favoritos: []
 		},
 		actions: {
 
@@ -86,69 +628,69 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 
-			
+
 			validToken: async () => {
 				try {
 					let data = await axios.get(process.env.BACKEND_URL + '/api/valid_token',
-					{
-						headers : {"Authorization" : "Bearer " + localStorage.getItem('token')}
-					})
-					setStore({ auth : true})
+						{
+							headers: { "Authorization": "Bearer " + localStorage.getItem('token') }
+						})
+					setStore({ auth: true })
 					console.log(data);
 					return true
 				} catch (error) {
 					console.log(error);
 					// if (error.response.status === 404) {
-						// 	alert(error.response.data.msj)
-						// }
-						return false
-					}
-				},
-				
-				getPerfil: async () => {
-					try {
-						let data = await axios.get(process.env.BACKEND_URL + '/api/perfil',
-						
-						{
-							headers : {"Authorization" : "Bearer " + localStorage.getItem('token')}
-						})
-						setStore({perfil: data.data})
-						console.log(getStore().perfil);
-						
-						return true
-					} catch (error) {
-						console.log(error);
-						// if (error.response.status === 404) {
-							// 	alert(error.response.data.msj)
-							// }
-							return false
-						}
-					},
-					
-					login: async (email, password) => {
-						try {
-							let data = await axios.post(process.env.BACKEND_URL + '/api/login',
-								{
-									"email": email,
-									"password": password
-								})
-							console.log(data);
-							localStorage.setItem("token", data.data.access_token)
-							setStore({ auth : true})
-							return true
-						} catch (error) {
-							console.log(error);
-							if (error.response.status === 404) {
-								alert(error.response.data.msg)
-							}
-							return false
-						}
-					},
+					// 	alert(error.response.data.msj)
+					// }
+					return false
+				}
+			},
 
-					logout: async () => {
-						localStorage.removeItem('token')
-						setStore({ auth : false})
-					},
+			getPerfil: async () => {
+				try {
+					let data = await axios.get(process.env.BACKEND_URL + '/api/perfil',
+
+						{
+							headers: { "Authorization": "Bearer " + localStorage.getItem('token') }
+						})
+					setStore({ perfil: data.data })
+					console.log(getStore().perfil);
+
+					return true
+				} catch (error) {
+					console.log(error);
+					// if (error.response.status === 404) {
+					// 	alert(error.response.data.msj)
+					// }
+					return false
+				}
+			},
+
+			login: async (email, password) => {
+				try {
+					let data = await axios.post(process.env.BACKEND_URL + '/api/login',
+						{
+							"email": email,
+							"password": password
+						})
+					console.log(data);
+					localStorage.setItem("token", data.data.access_token)
+					setStore({ auth: true })
+					return true
+				} catch (error) {
+					console.log(error);
+					if (error.response.status === 404) {
+						alert(error.response.data.msg)
+					}
+					return false
+				}
+			},
+
+			logout: async () => {
+				localStorage.removeItem('token')
+				setStore({ auth: false })
+			},
 
 			getAlquileres: async () => {
 				try {
@@ -162,8 +704,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					// }
 					return false
 				}
-			},
 
+			},
 			getVentas: async () => {
 				try {
 					let data = await axios.get(process.env.BACKEND_URL + '/api/gethouses/sell')
@@ -178,7 +720,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			getDetalles: async (id)=>{
+			getDetalles: async (id) => {
 				console.log(id);
 				try {
 					let data = await axios.get(process.env.BACKEND_URL + '/api/gethouse/' + id)
@@ -192,36 +734,37 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false
 
 
-			}
+				}
 
-		},
+			},
 
-		getFavoritos: async ()=>{
-			
-			try {
-				let data = await axios.get(process.env.BACKEND_URL + '/api/usuario/favorito',
-				{
-					headers : {"Authorization" : "Bearer " + localStorage.getItem('token')}
-				})
-				console.log(data.data.results);
-				setStore({"favoritos": data.data.results})
+			getFavoritos: async () => {
 
-			} catch (error) {
-				console.log(error);
-				// if (error.response.status === 404) {
-				// 	alert(error.response.data.msj)
-				// }
-				return false
+				try {
+					let data = await axios.get(process.env.BACKEND_URL + '/api/usuario/favorito',
+						{
+							headers: { "Authorization": "Bearer " + localStorage.getItem('token') }
+						})
+					console.log(data.data.results);
+					setStore({ "favoritos": data.data.results })
+
+				} catch (error) {
+					console.log(error);
+					// if (error.response.status === 404) {
+					// 	alert(error.response.data.msj)
+					// }
+					return false
+
+				}
+
+			},
+
+
+
 
 		}
-
-	},
-
-
-
-		
 	}
-}};
+};
 
 
 export default getState;
