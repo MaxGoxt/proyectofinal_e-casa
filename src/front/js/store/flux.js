@@ -758,6 +758,18 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 			},
+			getPerfilProp: async (id) => {
+				try {
+					let data = await axios.get(process.env.BACKEND_URL + '/api/user/' + id)
+					// setStore({ alquileres: data.data.results });
+					console.log(data.data.results);
+				} catch (error) {
+					console.log(error);
+					
+					return false
+				}
+
+			}
 
 
 

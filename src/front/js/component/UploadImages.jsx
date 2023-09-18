@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import { Context } from "../store/appContext";
+import { Link } from 'react-router-dom';
 
 export const UploadImages = () => {
     const { store, actions } = useContext(Context)
@@ -227,7 +228,7 @@ export const UploadImages = () => {
                     <label htmlFor="price" className="form-label texto-amarillo">Precio</label>
                     <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="price" aria-describedby="emailHelp" ref={price}/>
                 </div>
-                <button className="btn btn-primary">Subir casa</button>
+                <Link to={"/"}><button className="btn btn-primary">Subir casa</button></Link>
             </form>
             <div className="d-flex justify-content-center">
             </div>
