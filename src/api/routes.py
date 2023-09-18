@@ -80,6 +80,7 @@ def crear_registro():
         email = request.json.get("email", None),
         password = hashed_password,
         is_admin = request.json.get("is_admin", None),
+        profile_picture = "",
         account_creation_date = datetime.now()
     )
 
