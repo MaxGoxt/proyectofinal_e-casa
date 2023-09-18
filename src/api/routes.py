@@ -314,13 +314,13 @@ def perfil():
 @jwt_required()
 def eliminar_casa_favorita(casa_id):
     # Accede a la identidad del usuario con get_jwt_identity
-    current_user_email = get_jwt_identity()
+    current_user = get_jwt_identity()
 
 
-    request_body = request.get_json(force=True) #obtiene el cuerpo que se envíe por el body desde el postman
+    # request_body = request.get_json(force=True) #obtiene el cuerpo que se envíe por el body desde el postman
 
 # validar que exista el usuario
-    user_query = User.query.filter_by(id=request_body["user_id"]).first()
+    user_query = User.query.filter_by(email=current_user).first()
     if user_query is None:
         return jsonify({"msg": "el usuario no está registrado"}), 404
 
@@ -330,7 +330,7 @@ def eliminar_casa_favorita(casa_id):
         return jsonify({"msg": "La casa no existe"}), 404
 
 #validamos que la casa ya existía como favorita
-    fav_query = Favorites.query.filter_by(user_id = request_body["user_id"]).filter_by(house_id =casa_id).first() #devuelve los valores que coinciden (del user_id la tabla Favoritos) con el body del postman
+    fav_query = Favorites.query.filter_by(user_id = user_query.serialize()["id"]).filter_by(house_id =casa_id).first() #devuelve los valores que coinciden (del user_id la tabla Favoritos) con el body del postman
     if fav_query is None:
         return jsonify({"msg": "El favorito no existe"}), 404
 
@@ -344,7 +344,7 @@ def eliminar_casa_favorita(casa_id):
     
     return jsonify(request_body), 200
 
-
+# Agrega casas a un usuario propietario
 
 @api.route("/post", methods=['POST'])
 @jwt_required()

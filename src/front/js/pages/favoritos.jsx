@@ -12,24 +12,16 @@ export const Favoritos = () => {
     useEffect(() => {
         actions.getFavoritos()
       }, [])
-
-      const handleEliminarFavorito = (id) => {
-        // Llama a la acción para eliminar un favorito
-        actions.eliminarFavorito(id);
-      };
   
-
-
-    
+ 
 
     return (
-        <div className= "mt-5">
-        <h1 className= "text-white">Tus favoritos</h1>
+        <div className= "mt-5 pt-3">
+        <h1 className= "text-black">Tus favoritos</h1>
         {store.favoritos.map((item, index) => {
                         return (
                             <div key={index}>
-                                <CardFav titulo={item.houseId.title} ubicacion={item.houseId.location} id={index} imageUrl={item.houseId.image_url} />
-                               {() => handleEliminarFavorito(index)} 
+                                <CardFav titulo={item.houseId.title} ubicacion={item.houseId.location} id={item.houseId.id} imageUrl={item.houseId.image_url} />
                             </div>
 
                             

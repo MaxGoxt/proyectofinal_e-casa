@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import  { useState, useEffect, useContext } from 'react';
+import axios from "axios";
 
 
 export const CardFav = (props) => {
@@ -12,17 +13,18 @@ export const CardFav = (props) => {
 
     const toggleFavorito = () => {
       setIsFavorito(!isFavorito);
-    //   if (isFavorito) {
-    //     // Llama a la función para eliminar el favorito
-    //     props.eliminar_casa_favorita(props.id);
-    //   }
+      if (isFavorito) {
+        // Llama a la función para eliminar el favorito
+        console.log(props.id)
+        actions.deleteFavoritos(props.id);
+      }
 
     };
 
 
 
     return (
-    <><>
+    <>
             <div className="card mb-3" style={{ maxWidth: "440px" }}>
                 <div className="row g-0 h-4">
                     <div className="col-md-4">
@@ -44,7 +46,7 @@ export const CardFav = (props) => {
             </div>
 
         </> 
-    </>
+    
     
 
 
