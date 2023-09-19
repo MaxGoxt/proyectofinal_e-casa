@@ -5,7 +5,7 @@ import { Context } from "../store/appContext";
 import { useState, useEffect, useContext } from 'react';
 import "../../styles/card_feed_alq.css";
 
-export const CardFeedAlq = (props) => {
+export const CardHouseFeed = (props) => {
     const { store, actions } = useContext(Context)
     console.log(props.images)
     return (
@@ -35,29 +35,23 @@ export const CardFeedAlq = (props) => {
                         <span className="visually-hidden">Next</span>
                     </button>
                 </div>
-
-                {/*<div className="img d-flex align-items-start justify-content-end">
-                    <i className="position-absolute fa-regular fa-heart m-2 text-danger bg-dark p-2 bg-opacity-75 rounded"></i>
-                    <img className="card-img-top" alt="" src={props.imageUrl} />
-                </div>*/}
             </div>
             <div className="azul-oscuro mb-5 rounded-bottom">
                 <div className="d-flex justify-content-between">
-                    <strong className="card-title">{props.ubicacion}</strong>
+                    <strong className="card-title">{props.location}</strong>
                 </div>
                 <div className="d-flex justify-content-between px-1">
-                    <p className="card-text">$ {props.precio}</p>
-                    <Link to={"/details/"} style={{ textDecoration: "underline" }}>Ver detalles</Link>
+                    <p className="card-text">$ {props.price}</p>
+                    <Link to={"/details/" + props.id} style={{ textDecoration: "underline" }}>Ver detalles</Link>
                 </div>
             </div>
         </div>
     );
 };
 
-CardFeedAlq.propTypes = {
-
-    ubicacion: PropTypes.string,
-    precio: PropTypes.number,
+CardHouseFeed.propTypes = {
+    location: PropTypes.string,
+    price: PropTypes.number,
     id: PropTypes.number,
-    imageUrl: PropTypes.array
+    images: PropTypes.array
 };

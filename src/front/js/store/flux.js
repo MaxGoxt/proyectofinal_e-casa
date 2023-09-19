@@ -18,7 +18,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// 	}
 			// ]
 			propietario: [],
-			alquileres: [
+			/*alquileres: [
 				{
 					"category": "Alquiler",
 					"description": "Melo",
@@ -289,7 +289,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					"virified_account": true,
 					"wifi": false
 				}
-			],
+			],*/
+			alquileres: [],
 			ventas: [
 				{
 					"category": "Venta",
