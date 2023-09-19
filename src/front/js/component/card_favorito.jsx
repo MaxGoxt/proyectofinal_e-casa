@@ -22,7 +22,6 @@ export const CardFav = (props) => {
 
 
 
-
     return (
     <>
 

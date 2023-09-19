@@ -171,7 +171,7 @@ def protected():
     favoritos=Favorites.query.filter_by(user_id = user.id).all()
     response = list(map(lambda favoritos: favoritos.serialize(), favoritos))
     if response == []:
-        return jsonify({"msg": "El usuario no tiene favoritos ingresados"}), 404
+        return jsonify({"msg": "No tienes favoritos ingresados"}), 404
 
 
     return jsonify({"results": response}), 200
@@ -440,3 +440,4 @@ def getOneSingleHouse(id):
         return jsonify({ "msg": "The house dosen´t exist" }), 404
 
     return jsonify({ "results": house.serialize() }), 200
+ 
