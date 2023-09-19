@@ -16,6 +16,7 @@ class User(db.Model):
     usuario_favoritos = db.relationship('Favorites', backref='user', lazy=True)
     
     houses = db.relationship('House', backref='user', lazy=True)
+    # house_id = db.Column(db.Integer, db.ForeignKey('house.id'))
 
     def __repr__(self):
         return f'<User {self.email}>'
@@ -57,7 +58,6 @@ class House(db.Model):
     title = db.Column(db.String(150), nullable=False)
     description = db.Column(db.String(300), nullable=False)
     category = db.Column(db.String(10), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     location = db.Column(db.String(150), nullable=False)
     number_of_rooms = db.Column(db.Integer, nullable=False)
     number_of_bathrooms = db.Column(db.Integer, nullable=False)
@@ -67,18 +67,22 @@ class House(db.Model):
     price = db.Column(db.Integer, nullable=False)
 
     images = db.relationship('Image', backref='house', lazy=True)
+    
 
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    # user = db.relationship('User', backref='user', lazy=True)
     def __repr__(self):
         return f'<House {self.id}>'
 
     def serialize(self):
+        info_user= User.query.filter_by(id=self.user_id).first()
         return {
             "id": self.id,
             "title": self.title,
             "images": list(map(lambda item: item.serialize(),self.images)),
             "description": self.description,
             "category": self.category,
-            "user_id": self.user_id,
+            "info_propietario": [{"name":info_user.serialize()["name"], "lastname":info_user.serialize()["lastname"], "account_creation_date":str(info_user.serialize()["accountCreationDate"]) }],#list(map(lambda item: item.serialize(),self.user)),
             "location": self.location,
             "numberOfRooms": self.number_of_rooms,
             "numberOfBathrooms": self.number_of_bathrooms,
@@ -133,4 +137,5 @@ class Favorites(db.Model):
             "id": self.id,
             "userId": self.user_id,
             "houseId": None if self.houseId is None else self.houseId.serialize(),
+
         }

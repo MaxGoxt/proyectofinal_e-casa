@@ -16,6 +16,7 @@ function Details() {
      await actions.getDetalles(param.id)
     }
     getPerfil()
+   
   }, [])
 
 
@@ -91,8 +92,8 @@ function Details() {
           <li className="list-group-item details-list-group bg-celeste-claro mt-4 ms-0 ps-0"><p className="ps-0 ms-0">{store.casa.description}</p></li>
           <div className='d-flex mt-2 '>
             <div className=''>
-              <li className="list-group-item details-list-group duenio"><p>Dueño: {store.propietario.name} {store.propietario.lastname}</p> <br />
-                <p className='registro'>Se registró en mayo del 2015</p>
+              <li className="list-group-item details-list-group duenio"><p>pablo</p> <br />
+                <p className='registro'>12312321323123321</p>
               </li>
             </div>
 

@@ -580,7 +580,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 			auth: false,
 			perfil: {},
 			favoritos: [],
-			casaPropietario:[]
+			casaPropietario:[],
+			propietario2:[]
 		},
 		actions: {
 
@@ -692,6 +693,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						})
 					console.log(data);
 					localStorage.setItem("token", data.data.access_token)
+					localStorage.setItem("user_id", data.data.user.id)
 					setStore({ perfil: data.data.user });
 					setStore({ auth: true })
 					return true
@@ -739,11 +741,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getDetalles: async (id) => {
-				console.log(id);
+				
 				try {
 					let data = await axios.get(process.env.BACKEND_URL + '/api/gethouse/' + id)
-					setStore({ casa: data.data.results });
+					// setStore({ casa: data.data.results });
+					// setStore({propietraio2: data.data.results.info_propietario})
 					console.log(data.data.results);
+					
 				} catch (error) {
 					console.log(error);
 					// if (error.response.status === 404) {
@@ -777,10 +781,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			},
 			getPerfilProp: async (id) => {
+				console.log(id);
 				try {
 					let data = await axios.get(process.env.BACKEND_URL + '/api/user/' + id)
 					setStore({ propietario: data.data.results });
-					console.log(data.data);
+					console.log(data.data.results);
 				} catch (error) {
 					console.log(error);
 					
@@ -792,7 +797,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					let data = await axios.get(process.env.BACKEND_URL + '/api/user/houses/' + id)
 					setStore({ casaPropietario: data.data.results });
-					console.log(data.data);
+					console.log(data.data.results);
 				} catch (error) {
 					console.log(error);
 					
