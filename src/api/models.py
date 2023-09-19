@@ -68,8 +68,8 @@ class House(db.Model):
 
     images = db.relationship('Image', backref='house', lazy=True)
     
-
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
     # user = db.relationship('User', backref='user', lazy=True)
     def __repr__(self):
         return f'<House {self.id}>'
@@ -82,7 +82,7 @@ class House(db.Model):
             "images": list(map(lambda item: item.serialize(),self.images)),
             "description": self.description,
             "category": self.category,
-            "info_propietario": [{"name":info_user.serialize()["name"], "lastname":info_user.serialize()["lastname"], "account_creation_date":str(info_user.serialize()["accountCreationDate"]) }],#list(map(lambda item: item.serialize(),self.user)),
+            "info_propietario": {"user_id":info_user.serialize()["id"],"name":info_user.serialize()["name"], "lastname":info_user.serialize()["lastname"], "account_creation_date":info_user.serialize()["accountCreationDate"] },#list(map(lambda item: item.serialize(),self.user)),
             "location": self.location,
             "numberOfRooms": self.number_of_rooms,
             "numberOfBathrooms": self.number_of_bathrooms,

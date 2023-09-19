@@ -20,8 +20,7 @@ function Perfilprop() {
     const [registerST, setRegisterST] = useState("")
     const { store, actions } = useContext(Context)
     const navigate = useNavigate();
-    let casasVentas= []
-    let casasAlquiler= []
+    let datosProp= store.casa.info_propietario?.userid
 
     
     async function handleSubmit() {
@@ -50,29 +49,13 @@ function Perfilprop() {
             }
         }
         useEffect(() => { 
-            const getPerfil=async()=>{
+            
                 
-                await actions.getPerfilProp(store.casa.user_id)
-               await actions.getCasasProp(store.casa.user_id)
-            }
-
-            getPerfil()
-
-    
-                // actions.getAlquileres()
-                // actions.getVentas()
-            //     for (let index = 0; index < store.casaPropietario; index++) {
-            //         const element = store.casaPropietario[index];
-            //         if (element.category=="Venta") { casasVentas.concat(element)
-                        
-            //         }
-            //         else if (element.category== "Alquiler") { casasAlquiler.concat(element)
-                        
-            //         }
+            actions.getPerfilProp(datosProp)
+            actions.getCasasProp(datosProp)
            
-            // }
         }, [])
-       
+       console.log(store.casa.info_propietario?.userid);
     
     
    
@@ -144,7 +127,7 @@ function Perfilprop() {
             <div className="tab-content container-alquileres">
                 <div className={"tab-pane fade " + login}>
                     <div className={"row"} id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-                        {store.casaPropietario.map((item, index) => {
+                        {store.casaPropietario?.map((item, index) => {
                             return (
                                 item.category=="Alquiler"?
                                 <CardFeedAlq key={index} ubicacion={item.location} precio={item.price} id={item.id} imageUrl={item.image_url} />
@@ -154,7 +137,7 @@ function Perfilprop() {
                 </div>
                 <div className={"tab-pane fade" + register}>
                     <div className={"row"} id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-                        {store.casaPropietario.map((item, index) => {
+                        {store.casaPropietario?.map((item, index) => {
                             return (
                             item.category=="Venta"?
                                 <CardFeedVen key={index} ubicacion={item.location} precio={item.price} id={item.id} imageUrl={item.image_url}  />
