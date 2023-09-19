@@ -45,7 +45,7 @@ function Detailsventas() {
           <li className="list-group-item bg-celeste-claro mt-4">{store.casa.description} </li>
           <div className='d-flex mt-4'>
             <div className='ms-3'>
-              <li className="list-group-item duenio">Dueño: {store.propietario.name}<br />
+              <li className="list-group-item duenio">Dueño: {store.propietario.name} {store.propietario.lastname}<br />
                 <p className='registro'>Se registró en mayo del 2015</p>
               </li>
             </div>
