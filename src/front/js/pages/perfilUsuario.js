@@ -120,7 +120,8 @@ function Perfil() {
                     <label htmlFor="exampleInputPassword1" className="form-label">Descripción <i className="fa-solid fa-pencil"></i></label>
                     <input type="text" className="form-control" disabled value='Descripcion' onChange={(e) => setConfpassword(e.target.value)} />
                 </div>
-                <button type="submit" className="text-white btn btn-danger d-grid gap-2 col-6 mx-auto">Eliminar cuenta</button>
+                <button type="submit" className="text-white btn btn-danger d-grid gap-2 col-6 mx-auto">Eliminar cuenta</button> <br/>
+                <Link to={"/editarperfil"}><button type="submit" className="text-white bg-azul-oscuro d-grid gap-2 col-6 mx-auto">Editar Perfil</button></Link>
             </div>
 
         </form>
