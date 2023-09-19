@@ -27,8 +27,8 @@ export const Favoritos = () => {
                         return (
                             <CardFav
                                 key={index}
-                                titulo={item.houseId.title}
-                                ubicacion={item.houseId.location}
+                                title={item.houseId.title}
+                                location={item.houseId.location}
                                 id={item.houseId.id}
                                 images={item.houseId.images} />
                         )
