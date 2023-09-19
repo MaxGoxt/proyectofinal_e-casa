@@ -440,3 +440,4 @@ def getOneSingleHouse(id):
         return jsonify({ "msg": "The house dosen´t exist" }), 404
 
     return jsonify({ "results": house.serialize() }), 200
+ 
