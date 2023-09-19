@@ -8,6 +8,13 @@
     padding: 0;
 }
 
+.details-card-img:hover {
+    cursor: crosshair;
+    width: 500px !important;
+    opacity: 1;
+    filter: contrast(120%);
+}
+
 .details-list-group {
     padding: 20px 0 0 !important;
 }
@@ -18,6 +25,10 @@
 
 .details-btn {
     width: 120px;
+}
+
+.mobile-images {
+    display: none !important;
 }
 
 @media all and (max-width: 900px) {
@@ -52,6 +63,17 @@
         border-radius: 0 !important;
     }
 }
+
+@media all and (max-width: 720px) {
+    .bigger-screen {
+        display: none !important;
+    }
+
+    .mobile-images {
+        display: flex !important;
+    }
+}
+
 
 @media all and (max-width: 640px) {
     .card-header {
