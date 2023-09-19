@@ -142,6 +142,23 @@ def editar_perfil():
 
     db.session.commit()
     return jsonify({"msg": "Tu perfil fue editado con éxito"}), 200
+
+#   Eliminar cuenta de usuario
+
+@api.route('/user', methods=['DELETE'])
+@jwt_required()
+def eliminar_perfil():
+
+    current_user_email = get_jwt_identity()
+    perfil_query = User.query.filter_by(email=current_user_email).first()
+
+    if perfil_query is not None:
+
+        db.session.delete(perfil_query)
+        db.session.commit()
+        return jsonify({"msg": "Tu perfil fue eliminado con éxito"}), 200
+    
+    return jsonify({"msg": "No se encontró tu perfil"}), 404
     
 
 @api.route("/profile_picture", methods=["POST"])
@@ -340,6 +357,9 @@ def eliminar_casa_favorita(casa_id):
     }
     
     return jsonify(request_body), 200
+
+
+
 
 # Agrega casas a un usuario propietario
 
