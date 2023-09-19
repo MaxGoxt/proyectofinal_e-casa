@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import diego from "../../img/diego.jpg";
 import { Context } from '../store/appContext';
@@ -15,7 +15,10 @@ export const PanelCtrl = () => {
                 </button> 
             </Link>*/}
             <Link to={"/perfil"}>
-                <img src={diego} style={{ width: "40px", height: "40px" }} className="rounded-circle" alt="..." />
+                {store.perfil.profile_picture == ""
+                    ? <img src={diego} style={{ width: "40px", height: "40px" }} className="rounded-circle " alt="..." />
+                    : <img src={store.perfil.profile_picture} style={{ width: "40px", height: "40px" }} className="rounded-circle " alt="..." />
+                }
             </Link>
         </div>
     );

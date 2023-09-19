@@ -676,6 +676,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						})
 					console.log(data);
 					localStorage.setItem("token", data.data.access_token)
+					setStore({ perfil: data.data.user });
 					setStore({ auth: true })
 					return true
 				} catch (error) {
@@ -689,6 +690,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			logout: async () => {
 				localStorage.removeItem('token')
+				setStore({ perfil: {} })
 				setStore({ auth: false })
 			},
 

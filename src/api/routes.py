@@ -147,15 +147,12 @@ def editar_perfil():
 @api.route("/profile_picture", methods=["POST"])
 @jwt_required()
 def set_user_image():
-    image = request.files.get('image')  # Obtén la imagen
-    
+    picture_url  = request.get_json(force=True) #obtiene el cuerpo que se envíe por el body desde el postman
     current_user_email = get_jwt_identity()
 
     user = User.query.filter_by(email = current_user_email).first()
 
-    result = cloudinary.uploader.upload(image)
-
-    user.profile_picture = result['secure_url']
+    user.profile_picture = picture_url
     
     db.session.commit()
 
@@ -345,15 +342,18 @@ def eliminar_casa_favorita(casa_id):
 @api.route("/post", methods=['POST'])
 @jwt_required()
 def save_post():
-    image = request.files.get('image')  # Obtén la imagen
     json_data = json.loads(request.form.get('json_data'))  # Obtén la cadena JSON
+
+    if len(json_data['imagesUrl']) <= 4:
+        return jsonify({ "msg": "Debes añadir almenos 5 imagenes" })
 
     current_user_email = get_jwt_identity()
     user = User.query.filter_by(email = current_user_email).first()
-    user_id = user.id
 
     error_index_dosent_exist = f"El usuario con id {json_data.get('user_id', None)},  no existe" 
     error_index_not_received = "El user_id no fue enviado" 
+
+    user_id = user.id
 
     if user_id is None:
         return jsonify({ "msg": error_index_not_received })
@@ -366,7 +366,6 @@ def save_post():
     house = House(
         title=json_data.get("title", None),
         category=json_data.get("category", None),
-        image_url="no image",
         description=json_data.get("description", None),
         user_id=user_id,
         location=json_data.get("location", None),
@@ -377,13 +376,16 @@ def save_post():
         virified_account=json_data.get("virified_account", None),
         price=json_data.get("price", None),
     )
-
-    result = cloudinary.uploader.upload(image)
-
-    house.image_url = result['secure_url']
+    
+    user.is_admin = True
 
     db.session.add(house)
     db.session.commit()
+
+    for image in json_data['imagesUrl']:
+        image = Image(url = image, house_id = house.id)
+        db.session.add(image)
+        db.session.commit()
 
     return jsonify(house.serialize()), 200
 
