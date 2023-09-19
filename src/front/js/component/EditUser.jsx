@@ -2,30 +2,8 @@ import React, { useState } from 'react';
 
 export const EditUser = () => {
     const [files, setFiles] = useState([]);
-    const [image, setImage] = useState("");
 
-    const getUserProfileImage = async () => {
-        const options = {
-            headers: { "Authorization": "Bearer " + localStorage.getItem('token') },
-            method: "GET",
-        }
-
-        try {
-            const callApi = async () => {
-                const data = await fetch(process.env.BACKEND_URL + "/api/current_user", options);
-
-                const response = await data.json();
-                const { profile_picture } = response.results;
-                console.log(response);
-                console.log(profile_picture);
-                setImage(profile_picture);
-
-            }
-            callApi();
-        } catch (error) {
-            console.log(error);
-        }
-    }
+    
 
     const handleImage = e => {
         e.preventDefault();
@@ -54,7 +32,6 @@ export const EditUser = () => {
         <div>
             <form onSubmit={handleImage}>
                 <img src={image !== "" ? image : ""} alt="profile_picture" />
-                <input type="file" onChange={e => setFiles(e.target.files)} />
                 <button>Enviar</button>
             </form>
         </div>
