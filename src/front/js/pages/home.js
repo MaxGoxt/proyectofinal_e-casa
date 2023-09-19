@@ -2,8 +2,6 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/home.css";
-import { CardFeedVen } from "../component/card_feed_ven.jsx"
-import { CardFeedAlq } from "../component/card_feed_alq.jsx"
 import { PanelCtrl } from "../component/panel_control.jsx";
 import { CardHouseFeed } from "../component/CardHouseFeed.jsx"
 
@@ -56,7 +54,12 @@ export const Home = () => {
                     <div className={"row"} id="pills-login" role="tabpanel" aria-labelledby="tab-login">
                         {store.alquileres.map((item, index) => {
                             return (
-                                <CardHouseFeed key={index} location={item.location} price={item.price} id={item.id} images={item.images} />
+                                <CardHouseFeed 
+                                    key={index} 
+                                    location={item.location} 
+                                    price={item.price} 
+                                    id={item.id} 
+                                    images={item.images} />
                             )
                         })}
                     </div>
@@ -65,7 +68,12 @@ export const Home = () => {
                     <div className={"row"} id="pills-register" role="tabpanel" aria-labelledby="tab-register">
                         {store.ventas.map((item, index) => {
                             return (
-                                <CardHouseFeed key={index} location={item.location} price={item.price} id={item.id} images={item.images} />
+                                <CardHouseFeed 
+                                    key={index} 
+                                    location={item.location} 
+                                    price={item.price} 
+                                    id={item.id} 
+                                    images={item.images} />
                             )
                         })}
                     </div>

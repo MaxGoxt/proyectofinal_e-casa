@@ -2,60 +2,55 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-import  { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import axios from "axios";
 
 
 export const CardFav = (props) => {
     const { store, actions } = useContext(Context)
-    
+
     const [isFavorito, setIsFavorito] = useState(true);
 
-
+    console.log(props)
     const toggleFavorito = () => {
-      setIsFavorito(!isFavorito);
-      if (isFavorito) {
-        // Llama a la función para eliminar el favorito
-        actions.deleteFavoritos(props.id);
-      }
+        setIsFavorito(!isFavorito);
+        if (isFavorito) {
+            // Llama a la función para eliminar el favorito
+            actions.deleteFavoritos(props.id);
+        }
     };
 
 
 
     return (
-    <>
-
-
-            <div className="card mb-3" style={{ maxWidth: "440px" }}>
-                <div className="row g-0 h-4">
-                    <div className="col-md-4">
-                        <img src={props.imageUrl} className="img-fluid rounded-start rounded-4" alt="..." />
-                    </div>
-                    <div className="col-md-8">
-                        <div className="card-body">
-                            <h5 className="card-title">{props.titulo}</h5>
+        <>
+            <div className="col-12 col-md-6 col-xl-4">
+                <div className="m-1 border border-2 rounded-3 row px-2 py-2">
+                    <div className="d-flex mb-3">
+                        <img src={props.images[0].url} className="rounded rounded-4" style={{ width: "80px", height: "60px", objectFit: "cover" }} alt="..." />
+                        <div className="mt-0 p-0 ms-4">
+                            <p className="m-0  fw-bold fs-5">Punta ballena, estudio con vista y patio</p>
                         </div>
                     </div>
-                    <div className="d-flex justify-content-between px-1 float-end">
-                        <p className="card-text"><small className="text-body-secondary">{props.ubicacion}</small></p>
-                        <button onClick={toggleFavorito} className="btn" > { isFavorito?
-                            <i style={{ fontSize: "20px", color: "red" }} className="fa-solid fa-heart px-3 px-1 "></i> :
-                            <i style={{ fontSize: "20px", color: "red" }} className="fa-regular fa-heart px-3 px-1 "></i>
+                    <div className="d-flex justify-content-between float-end">
+                        <p className="m-0" style={{ textDecoration: "underline" }}>Carrasco, Departamento de Montevideo, Uruguay.</p>
+                        <button onClick={toggleFavorito} className="btn m-0 p-0" > {isFavorito ?
+                            <i style={{ fontSize: "20px", color: "red" }} className="fa-solid fa-heart px-1 fs-3"></i> :
+                            <i style={{ fontSize: "20px", color: "red" }} className="fa-regular fa-heart px-1 "></i>
                         }</button>
                     </div>
                 </div>
             </div>
+        </>
 
-        </> 
-    
-    
+
 
 
     );
 }
 
 CardFav.propTypes = {
-    
+
     ubicacion: PropTypes.string,
     id: PropTypes.number,
     imageUrl: PropTypes.string,
