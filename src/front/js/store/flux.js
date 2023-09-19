@@ -17,6 +17,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// 		initial: "white"
 			// 	}
 			// ]
+			propietario: [],
 			alquileres: [
 				{
 					"category": "Alquiler",
@@ -561,10 +562,25 @@ const getState = ({ getStore, getActions, setStore }) => {
 					"wifi": false
 				}
 			],
-			casa: {},
+			casa: {
+				"category": "Venta",
+				"description": "Melo",
+				"id": 18,
+				"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/aoteeureorya8aioyhkm.webp",
+				"location": "Melo, Cerro Largo",
+				"numberOfBathrooms": 2,
+				"numberOfRooms": 1,
+				"parking": true,
+				"price": 20000,
+				"title": "Melo",
+				"user_id": 1,
+				"virified_account": true,
+				"wifi": false
+			},
 			auth: false,
 			perfil: {},
-			favoritos: []
+			favoritos: [],
+			casaPropietario:[]
 		},
 		actions: {
 
@@ -681,9 +697,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return true
 				} catch (error) {
 					console.log(error);
-					if (error.response.status === 404) {
-						alert(error.response.data.msg)
-					}
+					// if (error.response.status === 404) {
+					// 	alert(error.response.data.msg)
+					// }
 					return false
 				}
 			},
@@ -751,16 +767,56 @@ const getState = ({ getStore, getActions, setStore }) => {
 					setStore({ "favoritos": data.data.results })
 
 				} catch (error) {
-					console.log(error);
+					console.log(error.response);
 					// if (error.response.status === 404) {
-					// 	alert(error.response.data.msj)
+						setStore({"favoritos": error.response.data.msg})
 					// }
 					return false
 
 				}
 
 			},
+			getPerfilProp: async (id) => {
+				try {
+					let data = await axios.get(process.env.BACKEND_URL + '/api/user/' + id)
+					setStore({ propietario: data.data.results });
+					console.log(data.data);
+				} catch (error) {
+					console.log(error);
+					
+					return false
+				}
 
+			},
+			getCasasProp: async (id) => {
+				try {
+					let data = await axios.get(process.env.BACKEND_URL + '/api/user/houses/' + id)
+					setStore({ casaPropietario: data.data.results });
+					console.log(data.data);
+				} catch (error) {
+					console.log(error);
+					
+					return false
+				}
+
+			},
+			deleteFavoritos: async (casa_id) => {
+				try {
+					// fetching data from the backend
+					const resp = await fetch(process.env.BACKEND_URL + '/api/favoritos/house/'+ casa_id, {
+						method: "DELETE",
+						headers: {
+							"Authorization": "Bearer " + localStorage.getItem('token')
+						}
+					});
+					const data = await resp.json()
+					console.log(data);
+					// don't forget to return something, that is how the async resolves
+					return data;
+				} catch (error) {
+					console.log("Error loading message from backend", error)
+				}
+			},
 
 
 

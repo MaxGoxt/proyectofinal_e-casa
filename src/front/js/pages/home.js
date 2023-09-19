@@ -15,8 +15,8 @@ export const Home = () => {
     const [registerST, setRegisterST] = useState("")
 
     useEffect(() => {
-        // actions.getAlquileres()
-        // actions.getVentas()
+        actions.getAlquileres()
+        actions.getVentas()
     }, [])
 
 
@@ -70,9 +70,8 @@ export const Home = () => {
                         })}
                     </div>
                 </div>
-            </div>{
-                store.auth ?
-                    <PanelCtrl /> : null
-            }</div >
+            </div>
+            <PanelCtrl />
+        </div>
     );
 };
