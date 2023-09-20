@@ -3,9 +3,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Context } from '../store/appContext';
 import { Link } from 'react-router-dom';
 import diego from "../../img/diego.jpg";
-import { CardFeedAlq } from "../component/card_feed_alq.jsx"
-import { CardFeedVen } from "../component/card_feed_ven.jsx"
-
+// import { CardFeedAlq } from "../component/card_feed_alq.jsx"
+// import { CardFeedVen } from "../component/card_feed_ven.jsx"
+import { CardHouseFeed } from "../component/CardHouseFeed.jsx"
 
 function Perfilprop() {
     const [lastName, setLastName] = useState("")
@@ -130,7 +130,10 @@ function Perfilprop() {
                         {store.casaPropietario?.map((item, index) => {
                             return (
                                 item.category=="Alquiler"?
-                                <CardFeedAlq key={index} ubicacion={item.location} precio={item.price} id={item.id} imageUrl={item.image_url} />
+                                <CardHouseFeed key={index} location={item.location} 
+                                price={item.price} 
+                                id={item.id} 
+                                images={item.images} />
                             :null)
                         })}
                     </div>
@@ -140,7 +143,10 @@ function Perfilprop() {
                         {store.casaPropietario?.map((item, index) => {
                             return (
                             item.category=="Venta"?
-                                <CardFeedVen key={index} ubicacion={item.location} precio={item.price} id={item.id} imageUrl={item.image_url}  />
+                                <CardHouseFeed key={index} location={item.location} 
+                                price={item.price} 
+                                id={item.id} 
+                                images={item.images} />
                             : null)
                         })}
                     </div>
