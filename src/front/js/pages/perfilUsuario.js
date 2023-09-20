@@ -86,7 +86,7 @@ function Perfil() {
                 <div className='ms-3   justify-content-center mt-5'>
                     <li className="list-group-item duenio">
                         <Link to={"/favoritos"}><i className="fa-regular fa-heart"></i></Link><br/>
-                        <Link to={"/"}><i className="fa-solid fa-gears my-3"></i></Link>
+                        <Link to={"/editarperfil"}><i className="fa-solid fa-gears my-3"></i></Link>
                     </li>
                 </div>
             </div>
@@ -121,7 +121,7 @@ function Perfil() {
                     <input type="text" className="form-control" disabled value='Descripcion' onChange={(e) => setConfpassword(e.target.value)} />
                 </div>
                 <button type="submit" className="text-white btn btn-danger d-grid gap-2 col-6 mx-auto">Eliminar cuenta</button> <br/>
-                <Link to={"/editarperfil"}><button type="submit" className="text-white bg-azul-oscuro d-grid gap-2 col-6 mx-auto">Editar Perfil</button></Link>
+                
             </div>
 
         </form>

@@ -79,8 +79,8 @@ function Editarperfil() {
 
                 <div className=' justify-content-center'>
                     <img src={diego} style={{ width: "100px", height: "100px" }} className="rounded-circle " alt="..." />
-                    <strong><p className='m-auto'>{store.propietario.name}</p></strong>
-                    <strong><p className='registro'>{store.propietario.email}</p></strong>
+                    <strong><p className='m-auto'>{store.perfil.name}</p></strong>
+                    <strong><p className='registro'>{store.perfil.email}</p></strong>
 
                     
                 </div>
@@ -95,19 +95,19 @@ function Editarperfil() {
             <div className=''>
                 <div className="mb-3 texto-amarillo">
                     <label htmlFor="exampleInputEmail1" className="form-label">Nombre </label>
-                    <input type="nombre" className="form-control"  aria-describedby="emailHelp" value={store.propietario.name} onChange={(e) => setFirstName(e.target.value)} />
+                    <input type="nombre" className="form-control"  aria-describedby="emailHelp" value={store.perfil.name} onChange={(e) => setFirstName(e.target.value)} />
                 </div>
                 <div className="mb-3 texto-amarillo">
                     <label htmlFor="exampleInputPassword1" className="form-label">Apellido </label>
-                    <input type="apellido" className="form-control" value={store.propietario.lastname} onChange={(e) => setLastName(e.target.value)} />
+                    <input type="apellido" className="form-control" value={store.perfil.lastname} onChange={(e) => setLastName(e.target.value)} />
                 </div>
                 <div className="mb-3 texto-amarillo">
                     <label htmlFor="exampleInputPassword1" className="form-label">Email </label>
-                    <input type="email" className="form-control"  value={store.propietario.email} onChange={(e) => setEmail(e.target.value)} />
+                    <input type="email" className="form-control"  value={store.perfil.email} onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 <div className="mb-3 texto-amarillo">
                     <label htmlFor="exampleInputPassword1" className="form-label">Telefono de contacto </label>
-                    <input type="contacto" className="form-control"  value={store.propietario.phoneNumber} onChange={(e) => setPhone(e.target.value)} />
+                    <input type="contacto" className="form-control"  value={store.perfil.phoneNumber} onChange={(e) => setPhone(e.target.value)} />
                 </div>
                 <div className="mb-3 texto-amarillo">
                     <label htmlFor="exampleInputPassword1" className="form-label">Contraseña</label>
@@ -122,7 +122,7 @@ function Editarperfil() {
             </div>
            
            
-            <div className="text-white my-5">
+            {/* <div className="text-white my-5">
             
             <ul className="nav-container nav nav-pills nav-justified mt-5" id="ex1" role="tablist">
                 <li className="nav-item" role="presentation">
@@ -157,7 +157,7 @@ function Editarperfil() {
                 </div>
             </div>
             
-        </div>
+        </div> */}
                 
             
            
