@@ -20,7 +20,7 @@ function Perfilprop() {
     const [registerST, setRegisterST] = useState("")
     const { store, actions } = useContext(Context)
     const navigate = useNavigate();
-    let datosProp= store.casa.info_propietario?.userid
+    let datosProp = store.casa.info_propietario?.user_id
 
     
     async function handleSubmit() {
@@ -55,7 +55,7 @@ function Perfilprop() {
             actions.getCasasProp(datosProp)
            
         }, [])
-       console.log(store.casa.info_propietario?.userid);
+       console.log(store.propietario);
     
     
    

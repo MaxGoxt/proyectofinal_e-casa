@@ -12,11 +12,11 @@ function Details() {
   useEffect(() => {
       
     actions.getDetalles(param.id)
-    actions.getPerfilProp(store.casa.user_id)
+    actions.getPerfilProp(store.casa.info_propietario?.user_id)
        
   }, [])
 
-console.log(store.casa.info_propietario?.account_creation_date);
+console.log(store.casa.info_propietario?.user_id);
 
   return (
     <div className='details-container container mx-auto row d-flex cuerpo mt-5'>

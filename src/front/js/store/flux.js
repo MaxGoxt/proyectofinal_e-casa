@@ -782,7 +782,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getPerfilProp: async (id) => {
 				console.log(id);
 				if(id){
-				localStorage.setItem("prop_id", getStore().casa.info_propietario?.userid)}
+				localStorage.setItem("prop_id", getStore().casa.info_propietario?.user_id)}
 
 				try {
 					let data = await axios.get(process.env.BACKEND_URL + '/api/user/' + localStorage.getItem('prop_id'))
