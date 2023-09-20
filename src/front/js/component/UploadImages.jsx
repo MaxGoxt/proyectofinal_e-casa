@@ -1,10 +1,28 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import { Context } from "../store/appContext";
+import { Link } from 'react-router-dom';
 
 export const UploadImages = () => {
-    const { store, actions } = useContext(Context)
-    const [files, setFiles] = useState(null);
-    const [images, setImages] = useState("")
+    const { store, actions } = useContext(Context);
+    const [imagesUrl, setImagesUrl] = useState([]);
+
+    const cloudinaryRef = useRef();
+    const widgetRef = useRef();
+
+    useEffect(() => {
+        cloudinaryRef.current = window.cloudinary;
+        widgetRef.current = cloudinaryRef.current.createUploadWidget({
+            cloudName: process.env.CLOUDNAME,
+            uploadPreset: process.env.UPLOAD_PRESET
+        }, function (error, result) {
+            if (result?.event === "success") {
+                setImagesUrl((imagesUrl) => {
+                    return [...imagesUrl, result.info.secure_url]
+                })
+            }
+        });
+    }, [])
+
 
     const title = useRef();
     const description = useRef();
@@ -14,21 +32,7 @@ export const UploadImages = () => {
     const number_of_bathrooms = useRef();
     const parking = useRef();
     const wifi = useRef();
-    const virified_account = useRef();
     const price = useRef();
-
-    const getImages = async () => {
-        // console.log("cambiar id de la imagen a pedir")
-        try {
-            const data = await fetch(process.env.BACKEND_URL + "/api/gethouse/1")
-            const response = await data.json();
-            // console.log(response);
-            // console.log(response.results.image_url);
-            setImages(response.results.image_url);
-        } catch (error) {
-            console.log(error);
-        }
-    }
 
     const checkRadioButtons = () => {
         let categorySelected = undefined;
@@ -75,22 +79,11 @@ export const UploadImages = () => {
     const uploadImage = evt => {
         evt.preventDefault();
 
-        const { 
+        const {
             categorySelected,
             wifiSelected,
-            parkingSelected 
+            parkingSelected
         } = checkRadioButtons();
-
-        const acceptedFormats = ["png", "jpg", "jpeg"];
-        let canBeUsed = false;
-
-        acceptedFormats.forEach(format => {
-            if (files[0].type.includes(format)) {
-                canBeUsed = true;
-            }
-        })
-
-        if (canBeUsed == false) alert("El formato no es el correcto debe ser png, jpg o jpeg");
 
         if (title.current.value === "") alert("El titulo esta vacio");
         if (categorySelected === undefined) alert("Selecciona una categoria");
@@ -98,13 +91,14 @@ export const UploadImages = () => {
         if (location.current.value === "") alert("La ubicación esta vacio");
         if (number_of_rooms.current.value === "") alert("El número de cuartos esta vacio");
         if (number_of_bathrooms.current.value === "") alert("El número de baños esta vacio");
-        if (parking === false ) alert("Selecciona si tiene parking o no");
-        if (wifi === false ) alert("Selecciona si tiene wifi o no");
+        if (parking === false) alert("Selecciona si tiene parking o no");
+        if (wifi === false) alert("Selecciona si tiene wifi o no");
         if (price.current.value === "") alert("El precio esta vacio");
+        if (imagesUrl.length <= 4) alert("Sube almenos 5 images");
 
         const formData = new FormData();
-        formData.append('image', files[0]); // Agrega la imagen al FormData
         formData.append('json_data', JSON.stringify({
+            imagesUrl,
             title: title.current.value,
             category: categorySelected,
             description: description.current.value,
@@ -119,40 +113,34 @@ export const UploadImages = () => {
 
         const options = {
             body: formData,
-            headers : {"Authorization" : "Bearer " + localStorage.getItem('token')},
+            headers: { "Authorization": "Bearer " + localStorage.getItem('token') },
             method: "POST",
         }
 
         try {
             const saveImage = async () => {
                 await fetch(process.env.BACKEND_URL + "/api/post", options)
-                    .then(() => getImages());
             }
             saveImage();
         } catch (error) {
             console.log(error);
         }
+
     }
 
-    useEffect(() => {
-        getImages();
-    }, [])
-
     return (
-        <div className="mt-5 bg-celeste-claro">
+        <div className="d-flex flex-column mt-5 bg-celeste-claro">
+            <button className="btn btn-primary mt-5 mx-auto" onClick={() => widgetRef.current.open()}>
+                SUBIR IMAGEN
+            </button>
             <form onSubmit={uploadImage} className="d-flex flex-column align-items-center mt-4">
-                <img src={images !== "" ? images : "https://www.eclosio.ong/wp-content/uploads/2018/08/default.png"} />
-                <label htmlFor="file" className="mt-2">
-                    <p className="btn btn-primary">Subir imagen</p>
-                </label>
-                <input type="file" id="file" className="mt-4 invisible" onChange={(e) => setFiles(e.target.files)} />
                 <div className="mb-3 w-50">
                     <label htmlFor="title" className="form-label texto-amarillo">Titulo</label>
-                    <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="title" aria-describedby="emailHelp" ref={title}/>
+                    <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="title" aria-describedby="emailHelp" ref={title} />
                 </div>
                 <div className="mb-3 w-50">
                     <label htmlFor="description" className="form-label texto-amarillo">Descripción</label>
-                    <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="description" aria-describedby="emailHelp" ref={description}/>
+                    <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="description" aria-describedby="emailHelp" ref={description} />
                 </div>
                 <div className="mb-3 w-50 d-flex justify-content-center">
                     <div className="w-30">
@@ -175,15 +163,15 @@ export const UploadImages = () => {
                 </div>
                 <div className="mb-3 w-50">
                     <label htmlFor="location" className="form-label texto-amarillo">Ubicación</label>
-                    <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="location" aria-describedby="emailHelp" ref={location}/>
+                    <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="location" aria-describedby="emailHelp" ref={location} />
                 </div>
                 <div className="mb-3 w-50">
                     <label htmlFor="number_of_rooms" className="form-label texto-amarillo">Nro° de cuartos</label>
-                    <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="number_of_rooms" aria-describedby="emailHelp" ref={number_of_rooms}/>
+                    <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="number_of_rooms" aria-describedby="emailHelp" ref={number_of_rooms} />
                 </div>
                 <div className="mb-3 w-50">
                     <label htmlFor="number_of_bathrooms" className="form-label texto-amarillo">Nro° de baños</label>
-                    <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="number_of_bathrooms" aria-describedby="emailHelp" ref={number_of_bathrooms}/>
+                    <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="number_of_bathrooms" aria-describedby="emailHelp" ref={number_of_bathrooms} />
                 </div>
                 <div className="mb-3 w-50 d-flex justify-content-center">
                     <div className="w-30">
@@ -225,7 +213,7 @@ export const UploadImages = () => {
                 </div>
                 <div className="mb-3 w-50">
                     <label htmlFor="price" className="form-label texto-amarillo">Precio</label>
-                    <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="price" aria-describedby="emailHelp" ref={price}/>
+                    <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="price" aria-describedby="emailHelp" ref={price} />
                 </div>
                 <button className="btn btn-primary">Subir casa</button>
             </form>

@@ -4,58 +4,107 @@ import { useParams, useLocation, Link } from 'react-router-dom';
 import diego from "../../img/diego.jpg";
 import { Comentarios } from '../component/comentarios_casas.jsx';
 import { PanelCtrl } from "../component/panel_control.jsx";
-
+import "../../styles/Details.css";
 
 function Details() {
   const { store, actions } = useContext(Context)
   let param = useParams()
   useEffect(() => {
-    // actions.getAlquileres()
-    actions.getDetalles(param.id)
+    const getPerfil=async()=>{
+      
+     await actions.getPerfilProp(store.casa.user_id)
+     await actions.getDetalles(param.id)
+    }
+    getPerfil()
   }, [])
 
 
 
-
   return (
-    <div className='row d-flex cuerpo mt-5'>
+    <div className='details-container container mx-auto row d-flex cuerpo mt-5'>
+      <div className="mt-3 d-block"></div>
+      <Link to={"/"} className="text-decoration-none my-2 continue-navigation"><span className="text-dark w-25 my-4"><i className="fa-solid fa-arrow-left-long me-2"></i><span>Seguir navegando</span></span></Link>
+      <div className="details-card-container col-12">
 
-      <div className="col-12 bg-white" style={{ width: "90rem" }}>
-        <Link to={"/"}><button type="submit" className="btn text-white bg-azul-oscuro  rounded-pill w-25 my-4">Volver</button></Link>
-        <img src={store.casa.image_url} className="card-img-top" alt="..." />
-        <div className="card-body">
+        <div className="card-header bigger-screen d-flex" style={{ height: "430px" }}>
+          {store.casa?.images?.map((img) => (
+            <img src={img.url} className="details-card-img" style={{ maxWidth: "100%", width: "20px", flexGrow: "1", objectFit: "cover", opacity: ".9", transition: ".5s ease" }} />
+          ))}
+        </div>
+
+
+
+
+
+        <div id="carouselExampleControls" className="carousel slide mobile-images" data-bs-ride="true">
+          <div className="carousel-inner" >
+            <div className="carousel-inner" style={{ height: "300px" }}>
+              {store.casa?.images?.map((img, index) => (
+                <div className={`carousel-item justify-content-center text-center ${index === 0 && "active"}`}>
+                  <img src={img.url} className="details-card-img" style={{ height: "300px" }} />
+                </div>
+              ))}
+            </div>
+            <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+              <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span className="visually-hidden">Previous</span>
+            </button>
+            <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+              <span className="carousel-control-next-icon" aria-hidden="true"></span>
+              <span className="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+
+        {/*<div className="card-header d-flex row">
+          {store.casa?.images?.map((img, index) => (
+            index <= 5 &&
+              <>
+                {index == 1 && <div className="object-fit-cover col-6">
+                  <img src={img.url} className={`object-fit-cover p-1`} alt="..." />
+                </div>}
+                <div>
+                  <img src={img.url} className={`object-fit-cover col-3 p-1`} alt="..." />
+                </div>
+              </>
+          ))}
+        </div>]*/}
+
+
+        <div className="card-body details-card-body">
           <h2 className="card-title">{store.casa.title}</h2>
 
-          <p className="text-white bg-azul-oscuro d-flex justify-content-center w-25 btn my-4">{store.casa.category}</p>
+          <p className="text-white bg-azul-oscuro d-flex details-btn justify-content-center btn my-4">{store.casa.category}</p>
           <h6 className='disponible'>Localización: {store.casa.location}</h6>
-          <p className="card-text"><strong>Alojamiento entero: departamento con servicios incluidos. <br />Anfitrión: Armando A.</strong></p>
+          <p className="card-text"><strong>Alojamiento entero: departamento con servicios incluidos. <br />Anfitrión: {store.propietario?.name}</strong></p>
           <p className='detalle'>{store.casa.numberOfRooms} Habitaciones - {store.casa.numberOfBathrooms} Baños - 250mt2 </p>
 
         </div>
-        <ul className="list-group list-group-flush">
+        <ul className="list-group details-list-group list-group-flush">
           <div className='d-flex justify-content-between'>
-            <p className='ms-3'><strong>${store.casa.price} Mensual </strong></p> <br />
-            
-             <p className='disponible'>Disponible ahora</p>
-             <button type="submit" className="btn text-white bg-azul-oscuro  mx-auto rounded-pill w-25 my-4 me-3 ">Alquilar</button>
+            <div>
+              <p className='mb-0'><strong>${store.casa.price} Mensual </strong></p>
+              <p className='disponible mb-0'>Disponible ahora</p>
+            </div>
+            <Link to={"/perfilprop"}><button type="submit" className="btn text-white bg-azul-oscuro  mx-auto rounded my-4 me-3 details-btn">Alquilar</button></Link>
           </div>
-          <li className="list-group-item bg-celeste-claro mt-4"><p>{store.casa.description}</p></li>
-          <div className='d-flex mt-4'>
-            <div className='ms-3'>
-              <li className="list-group-item duenio"><p>Dueño: Pablo Bullor</p> <br />
+          <li className="list-group-item details-list-group bg-celeste-claro mt-4 ms-0 ps-0"><p className="ps-0 ms-0">{store.casa.description}</p></li>
+          <div className='d-flex mt-2 '>
+            <div className=''>
+              <li className="list-group-item details-list-group duenio"><p>Dueño: {store.propietario?.name}</p> <br />
                 <p className='registro'>Se registró en mayo del 2015</p>
               </li>
             </div>
 
-            <img src={diego} style={{ width: "50px", height: "50px" }} className="rounded-circle ms-4" alt="..." />
+            <img src={diego} style={{ width: "50px", height: "50px" }} className="rounded-circle" alt="..." />
           </div>
 
-          <li className="list-group-item bg-celeste-claro mt-4">Soy de Uruguay, Sudamérica
+          <li className="list-group-item details-list-group bg-celeste-claro ps-0 ms-0 mt-4">Soy de Uruguay, Sudamérica
 
             Alterno viviendo entre la capital Montevideo y Punta del Este en el departamento de Maldonado. Punta Ballena es uno de los lugares más bonitos de Sudamérica en Punta del Este.</li>
         </ul>
-        <h5 className='ms-3 mt-3'>Comentarios:</h5>
-        <div className="d-flex " style={{ overflowX: 'scroll', scrollSnapType: 'x mandatory' }}>
+        <h5 className='mt-3 mb-2 comments'>Comentarios:</h5>
+        <div className="comments d-flex " style={{ overflowX: 'scroll', scrollSnapType: 'x mandatory' }}>
           <Comentarios />
           <Comentarios />
           <Comentarios />
@@ -67,10 +116,9 @@ function Details() {
 
         </div>
 
-      </div>{
-        store.auth ?
-          <PanelCtrl /> : null
-      }</div>
+      </div>
+      <PanelCtrl />
+    </div>
   );
 };
 

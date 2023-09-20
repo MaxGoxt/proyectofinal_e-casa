@@ -17,12 +17,28 @@ const getState = ({ getStore, getActions, setStore }) => {
 			// 		initial: "white"
 			// 	}
 			// ]
-			alquileres : [],
-			ventas : [],
-			casa: {},
-			auth : false,
-			perfil:{},
-			favoritos:[]
+			propietario: [],
+			alquileres: [],
+			ventas: [],
+			casa: {
+				"category": "Venta",
+				"description": "Melo",
+				"id": 18,
+				"image_url": "https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873945/aoteeureorya8aioyhkm.webp",
+				"location": "Melo, Cerro Largo",
+				"numberOfBathrooms": 2,
+				"numberOfRooms": 1,
+				"parking": true,
+				"price": 20000,
+				"title": "Melo",
+				"user_id": 1,
+				"virified_account": true,
+				"wifi": false
+			},
+			auth: false,
+			perfil: {},
+			favoritos: [],
+			casaPropietario:[]
 		},
 		actions: {
 
@@ -86,69 +102,71 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 
-			
+
 			validToken: async () => {
 				try {
 					let data = await axios.get(process.env.BACKEND_URL + '/api/valid_token',
-					{
-						headers : {"Authorization" : "Bearer " + localStorage.getItem('token')}
-					})
-					setStore({ auth : true})
+						{
+							headers: { "Authorization": "Bearer " + localStorage.getItem('token') }
+						})
+					setStore({ auth: true })
 					console.log(data);
 					return true
 				} catch (error) {
 					console.log(error);
 					// if (error.response.status === 404) {
-						// 	alert(error.response.data.msj)
-						// }
-						return false
-					}
-				},
-				
-				getPerfil: async () => {
-					try {
-						let data = await axios.get(process.env.BACKEND_URL + '/api/perfil',
-						
-						{
-							headers : {"Authorization" : "Bearer " + localStorage.getItem('token')}
-						})
-						setStore({perfil: data.data})
-						console.log(getStore().perfil);
-						
-						return true
-					} catch (error) {
-						console.log(error);
-						// if (error.response.status === 404) {
-							// 	alert(error.response.data.msj)
-							// }
-							return false
-						}
-					},
-					
-					login: async (email, password) => {
-						try {
-							let data = await axios.post(process.env.BACKEND_URL + '/api/login',
-								{
-									"email": email,
-									"password": password
-								})
-							console.log(data);
-							localStorage.setItem("token", data.data.access_token)
-							setStore({ auth : true})
-							return true
-						} catch (error) {
-							console.log(error);
-							if (error.response.status === 404) {
-								alert(error.response.data.msg)
-							}
-							return false
-						}
-					},
+					// 	alert(error.response.data.msj)
+					// }
+					return false
+				}
+			},
 
-					logout: async () => {
-						localStorage.removeItem('token')
-						setStore({ auth : false})
-					},
+			getPerfil: async () => {
+				try {
+					let data = await axios.get(process.env.BACKEND_URL + '/api/perfil',
+
+						{
+							headers: { "Authorization": "Bearer " + localStorage.getItem('token') }
+						})
+					setStore({ perfil: data.data })
+					console.log(getStore().perfil);
+
+					return true
+				} catch (error) {
+					console.log(error);
+					// if (error.response.status === 404) {
+					// 	alert(error.response.data.msj)
+					// }
+					return false
+				}
+			},
+
+			login: async (email, password) => {
+				try {
+					let data = await axios.post(process.env.BACKEND_URL + '/api/login',
+						{
+							"email": email,
+							"password": password
+						})
+					console.log(data);
+					localStorage.setItem("token", data.data.access_token)
+					setStore({ perfil: data.data.user });
+					setStore({ auth: true })
+					return true
+				} catch (error) {
+					console.log(error);
+					// if (error.response.status === 404) {
+					// 	alert(error.response.data.msg)
+					// }
+					return false
+				}
+			},
+
+			logout: async () => {
+				localStorage.removeItem('token')
+				setStore({ perfil: {} })
+				setStore({ auth: false })
+			},
 
 			getAlquileres: async () => {
 				try {
@@ -162,8 +180,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					// }
 					return false
 				}
-			},
 
+			},
 			getVentas: async () => {
 				try {
 					let data = await axios.get(process.env.BACKEND_URL + '/api/gethouses/sell')
@@ -178,7 +196,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-			getDetalles: async (id)=>{
+			getDetalles: async (id) => {
 				console.log(id);
 				try {
 					let data = await axios.get(process.env.BACKEND_URL + '/api/gethouse/' + id)
@@ -192,36 +210,104 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false
 
 
-			}
+				}
 
-		},
+			},
 
-		getFavoritos: async ()=>{
-			
-			try {
-				let data = await axios.get(process.env.BACKEND_URL + '/api/usuario/favorito',
-				{
-					headers : {"Authorization" : "Bearer " + localStorage.getItem('token')}
-				})
-				console.log(data.data.results);
-				setStore({"favoritos": data.data.results})
+			getFavoritos: async () => {
 
-			} catch (error) {
-				console.log(error);
-				// if (error.response.status === 404) {
-				// 	alert(error.response.data.msj)
-				// }
-				return false
+				try {
+					let data = await axios.get(process.env.BACKEND_URL + '/api/usuario/favorito',
+						{
+							headers: { "Authorization": "Bearer " + localStorage.getItem('token') }
+						})
+					console.log(data.data.results);
+					setStore({ "favoritos": data.data.results })
+
+				} catch (error) {
+					console.log(error.response);
+					// if (error.response.status === 404) {
+						setStore({"favoritos": error.response.data.msg})
+					// }
+					return false
+
+				}
+
+			},
+			getPerfilProp: async (id) => {
+				try {
+					let data = await axios.get(process.env.BACKEND_URL + '/api/user/' + id)
+					setStore({ propietario: data.data.results });
+					console.log(data.data);
+				} catch (error) {
+					console.log(error);
+					
+					return false
+				}
+
+			},
+			getCasasProp: async (id) => {
+				try {
+					let data = await axios.get(process.env.BACKEND_URL + '/api/user/houses/' + id)
+					setStore({ casaPropietario: data.data.results });
+					console.log(data.data);
+				} catch (error) {
+					console.log(error);
+					
+					return false
+				}
+
+			},
+			deleteFavoritos: async (casa_id) => {
+				try {
+					// fetching data from the backend
+					const resp = await fetch(process.env.BACKEND_URL + '/api/favoritos/house/'+ casa_id, {
+						method: "DELETE",
+						headers: {
+							"Authorization": "Bearer " + localStorage.getItem('token')
+						}
+					});
+					const data = await resp.json()
+					console.log(data);
+					// don't forget to return something, that is how the async resolves
+					return data;
+				} catch (error) {
+					console.log("Error loading message from backend", error)
+				}
+			},
+			editPerfil: async (firstName, lastName, email, password, phone) => {
+				console.log(localStorage.getItem('token'));
+				try {
+					
+					const resp = await fetch(process.env.BACKEND_URL + '/api/user',{
+						method: "PUT",
+						headers: {
+							"Authorization": "Bearer " + localStorage.getItem('token')
+						},
+						body: JSON.stringify({
+							
+							"name": firstName,
+							"lastname": lastName,
+							"email": email,
+							"phone_number": phone,
+							"password": password
+
+						
+					})})
+					const data = await resp.json()
+					console.log("funciona");
+					
+					return data;
+				} catch (error) {
+					// console.log("Error loading message from backend", error)
+				}
+			},
+
+
 
 		}
-
-	},
-
-
-
-		
 	}
-}};
+};
 
 
 export default getState;

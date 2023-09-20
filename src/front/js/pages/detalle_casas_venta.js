@@ -12,7 +12,9 @@ function Detailsventas() {
   let param = useParams()
   useEffect(() => {
     // actions.getVentas()
+    actions.getPerfilProp(store.casa.user_id)
     actions.getDetalles(param.id)
+    
 
   }, [])
 
@@ -32,18 +34,18 @@ function Detailsventas() {
 
           <p className="text-white bg-azul-oscuro d-flex justify-content-center w-25 btn my-4">{store.casa.category}</p>
           <h6 className='disponible'>Localización: {store.casa.location}</h6>
-          <p className="card-text"><strong>Alojamiento entero: departamento con servicios incluidos. <br />Anfitrión: Armando A.</strong></p>
+          <p className="card-text"><strong>Alojamiento entero: departamento con servicios incluidos. <br />Anfitrión: {store.propietario.name}.</strong></p>
           <p className='detalle'>{store.casa.numberOfRooms} Habitaciones - {store.casa.numberOfBathrooms} Baños - 250mt2 </p>
 
         </div>
         <ul className="list-group list-group-flush">
           <div className='d-flex justify-content-between'>
-            <p className='ms-3'><strong>U$S {store.casa.price}<br /> </strong><p className='disponible'>Disponible ahora</p></p><button type="submit" className="btn text-white bg-azul-oscuro  mx-auto rounded-pill w-25 my-4 me-3 ">Contacto</button>
+            <p className='ms-3'><strong>U$S {store.casa.price}<br /> </strong><p className='disponible'>Disponible ahora</p></p><button type="submit" className="btn text-white bg-azul-oscuro  mx-auto rounded-pill w-25 my-4 me-3 "><Link to={"/perfilprop"}>Contacto</Link></button>
           </div>
           <li className="list-group-item bg-celeste-claro mt-4">{store.casa.description} </li>
           <div className='d-flex mt-4'>
             <div className='ms-3'>
-              <li className="list-group-item duenio">Dueño: Pablo Bullor <br />
+              <li className="list-group-item duenio">Dueño: {store.propietario.name}<br />
                 <p className='registro'>Se registró en mayo del 2015</p>
               </li>
             </div>
@@ -57,10 +59,9 @@ function Detailsventas() {
         </ul>
 
 
-      </div>{
-        store.auth ?
-          <PanelCtrl /> : null
-      }</div>
+      </div>
+          <PanelCtrl />
+      </div>
 
 
   );
