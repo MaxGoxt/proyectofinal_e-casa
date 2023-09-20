@@ -309,6 +309,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 					// console.log("Error loading message from backend", error)
 				}
 			},
+			deleteCuenta: async () => {
+				try {
+					// fetching data from the backend
+					const resp = await fetch(process.env.BACKEND_URL + "/api/user", {
+						method: "DELETE",
+						headers: {
+							"Authorization": "Bearer " + localStorage.getItem('token')
+						}
+					});
+					const data = await resp.json()
+					console.log(data);
+					// don't forget to return something, that is how the async resolves
+					return data;
+				} catch (error) {
+					console.log("Error loading message from backend", error)
+				}
+			},
 
 
 
