@@ -9,12 +9,12 @@ const defaultUserImage = "https://www.svgrepo.com/show/335455/profile-default.sv
 export const Navbar = () => {
 	const { store, actions } = useContext(Context);
 
-
 	const route = useLocation();
 
 	useEffect(() => {
-		console.log(route);
-	}, [])
+		actions.getPerfil();
+		console.log(store.perfil);
+	}, []);
 
 	return (
 		<nav className="fixed-top d-block navbar navbar-light bg-light">
@@ -30,12 +30,20 @@ export const Navbar = () => {
 					{store.auth
 						? <div className="btn-group">
 							<div type="button" className="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-								<img src={store.perfil?.data?.profile_picture != undefined ? store.perfil?.data?.profile_picture : defaultUserImage} alt="profile_picture" width="32" />
+								{store.perfil.profile_picture == ""
+									? <img src={defaultUserImage} style={{ width: "32px", height: "32px" }} className="rounded-circle " alt="..." />
+									: <img src={store.perfil.profile_picture} style={{ width: "32px", height: "32px" }} className="rounded-circle " alt="..." />
+								}
 							</div>
 							<ul className="dropdown-menu dropdown-menu-end">
 								<li>
-									<Link to="/profile" className="dropdown-item text-decoration-none">
+									<Link to="/perfil" className="dropdown-item text-decoration-none">
 										Mi cuenta
+									</Link>
+								</li>
+								<li>
+									<Link to="/favoritos" className="dropdown-item text-decoration-none">
+										Favoritos
 									</Link>
 								</li>
 								<li>

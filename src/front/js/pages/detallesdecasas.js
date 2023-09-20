@@ -10,35 +10,63 @@ function Details() {
   const { store, actions } = useContext(Context)
   let param = useParams()
   useEffect(() => {
-    const getPerfil=async()=>{
       
-     await actions.getPerfilProp(store.casa.user_id)
-     await actions.getDetalles(param.id)
-    }
-    getPerfil()
+    actions.getDetalles(param.id)
+    actions.getPerfilProp(store.casa.info_propietario?.user_id)
+       
   }, [])
 
-
-
+console.log(store.casa.info_propietario?.user_id);
 
   return (
     <div className='details-container container mx-auto row d-flex cuerpo mt-5'>
       <div className="mt-3 d-block"></div>
-      <Link to={"/"} className="text-decoration-none my-2 continue-navigation"><span className="text-dark w-25 my-4"><i class="fa-solid fa-arrow-left-long me-2"></i><span>Seguir navegando</span></span></Link>
+      <Link to={"/"} className="text-decoration-none my-2 continue-navigation"><span className="text-dark w-25 my-4"><i className="fa-solid fa-arrow-left-long me-2"></i><span>Seguir navegando</span></span></Link>
       <div className="details-card-container col-12">
-        <div className="card-header d-flex gap-2">
-          <div className="col-12 main-image text-center col-md-6 rounded-start overflow-hidden">
-            <img src={store.casa.image_url} className="object-fit-cover col-12" alt="..." />
-          </div>
-          <div className="d-flex flex-column smaller-images col-md-3 ">
-            <img src={store.casa.image_url} className="object-fit-cover col-12 overflow-hidden" alt="..." />
-            <img src={store.casa.image_url} className="object-fit-cover col-12 overflow-hidden" alt="..." />
-          </div>
-          <div className="d-flex flex-column smaller-images col-md-3 rounded-end overflow-hidden">
-            <img src={store.casa.image_url} className="object-fit-cover h-50 overflow-hidden" alt="..." />
-            <img src={store.casa.image_url} className="object-fit-cover h-50 overflow-hidden" alt="..." />
+
+        <div className="card-header bigger-screen d-flex" style={{ height: "430px" }}>
+          {store.casa?.images?.map((img) => (
+            <img src={img.url} className="details-card-img" style={{ maxWidth: "100%", width: "20px", flexGrow: "1", objectFit: "cover", opacity: ".9", transition: ".5s ease" }} />
+          ))}
+        </div>
+
+
+
+
+
+        <div id="carouselExampleControls" className="carousel slide mobile-images" data-bs-ride="true">
+          <div className="carousel-inner" >
+            <div className="carousel-inner" style={{ height: "300px" }}>
+              {store.casa?.images?.map((img, index) => (
+                <div className={`carousel-item justify-content-center text-center ${index === 0 && "active"}`}>
+                  <img src={img.url} className="details-card-img" style={{ height: "300px" }} />
+                </div>
+              ))}
+            </div>
+            <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+              <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span className="visually-hidden">Previous</span>
+            </button>
+            <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+              <span className="carousel-control-next-icon" aria-hidden="true"></span>
+              <span className="visually-hidden">Next</span>
+            </button>
           </div>
         </div>
+
+        {/*<div className="card-header d-flex row">
+          {store.casa?.images?.map((img, index) => (
+            index <= 5 &&
+              <>
+                {index == 1 && <div className="object-fit-cover col-6">
+                  <img src={img.url} className={`object-fit-cover p-1`} alt="..." />
+                </div>}
+                <div>
+                  <img src={img.url} className={`object-fit-cover col-3 p-1`} alt="..." />
+                </div>
+              </>
+          ))}
+        </div>]*/}
 
 
         <div className="card-body details-card-body">
@@ -46,7 +74,7 @@ function Details() {
 
           <p className="text-white bg-azul-oscuro d-flex details-btn justify-content-center btn my-4">{store.casa.category}</p>
           <h6 className='disponible'>Localización: {store.casa.location}</h6>
-          <p className="card-text"><strong>Alojamiento entero: departamento con servicios incluidos. <br />Anfitrión: {store.propietario.name}</strong></p>
+          <p className="card-text"><strong>Alojamiento entero: departamento con servicios incluidos. <br />Anfitrión: {store.propietario?.name}</strong></p>
           <p className='detalle'>{store.casa.numberOfRooms} Habitaciones - {store.casa.numberOfBathrooms} Baños - 250mt2 </p>
 
         </div>
@@ -61,8 +89,8 @@ function Details() {
           <li className="list-group-item details-list-group bg-celeste-claro mt-4 ms-0 ps-0"><p className="ps-0 ms-0">{store.casa.description}</p></li>
           <div className='d-flex mt-2 '>
             <div className=''>
-              <li className="list-group-item details-list-group duenio"><p>Dueño: {store.propietario.name}</p> <br />
-                <p className='registro'>Se registró en mayo del 2015</p>
+              <li className="list-group-item details-list-group duenio"><p>{store.casa.info_propietario?.name} {store.casa.info_propietario?.lastname}</p> <br />
+                <p className='registro'>{store.casa.info_propietario?.account_creation_date}</p>
               </li>
             </div>
 

@@ -24,7 +24,7 @@ def handle_hello():
     return jsonify(response_body), 200
 
 
-# endpoint login
+#//endpoint login
 
 @api.route('/login', methods=['POST'])
 def login():
@@ -50,7 +50,7 @@ def login():
 
     return jsonify(response_body), 200
 
-# validar ruta del token es una ruta protegida
+#//validar ruta del token es una ruta protegida
 
 @api.route("/valid_token", methods=["GET"])
 @jwt_required()
@@ -60,7 +60,7 @@ def validartoken():
     return jsonify({ "is_logged": True }), 200
 
 
-# endpoint registrarse signup
+#//endpoint registrarse signup
 
 @api.route('/signup', methods=['POST'])
 def crear_registro():
@@ -89,7 +89,7 @@ def crear_registro():
 
     return jsonify(nuevo_usuario.serialize()),200
 
-# Obtener el perfil del usuario logeado
+#//Obtener el perfil del usuario logeado
 @api.route('/current_user', methods=['GET'])
 @jwt_required()
 def get_current_user_info():
@@ -99,7 +99,7 @@ def get_current_user_info():
 
     return jsonify({ "results": user.serialize() })
 
-# Obtener el perfil de un usuario
+#//Obtener el perfil de un usuario en particular
 
 @api.route('/user/<int:usuario_id>', methods=['GET'])
 def consulto_un_usuario(usuario_id):
@@ -107,7 +107,7 @@ def consulto_un_usuario(usuario_id):
     # Hago una consulta a la tabla usuarios para que traiga un usuario
     usuario_query = User.query.filter_by (id=usuario_id).first ()
 
-    # # Respondo si no existe el  usuario consultado
+    # # Respondo si no existe el usuario consultado
 
     if usuario_query is None :
         return jsonify ({"msg":"no existe usuario"}), 404
@@ -120,7 +120,7 @@ def consulto_un_usuario(usuario_id):
 
     return jsonify(response_body), 200
 
-# # # Editar datos del perfil de un usuario
+#//Editar datos del perfil de un usuario
 @api.route('/user', methods=['PUT'])
 @jwt_required()
 def editar_perfil():
@@ -128,13 +128,14 @@ def editar_perfil():
     request_body = request.get_json(force=True)
     current_user_email = get_jwt_identity()
     perfil_query = User.query.filter_by(email=current_user_email).first()
+    hashed_password = bcrypt.generate_password_hash(request.json.get("password", None)).decode('utf-8')
 
     if "name" in request_body:
         perfil_query.name = request_body["name"]
     if "lastname" in request_body:
         perfil_query.lastname = request_body["lastname"]
     if "password" in request_body:
-        perfil_query.password = request_body["password"]
+        perfil_query.password = hashed_password
     if "phone_number" in request_body:
         perfil_query.phone_number = request_body["phone_number"]
     if "is_admin" in request_body:
@@ -142,27 +143,41 @@ def editar_perfil():
 
     db.session.commit()
     return jsonify({"msg": "Tu perfil fue editado con éxito"}), 200
+
+#//Eliminar cuenta de usuario
+
+@api.route('/user', methods=['DELETE'])
+@jwt_required()
+def eliminar_perfil():
+
+    current_user_email = get_jwt_identity()
+    perfil_query = User.query.filter_by(email=current_user_email).first()
+
+    if perfil_query is not None:
+
+        db.session.delete(perfil_query)
+        db.session.commit()
+        return jsonify({"msg": "Tu perfil fue eliminado con éxito"}), 200
+    
+    return jsonify({"msg": "No se encontró tu perfil"}), 404
     
 
 @api.route("/profile_picture", methods=["POST"])
 @jwt_required()
 def set_user_image():
-    image = request.files.get('image')  # Obtén la imagen
-    
+    picture_url  = request.get_json(force=True) #obtiene el cuerpo que se envíe por el body desde el postman
     current_user_email = get_jwt_identity()
 
     user = User.query.filter_by(email = current_user_email).first()
 
-    result = cloudinary.uploader.upload(image)
-
-    user.profile_picture = result['secure_url']
+    user.profile_picture = picture_url
     
     db.session.commit()
 
     return jsonify({ "msg": "La imagen fue añadida con exito"}), 200
 
 
-# Ruta protegida de favoritos
+#//Ruta protegida de favoritos
 
 @api.route("/usuario/favorito", methods=["GET"])
 @jwt_required()
@@ -174,12 +189,12 @@ def protected():
     favoritos=Favorites.query.filter_by(user_id = user.id).all()
     response = list(map(lambda favoritos: favoritos.serialize(), favoritos))
     if response == []:
-        return jsonify({"msg": "El usuario no tiene favoritos ingresados"}), 404
+        return jsonify({"msg": "No tienes favoritos ingresados"}), 404
 
 
     return jsonify({"results": response}), 200
 
-# Obtener todas las casas de un usuario en especifico
+#//Obtener todas las casas de un usuario en especifico
 
 @api.route("/user/houses/<int:owner_id>", methods=["GET"])
 def owner_properties(owner_id):
@@ -196,7 +211,7 @@ def owner_properties(owner_id):
 
     return jsonify({ "results": response }), 200
 
-# Obtener todas las casas del usuario logueado
+#//Obtener todas las casas del usuario logueado
 
 @api.route("/user/houses", methods=["GET"])
 @jwt_required()
@@ -213,7 +228,7 @@ def get_current_user_houses():
 
     return jsonify({ "results": response })
 
-#  Agregar casas a favorito
+#// Agregar casas a favorito
 
 @api.route('/favoritos/house', methods=['POST'])
 def crear_casa_favorita():
@@ -249,7 +264,7 @@ def crear_casa_favorita():
 
     return request_body, 200
 
-# //editar posteos ruta protegida
+#//editar posteos ruta protegida
 
 @api.route('/post/<int:house_id>', methods=['PUT'])
 @jwt_required()
@@ -293,7 +308,7 @@ def editar_posteos(house_id):
 
 
 
-# perfil de usuario identificar a qué cuenta me loguee
+#//perfil de usuario identificar a qué cuenta me loguee
 @api.route("/perfil", methods=["GET"])
 @jwt_required()
 def perfil():
@@ -305,10 +320,8 @@ def perfil():
     return jsonify(perfil_query.serialize()), 200
 
 
-    # return jsonify(logged_in_as=current_user), 200
 
-
-#   Eliminar casa de favorito
+#// Eliminar casa de favorito
 
 @api.route('/favoritos/house/<int:casa_id>', methods=['DELETE'])
 @jwt_required()
@@ -319,17 +332,17 @@ def eliminar_casa_favorita(casa_id):
 
     # request_body = request.get_json(force=True) #obtiene el cuerpo que se envíe por el body desde el postman
 
-# validar que exista el usuario
+    # validar que exista el usuario
     user_query = User.query.filter_by(email=current_user).first()
     if user_query is None:
         return jsonify({"msg": "el usuario no está registrado"}), 404
 
- #validamos que exista la casa
+    #validamos que exista la casa
     casa_query = House.query.filter_by(id = casa_id).first() #id es la propiedad de la tabla House y house_id es el valor que se pasa por URL
     if casa_query is None:
         return jsonify({"msg": "La casa no existe"}), 404
 
-#validamos que la casa ya existía como favorita
+    #validamos que la casa ya existía como favorita
     fav_query = Favorites.query.filter_by(user_id = user_query.serialize()["id"]).filter_by(house_id =casa_id).first() #devuelve los valores que coinciden (del user_id la tabla Favoritos) con el body del postman
     if fav_query is None:
         return jsonify({"msg": "El favorito no existe"}), 404
@@ -344,20 +357,26 @@ def eliminar_casa_favorita(casa_id):
     
     return jsonify(request_body), 200
 
-# Agrega casas a un usuario propietario
+
+
+
+#//Agrega casas a un usuario propietario
 
 @api.route("/post", methods=['POST'])
 @jwt_required()
 def save_post():
-    image = request.files.get('image')  # Obtén la imagen
     json_data = json.loads(request.form.get('json_data'))  # Obtén la cadena JSON
+
+    if len(json_data['imagesUrl']) <= 4:
+        return jsonify({ "msg": "Debes añadir almenos 5 imagenes" })
 
     current_user_email = get_jwt_identity()
     user = User.query.filter_by(email = current_user_email).first()
-    user_id = user.id
 
     error_index_dosent_exist = f"El usuario con id {json_data.get('user_id', None)},  no existe" 
     error_index_not_received = "El user_id no fue enviado" 
+
+    user_id = user.id
 
     if user_id is None:
         return jsonify({ "msg": error_index_not_received })
@@ -370,7 +389,6 @@ def save_post():
     house = House(
         title=json_data.get("title", None),
         category=json_data.get("category", None),
-        image_url="no image",
         description=json_data.get("description", None),
         user_id=user_id,
         location=json_data.get("location", None),
@@ -381,13 +399,16 @@ def save_post():
         virified_account=json_data.get("virified_account", None),
         price=json_data.get("price", None),
     )
-
-    result = cloudinary.uploader.upload(image)
-
-    house.image_url = result['secure_url']
+    
+    user.is_admin = True
 
     db.session.add(house)
     db.session.commit()
+
+    for image in json_data['imagesUrl']:
+        image = Image(url = image, house_id = house.id)
+        db.session.add(image)
+        db.session.commit()
 
     return jsonify(house.serialize()), 200
 
@@ -438,3 +459,4 @@ def getOneSingleHouse(id):
         return jsonify({ "msg": "The house dosen´t exist" }), 404
 
     return jsonify({ "results": house.serialize() }), 200
+ 

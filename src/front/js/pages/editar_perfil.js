@@ -3,11 +3,11 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Context } from '../store/appContext';
 import { Link } from 'react-router-dom';
 import diego from "../../img/diego.jpg";
-// import { CardFeedAlq } from "../component/card_feed_alq.jsx"
-// import { CardFeedVen } from "../component/card_feed_ven.jsx"
-import { CardHouseFeed } from "../component/CardHouseFeed.jsx"
+import { CardFeedAlq } from "../component/card_feed_alq.jsx"
+import { CardFeedVen } from "../component/card_feed_ven.jsx"
 
-function Perfilprop() {
+
+function Editarperfil() {
     const [lastName, setLastName] = useState("")
     const [firstName, setFirstName] = useState("")
     const [email, setEmail] = useState("")
@@ -20,10 +20,13 @@ function Perfilprop() {
     const [registerST, setRegisterST] = useState("")
     const { store, actions } = useContext(Context)
     const navigate = useNavigate();
-    let datosProp = store.casa.info_propietario?.user_id
+    let casasVentas= []
+    let casasAlquiler= []
 
     
-    async function handleSubmit() {
+    async function handleSubmit(e) {
+        e.preventDefault()
+        actions.editPerfil(firstName, lastName, email, password, phone)
 
        }
 
@@ -32,30 +35,36 @@ function Perfilprop() {
        
         
 
-        function alquileres() {
-            if (login == "") {
-                setLogin("show active")
-                setLoginST("active")
-                setRegister("")
-                setRegisterST("")
-            }
-        }
-        function ventas() {
-            if (register == "") {
-                setRegister("show active")
-                setRegisterST("active")
-                setLogin("")
-                setLoginST("")
-            }
-        }
+        // function alquileres() {
+        //     if (login == "") {
+        //         setLogin("show active")
+        //         setLoginST("active")
+        //         setRegister("")
+        //         setRegisterST("")
+        //     }
+        // }
+        // function ventas() {
+        //     if (register == "") {
+        //         setRegister("show active")
+        //         setRegisterST("active")
+        //         setLogin("")
+        //         setLoginST("")
+        //     }
+        // }
         useEffect(() => { 
-            
+            const getPerfil=async()=>{
                 
-            actions.getPerfilProp(datosProp)
-            actions.getCasasProp(datosProp)
-           
+                await actions.getPerfilProp(store.casa.user_id)
+               await actions.getCasasProp(store.casa.user_id)
+               
+            }
+
+            getPerfil()
+
+    
+            
         }, [])
-       console.log(store.propietario);
+       
     
     
    
@@ -72,9 +81,9 @@ function Perfilprop() {
 
 
                 <div className=' justify-content-center'>
-                    <img src={diego} style={{ width: "100px", height: "100px" }} className="rounded-circle " alt="..." />
-                    <strong><p className='m-auto'>{store.propietario?.name}</p></strong>
-                    <strong><p className='registro'>{store.propietario?.email}</p></strong>
+                    <img src={store.perfil.profile_picture} style={{ width: "100px", height: "100px" }} className="rounded-circle " alt="..." />
+                    <strong><p className='m-auto'>{store.perfil.name}</p></strong>
+                    <strong><p className='registro'>{store.perfil.email}</p></strong>
 
                     
                 </div>
@@ -89,30 +98,31 @@ function Perfilprop() {
             <div className=''>
                 <div className="mb-3 texto-amarillo">
                     <label htmlFor="exampleInputEmail1" className="form-label">Nombre </label>
-                    <input type="nombre" className="form-control" disabled aria-describedby="emailHelp" value={store.propietario?.name} onChange={(e) => setFirstName(e.target.value)} />
+                    <input type="nombre" className="form-control"  aria-describedby="emailHelp" onChange={(e) => setFirstName(e.target.value)} />
                 </div>
                 <div className="mb-3 texto-amarillo">
                     <label htmlFor="exampleInputPassword1" className="form-label">Apellido </label>
-                    <input type="apellido" className="form-control" disabled value={store.propietario?.lastname} onChange={(e) => setLastName(e.target.value)} />
+                    <input type="apellido" className="form-control"  onChange={(e) => setLastName(e.target.value)} />
                 </div>
-                <div className="mb-3 texto-amarillo">
-                    <label htmlFor="exampleInputPassword1" className="form-label">Email </label>
-                    <input type="email" className="form-control" disabled value={store.propietario?.email} onChange={(e) => setEmail(e.target.value)} />
-                </div>
+                
                 <div className="mb-3 texto-amarillo">
                     <label htmlFor="exampleInputPassword1" className="form-label">Telefono de contacto </label>
-                    <input type="contacto" className="form-control" disabled value={store.propietario?.phoneNumber} onChange={(e) => setPhone(e.target.value)} />
+                    <input type="contacto" className="form-control"   onChange={(e) => setPhone(e.target.value)} />
+                </div>
+                <div className="mb-3 texto-amarillo">
+                    <label htmlFor="exampleInputPassword1" className="form-label">Contraseña</label>
+                    <input type="password" className="form-control"  onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 
                 <div className="mb-3 texto-amarillo">
                     <label htmlFor="exampleInputPassword1" className="form-label">Descripción</label>
-                    <input type="text" className="form-control" disabled value='Descripcion' />
+                    <input type="text" className="form-control"  />
                 </div>
-                
+                <button className="btn text-white bg-azul-oscuro" >Aceptar</button>
             </div>
            
            
-            <div className="text-white my-5">
+            {/* <div className="text-white my-5">
             
             <ul className="nav-container nav nav-pills nav-justified mt-5" id="ex1" role="tablist">
                 <li className="nav-item" role="presentation">
@@ -127,33 +137,27 @@ function Perfilprop() {
             <div className="tab-content container-alquileres">
                 <div className={"tab-pane fade " + login}>
                     <div className={"row"} id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-                        {store.casaPropietario?.map((item, index) => {
+                        {store.casaPropietario.map((item, index) => {
                             return (
                                 item.category=="Alquiler"?
-                                <CardHouseFeed key={index} location={item.location} 
-                                price={item.price} 
-                                id={item.id} 
-                                images={item.images} />
+                                <CardFeedAlq key={index} ubicacion={item.location} precio={item.price} id={item.id} imageUrl={item.image_url} />
                             :null)
                         })}
                     </div>
                 </div>
                 <div className={"tab-pane fade" + register}>
                     <div className={"row"} id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-                        {store.casaPropietario?.map((item, index) => {
+                        {store.casaPropietario.map((item, index) => {
                             return (
                             item.category=="Venta"?
-                                <CardHouseFeed key={index} location={item.location} 
-                                price={item.price} 
-                                id={item.id} 
-                                images={item.images} />
+                                <CardFeedVen key={index} ubicacion={item.location} precio={item.price} id={item.id} imageUrl={item.image_url}  />
                             : null)
                         })}
                     </div>
                 </div>
             </div>
             
-        </div>
+        </div> */}
                 
             
            
@@ -165,4 +169,4 @@ function Perfilprop() {
     );
                     }
 
-export default Perfilprop;
+export default Editarperfil;
