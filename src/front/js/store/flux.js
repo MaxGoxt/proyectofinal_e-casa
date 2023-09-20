@@ -797,7 +797,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 			getCasasProp: async (id) => {
 				try {
-					let data = await axios.get(process.env.BACKEND_URL + '/api/user/houses/' + id)
+					let data = await axios.get(process.env.BACKEND_URL + '/api/user/houses/' + localStorage.getItem('prop_id'))
 					setStore({ casaPropietario: data.data.results });
 					console.log(data);
 				} catch (error) {
