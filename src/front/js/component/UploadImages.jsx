@@ -120,7 +120,10 @@ export const UploadImages = () => {
         try {
             const saveImage = async () => {
                 await fetch(process.env.BACKEND_URL + "/api/post", options)
+<<<<<<< HEAD
                     
+=======
+>>>>>>> e6047710bbf6ae2f18c745a72088902848cb1e10
             }
             saveImage();
         } catch (error) {

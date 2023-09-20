@@ -1,0 +1,13 @@
+.no-favorites-container {
+    display: flex !important;
+    justify-content: center !important;
+}
+
+@media all and (max-width: 620px) {
+    .no-favorites-container {
+        margin: 20px 0;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center;
+    }
+}
