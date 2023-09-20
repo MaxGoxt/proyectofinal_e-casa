@@ -20,8 +20,7 @@ function Perfilprop() {
     const [registerST, setRegisterST] = useState("")
     const { store, actions } = useContext(Context)
     const navigate = useNavigate();
-    let casasVentas= []
-    let casasAlquiler= []
+    let datosProp = store.casa.info_propietario?.user_id
 
     
     async function handleSubmit() {
@@ -50,29 +49,13 @@ function Perfilprop() {
             }
         }
         useEffect(() => { 
-            const getPerfil=async()=>{
+            
                 
-                await actions.getPerfilProp(store.casa.user_id)
-               await actions.getCasasProp(store.casa.user_id)
-            }
-
-            getPerfil()
-
-    
-                // actions.getAlquileres()
-                // actions.getVentas()
-            //     for (let index = 0; index < store.casaPropietario; index++) {
-            //         const element = store.casaPropietario[index];
-            //         if (element.category=="Venta") { casasVentas.concat(element)
-                        
-            //         }
-            //         else if (element.category== "Alquiler") { casasAlquiler.concat(element)
-                        
-            //         }
+            actions.getPerfilProp(datosProp)
+            actions.getCasasProp(datosProp)
            
-            // }
         }, [])
-       
+       console.log(store.propietario);
     
     
    
