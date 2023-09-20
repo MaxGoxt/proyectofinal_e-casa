@@ -24,7 +24,9 @@ function Editarperfil() {
     let casasAlquiler= []
 
     
-    async function handleSubmit() {
+    async function handleSubmit(e) {
+        e.preventDefault()
+        actions.editPerfil(firstName, lastName, email, password, phone)
 
        }
 
@@ -33,27 +35,28 @@ function Editarperfil() {
        
         
 
-        function alquileres() {
-            if (login == "") {
-                setLogin("show active")
-                setLoginST("active")
-                setRegister("")
-                setRegisterST("")
-            }
-        }
-        function ventas() {
-            if (register == "") {
-                setRegister("show active")
-                setRegisterST("active")
-                setLogin("")
-                setLoginST("")
-            }
-        }
+        // function alquileres() {
+        //     if (login == "") {
+        //         setLogin("show active")
+        //         setLoginST("active")
+        //         setRegister("")
+        //         setRegisterST("")
+        //     }
+        // }
+        // function ventas() {
+        //     if (register == "") {
+        //         setRegister("show active")
+        //         setRegisterST("active")
+        //         setLogin("")
+        //         setLoginST("")
+        //     }
+        // }
         useEffect(() => { 
             const getPerfil=async()=>{
                 
                 await actions.getPerfilProp(store.casa.user_id)
                await actions.getCasasProp(store.casa.user_id)
+               
             }
 
             getPerfil()
@@ -78,7 +81,7 @@ function Editarperfil() {
 
 
                 <div className=' justify-content-center'>
-                    <img src={diego} style={{ width: "100px", height: "100px" }} className="rounded-circle " alt="..." />
+                    <img src={store.perfil.profile_picture} style={{ width: "100px", height: "100px" }} className="rounded-circle " alt="..." />
                     <strong><p className='m-auto'>{store.perfil.name}</p></strong>
                     <strong><p className='registro'>{store.perfil.email}</p></strong>
 
@@ -95,30 +98,27 @@ function Editarperfil() {
             <div className=''>
                 <div className="mb-3 texto-amarillo">
                     <label htmlFor="exampleInputEmail1" className="form-label">Nombre </label>
-                    <input type="nombre" className="form-control"  aria-describedby="emailHelp" value={store.perfil.name} onChange={(e) => setFirstName(e.target.value)} />
+                    <input type="nombre" className="form-control"  aria-describedby="emailHelp" onChange={(e) => setFirstName(e.target.value)} />
                 </div>
                 <div className="mb-3 texto-amarillo">
                     <label htmlFor="exampleInputPassword1" className="form-label">Apellido </label>
-                    <input type="apellido" className="form-control" value={store.perfil.lastname} onChange={(e) => setLastName(e.target.value)} />
+                    <input type="apellido" className="form-control"  onChange={(e) => setLastName(e.target.value)} />
                 </div>
-                <div className="mb-3 texto-amarillo">
-                    <label htmlFor="exampleInputPassword1" className="form-label">Email </label>
-                    <input type="email" className="form-control"  value={store.perfil.email} onChange={(e) => setEmail(e.target.value)} />
-                </div>
+                
                 <div className="mb-3 texto-amarillo">
                     <label htmlFor="exampleInputPassword1" className="form-label">Telefono de contacto </label>
-                    <input type="contacto" className="form-control"  value={store.perfil.phoneNumber} onChange={(e) => setPhone(e.target.value)} />
+                    <input type="contacto" className="form-control"   onChange={(e) => setPhone(e.target.value)} />
                 </div>
                 <div className="mb-3 texto-amarillo">
                     <label htmlFor="exampleInputPassword1" className="form-label">Contraseña</label>
-                    <input type="password" className="form-control"  value={store.perfil.password} onChange={(e) => setPassword(e.target.value)} />
+                    <input type="password" className="form-control"  onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 
                 <div className="mb-3 texto-amarillo">
                     <label htmlFor="exampleInputPassword1" className="form-label">Descripción</label>
                     <input type="text" className="form-control"  />
                 </div>
-                
+                <button className="btn text-white bg-azul-oscuro" >Aceptar</button>
             </div>
            
            
