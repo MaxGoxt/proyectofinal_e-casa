@@ -17,7 +17,11 @@ import { Upload } from "./pages/Upload.jsx";
 import { Favoritos } from "./pages/favoritos.jsx";
 import { EditUserView } from "./pages/EditUserView.jsx"
 import PerfilProp from "./pages/perfilPropietario";
+<<<<<<< HEAD
 import VistaNosotros from "./pages/vista_nosotros.jsx";
+=======
+import Editarperfil from "./pages/editar_perfil";
+>>>>>>> 914bb985004c9acfd0b12e39bd97b589c2cd2439
 
 
 //create your first component
@@ -47,8 +51,12 @@ const Layout = () => {
                         <Route element={<Perfil />} path="/perfil" />
                         <Route element={<Favoritos />} path="/favoritos" />
                         <Route element={<PerfilProp />} path="/perfilprop" />
+<<<<<<< HEAD
                         <Route element={<VistaNosotros />} path="/comp-nosotros" />
 
+=======
+                        <Route element={<Editarperfil />} path="/editarperfil" />
+>>>>>>> 914bb985004c9acfd0b12e39bd97b589c2cd2439
 
                     </Routes>
                     <Footer />
