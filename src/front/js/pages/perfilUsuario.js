@@ -16,7 +16,8 @@ function Perfil() {
     const navigate = useNavigate();
 
 
-    async function handleSubmit() {
+    async function handleSubmit(e) {
+        e.preventDefault()
         actions.deleteCuenta()
 
     }
