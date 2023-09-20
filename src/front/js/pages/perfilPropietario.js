@@ -90,8 +90,8 @@ function Perfilprop() {
 
                 <div className=' justify-content-center'>
                     <img src={diego} style={{ width: "100px", height: "100px" }} className="rounded-circle " alt="..." />
-                    <strong><p className='m-auto'>{store.propietario.name}</p></strong>
-                    <strong><p className='registro'>{store.propietario.email}</p></strong>
+                    <strong><p className='m-auto'>{store.propietario?.name}</p></strong>
+                    <strong><p className='registro'>{store.propietario?.email}</p></strong>
 
                     
                 </div>
@@ -106,19 +106,19 @@ function Perfilprop() {
             <div className=''>
                 <div className="mb-3 texto-amarillo">
                     <label htmlFor="exampleInputEmail1" className="form-label">Nombre </label>
-                    <input type="nombre" className="form-control" disabled aria-describedby="emailHelp" value={store.propietario.name} onChange={(e) => setFirstName(e.target.value)} />
+                    <input type="nombre" className="form-control" disabled aria-describedby="emailHelp" value={store.propietario?.name} onChange={(e) => setFirstName(e.target.value)} />
                 </div>
                 <div className="mb-3 texto-amarillo">
                     <label htmlFor="exampleInputPassword1" className="form-label">Apellido </label>
-                    <input type="apellido" className="form-control" disabled value={store.propietario.lastname} onChange={(e) => setLastName(e.target.value)} />
+                    <input type="apellido" className="form-control" disabled value={store.propietario?.lastname} onChange={(e) => setLastName(e.target.value)} />
                 </div>
                 <div className="mb-3 texto-amarillo">
                     <label htmlFor="exampleInputPassword1" className="form-label">Email </label>
-                    <input type="email" className="form-control" disabled value={store.propietario.email} onChange={(e) => setEmail(e.target.value)} />
+                    <input type="email" className="form-control" disabled value={store.propietario?.email} onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 <div className="mb-3 texto-amarillo">
                     <label htmlFor="exampleInputPassword1" className="form-label">Telefono de contacto </label>
-                    <input type="contacto" className="form-control" disabled value={store.propietario.phoneNumber} onChange={(e) => setPhone(e.target.value)} />
+                    <input type="contacto" className="form-control" disabled value={store.propietario?.phoneNumber} onChange={(e) => setPhone(e.target.value)} />
                 </div>
                 
                 <div className="mb-3 texto-amarillo">
@@ -144,7 +144,7 @@ function Perfilprop() {
             <div className="tab-content container-alquileres">
                 <div className={"tab-pane fade " + login}>
                     <div className={"row"} id="pills-login" role="tabpanel" aria-labelledby="tab-login">
-                        {store.casaPropietario.map((item, index) => {
+                        {store.casaPropietario?.map((item, index) => {
                             return (
                                 item.category=="Alquiler"?
                                 <CardFeedAlq key={index} ubicacion={item.location} precio={item.price} id={item.id} imageUrl={item.image_url} />
@@ -154,7 +154,7 @@ function Perfilprop() {
                 </div>
                 <div className={"tab-pane fade" + register}>
                     <div className={"row"} id="pills-register" role="tabpanel" aria-labelledby="tab-register">
-                        {store.casaPropietario.map((item, index) => {
+                        {store.casaPropietario?.map((item, index) => {
                             return (
                             item.category=="Venta"?
                                 <CardFeedVen key={index} ubicacion={item.location} precio={item.price} id={item.id} imageUrl={item.image_url}  />
