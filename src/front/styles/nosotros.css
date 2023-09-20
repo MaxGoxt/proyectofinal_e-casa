@@ -1,10 +1,23 @@
-.linea-amarilla::after {
-    content: '';
+.linea-amarilla {
     display: block;
     width: 100%;
-    height: 2px;
+    height: 3px;
     background-color: #FDBE34; /* Color amarillo */
     position: absolute;
     bottom: 0;
     left: 0;
+    text-decoration: underline;
   }
+  
+  /* Estilos personalizados para el enlace */
+  
+  a {
+    color: #FDBE34; /* Color del texto del enlace */
+    text-decoration: none; /* Eliminar subrayado */
+  }
+  
+  a:hover {
+    color: orange; /* Cambiar color al pasar el ratón */
+  }
+
+
