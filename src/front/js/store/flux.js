@@ -282,6 +282,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
+			editPerfil: async (firstName, lastName, email, password, phone) => {
+				console.log(localStorage.getItem('token'));
+				try {
+					
+					const resp = await fetch(process.env.BACKEND_URL + '/api/user',{
+						method: "PUT",
+						headers: {
+							"Authorization": "Bearer " + localStorage.getItem('token')
+						},
+						body: JSON.stringify({
+							
+							"name": firstName,
+							"lastname": lastName,
+							"email": email,
+							"phone_number": phone,
+							"password": password
+
+						
+					})})
+					const data = await resp.json()
+					console.log("funciona");
+					
+					return data;
+				} catch (error) {
+					// console.log("Error loading message from backend", error)
+				}
+			},
 
 
 
