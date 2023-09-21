@@ -59,10 +59,8 @@ function Editarperfil() {
                
             }
 
-            getPerfil()
-
-    
-            
+            getPerfil();
+            if (!actions.validToken()) navigate("/");
         }, [])
        
     
