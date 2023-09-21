@@ -81,7 +81,8 @@ def crear_registro():
         password = hashed_password,
         is_admin = request.json.get("is_admin", None),
         profile_picture = "",
-        account_creation_date = datetime.now()
+        account_creation_date = datetime.now(),
+        description = None
     )
 
     db.session.add(nuevo_usuario)
@@ -140,6 +141,8 @@ def editar_perfil():
         perfil_query.phone_number = request_body["phone_number"]
     if "is_admin" in request_body:
         perfil_query.is_admin = request_body["is_admin"]
+    if "description" in request_body:
+        perfil_query.description = request_body["description"]
 
     db.session.commit()
     return jsonify({"msg": "Tu perfil fue editado con éxito"}), 200

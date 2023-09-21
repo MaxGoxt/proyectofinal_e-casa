@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: b295cb7783a3
+Revision ID: c5a9db9f444d
 Revises: 
-Create Date: 2023-09-20 17:45:35.515969
+Create Date: 2023-09-21 15:02:17.825236
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'b295cb7783a3'
+revision = 'c5a9db9f444d'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -28,6 +28,7 @@ def upgrade():
     sa.Column('phone_number', sa.String(length=30), nullable=False),
     sa.Column('account_creation_date', sa.String(length=40), nullable=True),
     sa.Column('is_admin', sa.Boolean(), nullable=False),
+    sa.Column('description', sa.String(length=500), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email')
     )
@@ -36,7 +37,6 @@ def upgrade():
     sa.Column('title', sa.String(length=150), nullable=False),
     sa.Column('description', sa.String(length=300), nullable=False),
     sa.Column('category', sa.String(length=10), nullable=False),
-    sa.Column('user_id', sa.Integer(), nullable=True),
     sa.Column('location', sa.String(length=150), nullable=False),
     sa.Column('number_of_rooms', sa.Integer(), nullable=False),
     sa.Column('number_of_bathrooms', sa.Integer(), nullable=False),
@@ -44,6 +44,7 @@ def upgrade():
     sa.Column('wifi', sa.Boolean(), nullable=False),
     sa.Column('virified_account', sa.Boolean(), nullable=False),
     sa.Column('price', sa.Integer(), nullable=False),
+    sa.Column('user_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
