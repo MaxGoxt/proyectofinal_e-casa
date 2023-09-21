@@ -17,6 +17,7 @@ import { Upload } from "./pages/Upload.jsx";
 import { Favoritos } from "./pages/favoritos.jsx";
 import { EditUserView } from "./pages/EditUserView.jsx"
 import PerfilProp from "./pages/perfilPropietario";
+import VistaNosotros from "./pages/vista_nosotros.jsx";
 import Editarperfil from "./pages/editar_perfil";
 
 
@@ -47,6 +48,8 @@ const Layout = () => {
                         <Route element={<Perfil />} path="/perfil" />
                         <Route element={<Favoritos />} path="/favoritos" />
                         <Route element={<PerfilProp />} path="/perfilprop" />
+                        <Route element={<VistaNosotros />} path="/comp-nosotros" />
+
                         <Route element={<Editarperfil />} path="/editarperfil" />
 
                     </Routes>
