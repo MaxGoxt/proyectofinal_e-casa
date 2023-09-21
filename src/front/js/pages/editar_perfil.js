@@ -18,6 +18,8 @@ function Editarperfil() {
     const [loginST, setLoginST] = useState("active")
     const [register, setRegister] = useState("")
     const [registerST, setRegisterST] = useState("")
+    const [description, setDescription] = useState("")
+
     const { store, actions } = useContext(Context)
     const navigate = useNavigate();
     let casasVentas= []
@@ -26,7 +28,7 @@ function Editarperfil() {
     
     async function handleSubmit(e) {
         e.preventDefault()
-        actions.editPerfil(firstName, lastName, email, password, phone)
+        actions.editPerfil(firstName, lastName, email, password, phone, description)
 
        }
 
@@ -114,7 +116,7 @@ function Editarperfil() {
                 
                 <div className="mb-3 texto-amarillo">
                     <label htmlFor="exampleInputPassword1" className="form-label">Descripción</label>
-                    <input type="text" className="form-control"  />
+                    <input type="text" className="form-control" onChange={(e) => setDescription(e.target.value)} />
                 </div>
                 <button className="btn text-white bg-azul-oscuro" >Aceptar</button>
             </div>

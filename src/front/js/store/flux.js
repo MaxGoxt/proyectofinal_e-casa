@@ -103,22 +103,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 
-			validToken: async (navigate) => {
+			validToken: async () => {
 				try {
 					let data = await axios.get(process.env.BACKEND_URL + '/api/valid_token',
 						{
 							headers: { "Authorization": "Bearer " + localStorage.getItem('token') }
 						})
-					if (data.data.is_logged) setStore({ auth: true });
-					return true;
+					setStore({ auth: true })
+					console.log(data);
+					return true
 				} catch (error) {
 					console.log(error);
-					setStore({ auth: false })
-					
 					// if (error.response.status === 404) {
 					// 	alert(error.response.data.msj)
 					// }
-					return false;
+					return false
 				}
 			},
 
@@ -283,7 +282,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
-			editPerfil: async (firstName, lastName, email, password, phone) => {
+			editPerfil: async (firstName, lastName, email, password, phone, description) => {
 				console.log(localStorage.getItem('token'));
 				try {
 					
@@ -298,12 +297,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 							"lastname": lastName,
 							"email": email,
 							"phone_number": phone,
-							"password": password
+							"password": password,
+							"description": description
 
 						
 					})})
 					const data = await resp.json()
-					console.log("funciona");
 					
 					return data;
 				} catch (error) {
@@ -328,7 +327,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-
+			
 
 		}
 	}
