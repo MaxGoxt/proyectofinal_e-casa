@@ -8,13 +8,12 @@ import { useState, useEffect, useContext } from 'react';
 export const CardProp = (props) => {
     const { store, actions } = useContext(Context)
 
-
     return (
         <>
             <div className="col-12 col-md-6 col-xl-4 my-2">
                 <div className="m-1 border border-2 rounded-3 row px-2 py-3">
                     <div className="d-flex">
-                        <img src="https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873944/yfsd0ivntxrgifwgsbgx.webp" style={{ height: "100px"}} className="rounded rounded-4 col-4" alt="..." />
+                        <img src={props.images.url} style={{objectFit: "contain"}} className="rounded rounded-4 col-4" alt="La imagen de su propiedad" />
                         <div className="card-body pe-0 py-0 col-8">
                             <h4 className="fw-bold m-0">{props.title}</h4>
                             <p className="card-text m-0"><small>{props.description}</small></p>
@@ -55,4 +54,5 @@ CardProp.propTypes = {
     price: PropTypes.number,
     parking: PropTypes.bool,
     wifi: PropTypes.bool,
+    
 };

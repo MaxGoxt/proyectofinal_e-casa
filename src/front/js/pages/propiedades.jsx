@@ -11,30 +11,29 @@ import { PanelCtrl } from "../component/panel_control.jsx";
 export const Propiedades = () => {
     const { store, actions } = useContext(Context)
 
-    useEffect(() => { 
+    useEffect(() => {
         actions.getCasasProp(localStorage.getItem("user_id"))
     }, [])
-    console.log(store.casaPropietario["1"]);
 
     return (
         <div className="pt-5 px-5 row">
             <h1 className="text-black my-5">Administrar mis Propiedades</h1>
             {store.casaPropietario.map((item, index) => {
-                        return (
-                            <CardProp
-                                key={index}
-                                title={item.title}
-                                location={item.location}
-                                price={item.price}
-                                id={item.id}
-                                description={item.description}
-                                category={item.category}
-                                parking={item.parking}
-                                wifi={item.wifi}
-                                images={"https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873944/yfsd0ivntxrgifwgsbgx.webp"} />
-                        )
-                    })}
-            <PanelCtrl/>
+                return (
+                    <CardProp
+                        key={index}
+                        title={item.title}
+                        location={item.location}
+                        price={item.price}
+                        id={item.id}
+                        description={item.description}
+                        category={item.category}
+                        parking={item.parking}
+                        wifi={item.wifi}
+                        images={item.images['0']} />
+                )
+            })}
+            <PanelCtrl />
         </div>
     );
 };
