@@ -38,7 +38,7 @@ export const CardHouseFeed = (props) => {
             </div>
             <div className="azul-oscuro mb-5 rounded-bottom">
                 <div className="d-flex justify-content-between">
-                    <strong className="card-title">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsam quis excepturi temporibus neque eligendi! Omnis incidunt facilis quia molestias, necessitatibus quaerat in ducimus voluptatum accusamus saepe eos vel dolorem nesciunt.</strong>
+                    <strong className="card-title">{props.location}</strong>
                 </div>
                 <div className="d-flex justify-content-between px-1">
                     <p className="card-text">$ {props.price}</p>
