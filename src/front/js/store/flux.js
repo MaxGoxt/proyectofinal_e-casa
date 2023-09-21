@@ -283,7 +283,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
-			editPerfil: async (firstName, lastName, email, password, phone) => {
+			editPerfil: async (firstName, lastName, email, password, phone, description) => {
 				console.log(localStorage.getItem('token'));
 				try {
 					
@@ -298,12 +298,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 							"lastname": lastName,
 							"email": email,
 							"phone_number": phone,
-							"password": password
+							"password": password,
+							"description": description
 
 						
 					})})
 					const data = await resp.json()
-					console.log("funciona");
 					
 					return data;
 				} catch (error) {
