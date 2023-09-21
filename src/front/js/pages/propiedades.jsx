@@ -29,6 +29,8 @@ export const Propiedades = () => {
                                 id={item.id}
                                 description={item.description}
                                 category={item.category}
+                                parking={item.parking}
+                                wifi={item.wifi}
                                 images={"https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873944/yfsd0ivntxrgifwgsbgx.webp"} />
                         )
                     })}
