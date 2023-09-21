@@ -30,7 +30,7 @@ export const CardProp = (props) => {
                         </div>
                         <div className="my-auto">
                             <button className="btn">
-                                <Link to={"/upload"}><i className="fa-solid fa-pencil"></i></Link>
+                                <Link to={"/editar/mis-propiedades/" + props.id}><i className="fa-solid fa-pencil"></i></Link>
                             </button>
                             <button className="btn" onClick={() => { alert("deberia borrarse pero no lo hace") }}>
                                 <i className="fa-solid fa-trash text-danger"></i>
@@ -47,12 +47,12 @@ CardProp.propTypes = {
 
     location: PropTypes.string,
     id: PropTypes.number,
-    images: PropTypes.string,
+    images: PropTypes.object,
     title: PropTypes.string,
     description: PropTypes.string,
     category: PropTypes.string,
     price: PropTypes.number,
     parking: PropTypes.bool,
     wifi: PropTypes.bool,
-    
+
 };

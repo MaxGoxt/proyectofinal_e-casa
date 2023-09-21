@@ -269,38 +269,41 @@ def crear_casa_favorita():
 @api.route('/post/<int:house_id>', methods=['PUT'])
 @jwt_required()
 def editar_posteos(house_id):
-        
-    request_body = request.get_json(force=True) #obtiene el cuerpo que se envíe por el body desde el postman
+    json_data = json.loads(request.form.get('json_data'))
+
+    #request_body = request.get_json(force=True) #obtiene el cuerpo que se envíe por el body desde el postman
     # Accede a la identidad del usuario con get_jwt_identity
     current_user_email = get_jwt_identity()
+
+    user = User.query.filter_by(email = current_user_email).first()
    
-    post_query = House.query.filter_by(user_id=request_body["user_id"]).filter_by(id=house_id).first()
-    
+    post_query = House.query.filter_by(user_id=user.id, id=house_id).first()
+    print(post_query)
      
     #  validamos que exista una casa
     if post_query is None:
         return jsonify({"msg": "Esta casa no existe"}), 404
 
-    if "title" in request_body:
-        post_query.title = request_body["title"]
-    if "description" in request_body:
-        post_query.description = request_body["description"]
-    if "category" in request_body:
-        post_query.category = request_body["category"]
+    if "title" in json_data:
+        post_query.title = json_data["title"]
+    if "description" in json_data:
+        post_query.description = json_data["description"]
+    if "category" in json_data:
+        post_query.category = json_data["category"]
     # if "image_id" in body:
     #     casa_query.image_id = body["image_id"]
-    if "location" in request_body:
-        post_query.location = request_body["location"]
-    if "number_of_rooms" in request_body:
-        post_query.number_of_rooms = request_body["number_of_rooms"]
-    if "number_of_bathrooms" in request_body:
-        post_query.number_of_bathrooms = request_body["number_of_bathrooms"]
-    if "parking" in request_body:
-        post_query.parking = request_body["parking"]
-    if "wifi" in request_body:
-        post_query.wifi = request_body["wifi"]
-    if "price" in request_body:
-        post_query.price = request_body["price"]
+    if "location" in json_data:
+        post_query.location = json_data["location"]
+    if "number_of_rooms" in json_data:
+        post_query.number_of_rooms = json_data["number_of_rooms"]
+    if "number_of_bathrooms" in json_data:
+        post_query.number_of_bathrooms = json_data["number_of_bathrooms"]
+    if "parking" in json_data:
+        post_query.parking = json_data["parking"]
+    if "wifi" in json_data:
+        post_query.wifi = json_data["wifi"]
+    if "price" in json_data:
+        post_query.price = json_data["price"]
            
     
     db.session.commit()

@@ -20,6 +20,7 @@ import PerfilProp from "./pages/perfilPropietario";
 import VistaNosotros from "./pages/vista_nosotros.jsx";
 import Editarperfil from "./pages/editar_perfil";
 import {Propiedades} from "./pages/propiedades.jsx";
+import { EditProp } from "./pages/edit_prop.jsx";
 
 
 //create your first component
@@ -50,10 +51,9 @@ const Layout = () => {
                         <Route element={<Favoritos />} path="/favoritos" />
                         <Route element={<PerfilProp />} path="/perfilprop" />
                         <Route element={<VistaNosotros />} path="/comp-nosotros" />
-
                         <Route element={<Editarperfil />} path="/editarperfil" />
                         <Route element={<Propiedades />} path="/mis-propiedades" />
-
+                        <Route element={<EditProp />} path="/editar/mis-propiedades/:id" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>

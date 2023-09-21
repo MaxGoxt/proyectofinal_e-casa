@@ -103,22 +103,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
 
-			validToken: async (navigate) => {
+			validToken: async () => {
 				try {
 					let data = await axios.get(process.env.BACKEND_URL + '/api/valid_token',
 						{
 							headers: { "Authorization": "Bearer " + localStorage.getItem('token') }
 						})
-					if (data.data.is_logged) setStore({ auth: true });
-					return true;
+					setStore({ auth: true })
+					console.log(data);
+					return true
 				} catch (error) {
 					console.log(error);
-					setStore({ auth: false })
-					
 					// if (error.response.status === 404) {
 					// 	alert(error.response.data.msj)
 					// }
-					return false;
+					return false
 				}
 			},
 
