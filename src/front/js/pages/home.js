@@ -12,10 +12,10 @@ export const Home = () => {
     const [register, setRegister] = useState("")
     const [registerST, setRegisterST] = useState("")
 
-    // useEffect(() => {
-    //     actions.getAlquileres()
-    //     actions.getVentas()
-    // }, [])
+    useEffect(() => {
+        actions.getAlquileres()
+        actions.getVentas()
+    }, [])
 
 
     function alquileres() {

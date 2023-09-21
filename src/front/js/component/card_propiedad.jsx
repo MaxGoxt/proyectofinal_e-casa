@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
-import  { useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 
 
 export const CardProp = (props) => {
@@ -10,27 +10,31 @@ export const CardProp = (props) => {
 
 
     return (
-    <>
-            <div className="m-3 col-sm-6 col-md-4 col-lg-3 col-xl-2" style={{ maxWidth: "440px" }}>
-                <div className="row g-0 h-4">
-                    <div className="">
-                        <img src="https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873944/yfsd0ivntxrgifwgsbgx.webp" className="img-fluid rounded-start rounded-4" alt="..." />
-                    </div>
-                    <div className="">
-                        <div className="card-body">
-                            <h5 className="card-title">Titulo</h5>
+        <>
+            <div className="col-12 col-md-6 col-xl-4 my-2">
+                <div className="m-1 border border-2 rounded-3 row px-2 py-3">
+                    <div className="d-flex">
+                        <img src="https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873944/yfsd0ivntxrgifwgsbgx.webp" className="rounded rounded-4 col-4"alt="..." />
+                        <div className="card-body pe-0 py-0 col-8">
+                            <h4 className="fw-bold m-0">{props.title}</h4>
+                            <p className="card-text"><small>{props.description}</small></p>
                         </div>
                     </div>
-                    <div className="d-flex justify-content-between px-1 float-end">
-                        <p className="card-text"><small className="text-body-secondary">Ubicacion</small></p>
+                    <div className="d-flex justify-content-between px-3 float-end">
                         <div>
-                            <button className="btn" onClick={() => {alert("deberia borrarse pero no lo hace")}}>
-                                <i className="fa-solid fa-trash"></i>
-                            </button>
+                    <p className="card-text m-0"><small className="text-body-secondary">{props.location}</small></p>
+                    <p className="card-text"><small className="text-body-secondary">
+                        {props.category} a </small>{props.category == "Venta" ? <small>USD${props.price}</small>:<small>${props.price}</small>}
+                        </p>
+                    </div>
+                        <div className="my-auto">
                             <button className="btn">
                                 <Link to={"/upload"}><i className="fa-solid fa-pencil"></i></Link>
                             </button>
-                            </div>
+                            <button className="btn" onClick={() => { alert("deberia borrarse pero no lo hace") }}>
+                                <i className="fa-solid fa-trash text-danger"></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -39,9 +43,12 @@ export const CardProp = (props) => {
 }
 
 CardProp.propTypes = {
-    
-    ubicacion: PropTypes.string,
+
+    location: PropTypes.string,
     id: PropTypes.number,
-    imageUrl: PropTypes.string,
-    titulo: PropTypes.string,
+    images: PropTypes.string,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    category: PropTypes.string,
+    price: PropTypes.number,
 };

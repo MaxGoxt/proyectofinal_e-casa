@@ -2,18 +2,36 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { CardProp } from "../component/card_propiedad.jsx"
+import { CardHouseFeed } from "../component/CardHouseFeed.jsx"
+import { CardFav } from "../component/card_favorito.jsx"
 import { PanelCtrl } from "../component/panel_control.jsx";
+
 
 
 export const Propiedades = () => {
     const { store, actions } = useContext(Context)
 
+    useEffect(() => { 
+        actions.getCasasProp(localStorage.getItem("user_id"))
+    }, [])
+    console.log(store.casaPropietario["1"]);
+
     return (
-        <div className="mt-5 pt-3 row">
-            <h1 className="text-black">Tus favoritos</h1>
-            <CardProp/>
-            <CardProp/>
-            <CardProp/>
+        <div className="pt-5 px-5 row">
+            <h1 className="text-black my-5">Administrar mis Propiedades</h1>
+            {store.casaPropietario.map((item, index) => {
+                        return (
+                            <CardProp
+                                key={index}
+                                title={item.title}
+                                location={item.location}
+                                price={item.price}
+                                id={item.id}
+                                description={item.description}
+                                category={item.category}
+                                images={"https://res.cloudinary.com/dslz0zdlc/image/upload/v1694873944/yfsd0ivntxrgifwgsbgx.webp"} />
+                        )
+                    })}
             <PanelCtrl/>
         </div>
     );
