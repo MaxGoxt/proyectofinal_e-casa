@@ -27,6 +27,9 @@ const Nosotros = () => {
       &nbsp;ha trabajando con mucha responsabilidad y compromiso para facilitarles y garantizarles una gestión efectiva y que tengan una experiencia única para lograr la satisfacción de nuestros clientes.</p>
     </div>
     </div>
+    <div className="container d-flex justify-content-center align-items-center" >
+    <div className="texto-amarillo border border-2 border-warning rounded p-2 mb-2" >Contáctanos</div>
+    </div>
     </div>
   );
 };

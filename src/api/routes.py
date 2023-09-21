@@ -128,13 +128,14 @@ def editar_perfil():
     request_body = request.get_json(force=True)
     current_user_email = get_jwt_identity()
     perfil_query = User.query.filter_by(email=current_user_email).first()
+    hashed_password = bcrypt.generate_password_hash(request.json.get("password", None)).decode('utf-8')
 
     if "name" in request_body:
         perfil_query.name = request_body["name"]
     if "lastname" in request_body:
         perfil_query.lastname = request_body["lastname"]
     if "password" in request_body:
-        perfil_query.password = request_body["password"]
+        perfil_query.password = hashed_password
     if "phone_number" in request_body:
         perfil_query.phone_number = request_body["phone_number"]
     if "is_admin" in request_body:
