@@ -12,6 +12,8 @@ export const EditProp = () => {
     const cloudinaryRef = useRef();
     const widgetRef = useRef();
 
+    let alquilerBtn, ventaBtn = undefined
+
     useEffect(() => {
         cloudinaryRef.current = window.cloudinary;
         widgetRef.current = cloudinaryRef.current.createUploadWidget({
@@ -43,9 +45,11 @@ export const EditProp = () => {
         let parkingSelected = false;
 
         // CATEGORY
-        const alquilerBtn = category.current.childNodes[0].childNodes[0];
-        const ventaBtn = category.current.childNodes[1].childNodes[0];
+         alquilerBtn = category.current.childNodes[0].childNodes[0];
+         ventaBtn = category.current.childNodes[1].childNodes[0];
 
+         console.log(alquilerBtn.value);
+         console.log(ventaBtn.checked);
         if (alquilerBtn.checked) {
             categorySelected = alquilerBtn.value;
         } else if (ventaBtn.checked) {
@@ -102,15 +106,15 @@ export const EditProp = () => {
         formData.append('json_data', JSON.stringify({
             // imagesUrl,
             title: title.current.value,
-            // category: categorySelected,
-            // description: description.current.value,
-            // location: location.current.value,
-            // number_of_rooms: number_of_rooms.current.value,
-            // number_of_bathrooms: number_of_bathrooms.current.value,
-            // parking: parkingSelected,
-            // wifi: wifiSelected,
+            category: categorySelected,
+            description: description.current.value,
+            location: location.current.value,
+            number_of_rooms: number_of_rooms.current.value,
+            number_of_bathrooms: number_of_bathrooms.current.value,
+            wifi: wifiSelected,
+            parking: parkingSelected,
             // virified_account: true,
-            // price: price.current.value,
+            price: price.current.value,
         }));
 
         const options = {
@@ -120,10 +124,10 @@ export const EditProp = () => {
         }
 
         try {
-            console.log(id);
             const saveImage = async () => {
                 let response = await fetch(process.env.BACKEND_URL + "/api/post/" + id, options)
                 console.log(response);
+                console.log(formData.category);
             }
             saveImage();
         } catch (error) {
