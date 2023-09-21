@@ -78,7 +78,7 @@ export const UploadImages = () => {
 
     const uploadImage = evt => {
         evt.preventDefault();
-
+        
         const {
             categorySelected,
             wifiSelected,
@@ -119,7 +119,8 @@ export const UploadImages = () => {
 
         try {
             const saveImage = async () => {
-                await fetch(process.env.BACKEND_URL + "/api/post", options)
+                let response = await fetch(process.env.BACKEND_URL + "/api/post", options)
+                console.log(response);
             }
             saveImage();
         } catch (error) {
@@ -215,7 +216,7 @@ export const UploadImages = () => {
                     <label htmlFor="price" className="form-label texto-amarillo">Precio</label>
                     <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="price" aria-describedby="emailHelp" ref={price} />
                 </div>
-                <button className="btn btn-primary">Subir casa</button>
+                <button type='submit' className="btn btn-primary">Subir casa</button>
             </form>
             <div className="d-flex justify-content-center">
             </div>

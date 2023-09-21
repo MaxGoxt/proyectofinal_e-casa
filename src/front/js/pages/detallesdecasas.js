@@ -10,15 +10,11 @@ function Details() {
   const { store, actions } = useContext(Context)
   let param = useParams()
   useEffect(() => {
-    const getPerfil=async()=>{
-      
-     await actions.getPerfilProp(store.casa.user_id)
-     await actions.getDetalles(param.id)
-    }
-    getPerfil();
+    actions.getDetalles(param.id)
+    actions.getPerfilProp(store.casa.info_propietario?.user_id)
   }, [])
 
-
+console.log(store.casa.info_propietario?.user_id);
 
   return (
     <div className='details-container container mx-auto row d-flex cuerpo mt-5'>
@@ -76,7 +72,7 @@ function Details() {
 
           <p className="text-white bg-azul-oscuro d-flex details-btn justify-content-center btn my-4">{store.casa.category}</p>
           <h6 className='disponible'>Localización: {store.casa.location}</h6>
-          <p className="card-text"><strong>Alojamiento entero: departamento con servicios incluidos. <br />Anfitrión: {store.propietario.name}</strong></p>
+          <p className="card-text"><strong>Alojamiento entero: departamento con servicios incluidos. <br />Anfitrión: {store.propietario?.name}</strong></p>
           <p className='detalle'>{store.casa.numberOfRooms} Habitaciones - {store.casa.numberOfBathrooms} Baños - 250mt2 </p>
 
         </div>
@@ -91,8 +87,8 @@ function Details() {
           <li className="list-group-item details-list-group bg-celeste-claro mt-4 ms-0 ps-0"><p className="ps-0 ms-0">{store.casa.description}</p></li>
           <div className='d-flex mt-2 '>
             <div className=''>
-              <li className="list-group-item details-list-group duenio"><p>Dueño: {store.propietario.name}</p> <br />
-                <p className='registro'>Se registró en mayo del 2015</p>
+              <li className="list-group-item details-list-group duenio"><p>{store.casa.info_propietario?.name} {store.casa.info_propietario?.lastname}</p> <br />
+                <p className='registro'>{store.casa.info_propietario?.account_creation_date}</p>
               </li>
             </div>
 

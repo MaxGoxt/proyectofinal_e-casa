@@ -32,7 +32,7 @@ function Detailsventas() {
 
           <p className="text-white bg-azul-oscuro d-flex justify-content-center w-25 btn my-4">{store.casa.category}</p>
           <h6 className='disponible'>Localización: {store.casa.location}</h6>
-          <p className="card-text"><strong>Alojamiento entero: departamento con servicios incluidos. <br />Anfitrión: {store.propietario.name}.</strong></p>
+          <p className="card-text"><strong>Alojamiento entero: departamento con servicios incluidos. <br />Anfitrión: {store.propietario?.name}.</strong></p>
           <p className='detalle'>{store.casa.numberOfRooms} Habitaciones - {store.casa.numberOfBathrooms} Baños - 250mt2 </p>
 
         </div>
@@ -43,8 +43,8 @@ function Detailsventas() {
           <li className="list-group-item bg-celeste-claro mt-4">{store.casa.description} </li>
           <div className='d-flex mt-4'>
             <div className='ms-3'>
-              <li className="list-group-item duenio">Dueño: {store.propietario.name}<br />
-                <p className='registro'>Se registró en mayo del 2015</p>
+              <li className="list-group-item duenio">Dueño: {store.casa.info_propietario?.name} {store.casa.info_propietario?.lastname}<br />
+                <p className='registro'>{store.casa.info_propietario?.account_creation_date}</p>
               </li>
             </div>
 

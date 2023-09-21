@@ -22,7 +22,6 @@ export const Favoritos = () => {
             })
     }, [])
 
-    console.log(store.favoritos);
     return (
         <div className="mt-5 pt-3 container">
             { store.auth ? 
