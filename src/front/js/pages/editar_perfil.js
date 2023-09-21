@@ -56,10 +56,8 @@ function Editarperfil() {
                await actions.getCasasProp(store.casa.user_id)
             }
 
-            getPerfil()
-
-    
-            
+            getPerfil();
+            if (!actions.validToken()) navigate("/");
         }, [])
        
     

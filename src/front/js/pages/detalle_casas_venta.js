@@ -11,11 +11,9 @@ function Detailsventas() {
   const { store, actions } = useContext(Context)
   let param = useParams()
   useEffect(() => {
-    // actions.getVentas()
-    actions.getPerfilProp(store.casa.user_id)
-    actions.getDetalles(param.id)
-    
-
+      // actions.getVentas()
+      actions.getPerfilProp(store.casa.user_id)
+      actions.getDetalles(param.id);
   }, [])
 
 

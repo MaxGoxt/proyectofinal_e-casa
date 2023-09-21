@@ -15,7 +15,7 @@ function Details() {
      await actions.getPerfilProp(store.casa.user_id)
      await actions.getDetalles(param.id)
     }
-    getPerfil()
+    getPerfil();
   }, [])
 
 
