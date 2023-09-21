@@ -138,6 +138,7 @@ export const EditProp = () => {
 
     return (
         <div className="d-flex flex-column mt-5 bg-celeste-claro">
+            { store.auth ?<>
             <button className="btn btn-primary mt-5 mx-auto" onClick={() => widgetRef.current.open()}>
                 SUBIR IMAGEN
             </button>
@@ -226,8 +227,8 @@ export const EditProp = () => {
                 <button type='submit' className="btn btn-primary">Subir casa</button>
             </form>
             <div className="d-flex justify-content-center">
-            </div>
-
+            </div></>
+            : <h2 className='text-danger m-auto mt-5'>🚫INAUTORIZADO🚫</h2>}
         </div>
     );
 }
