@@ -39,7 +39,9 @@ export const Favoritos = () => {
                                     title={item.houseId.title}
                                     location={item.houseId.location}
                                     id={item.houseId.id}
-                                    images={item.houseId.images} />
+                                    images={item.houseId.images}
+                                    price={item.houseId.price}
+                                    />
                             )
                         )}
                     </div>
