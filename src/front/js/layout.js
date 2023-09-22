@@ -19,9 +19,11 @@ import { EditUserView } from "./pages/EditUserView.jsx"
 import PerfilProp from "./pages/perfilPropietario";
 import VistaNosotros from "./pages/vista_nosotros.jsx";
 import Editarperfil from "./pages/editar_perfil";
+import VistaFooter from "./pages/footertyc.jsx";
 
 
 //create your first component
+
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
     // you can set the basename on the .env file located at the root of this project, E.g: BASENAME=/react-hello-webapp/
@@ -49,6 +51,7 @@ const Layout = () => {
                         <Route element={<Favoritos />} path="/favoritos" />
                         <Route element={<PerfilProp />} path="/perfilprop" />
                         <Route element={<VistaNosotros />} path="/comp-nosotros" />
+                        <Route element={<VistaFooter />} path="/comp-footertyc" />
 
                         <Route element={<Editarperfil />} path="/editarperfil" />
 
