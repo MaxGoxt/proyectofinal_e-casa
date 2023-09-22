@@ -41,13 +41,14 @@ class User(db.Model):
 
 class Image(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    url = db.Column(db.String(300), nullable=False)
+    url = db.Column(db.String(3000), nullable=False)
     house_id = db.Column(db.Integer, db.ForeignKey('house.id'))
 
     def __repr__(self):
         return f'<Image {self.id}>'
 
     def serialize(self):
+        house_id = House.query.filter_by(id = self.house_id).first()
         return {
             "id": self.id,
             "url": self.url,

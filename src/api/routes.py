@@ -281,7 +281,9 @@ def editar_posteos(house_id):
     user = User.query.filter_by(email = current_user_email).first()
    
     post_query = House.query.filter_by(user_id=user.id, id=house_id).first()
-    print(post_query)
+
+    image_query = Image.query.filter_by(house_id=house_id).all()
+    
      
     #  validamos que exista una casa
     if post_query is None:
@@ -293,8 +295,10 @@ def editar_posteos(house_id):
         post_query.description = json_data["description"]
     if "category" in json_data:
         post_query.category = json_data["category"]
-    # if "image_id" in body:
-    #     casa_query.image_id = body["image_id"]
+    if json_data["imagesUrl"] is not None:
+        for i in range(0,len(json_data['imagesUrl'])):
+            image_query[i].url=json_data['imagesUrl'][i]
+            db.session.commit()
     if "location" in json_data:
         post_query.location = json_data["location"]
     if "number_of_rooms" in json_data:
@@ -310,6 +314,9 @@ def editar_posteos(house_id):
            
     
     db.session.commit()
+
+    
+
     return jsonify({"msg": "Tus cambios ya quedaron"}), 200
 
 
