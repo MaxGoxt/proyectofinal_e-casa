@@ -39,6 +39,10 @@ export const CardFav = (props) => {
                             <i style={{ fontSize: "20px", color: "red" }} className="fa-regular fa-heart px-1 "></i>
                         }</button>
                     </div>
+                    <div className="d-flex justify-content-between px-1">
+                    <p className="card-text">$ {props.price}</p>
+                    <Link to={"/details/" + props.id} style={{ textDecoration: "underline" }}>Ver detalles</Link>
+                </div>
                 </div>
             </div>
         </>
@@ -55,6 +59,7 @@ CardFav.propTypes = {
     id: PropTypes.number,
     imageUrl: PropTypes.string,
     titulo: PropTypes.string,
+    price: PropTypes.number,
 };
 
 

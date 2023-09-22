@@ -17,13 +17,13 @@ export const CardHouseFeed = (props) => {
     // console.log(store.favoritos["0"]?.houseId.id);
     // console.log(props.id);
     // console.log(props.id == store.favoritos["0"]?.houseId.id);
-    
+
     const toggleFavorito = () => {
         setIsFavorito(!isFavorito);
         if (props.id == store.favoritos["0"]?.houseId?.id) {
             // Llama a la función para eliminar el favorito
             actions.deleteFavoritos(props.id);
-        }else{
+        } else {
             actions.createFavoritos(props.id)
         }
     };
@@ -31,8 +31,14 @@ export const CardHouseFeed = (props) => {
     return (
         <div className="text-decoration-none col-sm-6 col-md-4 col-lg-3 col-xl-2 product">
             <div className="thumbnail">
-                <i onClick={()=>toggleFavorito(props.id)} className={props.id == store.favoritos["0"]?.houseId?.id?"position-absolute fa-solid fa-heart m-2 text-danger bg-dark p-2 bg-opacity-75 rounded" : "position-absolute fa-regular fa-heart m-2 text-danger bg-dark p-2 bg-opacity-75 rounded"} style={{ zIndex: "2", cursor: "pointer" }}></i>
-            <div id={"carouselExampleControls" + props.id} className="carousel slide" data-bs-ride="carousel" data-bs-interval="false" data-interval="false" data-mdb-interval="false">
+                <i
+                    onClick={() => toggleFavorito(props.id)}
+                    className={`position-absolute ${props.id === store.favoritos["0"]?.houseId?.id ? 'fa-solid' : 'fa-regular'
+                        } fa-heart m-2 text-danger bg-dark p-2 bg-opacity-75 rounded`}
+                    style={{ zIndex: "2", cursor: "pointer" }}
+                ></i>
+                {/* <i onClick={()=>toggleFavorito(props.id)} className={props.id == store.favoritos["0"]?.houseId?.id?"position-absolute fa-solid fa-heart m-2 text-danger bg-dark p-2 bg-opacity-75 rounded" : "position-absolute fa-regular fa-heart m-2 text-danger bg-dark p-2 bg-opacity-75 rounded"} style={{ zIndex: "2", cursor: "pointer" }}></i> */}
+                <div id={"carouselExampleControls" + props.id} className="carousel slide" data-bs-ride="carousel" data-bs-interval="false" data-interval="false" data-mdb-interval="false">
                     <div className="carousel-indicators">
                         <button type="button" data-bs-target={"#carouselExampleControls" + props.id} data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
                         <button type="button" data-bs-target={"#carouselExampleControls" + props.id} data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -62,8 +68,8 @@ export const CardHouseFeed = (props) => {
                     <strong className="card-title">{props.location}</strong>
                 </div>
                 <div className="d-flex justify-content-between px-1">
-                    <p className="card-text">$ {props.price}</p>
-                    <Link to={"/details/" + props.id} style={{ textDecoration: "underline" }}>Ver detalles</Link>
+                    <p className="card-text">$ {props.precio}</p>
+                    <Link to={"/details/"} style={{ textDecoration: "underline" }}>Ver detalles</Link>
                 </div>
             </div>
         </div>
