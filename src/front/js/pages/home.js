@@ -60,7 +60,8 @@ export const Home = () => {
                                     location={item.location} 
                                     price={item.price} 
                                     id={item.id} 
-                                    images={item.images} />
+                                    images={item.images}
+                                    category={item.category} />
                             )
                         })}
                     </div>
@@ -74,7 +75,8 @@ export const Home = () => {
                                     location={item.location} 
                                     price={item.price} 
                                     id={item.id} 
-                                    images={item.images} />
+                                    images={item.images}
+                                    category={item.category} />
                             )
                         })}
                     </div>

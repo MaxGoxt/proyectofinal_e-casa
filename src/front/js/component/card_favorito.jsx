@@ -40,7 +40,8 @@ export const CardFav = (props) => {
                         }</button>
                     </div>
                     <div className="d-flex justify-content-between px-1">
-                    <p className="card-text">$ {props.price}</p>
+                    <p className="card-text"><small className="text-body-secondary">
+                        </small>{props.category == "Venta" ? <small>USD${props.price}</small> : <small>${props.price}</small>}</p>
                     <Link to={"/details/" + props.id} style={{ textDecoration: "underline" }}>Ver detalles</Link>
                 </div>
                 </div>
@@ -60,6 +61,8 @@ CardFav.propTypes = {
     imageUrl: PropTypes.string,
     titulo: PropTypes.string,
     price: PropTypes.number,
+    category: PropTypes.string,
+
 };
 
 
