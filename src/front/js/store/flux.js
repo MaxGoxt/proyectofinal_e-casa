@@ -240,7 +240,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			createFavoritos: async (id) => {
-
 				try {
 					let data = await axios.post(process.env.BACKEND_URL + '/api/favoritos/house',{
 
@@ -248,7 +247,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 						"house_id": id
 
 					})
-					console.log(data.data.results);
+					console.log(data);
 				} catch (error) {
 					console.log(error.response);
 					// if (error.response.status === 404) {

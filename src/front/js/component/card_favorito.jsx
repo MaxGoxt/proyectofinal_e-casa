@@ -20,8 +20,6 @@ export const CardFav = (props) => {
         }
     };
 
-
-
     return (
         <>
             <div className="col-12 col-md-6 col-xl-4">
