@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useState, useEffect, useContext } from 'react';
-import axios from "axios";
 
 
 export const CardFav = (props) => {
@@ -11,12 +10,15 @@ export const CardFav = (props) => {
 
     const [isFavorito, setIsFavorito] = useState(true);
 
-    console.log(props)
+    
+
     const toggleFavorito = () => {
         setIsFavorito(!isFavorito);
         if (isFavorito) {
             // Llama a la función para eliminar el favorito
             actions.deleteFavoritos(props.id);
+        }else{
+            actions.createFavoritos(props.id)
         }
     };
 

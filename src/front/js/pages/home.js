@@ -16,6 +16,7 @@ export const Home = () => {
         actions.getAlquileres()
         actions.getVentas()
     }, [])
+    
 
 
     function alquileres() {
