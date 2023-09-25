@@ -8,6 +8,7 @@ import { PanelCtrl } from "../component/panel_control.jsx";
 
 export const Favoritos = () => {
     const { store, actions } = useContext(Context);
+   
 
     const navigate = useNavigate();
 
@@ -21,6 +22,7 @@ export const Favoritos = () => {
                 }
             })
     }, [])
+    console.log(store.favoritos);
 
     return (
         <div className="mt-5 pt-3 container">
@@ -39,7 +41,10 @@ export const Favoritos = () => {
                                     title={item.houseId.title}
                                     location={item.houseId.location}
                                     id={item.houseId.id}
-                                    images={item.houseId.images} />
+                                    images={item.houseId.images}
+                                    price={item.houseId.price}
+                                    category={item.houseId.category}
+                                    />
                             )
                         )}
                     </div>

@@ -270,6 +270,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 			},
+
+			createFavoritos: async (id) => {
+				try {
+					let data = await axios.post(process.env.BACKEND_URL + '/api/favoritos/house',{
+
+						"user_id": localStorage.getItem("user_id"),
+						"house_id": id
+
+					})
+					console.log(data);
+				} catch (error) {
+					console.log(error.response);
+					// if (error.response.status === 404) {
+						setStore({"favoritos": error.response.data.msg})
+					// }
+					return false
+
+				}
+
+			},
+
 			getPerfilProp: async (id) => {
 				console.log(id);
 				if (id) {
