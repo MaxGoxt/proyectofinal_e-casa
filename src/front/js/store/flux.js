@@ -74,7 +74,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				//reset the global store
 				setStore({ demo: demo });
 			},
-			signup: async (firstName, lastName, email, password, phone, confpassword) => {
+			signup: async ({firstName, lastName, email, password, phone, confpassword}) => {
 
 				try {
 					let data = await axios.post(process.env.BACKEND_URL + "/api/signup", {
@@ -134,7 +134,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return false
 				}
 			},
-			login: async (email, password) => {
+			login: async ({email, password}) => {
 				try {
 					let data = await axios.post(process.env.BACKEND_URL + '/api/login',
 						{
@@ -315,8 +315,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log("Error loading message from backend", error)
 				}
 			},
-			editPerfil: async (firstName, lastName, email, password, phone, description) => {
+			editPerfil: async ({name, lastname, password, phoneNumber, description}) => {
 				console.log(localStorage.getItem('token'));
+				
 				try {
 
 					const resp = await fetch(process.env.BACKEND_URL + '/api/user', {
@@ -325,11 +326,10 @@ const getState = ({ getStore, getActions, setStore }) => {
 							"Authorization": "Bearer " + localStorage.getItem('token')
 						},
 						body: JSON.stringify({
-
-							"name": firstName,
-							"lastname": lastName,
-							"email": email,
-							"phone_number": phone,
+							
+							"name": name,
+							"lastname": lastname,
+							"phone_number": phoneNumber,
 							"password": password,
 							"description": description
 
