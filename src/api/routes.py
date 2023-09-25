@@ -13,6 +13,43 @@ from flask_bcrypt import Bcrypt
 
 api = Blueprint('api', __name__)
 bcrypt = Bcrypt()
+ # SDK de Mercado Pago 
+import mercadopago 
+ # Agrega credenciales 
+sdk =  mercadopago.SDK("APP_USR-2815099995655791-092911-c238fdac299eadc66456257445c5457d-1160950667")
+
+@api.route("/preference", methods=["POST"]) 
+def preference(): 
+    body = json.loads(request.data)  # aca trae la info 
+ # acá vamos a poner más líneas de código 
+ # Crea un ítem en la preferencia 
+    preference_data = { 
+    "items": [ 
+    { 
+
+    "title": "E-casa",  #estas líneas las vamos a poder editar con los datos de nuestra API. 
+    "quantity": 1,   #estos tres son los requeridos obligatoriamente por mercadopago. 
+    "unit_price": body["price"],   #//aca va el total a pagar por el cliente. 
+    "description": body ["description"]
+ #//también podríamos mandar más datos como nombre del producto, etc. 
+    },],
+    "payer":{
+        "email": "test_user_17805074@testuser.com"
+    },
+        "back_urls": {
+            "success": "https://special-space-halibut-x5ww77999799hpq96-3000.app.github.dev",
+            "failure": "https://special-space-halibut-x5ww77999799hpq96-3000.app.github.dev",
+            "pending": "https://special-space-halibut-x5ww77999799hpq96-3000.app.github.dev"
+    },
+    "auto_return": "approved" 
+    
+    } 
+ 
+    preference_response = sdk.preference().create(preference_data) 
+    preference = preference_response["response"] 
+    return preference, 200
+
+
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():

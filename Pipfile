@@ -22,6 +22,7 @@ flask-jwt-extended = "*"
 asyncio = "*"
 flask-bcrypt = "*"
 bcrypt = "*"
+mercadopago = "*"
 
 [requires]
 python_version = "3.10"
