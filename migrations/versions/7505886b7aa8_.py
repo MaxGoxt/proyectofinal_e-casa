@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 892dd485d187
+Revision ID: 7505886b7aa8
 Revises: 
-Create Date: 2023-09-23 19:55:44.240275
+Create Date: 2023-09-25 19:35:25.491337
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '892dd485d187'
+revision = '7505886b7aa8'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -27,6 +27,7 @@ def upgrade():
     sa.Column('profile_picture', sa.String(length=300), nullable=True),
     sa.Column('phone_number', sa.String(length=30), nullable=False),
     sa.Column('account_creation_date', sa.String(length=40), nullable=True),
+    sa.Column('premium_level', sa.Integer(), nullable=False),
     sa.Column('is_admin', sa.Boolean(), nullable=False),
     sa.Column('description', sa.String(length=500), nullable=True),
     sa.PrimaryKeyConstraint('id'),
@@ -35,6 +36,7 @@ def upgrade():
     op.create_table('house',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=150), nullable=False),
+    sa.Column('priority', sa.Integer(), nullable=False),
     sa.Column('description', sa.String(length=300), nullable=False),
     sa.Column('category', sa.String(length=10), nullable=False),
     sa.Column('location', sa.String(length=150), nullable=False),
@@ -68,7 +70,7 @@ def upgrade():
     )
     op.create_table('image',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('url', sa.String(length=300), nullable=False),
+    sa.Column('url', sa.String(length=3000), nullable=False),
     sa.Column('house_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['house_id'], ['house.id'], ),
     sa.PrimaryKeyConstraint('id')

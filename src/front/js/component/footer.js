@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 export const Footer = () => (
-	<footer className="footer bg-azul-oscuro mb-1" style={{ maxWidth: "100%" }}>
+	<footer className="footer bg-azul-oscuro pb-5 mb-1" style={{ maxWidth: "100%" }}>
 		<><div className="  rounded  p-4 mt-4">
 			<h5 className=" text-white"> <a href="https://glowing-waffle-69ggqq776xqg3xrvp-3000.app.github.dev/comp-nosotros" target="_blank" style={{ color: '#ffffff', textDecoration: 'none' }}>Sobre nosotros</a></h5>
 			<p className=" text-white" style={{ color: "#fff !important" }}> <a style={{ color: '#ffffff', textDecoration: 'none' }} href="https://glowing-waffle-69ggqq776xqg3xrvp-3000.app.github.dev/comp-terminos" target="_blank"> <i class="fa-solid fa-square-check fa-xs" ></i>   Términos y condiciones</a></p>
