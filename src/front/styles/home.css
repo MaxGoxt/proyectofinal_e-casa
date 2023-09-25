@@ -116,15 +116,5 @@ body{
     text-decoration: underline;
   }
   
-  /* Estilos personalizados para el enlace */
-  
-  a {
-    color: #FDBE34; /* Color del texto del enlace */
-    text-decoration: none; /* Eliminar subrayado */
-  }
-  
-  a:hover {
-    color: orange; /* Cambiar color al pasar el ratón */
-  }
-
+ 
 

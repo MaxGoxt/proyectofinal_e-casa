@@ -22,6 +22,7 @@ import Editarperfil from "./pages/editar_perfil";
 import VistaFooter from "./pages/footertyc.jsx";
 import {Propiedades} from "./pages/propiedades.jsx";
 import { EditProp } from "./pages/edit_prop.jsx";
+import VistaTerminos from "./pages/vista_terminos.jsx";
 
 
 //create your first component
@@ -54,7 +55,8 @@ const Layout = () => {
                         <Route element={<PerfilProp />} path="/perfilprop" />
                         <Route element={<VistaNosotros />} path="/comp-nosotros" />
                         <Route element={<VistaFooter />} path="/comp-footertyc" />
-
+                        <Route element={<VistaTerminos />} path="/comp-terminos" />
+                        
                         <Route element={<Editarperfil />} path="/editarperfil" />
                         <Route element={<Propiedades />} path="/mis-propiedades" />
                         <Route element={<EditProp />} path="/editar/mis-propiedades/:id" />
