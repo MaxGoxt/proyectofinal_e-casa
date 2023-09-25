@@ -232,6 +232,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				setStore({ filterSales: orderSalesByPrice });
 			},
+			setNewPlan: async () => {
+
+			},
 			getDetalles: async (id) => {
 				try {
 					let data = await axios.get(process.env.BACKEND_URL + '/api/gethouse/' + id)
