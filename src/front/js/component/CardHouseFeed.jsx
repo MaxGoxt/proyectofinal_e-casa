@@ -8,9 +8,8 @@ import "../../styles/card_feed_alq.css";
 export const CardHouseFeed = (props) => {
     const { store, actions } = useContext(Context)
 
-    const [isFavorito, setIsFavorito] = useState(false);
-   
-
+    const [isFavorito, setIsFavorito] = useState(store.favoritos.some((item)=> item.houseId.id==props.id));
+//    let isFavorito=store.favoritos.some((item)=> item.houseId.id==props.id)
 
     useEffect(() => {
         actions.getFavoritos()
@@ -27,7 +26,7 @@ export const CardHouseFeed = (props) => {
         setIsFavorito(!isFavorito);
       
         
-        if (props.id == store.favoritos["0"]?.houseId?.id) {
+        if (isFavorito) {
             // Llama a la función para eliminar el favorito
             actions.deleteFavoritos(props.id);
         } else {
@@ -36,10 +35,10 @@ export const CardHouseFeed = (props) => {
     };
 
     return (
-        <div className="text-decoration-none col-sm-6 col-md-4 col-lg-3 col-xl-2 product">
+        <div className="text-decoration-none col-sm-6 col-md-4 col-lg-3 col-xl-2 product"> 
             <div className="thumbnail">
                
-                <i onClick={()=>toggleFavorito(props.id)} className={props.id == store.favoritos["0"]?.houseId?.id?"position-absolute fa-solid fa-heart m-2 text-danger bg-dark p-2 bg-opacity-75 rounded" : "position-absolute fa-regular fa-heart m-2 text-danger bg-dark p-2 bg-opacity-75 rounded"} style={{ zIndex: "2", cursor: "pointer" }}></i>
+            <i onClick={()=>toggleFavorito(props.id)} className={store.favoritos?.some((item)=> item.houseId.id==props.id)?"position-absolute fa-solid fa-heart m-2 text-danger bg-dark p-2 bg-opacity-75 rounded" : "position-absolute fa-regular fa-heart m-2 text-danger bg-dark p-2 bg-opacity-75 rounded"} style={{ zIndex: "2", cursor: "pointer" }}></i>
                 <div id={"carouselExampleControls" + props.id} className="carousel slide" data-bs-ride="carousel" data-bs-interval="false" data-interval="false" data-mdb-interval="false">
                     <div className="carousel-indicators">
                         <button type="button" data-bs-target={"#carouselExampleControls" + props.id} data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
