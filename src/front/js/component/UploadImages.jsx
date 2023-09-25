@@ -100,11 +100,6 @@ export const UploadImages = () => {
             parkingSelected
         } = checkRadioButtons();
 
-        console.log((categorySelected === "Alquiler" || categorySelected === "Venta"));
-        console.log(isWifiSelected);
-        console.log(isParkingSelected);
-        console.log(imagesUrl.length > 4);
-        
         if ((categorySelected === "Alquiler" || categorySelected === "Venta") && isWifiSelected && isParkingSelected && imagesUrl.length > 4) {
             const formData = new FormData();
             formData.append('json_data', JSON.stringify({
