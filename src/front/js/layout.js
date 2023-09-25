@@ -22,7 +22,8 @@ import Editarperfil from "./pages/editar_perfil";
 import { Propiedades } from "./pages/propiedades.jsx";
 import { EditProp } from "./pages/edit_prop.jsx";
 import { UpgradePlan } from "./pages/UpgradePlan.jsx";
-
+import { Payments } from './pages/Payments.jsx';
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 
 //create your first component
 const Layout = () => {
@@ -32,8 +33,12 @@ const Layout = () => {
 
     if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
 
+    
+
     return (
-        <div>
+        <PayPalScriptProvider options={{
+            "clientId": "AVFjigUf5l9KutuapcvZ28RqLPqcc8c_CZZBwRNDtcly88yDWqWmbYm9ZVuuOrVJfpr6idx0KbbEiGEk"
+        }}>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
                     <Navbar />
@@ -56,13 +61,13 @@ const Layout = () => {
                         <Route element={<Propiedades />} path="/mis-propiedades" />
                         <Route element={<EditProp />} path="/editar/mis-propiedades/:id" />
                         <Route element={<UpgradePlan />} path="/upgradeplan" />
+                        <Route element={<Payments />} path="/payments" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>
             </BrowserRouter>
-        </div>
+        </PayPalScriptProvider>
     );
 };
 
 export default injectContext(Layout);
-
