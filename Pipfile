@@ -23,6 +23,7 @@ asyncio = "*"
 flask-bcrypt = "*"
 bcrypt = "*"
 mercadopago = "*"
+stripe = "*"
 
 [requires]
 python_version = "3.10"
