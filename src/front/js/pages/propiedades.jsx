@@ -18,7 +18,7 @@ export const Propiedades = () => {
     return (
         <div className="pt-5 px-5 row">
             <h1 className="text-black my-5">Administrar mis Propiedades</h1>
-            {store.casaPropietario.map((item, index) => {
+            {store.casaPropietario?.map((item, index) => {
                 return (
                     <CardProp
                         key={index}

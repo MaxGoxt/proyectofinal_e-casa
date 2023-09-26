@@ -38,7 +38,7 @@ function Detailsventas() {
         </div>
         <ul className="list-group list-group-flush">
           <div className='d-flex justify-content-between'>
-            <p className='ms-3'><strong>U$S {store.casa.price}<br /> </strong><p className='disponible'>Disponible ahora</p></p><button type="submit" className="btn text-white bg-azul-oscuro  mx-auto rounded-pill w-25 my-4 me-3 "><Link to={"/perfilprop"}>Contacto</Link></button>
+            <p className='ms-3'><strong>U$S {store.casa.price}<br /> </strong><p className='disponible'>Disponible ahora</p></p><button type="submit" className="btn text-white bg-azul-oscuro  mx-auto rounded-pill w-25 my-4 me-3 " ><Link to={"/perfilprop"}>Contacto</Link></button>
           </div>
           <li className="list-group-item bg-celeste-claro mt-4">{store.casa.description} </li>
           <div className='d-flex mt-4'>
