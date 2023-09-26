@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useState, useEffect, useContext } from 'react';
-import axios from "axios";
 
 
 export const CardFav = (props) => {
@@ -11,16 +10,17 @@ export const CardFav = (props) => {
 
     const [isFavorito, setIsFavorito] = useState(true);
 
-    console.log(props)
+    
+
     const toggleFavorito = () => {
         setIsFavorito(!isFavorito);
         if (isFavorito) {
             // Llama a la función para eliminar el favorito
             actions.deleteFavoritos(props.id);
+        }else{
+            actions.createFavoritos(props.id)
         }
     };
-
-
 
     return (
         <>
@@ -39,6 +39,11 @@ export const CardFav = (props) => {
                             <i style={{ fontSize: "20px", color: "red" }} className="fa-regular fa-heart px-1 "></i>
                         }</button>
                     </div>
+                    <div className="d-flex justify-content-between px-1">
+                    <p className="card-text"><small className="text-body-secondary">
+                        </small>{props.category == "Venta" ? <small>USD${props.price}</small> : <small>${props.price}</small>}</p>
+                    <Link to={"/details/" + props.id} style={{ textDecoration: "underline" }}>Ver detalles</Link>
+                </div>
                 </div>
             </div>
         </>
@@ -55,6 +60,9 @@ CardFav.propTypes = {
     id: PropTypes.number,
     imageUrl: PropTypes.string,
     titulo: PropTypes.string,
+    price: PropTypes.number,
+    category: PropTypes.string,
+
 };
 
 

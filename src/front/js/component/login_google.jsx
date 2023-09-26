@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useContext } from 'react';
+import { Context } from "../store/appContext";
 import { GoogleOAuthProvider, GoogleLogin, useGoogleOneTapLogin, googleLogout } from '@react-oauth/google'
 import { useNavigate } from "react-router-dom";
 import jwt_decode from "jwt-decode";
@@ -15,6 +16,7 @@ export const GLogin = () => {
             <GoogleLogin
                 onSuccess={credentiales => {
                     let decoded = jwt_decode(credentiales.credential);
+
                     console.log(decoded);                   
                 }}
                 onError={() => {

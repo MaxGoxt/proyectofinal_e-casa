@@ -12,6 +12,7 @@ class User(db.Model):
     profile_picture = db.Column(db.String(300), nullable=True)
     phone_number = db.Column(db.String(30), nullable=False)
     account_creation_date = db.Column(db.String(40), nullable=True)
+    premium_level = db.Column(db.Integer, nullable=False)
     is_admin = db.Column(db.Boolean(), nullable=False)
     description = db.Column(db.String(500), nullable=True)
     usuario_favoritos = db.relationship('Favorites', backref='user', lazy=True)
@@ -31,6 +32,7 @@ class User(db.Model):
             "email": self.email,
             "password": self.password,
             "phoneNumber": self.phone_number,
+            "premium_level": self.premium_level,
             "is_admin": self.is_admin,
             "accountCreationDate": self.account_creation_date,
             "description": self.description,
@@ -59,6 +61,7 @@ class Image(db.Model):
 class House(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(150), nullable=False)
+    priority = db.Column(db.Integer, nullable=False)
     description = db.Column(db.String(300), nullable=False)
     category = db.Column(db.String(10), nullable=False)
     location = db.Column(db.String(150), nullable=False)
@@ -68,10 +71,10 @@ class House(db.Model):
     wifi = db.Column(db.Boolean(), nullable=False)
     virified_account = db.Column(db.Boolean(), nullable=False)
     price = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     images = db.relationship('Image', backref='house', lazy=True)
     
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     # user = db.relationship('User', backref='user', lazy=True)
     def __repr__(self):
@@ -82,6 +85,7 @@ class House(db.Model):
         return {
             "id": self.id,
             "title": self.title,
+            "priority": self.priority,
             "images": list(map(lambda item: item.serialize(),self.images)),
             "description": self.description,
             "category": self.category,

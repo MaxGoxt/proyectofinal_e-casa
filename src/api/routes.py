@@ -10,9 +10,13 @@ from datetime import datetime
 import cloudinary
 import cloudinary.uploader
 from flask_bcrypt import Bcrypt
+import stripe
 
 api = Blueprint('api', __name__)
 bcrypt = Bcrypt()
+
+public_key = "pk_test_51NuDsdH6hUfczlRSigLh8Y1oaQi8uaQISB7L174xRbBNIxDlonQA8wehFHxzNNr5OfBc1t3MCfLo2Vtg5pAfhjXd00eEuJsktf"
+stripe.api_key = "sk_test_51NuDsdH6hUfczlRSPY3vduy1Dbp2Gx50Iln2UyS62yWtpMY9xrcsgdronPUy0mmJpyy9C2BwUPs2m0aZSTnEyAen00wiDAudbW"
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
@@ -24,7 +28,21 @@ def handle_hello():
     return jsonify(response_body), 200
 
 
-#//endpoint login
+@api.route("/payment", methods=["POST"])
+def payment():
+    customer = stripe.Customer.create(email = request.form['stripeEmail'],
+                                      source = request.form['stripeToken'])
+
+    charge = stripe.Charge.create(
+        customer = customer.id,
+        amount = 1999,
+        currency = "usd",
+        description = "Dontation"
+    )
+    
+    return "successfull payment"
+
+# endpoint login
 
 @api.route('/login', methods=['POST'])
 def login():
@@ -77,6 +95,7 @@ def crear_registro():
         name = request.json.get("name", None),
         lastname = request.json.get("lastname", None),
         phone_number = request.json.get("phone_number", None),
+        premium_level = 0,
         email = request.json.get("email", None),
         password = hashed_password,
         is_admin = request.json.get("is_admin", None),
@@ -163,7 +182,31 @@ def eliminar_perfil():
         return jsonify({"msg": "Tu perfil fue eliminado con éxito"}), 200
     
     return jsonify({"msg": "No se encontró tu perfil"}), 404
+
+
+@api.route("/set_new_plan", methods=["PUT"])
+@jwt_required()
+def set_new_plan():
+    request_body = request.get_json(force=True)
+    current_user_email = get_jwt_identity()
+
+    user = User.query.filter_by(email = current_user_email).first()
+
+    if user is None:
+        return jsonify({ "msg": "El usuario no existe" }), 404
     
+    user.premium_level = request_body["planValue"]
+    db.session.commit()
+
+    # SET HOUSES PRIORITY
+
+    houses = House.query.filter_by(user_id = user.id).all()
+
+    for house in houses:
+        house.priority = user.premium_level
+        db.session.commit()
+
+    return jsonify({ "msg": "¡Tu plan se actualizó! :)" })
 
 @api.route("/profile_picture", methods=["POST"])
 @jwt_required()
@@ -403,6 +446,7 @@ def save_post():
         title=json_data.get("title", None),
         category=json_data.get("category", None),
         description=json_data.get("description", None),
+        priority=user.premium_level,
         user_id=user_id,
         location=json_data.get("location", None),
         number_of_rooms=json_data.get("number_of_rooms", None),

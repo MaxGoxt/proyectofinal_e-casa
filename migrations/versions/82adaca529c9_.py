@@ -1,14 +1,8 @@
 """empty message
 
-<<<<<<<< HEAD:migrations/versions/290d4e73c7e0_.py
-Revision ID: 290d4e73c7e0
+Revision ID: 82adaca529c9
 Revises: 
-Create Date: 2023-09-21 20:38:39.357156
-========
-Revision ID: d879763f5bae
-Revises: 
-Create Date: 2023-09-21 18:41:49.694309
->>>>>>>> 968adea4e0986824318979a12ffcff4b83539f84:migrations/versions/d879763f5bae_.py
+Create Date: 2023-09-25 15:53:24.384697
 
 """
 from alembic import op
@@ -16,11 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-<<<<<<<< HEAD:migrations/versions/290d4e73c7e0_.py
-revision = '290d4e73c7e0'
-========
-revision = 'd879763f5bae'
->>>>>>>> 968adea4e0986824318979a12ffcff4b83539f84:migrations/versions/d879763f5bae_.py
+revision = '82adaca529c9'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -37,6 +27,7 @@ def upgrade():
     sa.Column('profile_picture', sa.String(length=300), nullable=True),
     sa.Column('phone_number', sa.String(length=30), nullable=False),
     sa.Column('account_creation_date', sa.String(length=40), nullable=True),
+    sa.Column('premium_level', sa.Integer(), nullable=False),
     sa.Column('is_admin', sa.Boolean(), nullable=False),
     sa.Column('description', sa.String(length=500), nullable=True),
     sa.PrimaryKeyConstraint('id'),
@@ -45,6 +36,7 @@ def upgrade():
     op.create_table('house',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(length=150), nullable=False),
+    sa.Column('priority', sa.Integer(), nullable=False),
     sa.Column('description', sa.String(length=300), nullable=False),
     sa.Column('category', sa.String(length=10), nullable=False),
     sa.Column('location', sa.String(length=150), nullable=False),
@@ -78,7 +70,7 @@ def upgrade():
     )
     op.create_table('image',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('url', sa.String(length=300), nullable=False),
+    sa.Column('url', sa.String(length=3000), nullable=False),
     sa.Column('house_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['house_id'], ['house.id'], ),
     sa.PrimaryKeyConstraint('id')
