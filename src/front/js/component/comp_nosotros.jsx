@@ -33,7 +33,7 @@ const Nosotros = () => {
         </Link></div>
     </div>
     </div>
-  );
+  );vista
 };
 
 export default Nosotros;
