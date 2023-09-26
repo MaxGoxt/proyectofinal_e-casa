@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 import { Context } from "../store/appContext";
 import { Link, useNavigate } from "react-router-dom";
 import logoecasa from "../../img/logoe-casa.png";
-import googleLogo from "../../img/logo-google.png";
+import { GLogin } from "../component/login_google.jsx";
 import * as Yup from 'yup';
 import { useFormik } from 'formik';
 
@@ -73,8 +73,8 @@ export const Login = () => {
                 <button type="submit" className="btn text-white bg-azul-oscuro col-12 mx-auto">Entrar</button>
             </form>
             <div className="container">
-                <p id="emailHelp" className="form-text my-3 d-flex justify-content-center">iniciar con Google</p>
-                <button type="submit" className="btn borde-azul-oscuro col-12 mx-auto border-2 rounded-pill"><img src={googleLogo} alt=":C" style={{ width: "30px" }} /></button>
+                {/* <p id="emailHelp" className="form-text my-3 d-flex justify-content-center">iniciar con Google</p> */}
+                <GLogin/>
             </div>
             <div className="d-flex form-text my-4 justify-content-between container">
                 <p id="emailHelp">Olvidaste tu contraseña?</p>

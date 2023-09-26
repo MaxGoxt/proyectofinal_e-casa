@@ -76,7 +76,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					// don't forget to return something, that is how the async resolves
 					return data;
 				} catch (error) {
-					// console.log("Error loading message from backend", error)
 				}
 			},
 			changeColor: (index, color) => {
@@ -94,7 +93,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ demo: demo });
 			},
 			signup: async ({ firstName, lastName, email, password, phone, confpassword }) => {
-
 				try {
 					let data = await axios.post(process.env.BACKEND_URL + "/api/signup", {
 						"name": firstName,
@@ -124,13 +122,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 							headers: { "Authorization": "Bearer " + localStorage.getItem('token') }
 						})
 					setStore({ auth: true })
-					console.log(data);
 					return true
 				} catch (error) {
 					console.log(error);
-					// if (error.response.status === 404) {
-					// 	alert(error.response.data.msj)
-					// }
 					return false
 				}
 			},
@@ -142,14 +136,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 							headers: { "Authorization": "Bearer " + localStorage.getItem('token') }
 						})
 					setStore({ perfil: data.data })
-					console.log(getStore().perfil);
-
 					return true
 				} catch (error) {
 					console.log(error);
-					// if (error.response.status === 404) {
-					// 	alert(error.response.data.msj)
-					// }
 					return false
 				}
 			},
@@ -160,7 +149,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 							"email": email,
 							"password": password
 						})
-					console.log(data);
 					localStorage.setItem("token", data.data.access_token)
 					localStorage.setItem("user_id", data.data.user.id)
 					setStore({ perfil: data.data.user });
@@ -168,9 +156,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					return true
 				} catch (error) {
 					console.log(error);
-					// if (error.response.status === 404) {
-					// 	alert(error.response.data.msg)
-					// }
 					return false
 				}
 			},
@@ -193,12 +178,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					})
 					setStore({ alquileres: orderByPriority });
 					setStore({ orderRentItems: data.data.results });
-					console.log(data.data.results);
 				} catch (error) {
 					console.log(error);
-					// if (error.response.status === 404) {
-					// 	alert(error.response.data.msj)
-					// }
 					return false
 				}
 			},
@@ -273,14 +254,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					let data = await axios.get(process.env.BACKEND_URL + '/api/gethouse/' + id)
 					setStore({ casa: data.data.results });
-					// setStore({propietraio2: data.data.results.info_propietario})
-					console.log(data.data.results);
-
 				} catch (error) {
 					console.log(error);
-					// if (error.response.status === 404) {
-					// 	alert(error.response.data.msj)
-					// }
 					return false
 				}
 			},
@@ -290,14 +265,11 @@ const getState = ({ getStore, getActions, setStore }) => {
 						{
 							headers: { "Authorization": "Bearer " + localStorage.getItem('token') }
 						})
-					console.log(data.data.results);
 					setStore({ "favoritos": data.data.results })
 
 				} catch (error) {
 					console.log(error.response);
-					// if (error.response.status === 404) {
 					setStore({ "favoritos": error.response.data.msg })
-					// }
 					return false
 
 				}
@@ -306,18 +278,15 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			createFavoritos: async (id) => {
 				try {
-					let data = await axios.post(process.env.BACKEND_URL + '/api/favoritos/house',{
+					let data = await axios.post(process.env.BACKEND_URL + '/api/favoritos/house', {
 
 						"user_id": localStorage.getItem("user_id"),
 						"house_id": id
 
 					})
-					console.log(data);
 				} catch (error) {
 					console.log(error.response);
-					// if (error.response.status === 404) {
-						setStore({"favoritos": error.response.data.msg})
-					// }
+					setStore({ "favoritos": error.response.data.msg })
 					return false
 
 				}
@@ -325,7 +294,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			getPerfilProp: async (id) => {
-				console.log(id);
 				if (id) {
 					localStorage.setItem("prop_id", getStore().casa.info_propietario?.user_id)
 				}
@@ -333,10 +301,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					let data = await axios.get(process.env.BACKEND_URL + '/api/user/' + localStorage.getItem('prop_id'))
 					setStore({ propietario: data.data.results });
-					console.log(data);
 				} catch (error) {
 					console.log(error);
-
 					return false
 				}
 
@@ -345,10 +311,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					let data = await axios.get(process.env.BACKEND_URL + '/api/user/houses/' + localStorage.getItem('prop_id'))
 					setStore({ casaPropietario: data.data.results });
-					console.log(data);
 				} catch (error) {
 					console.log(error);
-
 					return false
 				}
 
@@ -363,7 +327,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					});
 					const data = await resp.json()
-					console.log(data);
 					// don't forget to return something, that is how the async resolves
 					return data;
 				} catch (error) {
@@ -371,10 +334,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 			editPerfil: async ({ name, lastname, password, phoneNumber, description }) => {
-				console.log(localStorage.getItem('token'));
-
 				try {
-
 					const resp = await fetch(process.env.BACKEND_URL + '/api/user', {
 						method: "PUT",
 						headers: {
@@ -395,7 +355,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 					return data;
 				} catch (error) {
-					// console.log("Error loading message from backend", error)
 				}
 			},
 			deleteCuenta: async () => {
@@ -408,7 +367,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 						}
 					});
 					const data = await resp.json()
-					console.log(data);
 					// don't forget to return something, that is how the async resolves
 					return data;
 				} catch (error) {
@@ -416,6 +374,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
+			editProfilePic: async (picture_url) => {
+				const options = {
+					body: JSON.stringify({picture_url}),
+					headers: { Authorization: "Bearer " + localStorage.getItem('token') },
+					method: "POST",
+				}
+				try {
+						await fetch(process.env.BACKEND_URL + "/api/profile_picture", options)
+					}
+				catch (error) {
+					console.log(error);
+				}
+			},
 			pagoMercadoPago: async (price, description) => {
 				try {
 					const response = await axios.post(process.env.BACKEND_URL + "/api/preference", {
@@ -424,7 +395,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 					}, {
 						headers: { Authorization: "Bearer " + localStorage.getItem('token') }
 					});
-					console.log(response.data);
 					setStore({ mercadoPago: response.data });  //guardamos  la info en el objeto que creamos en store 
 				} catch (error) {
 					console.log(error);

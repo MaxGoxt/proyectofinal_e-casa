@@ -255,7 +255,7 @@ def set_user_image():
 
     user = User.query.filter_by(email = current_user_email).first()
 
-    user.profile_picture = picture_url
+    user.profile_picture = picture_url["picture_url"]
     
     db.session.commit()
 

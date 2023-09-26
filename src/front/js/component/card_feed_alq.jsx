@@ -7,7 +7,6 @@ import "../../styles/card_feed_alq.css";
 
 export const CardFeedAlq = (props) => {
     const { store, actions } = useContext(Context)
-    console.log(props.images)
     return (
         <div className="text-decoration-none col-sm-6 col-md-4 col-lg-3 col-xl-2 product">
             <div className="thumbnail">
