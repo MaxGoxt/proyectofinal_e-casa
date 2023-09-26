@@ -13,6 +13,64 @@ from flask_bcrypt import Bcrypt
 
 api = Blueprint('api', __name__)
 bcrypt = Bcrypt()
+ # SDK de Mercado Pago 
+import mercadopago 
+ # Agrega credenciales 
+sdk =  mercadopago.SDK("APP_USR-2815099995655791-092911-c238fdac299eadc66456257445c5457d-1160950667")
+
+@api.route("/preference", methods=["POST"]) 
+@jwt_required()
+def preference(): 
+    body = json.loads(request.data)  # aca trae la info 
+ # acá vamos a poner más líneas de código 
+ # Crea un ítem en la preferencia 
+    preference_data = { 
+    "items": [ 
+    { 
+
+    "title": "E-casa",  #estas líneas las vamos a poder editar con los datos de nuestra API. 
+    "quantity": 1,   #estos tres son los requeridos obligatoriamente por mercadopago. 
+    "unit_price": body["price"],   #//aca va el total a pagar por el cliente. 
+    "description": body ["description"]
+ #//también podríamos mandar más datos como nombre del producto, etc. 
+    },],
+    "payer":{
+        "email": "test_user_17805074@testuser.com"
+    },
+        "back_urls": {
+            "success": "https://glowing-capybara-pqpgxqqxw57h7r99-3000.app.github.dev",
+            "failure": "https://glowing-capybara-pqpgxqqxw57h7r99-3000.app.github.dev",
+            "pending": "https://glowing-capybara-pqpgxqqxw57h7r99-3000.app.github.dev"
+    },
+    "auto_return": "approved" 
+    
+    } 
+ 
+    preference_response = sdk.preference().create(preference_data)
+    preference = preference_response["response"] 
+    
+    current_user_email = get_jwt_identity()
+    user = User.query.filter_by(email = current_user_email).first()
+    
+    print(body["price"])
+    if body["price"] == 20:
+        user.premium_level = 2
+        db.session.commit()
+    else:
+        user.premium_level = 1
+        db.session.commit()
+
+    # SET HOUSES PRIORITY
+
+    houses = House.query.filter_by(user_id = user.id).all()
+
+    for house in houses:
+        house.priority = user.premium_level
+        db.session.commit()
+        
+    return preference, 200
+
+
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
