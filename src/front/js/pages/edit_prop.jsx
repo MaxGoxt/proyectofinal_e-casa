@@ -20,10 +20,8 @@ export const EditProp = () => {
             cloudName: process.env.CLOUDNAME,
             uploadPreset: process.env.UPLOAD_PRESET
         }, function (error, result) {
-            console.log(result);
             if (result?.event === "success") {
                 setImagesUrl((imagesUrl) => {
-                    console.log(imagesUrl);
                     return [...imagesUrl, result.info.secure_url]
                 })
             }
@@ -123,11 +121,9 @@ export const EditProp = () => {
             method: "PUT",
         }
 
-        console.log(formData.imagesUrl);
         try {
             const uploadProp = async () => {
                 let response = await fetch(process.env.BACKEND_URL + "/api/post/" + id, options)
-                console.log(response);
             }
             uploadProp();
         } catch (error) {

@@ -36,7 +36,6 @@ function Perfil() {
                 saveUserImage(result.info.secure_url);
             }
         });
-        console.log(store.auth);
         if (store.auth === false) navigate("/");
     }, [])
 

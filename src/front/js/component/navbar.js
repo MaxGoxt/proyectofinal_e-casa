@@ -13,7 +13,6 @@ export const Navbar = () => {
 
 	useEffect(() => {
 		actions.getPerfil();
-		console.log(store.perfil);
 	}, []);
 
 	return (

@@ -17,8 +17,6 @@ function Details() {
     actions.getPerfilProp(store.casa.info_propietario?.user_id)
   }, [])
 
-  console.log(store.casa.info_propietario?.user_id);
-
   return (
     <div className='details-container container mx-auto row d-flex cuerpo mt-5'>
       <div className="mt-3 d-block"></div>
@@ -26,20 +24,15 @@ function Details() {
       <div className="details-card-container col-12">
 
         <div className="card-header bigger-screen d-flex" style={{ height: "430px" }}>
-          {store.casa?.images?.map((img) => (
-            <img src={img.url} className="details-card-img" style={{ maxWidth: "100%", width: "20px", flexGrow: "1", objectFit: "cover", opacity: ".9", transition: ".5s ease" }} />
+          {store.casa?.images?.map((img, index) => (
+            <img key={index} src={img.url} className="details-card-img" style={{ maxWidth: "100%", width: "20px", flexGrow: "1", objectFit: "cover", opacity: ".9", transition: ".5s ease" }} />
           ))}
         </div>
-
-
-
-
-
         <div id="carouselExampleControls" className="carousel slide mobile-images" data-bs-ride="true">
           <div className="carousel-inner" >
             <div className="carousel-inner" style={{ height: "300px" }}>
               {store.casa?.images?.map((img, index) => (
-                <div className={`carousel-item justify-content-center text-center ${index === 0 && "active"}`}>
+                <div key={index} className={`carousel-item justify-content-center text-center ${index === 0 && "active"}`}>
                   <img src={img.url} className="details-card-img" style={{ height: "300px" }} />
                 </div>
               ))}

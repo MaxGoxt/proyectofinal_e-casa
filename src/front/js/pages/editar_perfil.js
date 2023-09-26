@@ -39,7 +39,6 @@ function Editarperfil() {
             }),
 
         onSubmit: values => {
-            console.log(values);
             actions.editPerfil(values).then(res => {
                 if (res.msg == "Tu perfil fue editado con éxito")
                     navigate("/perfil")

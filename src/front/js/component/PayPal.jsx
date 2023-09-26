@@ -14,7 +14,6 @@ export const PayPal = (props) => {
     const navigate = useNavigate();
 
     if (paidFor) {
-        console.log(planValue);
         setNewPlan(planValue)
             .then(res => {
                 if (res) {
@@ -54,7 +53,6 @@ export const PayPal = (props) => {
             }}
             onApprove={async (data, actions) => {
                 const order = await actions.order.capture();
-                console.log("order", order);
                 handleApprove(data.orderID)
             }}
             onError={(err) => {

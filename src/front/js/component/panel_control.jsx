@@ -14,11 +14,6 @@ export const PanelCtrl = () => {
                     <Link to={"/favoritos"}>
                         <i style={{ fontSize: "40px" }} className="fa-regular fa-heart"></i>
                     </Link>
-                    {/* <Link to={"/upload"}>
-                        <button style={{ width: "40px", height: "40px" }} className="btn borde-azul-oscuro border-3 rounded-circle p-auto">
-                            <i className="fa-solid fa-plus"></i>
-                        </button>
-                    </Link> */}
                     <div className="dropdown">
                         <button className="btn borde-azul-oscuro border-3 rounded-circle p-auto" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i className="fa-solid fa-plus"></i>

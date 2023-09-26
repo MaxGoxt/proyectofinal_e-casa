@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-export const FilterMenu = ({ setShowFilteredResults, filter }) => {
+export const FilterMenu = ({ setShowFilteredResults, filter, maxValue }) => {
     const [minPriceSlider, setMinPriceSlider] = useState(0);
-    const [maxPriceSlider, setMaxPriceSlider] = useState(200000);
+    const [maxPriceSlider, setMaxPriceSlider] = useState(maxValue);
     const [inputStep, setInputStep] = useState(2000);
 
     const handleMinPriceSlider = e => {

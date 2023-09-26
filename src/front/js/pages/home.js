@@ -69,6 +69,7 @@ export const Home = () => {
                     <FilterMenu
                         setShowFilteredResults={setRentFilteredResults}
                         filter={filterRentByPrice}
+                        maxValue={100000}
                     />
                     <div className={"row"} id="pills-login" role="tabpanel" aria-labelledby="tab-login">
                         {!showRentFilteredResults
@@ -95,6 +96,7 @@ export const Home = () => {
                     <FilterMenu
                         setShowFilteredResults={setSalesFilteredResults}
                         filter={filterSalesByPrice}
+                        maxValue={1000000}
                     />
                     <div className={"row"} id="pills-register" role="tabpanel" aria-labelledby="tab-register">
                         {!showSalesFilteredResults

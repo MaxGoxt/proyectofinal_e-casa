@@ -15,15 +15,15 @@ export const UpgradePlanCard = ({ typeOfPlan, priceAMonth, benefit1, benefit2, b
                 </div>
                 <div className="">
                     <div className="d-flex">
-                        <i class="fa-solid fa-check me-3"></i>
+                        <i className="fa-solid fa-check me-3"></i>
                         <p>{benefit1}</p>
                     </div>
                     <div className="d-flex">
-                        <i class="fa-solid fa-check me-3"></i>
+                        <i className="fa-solid fa-check me-3"></i>
                         <p>{benefit2}</p>
                     </div>
                     <div className="d-flex">
-                        <i class="fa-solid fa-check me-3"></i>
+                        <i className="fa-solid fa-check me-3"></i>
                         <p>{benefit3}</p>
                     </div>
                 </div>

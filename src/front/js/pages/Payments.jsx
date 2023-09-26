@@ -9,11 +9,6 @@ export const Payments = () => {
     const [planValue, setPlanValue] = useState(null);
     const { id } = useParams();
 
-    /*const product = {
-        description: "La descripción rereact",
-        price: 20
-    }*/
-
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -31,15 +26,15 @@ export const Payments = () => {
 
         await actions.pagoMercadoPago(price, description);
         let direccion = await store.mercadoPago.init_point;  //  direccion guarda la url que trae init_point 
-        // console.log(direccion);
         window.location.replace(direccion);  // window es para renderizar y mandar al cliente a la url de pagar 
     };
 
     return (
-        <div className="mt-5 pt-5 d-flex flex-column justify-content-center align-items-center" style={{ marginTop: "200px" }}>
-            <p>Elije un método de pago</p>
+        <div className="mt-5 pt-5 d-flex flex-column justify-content-center align-items-center fs-5" style={{ marginTop: "200px" }}>
+            <p>Elije un método de pago:</p>
             {product !== null && <PayPal product={product} planValue={planValue} setNewPlan={actions.setNewPlan} />}
-            {product !== null && <button onClick={pagar} className="bg-azul-oscuro text-white mb-3">Mercadopago</button>}
+            <p className='my-3'>O</p>
+            {product !== null && <button onClick={pagar} className="bg-azul-oscuro text-white mb-3 btn w-25">Mercadopago</button>}
         </div>
     )
 }
