@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 import  { useState, useEffect, useContext } from 'react';
-import axios from "axios";
 import "../../styles/home.css";
 
 
@@ -28,12 +27,10 @@ const Nosotros = () => {
     </div>
     <div className="container d-flex justify-content-center align-items-center" >
     <div className="texto-amarillo border border-2 border-warning rounded p-2 mb-2" >
-    <Link to="/contacto" className="texto-amarillo border border-2 border-warning rounded p-2 mb-2">
-          Contáctanos
-        </Link></div>
+      Contáctanos</div>
     </div>
     </div>
-  );vista
+  );
 };
 
 export default Nosotros;
