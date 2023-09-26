@@ -47,6 +47,11 @@ export const Navbar = () => {
 									</Link>
 								</li>
 								<li>
+									<Link to="/upgradeplan" className="dropdown-item text-decoration-none">
+										Planes
+									</Link>
+								</li>
+								<li>
 									<Link onClick={() => actions.logout()} to="/login" className="dropdown-item text-decoration-none">
 										Cerrar sesión
 									</Link>

@@ -1,19 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { PayPalButtons } from "@paypal/react-paypal-js";
+import { useNavigate } from "react-router-dom";
 
-export const Payment = (props) => {
+export const PayPal = (props) => {
     const [paidFor, setPaidFor] = useState(false);
     const [error, setError] = useState(null);
-    const { product } = props;
+    const { product, planValue, setNewPlan } = props;
 
     const handleApprove = (orderId) => {
-        console.log("We made it, We made it");
         setPaidFor(true);
-        // 
     }
 
+    const navigate = useNavigate();
+
     if (paidFor) {
-        
+        console.log(planValue);
+        setNewPlan(planValue)
+            .then(res => {
+                if (res) {
+                    alert("¡Pago realizado con exito!")
+                    navigate("/");
+                }
+            });
     }
 
     if (error) {
@@ -44,7 +52,7 @@ export const Payment = (props) => {
                 }
 
             }}
-            onApprove={async ( data, actions ) => {
+            onApprove={async (data, actions) => {
                 const order = await actions.order.capture();
                 console.log("order", order);
                 handleApprove(data.orderID)
