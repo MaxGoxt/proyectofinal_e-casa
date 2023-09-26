@@ -37,11 +37,9 @@ const Layout = () => {
 
     if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
 
-    
-
     return (
         <PayPalScriptProvider options={{
-            "clientId": "AVFjigUf5l9KutuapcvZ28RqLPqcc8c_CZZBwRNDtcly88yDWqWmbYm9ZVuuOrVJfpr6idx0KbbEiGEk"
+            "clientId": process.env.PAYPAL_CLIENT_ID
         }}>
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
@@ -68,7 +66,7 @@ const Layout = () => {
                         <Route element={<Propiedades />} path="/mis-propiedades" />
                         <Route element={<EditProp />} path="/editar/mis-propiedades/:id" />
                         <Route element={<UpgradePlan />} path="/upgradeplan" />
-                        <Route element={<Payments />} path="/payments" />
+                        <Route element={<Payments />} path="/payments/:id" />
                     </Routes>
                     <Footer />
                 </ScrollToTop>

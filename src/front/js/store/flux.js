@@ -42,6 +42,24 @@ const getState = ({ getStore, getActions, setStore }) => {
 			perfil: {},
 			favoritos: [],
 			casaPropietario: [],
+			upgradePlans: [
+				{
+				  typeOfPlan: "Starter",
+				  priceAMonth: 10,
+				  benefit1: "Mayor visibilidad (7 días)",
+				  benefit2: "Publica hasta 10 fotos",
+				  benefit3: "Soporte por correo electrónico",
+				  planValue: 1,
+				},
+				{
+				  typeOfPlan: "Pro",
+				  priceAMonth: 20,
+				  benefit1: "Mayor visibilidad (1 mes)",
+				  benefit2: "Publica hasta 15 fotos",
+				  benefit3: "Soporte por correo electrónico",
+				  planValue: 2,
+				},
+			]
 		},
 		actions: {
 
@@ -233,8 +251,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 				})
 				setStore({ filterSales: orderSalesByPrice });
 			},
-			setNewPlan: async () => {
-
+			setNewPlan: async (planValue) => {
+				try {
+					await fetch(process.env.BACKEND_URL + "/api/set_new_plan", {
+						method: "PUT",
+						headers: {
+							"Content-Type": "application/json",
+							"Authorization": "Bearer " + localStorage.getItem('token'),
+						},
+						body: JSON.stringify({
+							planValue
+						})
+					});
+					return true;
+				} catch (error) {
+					console.log(error);
+					return false;
+				}
 			},
 			getDetalles: async (id) => {
 				try {
@@ -388,6 +421,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 					const response = await axios.post(process.env.BACKEND_URL + "/api/preference", {
 						price: price,
 						description: description  //acá está de nuevo la variable  donde se guarda el total a pagar por el cliente 
+					}, {
+						headers: { Authorization: "Bearer " + localStorage.getItem('token') }
 					});
 					console.log(response.data);
 					setStore({ mercadoPago: response.data });  //guardamos  la info en el objeto que creamos en store 
