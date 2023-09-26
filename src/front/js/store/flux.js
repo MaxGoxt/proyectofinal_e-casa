@@ -416,10 +416,9 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			editProfilePic: async (picture_url) => {
-				console.log(picture_url);
 				const options = {
-					body: picture_url,
-					headers: { "Authorization": "Bearer " + localStorage.getItem('token') },
+					body: JSON.stringify({picture_url}),
+					headers: { Authorization: "Bearer " + localStorage.getItem('token') },
 					method: "POST",
 				}
 				try {

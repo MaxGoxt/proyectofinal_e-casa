@@ -15,7 +15,6 @@ function Perfil() {
     const { store, actions } = useContext(Context)
     const navigate = useNavigate();
 
-
     async function handleSubmit(e) {
         e.preventDefault()
         actions.deleteCuenta()
@@ -41,13 +40,12 @@ function Perfil() {
         if (store.auth === false) navigate("/");
     }, [])
 
-    const saveUserImage = async (img_route) => {
+    const saveUserImage = async (picture_url) => {
         const options = {
             method: "POST",
             headers: { "Authorization": "Bearer " + localStorage.getItem('token') },
-            body: JSON.stringify(img_route),
+            body: JSON.stringify({picture_url}),
         }
-
         try {
             const saveImage = async () => {
                 await fetch(process.env.BACKEND_URL + "/api/profile_picture", options)
@@ -59,13 +57,10 @@ function Perfil() {
         }
     }
 
-
     return (
-
         <form className='container pb-3 bg-celeste-claro mt-5' onSubmit={handleSubmit}>
-            <Link to={"/"}><button type="submit" className="btn text-white bg-azul-oscuro  rounded-pill  my-4"><i class="fa-solid fa-xmark"></i></button></Link>
+            <Link to={"/"}><button type="submit" className="btn text-white bg-azul-oscuro  rounded-pill  my-4"><i className="fa-solid fa-xmark"></i></button></Link>
             <div className='ms-3 d-flex  justify-content-center me-4'>
-
                 <div>
                     <div className='justify-content-center'>
                         <label id="profile_input" onClick={() => widgetRef.current.open()}>
@@ -77,7 +72,6 @@ function Perfil() {
                     <strong><p className='m-auto'>{store.perfil.name}</p></strong>
                     <strong><p className='registro'>{store.perfil.email}</p></strong>
                 </div>
-
                 <div className='ms-3   justify-content-center mt-5'>
                     <li className="list-group-item duenio">
                         <Link to={"/favoritos"}><i className="fa-regular fa-heart"></i></Link><br />
@@ -85,11 +79,6 @@ function Perfil() {
                     </li>
                 </div>
             </div>
-
-
-
-
-
             <div className=''>
                 <div className="mb-3 texto-amarillo">
                     <label htmlFor="exampleInputEmail1" className="form-label">Nombre <i className="fa-solid fa-pencil" onClick={() => setFirstName("")}></i> </label>
@@ -116,11 +105,8 @@ function Perfil() {
                     <input type="text" className="form-control" disabled value={store.perfil.description} onChange={(e) => setConfpassword(e.target.value)} />
                 </div>
                 <button type="submit" className="text-white btn btn-danger d-grid gap-2 col-6 mx-auto" >Eliminar cuenta</button> <br />
-
             </div>
-
         </form>
-
     );
 }
 

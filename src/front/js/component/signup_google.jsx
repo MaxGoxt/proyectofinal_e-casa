@@ -11,7 +11,7 @@ export const GSignUp = () => {
     let password = "12345678"
     const { actions } = useContext(Context)
 
-    const createAcount = async (name, last_name, email, password1, phone, picture_url)=> {
+    const createAcount = async (name, last_name, email, password1, phone, picture_url) => {
         await actions.signup(
             {
                 "firstName": name,
@@ -20,9 +20,13 @@ export const GSignUp = () => {
                 "password": password1,
                 "phone": phone
             });
-        await actions.editProfilePic(picture_url)
-        await actions.login({email: email, password: password1});
-        await actions.validToken()
+        await actions.login({ email: email, password: password1 })
+            .then(res => {
+                if (res) {
+                    // await actions.validToken()
+                    actions.editProfilePic(picture_url)
+                }
+            })
     }
 
     return (
