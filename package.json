@@ -73,11 +73,8 @@
 		]
 	},
 	"dependencies": {
-<<<<<<< HEAD
 		"@react-oauth/google": "^0.11.1",
-=======
 		"@paypal/react-paypal-js": "^8.1.3",
->>>>>>> f7c68fac34ba96d0c7facde23884f50d5514073e
 		"axios": "^1.5.0",
 		"formik": "^2.4.5",
 		"jwt-decode": "^3.1.2",
