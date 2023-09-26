@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { useEffect } from 'react';
 import { GoogleOAuthProvider, GoogleLogin, useGoogleOneTapLogin, googleLogout } from '@react-oauth/google'
 import { useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
 // login nuevo
 export const GLogin = () => {
@@ -12,11 +13,12 @@ export const GLogin = () => {
     return (
         <GoogleOAuthProvider clientId={process.env.GOOGLE_ID}>
             <GoogleLogin
-                onSuccess={credentialResponse => {
-                    console.log(credentialResponse);                   
+                onSuccess={credentiales => {
+                    let decoded = jwt_decode(credentiales.credential);
+                    console.log(decoded);                   
                 }}
                 onError={() => {
-                    console.log('Login Failed');
+                    console.log('Algo salió mal');
                 }}
                 useOneTap
             />
