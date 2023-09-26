@@ -13,7 +13,6 @@ const Nosotros = () => {
       <h1 className= "texto-amarillo d-flex justify-content-center py-3 mx-5 border-bottom border-3 border-warning">
         Sobre Nosotros
       </h1>
-      {/* <hr className= "texto-amarillo" style={{ width: "15px" }}/> */}
       
       <div className="container">
       <div className="p-5">
@@ -28,10 +27,13 @@ const Nosotros = () => {
     </div>
     </div>
     <div className="container d-flex justify-content-center align-items-center" >
-    <div className="texto-amarillo border border-2 border-warning rounded p-2 mb-2" >Contáctanos</div>
+    <div className="texto-amarillo border border-2 border-warning rounded p-2 mb-2" >
+    <Link to="/contacto" className="texto-amarillo border border-2 border-warning rounded p-2 mb-2">
+          Contáctanos
+        </Link></div>
     </div>
     </div>
-  );
+  );vista
 };
 
 export default Nosotros;

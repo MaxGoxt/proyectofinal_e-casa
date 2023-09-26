@@ -22,6 +22,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			filterRent: [],
 			filterSales: [],
 			ventas: [],
+			mercadoPago: {},
 			casa: {
 				"category": "Venta",
 				"description": "Melo",
@@ -75,7 +76,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({ demo: demo });
 			},
 			signup: async ({ firstName, lastName, email, password, phone, confpassword }) => {
-				console.log(firstName, lastName, email, password, phone);
 				try {
 					let data = await axios.post(process.env.BACKEND_URL + "/api/signup", {
 						"name": firstName,
@@ -396,6 +396,21 @@ const getState = ({ getStore, getActions, setStore }) => {
 					console.log(error);
 				}
 			},
+			pagoMercadoPago: async (price, description) => {
+				try {
+					const response = await axios.post(process.env.BACKEND_URL + "/api/preference", {
+						price: price,
+						description: description  //acá está de nuevo la variable  donde se guarda el total a pagar por el cliente 
+					});
+					console.log(response.data);
+					setStore({ mercadoPago: response.data });  //guardamos  la info en el objeto que creamos en store 
+				} catch (error) {
+					console.log(error);
+				}
+			},
+
+
+
 		}
 	}
 };

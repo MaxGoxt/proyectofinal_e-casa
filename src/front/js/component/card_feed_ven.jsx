@@ -9,7 +9,7 @@ export const CardFeedVen = (props) => {
     const { store, actions } = useContext(Context)
     return (
         <>
-            <Link to={"/detailsventas/" + props.id} className="text-decoration-none col-sm-6 col-md-4 col-lg-3 col-xl-2 product">
+            <Link to={"/detailsventas/" + props.id} className="text-decoration-none col-sm-6 col-md-4 col-lg-3 col-xl-2 product" style={{ color: '#ffffff', textDecoration: 'none' }} >
                 <div className="thumbnail" href="#">
                     <div className="img d-flex align-items-start justify-content-end">
                         <i className="position-absolute fa-regular fa-heart m-2 text-danger bg-dark p-2 bg-opacity-75 rounded"></i>
