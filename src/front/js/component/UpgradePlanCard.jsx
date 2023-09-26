@@ -1,18 +1,7 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 export const UpgradePlanCard = ({ typeOfPlan, priceAMonth, benefit1, benefit2, benefit3, planValue }) => {
-
-    const handleSetNewPlan = async () => {
-        await fetch(process.env.BACKEND_URL + "/api/set_new_plan", {
-            method: "PUT",
-            headers: {
-                "Authorization": "Bearer " + localStorage.getItem('token'),
-            },
-            body: JSON.stringify({
-                planValue
-            })
-        })
-    }
 
     return (
         <div className="col-sm-12 col-md-6 mb-3">
@@ -39,10 +28,9 @@ export const UpgradePlanCard = ({ typeOfPlan, priceAMonth, benefit1, benefit2, b
                     </div>
                 </div>
                 <div className="pb-3">
-                    <button
-                        className="btn text-white bg-azul-oscuro fw-bold w-100"
-                        style={{ borderRadius: "40px" }} 
-                        onClick={handleSetNewPlan}>Comenzar</button>
+                    <Link to={`/payments/${planValue}`} className="btn text-white bg-azul-oscuro fw-bold w-100">
+                        Comenzar
+                    </Link>
                 </div>
             </div>
         </div>

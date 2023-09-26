@@ -8,10 +8,10 @@ import { FilterMenu } from "../component/FilterMenu.jsx";
 
 export const Home = () => {
     const { store, actions } = useContext(Context);
-    const [login, setLogin] = useState("show active")
-    const [loginST, setLoginST] = useState("active")
-    const [register, setRegister] = useState("")
-    const [registerST, setRegisterST] = useState("")
+    const [login, setLogin] = useState("show active");
+    const [loginST, setLoginST] = useState("active");
+    const [register, setRegister] = useState("");
+    const [registerST, setRegisterST] = useState("");
 
     const [showRentFilteredResults, setRentFilteredResults] = useState(false);
     const [showSalesFilteredResults, setSalesFilteredResults] = useState(false);

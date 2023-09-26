@@ -10,13 +10,9 @@ from datetime import datetime
 import cloudinary
 import cloudinary.uploader
 from flask_bcrypt import Bcrypt
-import stripe
 
 api = Blueprint('api', __name__)
 bcrypt = Bcrypt()
-
-public_key = "pk_test_51NuDsdH6hUfczlRSigLh8Y1oaQi8uaQISB7L174xRbBNIxDlonQA8wehFHxzNNr5OfBc1t3MCfLo2Vtg5pAfhjXd00eEuJsktf"
-stripe.api_key = "sk_test_51NuDsdH6hUfczlRSPY3vduy1Dbp2Gx50Iln2UyS62yWtpMY9xrcsgdronPUy0mmJpyy9C2BwUPs2m0aZSTnEyAen00wiDAudbW"
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
@@ -26,21 +22,6 @@ def handle_hello():
     }
 
     return jsonify(response_body), 200
-
-
-@api.route("/payment", methods=["POST"])
-def payment():
-    customer = stripe.Customer.create(email = request.form['stripeEmail'],
-                                      source = request.form['stripeToken'])
-
-    charge = stripe.Charge.create(
-        customer = customer.id,
-        amount = 1999,
-        currency = "usd",
-        description = "Dontation"
-    )
-    
-    return "successfull payment"
 
 # endpoint login
 
