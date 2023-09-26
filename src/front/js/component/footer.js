@@ -10,7 +10,7 @@ export const Footer = () => (
 			<p className=" text-white" ><i className="fa-solid fa-phone fa-xs" style={{ color: "#ffffff" }}></i>  099123123</p>
 			<p className=" text-white"> <i className="fa-solid fa-envelope fa-xs" style={{ color: "#ffffff" }}></i>  e-acasa@gmail.com</p>
 			<p className=" text-white border-bottom border-2 py-1"></p>
-			<p className=" text-white text-center justify-content-center"><i className="fa-regular fa-copyright fa-xs" style={{ color: "#ffffff" }}></i>   e-casas.company</p>
+			<p className=" text-white text-center justify-content-center"> <i className="fa-regular fa-copyright fa-xs" style={{ color: "#ffffff" }}></i>   e-casas.company</p>
 
 		</div>
 			<div>

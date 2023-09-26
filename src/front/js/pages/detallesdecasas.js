@@ -82,7 +82,7 @@ console.log(store.casa.info_propietario?.user_id);
               <p className='mb-0'><strong>${store.casa.price} Mensual </strong></p>
               <p className='disponible mb-0'>Disponible ahora</p>
             </div>
-            <button type="submit" className="btn text-white bg-azul-oscuro  mx-auto rounded-pill w-25 my-4 me-3 "><Link to={"/perfilprop"}>Contacto</Link></button>
+            <button type="submit" className="text-white bg-azul-oscuro d-flex details-btn justify-content-center btn my-4 " style={{ color: '#ffffff', textDecoration: 'none' }}><Link to={"/perfilprop"}>Contacto</Link></button>
           </div>
           <li className="list-group-item details-list-group bg-celeste-claro mt-4 ms-0 ps-0"><p className="ps-0 ms-0">{store.casa.description}</p></li>
           <div className='d-flex mt-2 '>
