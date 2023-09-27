@@ -100,8 +100,8 @@ function Perfil() {
                     <input type="password" className="form-control" disabled value={store.perfil.password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 <div className="mb-3 azul-oscuro fw-bolder col-md-6">
-                    <label htmlFor="exampleInputPassword1" className="form-label">Descripción</label>
-                    <input type="text" className="form-control" disabled value={store.perfil.description} onChange={(e) => setConfpassword(e.target.value)} />
+                    <label htmlFor="exampleInputPassword1" className="form-label" >Descripción</label>
+                    <textarea type="text" className="form-control" style={{height:"100px"}} disabled value={store.perfil.description} onChange={(e) => setConfpassword(e.target.value)} />
                 </div>
                 <button type="submit" className="text-white btn btn-danger d-grid gap-2 col-6 mx-auto" >Eliminar cuenta</button> <br />
             </div>

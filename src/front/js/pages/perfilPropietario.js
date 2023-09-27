@@ -76,7 +76,7 @@ function Perfilprop() {
 
                 <div className="mb-3 azul-oscuro fw-bolder col-md-6">
                     <label htmlFor="exampleInputPassword1" className="form-label">Descripción</label>
-                    <input type="text" className="form-control" disabled value='Descripcion' />
+                    <textarea type="text" style={{height:"100px"}} className="form-control" disabled value='Descripcion' />
                 </div>
             </div>
             <div className="text-white my-5">
