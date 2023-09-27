@@ -89,17 +89,6 @@ export const EditProp = () => {
             parkingSelected
         } = checkRadioButtons();
 
-        // if (title.current.value === "") alert("El titulo esta vacio");
-        // if (categorySelected === undefined) alert("Selecciona una categoria");
-        // if (description.current.value === "") alert("La descripción esta vacio");
-        // if (location.current.value === "") alert("La ubicación esta vacio");
-        // if (number_of_rooms.current.value === "") alert("El número de cuartos esta vacio");
-        // if (number_of_bathrooms.current.value === "") alert("El número de baños esta vacio");
-        // if (parking === false) alert("Selecciona si tiene parking o no");
-        // if (wifi === false) alert("Selecciona si tiene wifi o no");
-        // if (price.current.value === "") alert("El precio esta vacio");
-        // if (imagesUrl.length <= 4) alert("Sube almenos 5 images");
-
         const formData = new FormData();
         formData.append('json_data', JSON.stringify({
             imagesUrl: imagesUrl,
@@ -129,27 +118,27 @@ export const EditProp = () => {
         } catch (error) {
             console.log(error);
         }
-
     }
 
     return (
         <div className="d-flex flex-column mt-5 bg-celeste-claro">
+        <h3 className="text-center pt-4">Acá puedes editar tu propiedad</h3>
             { store.auth ?<>
             <button className="btn btn-primary mt-5 mx-auto" onClick={() => widgetRef.current.open()}>
                 SUBIR IMAGEN
             </button>
             <form onSubmit={(e)=>{e.preventDefault(); uploadImage(param.id); navigate("/mis-propiedades")}} className="d-flex flex-column align-items-center mt-4">
                 <div className="mb-3 w-50">
-                    <label htmlFor="title" className="form-label texto-amarillo">Titulo</label>
+                    <label htmlFor="title" className="form-label azul-oscuro fw-bolder">Titulo</label>
                     <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="title" aria-describedby="emailHelp" ref={title} />
                 </div>
                 <div className="mb-3 w-50">
-                    <label htmlFor="description" className="form-label texto-amarillo">Descripción</label>
+                    <label htmlFor="description" className="form-label azul-oscuro fw-bolder">Descripción</label>
                     <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="description" aria-describedby="emailHelp" ref={description} />
                 </div>
                 <div className="mb-3 w-50 d-flex justify-content-center">
                     <div className="w-30">
-                        <p className="text-center">Categoria</p>
+                        <p className="text-center azul-oscuro fw-bolder">Categoría</p>
                         <div className="d-flex justify-content-center" ref={category}>
                             <div className="form-check me-3">
                                 <input className="form-check-input" type="radio" name="category" value="Alquiler" id="flexRadioDefault1" />
@@ -167,20 +156,13 @@ export const EditProp = () => {
                     </div>
                 </div>
                 <div className="mb-3 w-50">
-                    <label htmlFor="location" className="form-label texto-amarillo">Ubicación</label>
+                    <label htmlFor="location" className="form-label azul-oscuro fw-bolder">Ubicación</label>
                     <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="location" aria-describedby="emailHelp" ref={location} />
                 </div>
-                <div className="mb-3 w-50">
-                    <label htmlFor="number_of_rooms" className="form-label texto-amarillo">Nro° de cuartos</label>
-                    <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="number_of_rooms" aria-describedby="emailHelp" ref={number_of_rooms} />
-                </div>
-                <div className="mb-3 w-50">
-                    <label htmlFor="number_of_bathrooms" className="form-label texto-amarillo">Nro° de baños</label>
-                    <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="number_of_bathrooms" aria-describedby="emailHelp" ref={number_of_bathrooms} />
-                </div>
+                <div className="d-flex justify-content-around mx-1">
                 <div className="mb-3 w-50 d-flex justify-content-center">
                     <div className="w-30">
-                        <p className="text-center">¿Tiene wifi?</p>
+                        <p className="text-center azul-oscuro fw-bolder">¿Tiene wifi?</p>
                         <div className="d-flex justify-content-center" ref={wifi}>
                             <div className="form-check me-3">
                                 <input className="form-check-input" type="radio" value="Si" name="wifi" id="siradio" />
@@ -199,7 +181,7 @@ export const EditProp = () => {
                 </div>
                 <div className="mb-3 w-50 d-flex justify-content-center">
                     <div className="w-30">
-                        <p className="text-center">¿Tiene estacionamiento?</p>
+                        <p className="text-center azul-oscuro fw-bolder">¿Tiene estacionamiento?</p>
                         <div className="d-flex justify-content-center" ref={parking}>
                             <div className="form-check me-3">
                                 <input className="form-check-input" type="radio" value="Si" name="parking" id="siradio2" />
@@ -216,8 +198,17 @@ export const EditProp = () => {
                         </div>
                     </div>
                 </div>
+                </div>
                 <div className="mb-3 w-50">
-                    <label htmlFor="price" className="form-label texto-amarillo">Precio</label>
+                    <label htmlFor="number_of_rooms" className="form-label azul-oscuro fw-bolder">N° de cuartos</label>
+                    <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="number_of_rooms" aria-describedby="emailHelp" ref={number_of_rooms} />
+                </div>
+                <div className="mb-3 w-50">
+                    <label htmlFor="number_of_bathrooms" className="form-label azul-oscuro fw-bolder">N° de baños</label>
+                    <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="number_of_bathrooms" aria-describedby="emailHelp" ref={number_of_bathrooms} />
+                </div>
+                <div className="mb-3 w-50">
+                    <label htmlFor="price" className="form-label azul-oscuro fw-bolder">Precio</label>
                     <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="price" aria-describedby="emailHelp" ref={price} />
                 </div>
                 <button type='submit' className="btn btn-primary">Subir casa</button>
