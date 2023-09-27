@@ -16,7 +16,7 @@ export const Navbar = () => {
 	}, []);
 
 	return (
-		<nav className="fixed-top d-block navbar navbar-light bg-light">
+		!route.pathname.includes("signup") && !route.pathname.includes("login") && <nav className="fixed-top d-block navbar navbar-light bg-light">
 			<div className={`d-flex ${!route.pathname.includes("details") ? "otherplaces" : "container"} justify-content-between align-items-center`}>
 				<Link to="/" className="text-decoration-none text-dark d-flex align-items-end">
 					<img className="mx-2" src={logoecasa} alt="logo ecasa" style={{ width: "40px" }} />
