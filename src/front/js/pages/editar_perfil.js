@@ -59,8 +59,8 @@ function Editarperfil() {
                     <strong><p className='registro'>{store.perfil.email}</p></strong>
                 </div>
             </div>
-            <div className=''>
-                <div className="mb-3 texto-amarillo">
+            <div className='row g-3'>
+                <div className="mb-3 azul-oscuro fw-bolder col-md-6">
                     <label htmlFor="name" className="form-label">Nombre </label>
                     <input type="name" id="name" name="name" className="form-control" aria-describedby="emailHelp" onChange={formik.handleChange}
                         value={formik.values.name} />
@@ -68,7 +68,7 @@ function Editarperfil() {
                         <div className='text-danger'>{formik.errors.name}</div>
                     ) : null}
                 </div>
-                <div className="mb-3 texto-amarillo">
+                <div className="mb-3 azul-oscuro fw-bolder col-md-6">
                     <label htmlFor="lastname" className="form-label">Apellido </label>
                     <input type="lastname" id="lastname" name="lastname" className="form-control" onChange={formik.handleChange}
                         value={formik.values.lastname} />{formik.touched.lastname && formik.errors.lastname ? (
@@ -76,15 +76,7 @@ function Editarperfil() {
                         ) : null}
                 </div>
 
-                <div className="mb-3 texto-amarillo">
-                    <label htmlFor="phoneNumber" className="form-label">Telefono de contacto </label>
-                    <input type="phoneNumber" id="phoneNumber" name="phoneNumber" className="form-control" onChange={formik.handleChange}
-                        value={formik.values.phoneNumber} />
-                    {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
-                        <div className='text-danger'>{formik.errors.phoneNumber}</div>
-                    ) : null}
-                </div>
-                <div className="mb-3 texto-amarillo">
+                <div className="mb-3 azul-oscuro fw-bolder col-md-6">
                     <label htmlFor="password" className="form-label">Contraseña</label>
                     <input type="password" id="password" name="password" className="form-control" onChange={formik.handleChange}
                         value={formik.values.password} />
@@ -92,10 +84,18 @@ function Editarperfil() {
                         <div className='text-danger'>{formik.errors.password}</div>
                     ) : null}
                 </div>
+                <div className="mb-3 azul-oscuro fw-bolder col-md-6">
+                    <label htmlFor="phoneNumber" className="form-label">Telefono de contacto </label>
+                    <input type="phoneNumber" id="phoneNumber" name="phoneNumber" className="form-control" onChange={formik.handleChange}
+                        value={formik.values.phoneNumber} />
+                    {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
+                        <div className='text-danger'>{formik.errors.phoneNumber}</div>
+                    ) : null}
+                </div>
 
-                <div className="mb-3 texto-amarillo">
+                <div className="mb-3 azul-oscuro fw-bolder ">
                     <label htmlFor="description" className="form-label">Descripción</label>
-                    <input type="description" id="description" name="description" className="form-control" onChange={formik.handleChange}
+                    <textarea type="description" id="description" name="description" className="form-control w-50" style={{height:"100px"}} onChange={formik.handleChange}
                         value={formik.values.description} />
                     {formik.touched.description && formik.errors.description ? (
                         <div className='text-danger'>{formik.errors.description}</div>
