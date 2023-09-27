@@ -213,8 +213,13 @@ def eliminar_perfil():
 
     current_user_email = get_jwt_identity()
     perfil_query = User.query.filter_by(email=current_user_email).first()
+    house_query = House.query.filter_by(user_id=perfil_query.id).all()
 
     if perfil_query is not None:
+
+        for house in house_query:
+            db.session.delete(house)
+            db.session.commit()
 
         db.session.delete(perfil_query)
         db.session.commit()
