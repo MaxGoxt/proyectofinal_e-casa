@@ -4,6 +4,7 @@ import { Context } from '../store/appContext';
 import { Link } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+const defaultUserImage = "https://www.svgrepo.com/show/335455/profile-default.svg"
 
 function Editarperfil() {
 
@@ -19,7 +20,7 @@ function Editarperfil() {
             name: store.perfil.name,
             lastname: store.perfil.lastname,
             phoneNumber: store.perfil.phoneNumber,
-            password: store.perfil.password,
+            password: "",
             description: store.perfil.description
 
         },
@@ -34,8 +35,8 @@ function Editarperfil() {
                 phoneNumber: Yup.string()
                     .min(9, 'Debe tener 9 caracteres o mas'),
 
-                password: Yup.string().min(8, 'Debe tener 8 caracteres o mas'),
-                description: Yup.string().min(8, "Debe tener 8 caracteres o mas")
+                password: Yup.string().min(8, 'Debe tener 8 caracteres o mas').required("Obligatorio"),
+                description: Yup.string()
             }),
 
         onSubmit: values => {
@@ -52,7 +53,8 @@ function Editarperfil() {
             <Link to={"/perfil"}><button className="btn text-white bg-azul-oscuro  rounded-pill  my-4"><i className="fa-solid fa-xmark"></i></button></Link>
             <div className='ms-3 d-flex  justify-content-center me-4'>
                 <div className=' justify-content-center'>
-                    <img src={store.perfil.profile_picture} style={{ width: "100px", height: "100px" }} className="rounded-circle " alt="..." />
+                    {store.perfil.profile_picture == "" ? <img src={defaultUserImage} style={{ width: "100px", height: "100px" }} className="rounded-circle " alt="..." /> :
+                    <img src={store.perfil.profile_picture} style={{ width: "100px", height: "100px" }} className="rounded-circle " alt="..." />}
                     <strong><p className='m-auto'>{store.perfil.name}</p></strong>
                     <strong><p className='registro'>{store.perfil.email}</p></strong>
                 </div>

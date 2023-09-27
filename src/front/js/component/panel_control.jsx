@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import diego from "../../img/diego.jpg";
 import { Context } from '../store/appContext';
+const defaultUserImage = "https://www.svgrepo.com/show/335455/profile-default.svg"
 
 
 export const PanelCtrl = () => {
@@ -30,7 +30,7 @@ export const PanelCtrl = () => {
                     </div>
                     <Link to={"/perfil"}>
                         {store.perfil.profile_picture == ""
-                            ? <img src={diego} style={{ width: "40px", height: "40px" }} className="rounded-circle " alt="..." />
+                            ? <img src={defaultUserImage} style={{ width: "40px", height: "40px" }} className="rounded-circle " alt="..." />
                             : <img src={store.perfil.profile_picture} style={{ width: "40px", height: "40px" }} className="rounded-circle " alt="..." />
                         }
                     </Link>

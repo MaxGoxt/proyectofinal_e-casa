@@ -2,7 +2,7 @@ import React, { useState, useRef, useContext, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Context } from '../store/appContext';
 import { Link } from 'react-router-dom';
-import diego from "../../img/diego.jpg";
+const defaultUserImage = "https://www.svgrepo.com/show/335455/profile-default.svg"
 
 
 function Perfil() {
@@ -63,7 +63,7 @@ function Perfil() {
                 <div>
                     <div className='justify-content-center'>
                         <label id="profile_input" onClick={() => widgetRef.current.open()}>
-                            {store.perfil.profile_picture == "" ? <img src={diego} style={{ width: "100px", height: "100px" }} className="rounded-circle " alt="..." /> :
+                            {store.perfil.profile_picture == "" ? <img src={defaultUserImage} style={{ width: "100px", height: "100px" }} className="rounded-circle " alt="..." /> :
                                 <img src={store.perfil.profile_picture} style={{ width: "100px", height: "100px" }} className="rounded-circle " alt="..." />}
                         </label>
                         <input id="profile_input" className="invisible d-none" type="file" onChange={e => setFiles(e.target.files)} />
