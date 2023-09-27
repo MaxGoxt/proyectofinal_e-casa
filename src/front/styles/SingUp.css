@@ -1,0 +1,48 @@
+.sing-up-container {
+    padding: 60px 60px;
+}
+
+.sign-up-image {
+
+}
+
+.sign-button {
+    width: 280px;
+}
+
+@media all and (max-width: 1024px) {
+    .sing-up-container {
+        padding: 60px 60px;
+    }
+
+    .sign-up-image {
+        object-fit: cover;
+        width: 320px !important;
+        height: 100%;
+    } 
+}
+
+@media all and (max-width: 720px) {
+    .sing-up-container {
+        padding: 60px 60px;
+    }
+
+    .sign-up-image {
+        display: none;
+    } 
+
+    .sign-button {
+        width: 100% !important;
+    }
+}
+
+@media all and (max-width: 520px) {
+    .sing-up-container {
+        padding: 20px 20px;
+    }
+
+    .form-container {
+        padding: 20px !important;
+    }
+
+}
