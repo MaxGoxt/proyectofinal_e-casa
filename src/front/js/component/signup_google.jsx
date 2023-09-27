@@ -25,6 +25,7 @@ export const GSignUp = () => {
                 if (res) {
                     // await actions.validToken()
                     actions.editProfilePic(picture_url)
+                    actions.getPerfil();
                 }
             })
     }
