@@ -80,8 +80,8 @@ export const Login = () => {
                         {/* <p id="emailHelp" className="form-text my-3 d-flex justify-content-center">iniciar con Google</p> */}
                         <GLogin />
                     </div>
-                    <div className="d-flex form-text my-4 justify-content-between container">
-                        <p id="emailHelp">Olvidaste tu contraseña?</p>
+                    <div className="d-flex form-text my-4">
+                        <p id="emailHelp" className="me-2">¿Aún no tienes una cuenta?</p>
                         <Link to={"/signup"}><p className="azul-oscuro fw-bolder">Regístrate</p></Link>
                     </div>
                 </div>
