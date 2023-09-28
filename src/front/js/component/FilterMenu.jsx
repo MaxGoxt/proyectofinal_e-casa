@@ -46,68 +46,56 @@ export const FilterMenu = ({ setShowFilteredResults, filter, maxValue }) => {
     return (
         <div className="filter-container">
             <div className="text-dark">
-                <p className="mb-0">Rango de precios</p>
-                <div className="row">
-                    <div className="col-3">
-                        <div className="d-flex">
+                <p className="my-2">Rango de precios</p>
+                <div className="row d-flex justify-content-between">
+                    <div className="col-4">
+                        <div className="d-flex my-2 col-12">
                             <label htmlFor="customRange1" className="d-none form-label">Rango mínimo</label>
                             <input type="range" onChange={handleMinPriceSlider} className="form-range" value={minPriceSlider} min="0" max="198000" step={inputStep} id="customRange1"></input>
                         </div>
+                        <div className="col-12 d-flex justify-content-between">
+                            <span className="azul-oscuro my-auto">De:</span>
+                            <input
+                                type="number"
+                                className="w-75 bg-white border-primary border my-1"
+                                style={{ width: "100px" }}
+                                onChange={handleMinPriceInput}
+                                id="minPriceSliderInfo"
+                                min="0"
+                                step={inputStep}
+                                max="198000"
+                                value={minPriceSlider} />
+                        </div>
                     </div>
-                    <div className="col-3">
-                        <div className="d-flex">
+                    <div className="col-4">
+                        <div className="d-flex my-2 col-12">
                             <label htmlFor="customRange2" className="d-none form-label">Rango maximo</label>
                             <input type="range" onChange={handleMaxPriceSlider} className="form-range" value={maxPriceSlider} min="2000" max="200000" step={inputStep} id="customRange2"></input>
                         </div>
+                        <div className="col-12 d-flex justify-content-between">
+                            <span className="azl-osucuro my-auto">Hasta:</span>
+                            <input
+                                type="number"
+                                className="w-75 bg-white border-primary border my-1"
+                                style={{ width: "100px" }}
+                                onChange={handleMaxPriceInput}
+                                id="maxPriceSliderInfo"
+                                min="2000"
+                                step={inputStep}
+                                max="200000"
+                                value={maxPriceSlider} />
+                        </div>
+                    </div>
+                    <div className='col-12 col-sm-2'>
+                        <button className="btn bg-azul-oscuro text-white col-12 my-1" onClick={handlePriceFilter}>
+                            Ordenar
+                        </button>
+                        <button className="btn btn-secondary text-white col-12 my-1" onClick={cleanFilters}>
+                            Limpiar
+                        </button>
                     </div>
                 </div>
-                <div className="d-flex w-50">
-                    <div className="pe-1 d-flex flex-column">
-                        <span>De</span>
-                        <input
-                            type="number"
-                            className="col-6 bg-white border-primary border"
-                            style={{ width: "100px" }}
-                            onChange={handleMinPriceInput}
-                            id="minPriceSliderInfo"
-                            min="0"
-                            step={inputStep}
-                            max="198000"
-                            value={minPriceSlider} />
-                    </div>
-                    <div className="ps-1 d-flex flex-column">
-                        <span>Hasta</span>
-                        <input
-                            type="number"
-                            className="col-6 bg-white border-primary border"
-                            style={{ width: "100px" }}
-                            onChange={handleMaxPriceInput}
-                            id="maxPriceSliderInfo"
-                            min="2000"
-                            step={inputStep}
-                            max="200000"
-                            value={maxPriceSlider} />
-                    </div>
-                </div>
-            </div>
-            <div className="d-flex w-50 mt-3">
-                <div className="pe-1">
-                    <button
-                        className="btn btn-secondary"
-                        onClick={handlePriceFilter}
-                        style={{ width: "100px" }}
-                    >
-                        Ordenar
-                    </button>
-                </div>
-                <div className="ps-1">
-                    <button
-                        className="btn btn-secondary"
-                        onClick={cleanFilters}
-                        style={{ width: "100px" }}
-                    >
-                        Limpiar
-                    </button>
+                <div>
                 </div>
             </div>
         </div>

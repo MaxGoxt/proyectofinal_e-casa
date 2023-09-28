@@ -1,0 +1,23 @@
+.payment-container {
+    flex-direction: row !important;
+}
+
+@media all and (max-width: 760px) {
+    .payment-container {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 0 !important;
+    }
+}
+
+@media all and (max-width: 420px) {
+    .father-payment-container {
+        padding: 120px 0 0 0 !important;
+    }
+
+    .payment-container {
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 0 !important;
+    }
+}

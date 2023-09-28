@@ -16,13 +16,13 @@ export const Navbar = () => {
 	}, []);
 
 	return (
-		<nav className="fixed-top d-block navbar navbar-light bg-light">
+		!route.pathname.includes("signup") && !route.pathname.includes("login") && <nav className="fixed-top d-block navbar navbar-light bg-light">
 			<div className={`d-flex ${!route.pathname.includes("details") ? "otherplaces" : "container"} justify-content-between align-items-center`}>
 				<Link to="/" className="text-decoration-none text-dark d-flex align-items-end">
 					<img className="mx-2" src={logoecasa} alt="logo ecasa" style={{ width: "40px" }} />
 					<span className="fs-4">E-CASA</span>
 				</Link>
-				<div className="d-flex align-items-center">
+				<div className="d-flex align-items-center nav-setting-container">
 					<Link to="/upload" className="text-dark fw-bold text-decoration-none me-3 nav_upload_house">
 						<button type="button" className="btn btn-outline-success text-grey" style={{ fontSize: "16px" }}>Subé tu casa a E-CASA</button>
 					</Link>
@@ -40,16 +40,25 @@ export const Navbar = () => {
 										Mi cuenta
 									</Link>
 								</li>
+								{ store.perfil.is_admin &&	
+									<li>
+										<Link to="/mis-propiedades" className="dropdown-item text-decoration-none">
+											Ver mis propiedades
+										</Link>
+									</li>
+								}
 								<li>
 									<Link to="/favoritos" className="dropdown-item text-decoration-none">
 										Favoritos
 									</Link>
 								</li>
-								<li>
-									<Link to="/upgradeplan" className="dropdown-item text-decoration-none">
-										Planes
-									</Link>
-								</li>
+								{ store.perfil.is_admin &&
+									<li>
+										<Link to="/upgradeplan" className="dropdown-item text-decoration-none">
+											Planes
+										</Link>
+									</li>
+								}
 								<li>
 									<Link onClick={() => actions.logout()} to="/login" className="dropdown-item text-decoration-none">
 										Cerrar sesión

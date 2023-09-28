@@ -1,7 +1,9 @@
 import React, { useContext } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { Context } from '../store/appContext';
-const defaultUserImage = "https://www.svgrepo.com/show/335455/profile-default.svg"
+import '../../styles/PanelDeControl.css';
+
+const defaultUserImage = "https://www.svgrepo.com/show/335455/profile-default.svg";
 
 
 export const PanelCtrl = () => {
@@ -10,7 +12,7 @@ export const PanelCtrl = () => {
     return (
         <>
             {store.auth ?
-                <div className="bg-celeste-claro py-2 fixed-bottom mt-auto text-center azul-oscuro d-flex justify-content-around">
+                <div className="bg-celeste-claro  control-panel py-2 fixed-bottom mt-auto text-center azul-oscuro d-flex justify-content-around">
                     <Link to={"/favoritos"}>
                         <i style={{ fontSize: "40px" }} className="fa-regular fa-heart"></i>
                     </Link>
@@ -18,7 +20,6 @@ export const PanelCtrl = () => {
                         <button className="btn borde-azul-oscuro border-3 rounded-circle p-auto" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <i className="fa-solid fa-plus"></i>
                         </button>
-
                         {store.perfil.is_admin ?
                             <ul className="dropdown-menu">
                                 <li><Link to={"/mis-propiedades"}><p className="dropdown-item m-0"><i className="fa-solid fa-gears"></i> Ver mis propiedades</p></Link></li>
@@ -26,7 +27,8 @@ export const PanelCtrl = () => {
                             </ul> :
                             <ul className="dropdown-menu">
                                 <li><Link to={"/upload"}><p className="dropdown-item m-0">Ofrece tu propiedad</p></Link></li>
-                            </ul>}
+                            </ul>
+                        }
                     </div>
                     <Link to={"/perfil"}>
                         {store.perfil.profile_picture == ""

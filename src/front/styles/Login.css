@@ -1,0 +1,34 @@
+.login-container {
+    width: 520px;
+}
+
+@media all and (max-width: 1024px) {
+    .sign-up-image {
+        display: none;
+    } 
+}
+
+@media all and (max-width: 900px) {
+    .sign-up-image {
+        object-fit: cover;
+        width: 320px !important;
+        height: 100%;
+    } 
+
+    .login-container {
+        width: 520px;
+    }     
+}
+
+@media all and (max-width: 700px) {
+    .login-container {
+        width: 520px !important;
+    }
+}
+
+@media all and (max-width: 500px) {
+    .login-container {
+        width: 320px !important;
+        padding: 20px !important;
+    }
+}

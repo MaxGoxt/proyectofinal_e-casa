@@ -38,9 +38,9 @@ def preference():
         "email": "test_user_17805074@testuser.com"
     },
         "back_urls": {
-            "success": "https://glowing-capybara-pqpgxqqxw57h7r99-3000.app.github.dev",
-            "failure": "https://glowing-capybara-pqpgxqqxw57h7r99-3000.app.github.dev",
-            "pending": "https://glowing-capybara-pqpgxqqxw57h7r99-3000.app.github.dev"
+            "success": "https://e-casa.onrender.com",
+            "failure": "https://e-casa.onrender.com",
+            "pending": "https://e-casa.onrender.com"
     },
     "auto_return": "approved" 
     

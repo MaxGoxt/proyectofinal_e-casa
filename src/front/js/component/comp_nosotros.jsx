@@ -22,7 +22,7 @@ const Nosotros = () => {
       <a href="https://www.linkedin.com/in/maximiliano-gomez-coitino" target="_blank" style={{ color: '#FDBE34', textDecoration: 'none' }}><strong>Maximiliano Gómez</strong></a>,&nbsp;
       <a href="https://www.linkedin.com/in/agustin-rolando-538148287" target="_blank" style={{ color: '#FDBE34', textDecoration: 'none' }}><strong>Agustín Rolando</strong></a>&nbsp; y &nbsp;
       <a href="https://www.linkedin.com/in/claudia-salituro-7151b2250 " target="_blank" style={{ color: '#FDBE34', textDecoration: 'none' }}><strong>Claudia Salituro</strong> </a>
-      &nbsp;ha trabajando con mucha responsabilidad y compromiso para facilitarles y garantizarles una gestión efectiva y que tengan una experiencia única para lograr la satisfacción de nuestros clientes.</p>
+      &nbsp;ha trabajado con mucha responsabilidad y compromiso para facilitarles y garantizarles una gestión efectiva y que tengan una experiencia única para lograr la satisfacción de nuestros clientes.</p>
     </div>
     </div>
     <div className="container d-flex justify-content-center align-items-center" >

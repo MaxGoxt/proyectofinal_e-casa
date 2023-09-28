@@ -1,0 +1,18 @@
+.control-panel {
+    display: none !important;
+}
+
+.nav-setting-container {
+    display: flex !important;
+}
+
+
+@media all and (max-width: 520px) {
+    .control-panel {
+        display: flex !important;
+    }
+
+    .nav-setting-container {
+        display: none !important;
+    }
+}

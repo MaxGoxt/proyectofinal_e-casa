@@ -8,31 +8,28 @@ import "../../styles/card_feed_alq.css";
 export const CardHouseFeed = (props) => {
     const { store, actions } = useContext(Context)
 
-    // const [isFavorito, setIsFavorito] = useState(store.favoritos.some((item)=> item.houseId.id==props.id));
     const [isFavorito, setIsFavorito] = useState(
         Array.isArray(store.favoritos) && store.favoritos.some((item) => item.houseId.id === props.id)
       );
 
     useEffect(() => {
         actions.getFavoritos()
-
     }, [])
  
-
-    const toggleFavorito = () => {
-        setIsFavorito(!isFavorito);
-      
-        
+    const toggleFavorito = async () => {
+        setIsFavorito(!isFavorito);      
         if (isFavorito) {
             // Llama a la función para eliminar el favorito
-            actions.deleteFavoritos(props.id);
+           await actions.deleteFavoritos(props.id);
         } else {
-            actions.createFavoritos(props.id)
+           await actions.createFavoritos(props.id)
         }
+        actions.getFavoritos()
+
     };
 
     return (
-        <div className="text-decoration-none col-sm-6 col-md-4 col-lg-3 col-xl-2 product"> 
+        <div className="text-decoration-none col-sm-6 col-md-4 col-lg-3 col-xl-3 mx-auto product"> 
             <div className="thumbnail">
                 <i
                     onClick={() => toggleFavorito(props.id)}
