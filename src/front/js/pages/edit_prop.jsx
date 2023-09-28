@@ -127,7 +127,7 @@ export const EditProp = () => {
                 <button className="btn btn-primary mt-5 mx-auto" onClick={() => widgetRef.current.open()}>
                     SUBIR IMAGEN
                 </button>
-                <form onSubmit={(e) => { e.preventDefault(); uploadImage(param.id); navigate("/mis-propiedades") }} className="d-flex flex-column align-items-center mt-4">
+                <form onSubmit={(e) => { e.preventDefault(); uploadImage(param.id); navigate("/mis-propiedades/" + localStorage.getItem("user_id"))}} className="d-flex flex-column align-items-center mt-4">
                     <div className="mb-3 w-50">
                         <label htmlFor="title" className="form-label azul-oscuro fw-bolder">Titulo</label>
                         <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="title" aria-describedby="emailHelp" ref={title} />
@@ -211,7 +211,7 @@ export const EditProp = () => {
                         <label htmlFor="price" className="form-label azul-oscuro fw-bolder">Precio</label>
                         <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="price" aria-describedby="emailHelp" ref={price} />
                     </div>
-                    <button type='submit' className="btn btn-primary" onClick={() => navigate("/mis-propiedades/" + localStorage.getItem("user_id"))}>Editar casa</button>
+                    <button type='submit' className="btn btn-primary">Editar casa</button>
                 </form>
                 <div className="d-flex justify-content-center">
                 </div></>
