@@ -42,7 +42,7 @@ export const Navbar = () => {
 								</li>
 								{store.perfil.is_admin &&
 									<li>
-										<Link to="/mis-propiedades" className="dropdown-item text-decoration-none">
+										<Link to={"/mis-propiedades/" + localStorage.getItem("user_id")}  className="dropdown-item text-decoration-none">
 											Ver mis propiedades
 										</Link>
 									</li>
