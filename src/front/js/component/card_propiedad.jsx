@@ -32,7 +32,7 @@ export const CardProp = (props) => {
                             <button className="btn">
                                 <Link to={"/editar/mis-propiedades/" + props.id}><i className="fa-solid fa-pencil"></i></Link>
                             </button>
-                            <button className="btn" onClick={() => { alert("deberia borrarse pero no lo hace") }}>
+                            <button className="btn" onClick={async() => {await actions.deletePost(props.id), window.location.reload(true)}}>
                                 <i className="fa-solid fa-trash text-danger"></i>
                             </button>
                         </div>
