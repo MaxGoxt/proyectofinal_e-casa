@@ -72,7 +72,7 @@ function Singup() {
             <div className="d-flex bg-white align-items-center">
                 <img className="sign-up-image" src="https://res.cloudinary.com/dslz0zdlc/image/upload/v1695841603/8_qoif4n.jpg" alt="sing-up-picture" />
                 <form className='container p-5 form-container' onSubmit={formik.handleSubmit}>
-                    <h1 className='d-flex justify-content-start mb-4'>Regístrate</h1>
+                    <h1 className='d-flex justify-content-start mb-4 azul-oscuro'>Regístrate</h1>
                     <div className=''>
                         <div className="row">
                             <div className="mb-3 fw-bolder azul-oscuro col-12 col-sm-6">

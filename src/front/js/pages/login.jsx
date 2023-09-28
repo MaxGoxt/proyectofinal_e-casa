@@ -55,18 +55,18 @@ export const Login = () => {
                     </Link>
                     <p id="emailHelp" className="d-flex justify-content-center my-3">E-CASA</p>
                     <form className="container my-4" onSubmit={formik.handleSubmit}>
-                        <h1>Entrar</h1>
+                        <h1 className="azul-oscuro">Entrar</h1>
                         <p id="emailHelp" className="form-text my-3">Hola! Qué gusto verte</p>
                         <div className="mb-3">
-                            <label htmlFor="email" className="form-label azul-oscuro fw-bolder">Email address</label>
-                            <input type="email" name="email" id="email" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" aria-describedby="emailHelp" onChange={formik.handleChange}
+                            <label htmlFor="email" className="form-label azul-oscuro fw-bolder">Email</label>
+                            <input placeholder="Ingresa tu email" type="email" name="email" id="email" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" aria-describedby="emailHelp" onChange={formik.handleChange}
                                 value={formik.values.email} />{formik.touched.email && formik.errors.email ? (
                                     <div className='text-danger'>{formik.errors.email}</div>
                                 ) : null}
                         </div>
                         <div className="mb-3">
-                            <label htmlFor="password" className="form-label azul-oscuro fw-bolder">Password</label>
-                            <input type="password" name="password" id="password" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" onChange={formik.handleChange}
+                            <label htmlFor="password" className="form-label azul-oscuro fw-bolder">Contraseña</label>
+                            <input type="password" placeholder="Ingresa tu contraseña" name="password" id="password" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" onChange={formik.handleChange}
                                 value={formik.values.password} />
                             {formik.touched.password && formik.errors.password ? (
                                 <div className='text-danger'>{formik.errors.password}</div>
