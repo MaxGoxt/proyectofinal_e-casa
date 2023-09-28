@@ -16,16 +16,16 @@ export const CardHouseFeed = (props) => {
         actions.getFavoritos()
     }, [])
  
-    const toggleFavorito = () => {
-        setIsFavorito(!isFavorito);
-      
-        
+    const toggleFavorito = async () => {
+        setIsFavorito(!isFavorito);      
         if (isFavorito) {
             // Llama a la función para eliminar el favorito
-            actions.deleteFavoritos(props.id);
+           await actions.deleteFavoritos(props.id);
         } else {
-            actions.createFavoritos(props.id)
+           await actions.createFavoritos(props.id)
         }
+        actions.getFavoritos()
+
     };
 
     return (
