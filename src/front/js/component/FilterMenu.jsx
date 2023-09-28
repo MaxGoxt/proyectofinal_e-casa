@@ -73,7 +73,7 @@ export const FilterMenu = ({ setShowFilteredResults, filter, maxValue }) => {
                             <input type="range" onChange={handleMaxPriceSlider} className="form-range" value={maxPriceSlider} min="2000" max="200000" step={inputStep} id="customRange2"></input>
                         </div>
                         <div className="col-12 d-flex justify-content-between">
-                            <span className="azul-oscuro my-auto">Hasta:</span>
+                            <span className="azl-osucuro my-auto">Hasta:</span>
                             <input
                                 type="number"
                                 className="w-75 bg-white border-primary border my-1"
