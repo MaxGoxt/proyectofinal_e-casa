@@ -2,18 +2,20 @@ import React, { useState, useEffect, useContext, useRef } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { CardProp } from "../component/card_propiedad.jsx"
-import { CardHouseFeed } from "../component/CardHouseFeed.jsx"
-import { CardFav } from "../component/card_favorito.jsx"
 import { PanelCtrl } from "../component/panel_control.jsx";
 
 
 
 export const Propiedades = () => {
     const { store, actions } = useContext(Context)
+    const param = useParams()
 
-    useEffect(() => {
-        actions.getCasasProp(localStorage.getItem("user_id"))
+    useEffect( () => {
+        actions.getMyPerfil(param)
+        actions.getMyCasas()
     }, [])
+
+    console.log(param);
 
     return (
         <div className="pt-5 px-5 row">
