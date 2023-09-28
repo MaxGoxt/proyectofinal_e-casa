@@ -78,30 +78,30 @@ function Perfil() {
                     </li>
                 </div>
             </div>
-            <div className=''>
-                <div className="mb-3 texto-amarillo">
-                    <label htmlFor="exampleInputEmail1" className="form-label">Nombre <i className="fa-solid fa-pencil" onClick={() => setFirstName("")}></i> </label>
+            <div className='row g-3'>
+                <div className="mb-3 azul-oscuro fw-bolder col-md-6">
+                    <label htmlFor="exampleInputEmail1" className="form-label">Nombre</label>
                     <input type="nombre" className="form-control" disabled value={store.perfil.name} onChange={(e) => setFirstName(e.target.value)} />
                 </div>
-                <div className="mb-3 texto-amarillo">
-                    <label htmlFor="exampleInputPassword1" className="form-label">Apellido <i className="fa-solid fa-pencil"></i></label>
+                <div className="mb-3 azul-oscuro fw-bolder col-md-6">
+                    <label htmlFor="exampleInputPassword1" className="form-label">Apellido</label>
                     <input type="apellido" className="form-control" disabled value={store.perfil.lastname} onChange={(e) => setLastName(e.target.value)} />
                 </div>
-                <div className="mb-3 texto-amarillo">
-                    <label htmlFor="exampleInputPassword1" className="form-label">Email <i className="fa-solid fa-pencil"></i></label>
+                <div className="mb-3 azul-oscuro fw-bolder col-md-6">
+                    <label htmlFor="exampleInputPassword1" className="form-label">Email</label>
                     <input type="email" className="form-control" disabled value={store.perfil.email} onChange={(e) => setEmail(e.target.value)} />
                 </div>
-                <div className="mb-3 texto-amarillo">
-                    <label htmlFor="exampleInputPassword1" className="form-label">Telefono de contacto <i className="fa-solid fa-pencil"></i></label>
+                <div className="mb-3 azul-oscuro fw-bolder col-md-6">
+                    <label htmlFor="exampleInputPassword1" className="form-label">Telefono de contacto</label>
                     <input type="contacto" className="form-control" disabled value={store.perfil.phoneNumber} onChange={(e) => setPhone(e.target.value)} />
                 </div>
-                <div className="mb-3 texto-amarillo">
-                    <label htmlFor="exampleInputPassword1" className="form-label">Contraseña <i className="fa-solid fa-pencil"></i> <i className="fa-regular fa-eye"></i></label>
+                <div className="mb-3 azul-oscuro fw-bolder col-md-6">
+                    <label htmlFor="exampleInputPassword1" className="form-label">Contraseña</label>
                     <input type="password" className="form-control" disabled value={store.perfil.password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
-                <div className="mb-3 texto-amarillo">
-                    <label htmlFor="exampleInputPassword1" className="form-label">Descripción <i className="fa-solid fa-pencil"></i></label>
-                    <input type="text" className="form-control" disabled value={store.perfil.description} onChange={(e) => setConfpassword(e.target.value)} />
+                <div className="mb-3 azul-oscuro fw-bolder col-md-6">
+                    <label htmlFor="exampleInputPassword1" className="form-label" >Descripción</label>
+                    <textarea type="text" className="form-control" style={{height:"100px"}} disabled value={store.perfil.description} onChange={(e) => setConfpassword(e.target.value)} />
                 </div>
                 <button type="submit" className="text-white btn btn-danger d-grid gap-2 col-6 mx-auto" >Eliminar cuenta</button> <br />
             </div>
