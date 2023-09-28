@@ -15,7 +15,6 @@ export const Propiedades = () => {
         actions.getMyCasas()
     }, [])
 
-    console.log(param);
 
     return (
         <div className="pt-5 px-5 row">
