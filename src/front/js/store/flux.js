@@ -401,7 +401,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-
+			deletePost: async (casa_id) => {
+				try {
+					// fetching data from the backend
+					const resp = await fetch(process.env.BACKEND_URL + '/api/post/' + casa_id, {
+						method: "DELETE",
+					});
+					const data = await resp.json()
+					// don't forget to return something, that is how the async resolves
+					return data;
+				} catch (error) {
+					console.log("Error loading message from backend", error)
+				}
+			},
 
 		}
 	}
