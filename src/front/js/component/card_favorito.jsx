@@ -36,7 +36,7 @@ export const CardFav = (props) => {
                         <p className="m-0" style={{ textDecoration: "underline" }}>{props.location}</p>
                         <button onClick={toggleFavorito} className="btn m-0 p-0" > {isFavorito ?
                             <i style={{ fontSize: "20px", color: "red" }} className="fa-solid fa-heart px-1 fs-3"></i> :
-                            <i style={{ fontSize: "20px", color: "red" }} className="fa-regular fa-heart px-1 "></i>
+                            <i style={{ fontSize: "20px", color: "red" }} className="fa-regular fa-heart px-1 fs-3"></i>
                         }</button>
                     </div>
                     <div className="d-flex justify-content-between px-1">
