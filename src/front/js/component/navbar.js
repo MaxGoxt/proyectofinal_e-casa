@@ -40,9 +40,9 @@ export const Navbar = () => {
 										Mi cuenta
 									</Link>
 								</li>
-								{ store.perfil.is_admin &&	
+								{store.perfil.is_admin &&
 									<li>
-										<Link to="/mis-propiedades" className="dropdown-item text-decoration-none">
+										<Link to={"/mis-propiedades/" + localStorage.getItem("user_id")}  className="dropdown-item text-decoration-none">
 											Ver mis propiedades
 										</Link>
 									</li>
@@ -52,7 +52,7 @@ export const Navbar = () => {
 										Favoritos
 									</Link>
 								</li>
-								{ store.perfil.is_admin &&
+								{store.perfil.is_admin &&
 									<li>
 										<Link to="/upgradeplan" className="dropdown-item text-decoration-none">
 											Planes
@@ -72,6 +72,11 @@ export const Navbar = () => {
 							</Link>
 						</div>
 					}
+				</div>
+				<div className="ml-auto button-login-container">
+					<Link to="/login">
+						<button className="btn btn-primary">Iniciar sesión</button>
+					</Link>
 				</div>
 			</div>
 		</nav >

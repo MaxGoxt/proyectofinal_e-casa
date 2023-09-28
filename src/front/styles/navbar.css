@@ -2,6 +2,10 @@
     margin: 0 40px;
 }
 
+.button-login-container{
+    display: none !important;
+}
+
 @media all and (max-width: 900px) {
     .otherplaces {
         margin: 0 20px;
@@ -15,5 +19,11 @@
 
     .nav_upload_house {
         display: none;
+    }
+}
+
+@media all and (max-width: 520px) {
+    .button-login-container{
+        display: flex !important;
     }
 }
