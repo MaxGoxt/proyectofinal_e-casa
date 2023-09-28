@@ -61,9 +61,8 @@ const Layout = () => {
                         <Route element={<VistaNosotros />} path="/comp-nosotros" />
                         <Route element={<VistaFooter />} path="/comp-footertyc" />
                         <Route element={<VistaTerminos />} path="/comp-terminos" />
-
                         <Route element={<Editarperfil />} path="/editarperfil" />
-                        <Route element={<Propiedades />} path="/mis-propiedades" />
+                        <Route element={<Propiedades />} path="/mis-propiedades/:user" />
                         <Route element={<EditProp />} path="/editar/mis-propiedades/:id" />
                         <Route element={<UpgradePlan />} path="/upgradeplan" />
                         <Route element={<Payments />} path="/payments/:id" />

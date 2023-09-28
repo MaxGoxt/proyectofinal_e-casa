@@ -317,6 +317,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 			},
+
+			getMyPerfil: async (id) => {
+				if (id) {
+					localStorage.setItem("prop_id", getStore().casa.info_propietario?.user_id)
+				}
+
+				try {
+					let data = await axios.get(process.env.BACKEND_URL + '/api/user/' + localStorage.getItem('user_id'))
+					setStore({ propietario: data.data.results });
+				} catch (error) {
+					console.log(error);
+					return false
+				}
+
+			},
+			getMyCasas: async (id) => {
+				try {
+					let data = await axios.get(process.env.BACKEND_URL + '/api/user/houses/' + localStorage.getItem('user_id'))
+					setStore({ casaPropietario: data.data.results });
+				} catch (error) {
+					console.log(error);
+					return false
+				}
+
+			},
 			deleteFavoritos: async (casa_id) => {
 				try {
 					// fetching data from the backend

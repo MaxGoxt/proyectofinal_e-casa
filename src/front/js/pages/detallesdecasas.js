@@ -51,7 +51,6 @@ function Details() {
           <h2 className="card-title">{store.casa.title}</h2>
           <p className="text-white bg-azul-oscuro d-flex details-btn justify-content-center btn my-4">{store.casa.category}</p>
           <h6 className='disponible'>Localización: {store.casa.location}</h6>
-          <p className="card-text"><strong>Alojamiento entero: departamento con servicios incluidos. <br />Anfitrión: {store.propietario?.name}</strong></p>
           <p className='detalle'>{store.casa.numberOfRooms} Habitaciones - {store.casa.numberOfBathrooms} Baños - 250mt2 </p>
         </div>
         <ul className="list-group details-list-group list-group-flush">
