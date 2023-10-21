@@ -5,6 +5,7 @@ from .models import db, User, House, Image, Booking, Favorites
 from flask_admin.contrib.sqla import ModelView
 
 
+
 def setup_admin(app):
     app.secret_key = os.environ.get('FLASK_APP_KEY', 'sample key')
     app.config['FLASK_ADMIN_SWATCH'] = 'lux'
