@@ -30,12 +30,15 @@ def generate_sitemap(app):
             if "/admin/" not in url:
                 links.append(url)
 
-    links_html = "".join(["<li><a href='" + y + "'>" + y + "</a></li>" for y in links])
+    links_html = "".join(["<li class='list-group-item my-1 bg-dark'><a class='link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' href='" + y + "'>" + y + "</a></li>" for y in links])
     return """
-        <div style="text-align: center;">
-        <img style="max-height: 80px" src='https://storage.googleapis.com/breathecode/boilerplates/rigo-baby.jpeg' />
-        <h1>Rigo welcomes you to your API!!</h1>
-        <p>API HOST: <script>document.write('<input style="padding: 5px; width: 300px" type="text" value="'+window.location.href+'" />');</script></p>
-        <p>Start working on your project by following the <a href="https://start.4geeksacademy.com/starters/full-stack" target="_blank">Quick Start</a></p>
-        <p>Remember to specify a real endpoint path like: </p>
-        <ul style="text-align: left;">"""+links_html+"</ul></div>"
+        <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        </head>
+        <body style="text-align: center;">
+        <img style="max-height: 150px" src='https://res.cloudinary.com/dslz0zdlc/image/upload/v1697845632/rnhn8ipdelx9vbkbnvcz.png' alt="Logo e-casa"/>
+        <h1 style="color: #10316b;">Bienvenido a la API de E-CASA</h1>
+        <p style="color: #10316b;">API HOST: <script>document.write('<input disabled style="padding: 5px; width: 300px" type="text" value="'+window.location.href+'" />');</script></p>
+        <p style="color: #10316b;">Comience a trabajar en el proyecto siguiendo el <a href="https://start.4geeksacademy.com/starters/full-stack" target="_blank">Inicio Rápido</a></p>
+        <p style="color: #10316b;">Recuerde especificar una ruta del endpoint real como: </p>
+        <ul class="list-group list-group-flush w-50 mx-auto bg-dark rounded mb-3 px-3">"""+links_html+"</ul></body>"
