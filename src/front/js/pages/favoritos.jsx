@@ -24,7 +24,7 @@ export const Favoritos = () => {
     }, [])
 
     return (
-        <div className="mt-5 pt-3 container">
+        <div className="mt-5 pt-3 container">pm
             { store.auth ? 
             <>
                 <h2 className="text-black">Tus favoritos</h2>
