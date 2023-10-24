@@ -30,6 +30,7 @@ def generate_sitemap(app):
             if "/admin/" not in url:
                 links.append(url)
 
+
     links_html = "".join(["<li class='list-group-item my-1 bg-dark'><a class='link-info link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover' href='" + y + "'>" + y + "</a></li>" for y in links])
     return """
         <head>
@@ -42,3 +43,4 @@ def generate_sitemap(app):
         <p style="color: #10316b;">Comience a trabajar en el proyecto siguiendo el <a href="https://start.4geeksacademy.com/starters/full-stack" target="_blank">Inicio Rápido</a></p>
         <p style="color: #10316b;">Recuerde especificar una ruta del endpoint real como: </p>
         <ul class="list-group list-group-flush w-50 mx-auto bg-dark rounded mb-3 px-3">"""+links_html+"</ul></body>"
+
