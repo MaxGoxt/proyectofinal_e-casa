@@ -15,6 +15,12 @@ export const Navbar = () => {
 		actions.getPerfil();
 	}, []);
 
+	const mostrarAlerta = () => {
+		window.alert("¡Regístrate para subir tu casa a E-CASA! ¿Deseas registrarte ahora?");
+		console.log("alerta")
+	
+	  };
+
 	return (
 		!route.pathname.includes("signup") && !route.pathname.includes("login") && <nav className="fixed-top d-block navbar navbar-light bg-light">
 			<div className={`d-flex ${!route.pathname.includes("details") ? "otherplaces" : "container"} justify-content-between align-items-center`}>
@@ -24,7 +30,7 @@ export const Navbar = () => {
 				</Link>
 				<div className="d-flex align-items-center nav-setting-container">
 					<Link to="/upload" className="text-dark fw-bold text-decoration-none me-3 nav_upload_house">
-						<button type="button" className="btn btn-outline-success text-grey" style={{ fontSize: "16px" }}>Subé tu casa a E-CASA</button>
+						<button type="button" className="btn btn-outline-success text-grey" style={{ fontSize: "16px" }} onClick={mostrarAlerta}>Sube tu casa a E-CASA</button>
 					</Link>
 					{store.auth
 						? <div className="btn-group">
