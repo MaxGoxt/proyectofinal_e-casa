@@ -11,6 +11,8 @@ def setup_admin(app):
     app.config['FLASK_ADMIN_SWATCH'] = 'lux'
     admin = Admin(app, name="E-CASA", template_mode='bootstrap4')
 
+
+
     # Add your models here, for example this is how we add a the User model to the admin
     admin.add_view(ModelView(User, db.session))
     admin.add_view(ModelView(House, db.session))
