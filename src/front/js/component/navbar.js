@@ -17,28 +17,23 @@ export const Navbar = () => {
 	}, []);
 
 	
+
 	const mostrarAlerta = () => {
-		const resultado = window.confirm("¡Regístrate para subir tu casa a E-CASA! ¿Deseas registrarte ahora?");
-		if (resultado) {
-		  // El usuario hizo clic en "Aceptar"
-		  window.location.href = "/signup"; // Redirige al formulario de registro
-		} else {
-			window.location.href = "/upload";// El usuario hizo clic en "Cancelar" (se queda en la misma página)
+		if (!store.auth) {
+		  const resultado = window.confirm("¡Regístrate para subir tu casa a E-CASA! ¿Deseas registrarte ahora?");
+		  if (resultado) {
+			// El usuario hizo clic en "Aceptar"
+			window.location.href = "/signup"; // Redirige al formulario de registro
+		  } else {
+			if (route.pathname !== "/upload") {
+			  // El usuario hizo clic en "Cancelar" y no está en la página "/upload"
+			  window.location.href = "/upload"; // Redirige a la página de subida
+			}
+		  }
 		}
 	  };
 
-	//   const mostrarAlerta = () => {
-	// 	const resultado = window.confirm("¡Regístrate para subir tu casa a E-CASA! ¿Deseas registrarte ahora?");
-	// 	if (resultado) {
-	// 	  El usuario hizo clic en "Aceptar", no necesitas hacer nada aquí.
-	// 	} else {
-	// 	  El usuario hizo clic en "Cancelar"
-	// 	  if (route.pathname === "/upload") {
-	// 		Solo redirige si no está en la página "/upload" para evitar recargar la página actual.
-	// 		window.location.href = "/upload";
-	// 	  }
-	// 	}
-	//   };
+
 
 	return (
 		!route.pathname.includes("signup") && !route.pathname.includes("login") && <nav className="fixed-top d-block navbar navbar-light bg-light">
@@ -48,7 +43,7 @@ export const Navbar = () => {
 					<span className="fs-4">E-CASA</span>
 				</Link>
 				<div className="d-flex align-items-center nav-setting-container">
-					<Link to="/signup" className="text-dark fw-bold text-decoration-none me-3 nav_upload_house">
+					<Link to="/upload" className="text-dark fw-bold text-decoration-none me-3 nav_upload_house">
 						<button type="button" className="btn btn-outline-success text-grey" style={{ fontSize: "16px" }} onClick={mostrarAlerta}>Sube tu casa a E-CASA</button>
 					</Link>
 					{store.auth
@@ -67,7 +62,7 @@ export const Navbar = () => {
 								</li>
 								{store.perfil.is_admin &&
 									<li>
-										<Link to={"/mis-propiedades/" + localStorage.getItem("user_id")}  className="dropdown-item text-decoration-none">
+										<Link to={"/mis-propiedades/" + localStorage.getItem("user_id")} className="dropdown-item text-decoration-none">
 											Ver mis propiedades
 										</Link>
 									</li>
