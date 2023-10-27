@@ -1,10 +1,16 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef, useLayoutEffect } from 'react';
+
+
 import { Context } from "../store/appContext";
 import { useParams, useLocation, Link } from 'react-router-dom';
 import diego from "../../img/diego.jpg";
 import { Comentarios } from '../component/comentarios_casas.jsx';
 import { PanelCtrl } from "../component/panel_control.jsx";
 import "../../styles/Details.css";
+import 'mapbox-gl/dist/mapbox-gl.css';
+import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
+import { Map } from 'mapbox-gl';
+// import { Loading } from './'
 
 function Details() {
 
@@ -16,6 +22,25 @@ function Details() {
     actions.getDetalles(param.id)
     actions.getPerfilProp(store.casa.info_propietario?.user_id)
   }, [])
+
+  // const mapDiv = useRef < HTMLDivElement > (null);
+  const mapaDiv2 = useRef();
+
+
+  const { isLoading, userLocation } = useContext(Context)
+  //api de clave de mapbox
+
+  useLayoutEffect(() => {
+    if (!isLoading) {
+      const map = new Map({
+        container: mapaDiv2.current, // container ID
+        style: 'mapbox://styles/mapbox/streets-v12', // style URL
+        center: [-55.568654, -30.884951], // starting position [lng, lat]
+        zoom: 20, // starting zoom
+      });
+
+    }
+  }), [isLoading]
 
   return (
     <div className='details-container container mx-auto row d-flex cuerpo mt-5'>
@@ -51,6 +76,17 @@ function Details() {
           <h2 className="card-title">{store.casa.title}</h2>
           <p className="text-white bg-azul-oscuro d-flex details-btn justify-content-center btn my-4">{store.casa.category}</p>
           <h6 className='disponible'>Localización: {store.casa.location}</h6>
+          <div className='ubumapa' ref={mapaDiv2} id='map2'
+            style={{
+              // backgroundColor: 'red',
+              height: '300px',
+              width: '100vw',
+
+            }
+
+            }>
+
+          </div>
           <p className='detalle'>{store.casa.numberOfRooms} Habitaciones - {store.casa.numberOfBathrooms} Baños - 250mt2 </p>
         </div>
         <ul className="list-group details-list-group list-group-flush">

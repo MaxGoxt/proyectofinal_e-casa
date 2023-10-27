@@ -20,7 +20,7 @@ import PerfilProp from "./pages/perfilPropietario";
 import VistaNosotros from "./pages/vista_nosotros.jsx";
 import Editarperfil from "./pages/editar_perfil";
 import VistaFooter from "./pages/footertyc.jsx";
-import {Propiedades} from "./pages/propiedades.jsx";
+import { Propiedades } from "./pages/propiedades.jsx";
 import { EditProp } from "./pages/edit_prop.jsx";
 import VistaTerminos from "./pages/vista_terminos.jsx";
 
@@ -36,6 +36,7 @@ const Layout = () => {
     const basename = process.env.BASENAME || "";
 
     if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
+
 
     return (
         <PayPalScriptProvider options={{
