@@ -7,6 +7,11 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
 import { Map } from 'mapbox-gl';
 // import { Loading } from './'
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+// import '../../styles/prueba.css';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+
+
 
 const schema = Yup.object().shape({
     title: Yup.string()
@@ -42,12 +47,7 @@ export const UploadImages = () => {
     const [isCategorySelected, setIsCategorySelected] = useState(true);
     const [isWifiSelected, setIsWifiSelected] = useState(true);
     const [isParkingSelected, setIsParkingSelected] = useState(true);
-    // const mapDiv = useRef < HTMLDivElement > (null);
-    // const mapDiv = useRef();
 
-    // const mapDiv = useRef(true);
-    // const { isLoading, userLocation } = useContext(Context)
-    //api de clave de mapbox
 
 
 
@@ -181,31 +181,34 @@ export const UploadImages = () => {
     }, [])
 
 
-    // useLayoutEffect(() => {
-    //     const map = new Map({
-    //         container: mapDiv.current, // container ID
-    //         style: 'mapbox://styles/mapbox/streets-v12', // style URL
-    //         center: [-34.847574, -56.198936], // starting position [lng, lat]
-    //         zoom: 14, // starting zoom
-    //     });
-    // }), [isLoading]
 
-
-    // const mapDiv = useRef < HTMLDivElement > (null);
     const mapaDiv2 = useRef();
 
     const { isLoading, userLocation } = useContext(Context)
+
     useLayoutEffect(() => {
+        // verifica si "isLoading" es false para asegurarse de que los datos hayan terminado de cargar
         if (!isLoading) {
-            const map = new Map({
-                container: mapaDiv2.current, // container ID
-                style: 'mapbox://styles/mapbox/streets-v12', // style URL
-                center: [-56.719509, -34.344549], // starting position [lng, lat]
-                zoom: 20, // starting zoom
+            // Crea una nueva instancia del mapa de Mapbox
+            const map = new mapboxgl.Map({
+                container: 'mapi',
+                style: 'mapbox://styles/mapbox/streets-v12',
+                center: [-79.4512, 43.6568], // Establece el centro del mapa en coordenadas específicas
+                zoom: 4
             });
 
+            // Crea una nueva instancia del geocodificador de Mapbox
+            const geocoder = new MapboxGeocoder({
+                accessToken: mapboxgl.accessToken,
+                mapboxgl: mapboxgl
+            });
+
+            // Agrega el geocodificador al mapa
+            document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
         }
-    }), [isLoading]
+    }), [isLoading] // Se ejecuta cada vez que isLoading cambia
+
+
 
 
     return (
@@ -269,16 +272,21 @@ export const UploadImages = () => {
 
                 </div>
 
-                {/* <div className='ubumapa' useref={mapDiv} id='map' */}
-                <div className='ubumapa' ref={mapaDiv2} id='map'
+
+
+                <div id="geocoder" className="  geocoder"></div>
+
+                <div className=' row col-12 ubumapa' id='mapi'
                     style={{
                         // backgroundColor: 'red',
-                        height: '300px',
+                        height: '500px',
                         width: '100vw',
 
                     }
 
                     }>
+
+
 
                 </div>
                 <div className="w-50 d-flex justify-content-evenly mx-1 ">
