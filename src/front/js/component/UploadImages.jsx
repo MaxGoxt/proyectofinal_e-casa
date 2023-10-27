@@ -1,8 +1,12 @@
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import React, { useState, useRef, useEffect, useContext, useLayoutEffect } from 'react';
 import { Context } from "../store/appContext";
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
+import { Map } from 'mapbox-gl';
+// import { Loading } from './'
 
 const schema = Yup.object().shape({
     title: Yup.string()
@@ -38,6 +42,14 @@ export const UploadImages = () => {
     const [isCategorySelected, setIsCategorySelected] = useState(true);
     const [isWifiSelected, setIsWifiSelected] = useState(true);
     const [isParkingSelected, setIsParkingSelected] = useState(true);
+    // const mapDiv = useRef < HTMLDivElement > (null);
+    // const mapDiv = useRef();
+
+    // const mapDiv = useRef(true);
+    // const { isLoading, userLocation } = useContext(Context)
+    //api de clave de mapbox
+
+
 
     const category = useRef();
     const parking = useRef();
@@ -153,6 +165,7 @@ export const UploadImages = () => {
     const cloudinaryRef = useRef();
     const widgetRef = useRef();
 
+
     useEffect(() => {
         cloudinaryRef.current = window.cloudinary;
         widgetRef.current = cloudinaryRef.current.createUploadWidget({
@@ -166,6 +179,34 @@ export const UploadImages = () => {
             }
         });
     }, [])
+
+
+    // useLayoutEffect(() => {
+    //     const map = new Map({
+    //         container: mapDiv.current, // container ID
+    //         style: 'mapbox://styles/mapbox/streets-v12', // style URL
+    //         center: [-34.847574, -56.198936], // starting position [lng, lat]
+    //         zoom: 14, // starting zoom
+    //     });
+    // }), [isLoading]
+
+
+    // const mapDiv = useRef < HTMLDivElement > (null);
+    const mapaDiv2 = useRef();
+
+    const { isLoading, userLocation } = useContext(Context)
+    useLayoutEffect(() => {
+        if (!isLoading) {
+            const map = new Map({
+                container: mapaDiv2.current, // container ID
+                style: 'mapbox://styles/mapbox/streets-v12', // style URL
+                center: [-56.719509, -34.344549], // starting position [lng, lat]
+                zoom: 20, // starting zoom
+            });
+
+        }
+    }), [isLoading]
+
 
     return (
         <div className="d-flex flex-column mt-5 bg-celeste-claro">
@@ -215,6 +256,7 @@ export const UploadImages = () => {
                         {!isCategorySelected && <span className="mx-auto" style={{ margin: "-12px" }}>Selecciona una categoria</span>}
                     </div>
                 </div>
+
                 <div className="mb-3 w-50">
                     <label htmlFor="location" className="form-label azul-oscuro fw-bolder">Ubicación</label>
                     <input type="text"
@@ -224,6 +266,19 @@ export const UploadImages = () => {
                         id="location"
                         aria-describedby="emailHelp" />
                     {errors.location && <span>{errors.location}</span>}
+
+                </div>
+
+                {/* <div className='ubumapa' useref={mapDiv} id='map' */}
+                <div className='ubumapa' ref={mapaDiv2} id='map'
+                    style={{
+                        // backgroundColor: 'red',
+                        height: '300px',
+                        width: '100vw',
+
+                    }
+
+                    }>
 
                 </div>
                 <div className="w-50 d-flex justify-content-evenly mx-1 ">
