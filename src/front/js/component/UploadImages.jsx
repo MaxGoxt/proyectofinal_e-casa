@@ -1,8 +1,17 @@
-import React, { useState, useRef, useEffect, useContext } from 'react';
+import React, { useState, useRef, useEffect, useContext, useLayoutEffect } from 'react';
 import { Context } from "../store/appContext";
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
+import { Map } from 'mapbox-gl';
+// import { Loading } from './'
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+// import '../../styles/prueba.css';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+
+
 
 const schema = Yup.object().shape({
     title: Yup.string()
@@ -38,6 +47,9 @@ export const UploadImages = () => {
     const [isCategorySelected, setIsCategorySelected] = useState(true);
     const [isWifiSelected, setIsWifiSelected] = useState(true);
     const [isParkingSelected, setIsParkingSelected] = useState(true);
+
+
+
 
     const category = useRef();
     const parking = useRef();
@@ -153,6 +165,7 @@ export const UploadImages = () => {
     const cloudinaryRef = useRef();
     const widgetRef = useRef();
 
+
     useEffect(() => {
         cloudinaryRef.current = window.cloudinary;
         widgetRef.current = cloudinaryRef.current.createUploadWidget({
@@ -166,6 +179,37 @@ export const UploadImages = () => {
             }
         });
     }, [])
+
+
+
+    const mapaDiv2 = useRef();
+
+    const { isLoading, userLocation } = useContext(Context)
+
+    useLayoutEffect(() => {
+        // verifica si "isLoading" es false para asegurarse de que los datos hayan terminado de cargar
+        if (!isLoading) {
+            // Crea una nueva instancia del mapa de Mapbox
+            const map = new mapboxgl.Map({
+                container: 'mapi',
+                style: 'mapbox://styles/mapbox/streets-v12',
+                center: [-79.4512, 43.6568], // Establece el centro del mapa en coordenadas específicas
+                zoom: 4
+            });
+
+            // Crea una nueva instancia del geocodificador de Mapbox
+            const geocoder = new MapboxGeocoder({
+                accessToken: mapboxgl.accessToken,
+                mapboxgl: mapboxgl
+            });
+
+            // Agrega el geocodificador al mapa
+            document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+        }
+    }), [isLoading] // Se ejecuta cada vez que isLoading cambia
+
+
+
 
     return (
         <div className="d-flex flex-column mt-5 bg-celeste-claro">
@@ -215,6 +259,7 @@ export const UploadImages = () => {
                         {!isCategorySelected && <span className="mx-auto" style={{ margin: "-12px" }}>Selecciona una categoria</span>}
                     </div>
                 </div>
+
                 <div className="mb-3 w-50">
                     <label htmlFor="location" className="form-label azul-oscuro fw-bolder">Ubicación</label>
                     <input type="text"
@@ -224,6 +269,24 @@ export const UploadImages = () => {
                         id="location"
                         aria-describedby="emailHelp" />
                     {errors.location && <span>{errors.location}</span>}
+
+                </div>
+
+
+
+                <div id="geocoder" className="  geocoder"></div>
+
+                <div className=' row col-12 ubumapa' id='mapi'
+                    style={{
+                        // backgroundColor: 'red',
+                        height: '500px',
+                        width: '100vw',
+
+                    }
+
+                    }>
+
+
 
                 </div>
                 <div className="w-50 d-flex justify-content-evenly mx-1 ">

@@ -12,7 +12,7 @@ const Nosotros = () => {
       <h1 className= "texto-amarillo d-flex justify-content-center py-3 mx-5 border-bottom border-3 border-warning">
         Sobre Nosotros
       </h1>
-      
+
       <div className="container">
       <div className="p-5">
       <p className=" text-white">VISION: Somos un grupo de desarrolladores junior, que motivados por la necesidad del acceso a la vivienda, creamos esta aplicación para que nuestros usuarios encuentren la opción más adecuada de acuerdo a sus preferencias y necesidades dentro de todo el territorio nacional.</p>
