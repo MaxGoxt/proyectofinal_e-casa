@@ -261,7 +261,12 @@ export const UploadImages = () => {
     return (
 
         <div className="d-flex flex-column mt-5 bg-celeste-claro">
-
+            <div>
+                {
+                    imagesUrl.map(item => (
+                        <img src={item} style={{ width: '250px' }} />
+                    ))}
+            </div>
             <button className="btn btn-primary mt-5 mx-auto" onClick={() => widgetRef.current.open()}>
                 SUBIR IMAGEN
             </button>
