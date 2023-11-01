@@ -8,7 +8,7 @@ import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
 import { Map } from 'mapbox-gl';
 // import { Loading } from './'
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
-// import '../../styles/prueba.css';
+import '../../styles/prueba.css';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 
@@ -193,9 +193,44 @@ export const UploadImages = () => {
             const map = new mapboxgl.Map({
                 container: 'mapi',
                 style: 'mapbox://styles/mapbox/streets-v12',
-                center: [-79.4512, 43.6568], // Establece el centro del mapa en coordenadas específicas
-                zoom: 4
+                center: [-56.712822, -34.340986], // Establece el centro del mapa en coordenadas específicas
+                zoom: 14
             });
+
+            // Create a default Marker and add it to the map.
+            const marker1 = new mapboxgl.Marker()
+                .setLngLat([-56.712822, -34.340986])
+                .addTo(map);
+
+
+            map.on('click', (e) => {
+
+                document.getElementById('info').innerHTML =
+                    // `e.point` is the x, y coordinates of the `mousemove` event
+                    // relative to the top-left corner of the map.
+                    JSON.stringify(e.point.x + " . " + e.point.y) +
+
+                    '<br />' +
+                    // `e.lngLat` is the longitude, latitude geographical position of the event.
+                    JSON.stringify(e.lngLat.wrap().lng + "." + JSON.stringify(e.lngLat.wrap().lat));
+
+                let latitud = parseFloat(JSON.stringify(e.lngLat.wrap().lat))
+                let longitud = parseFloat(JSON.stringify(e.lngLat.wrap().lng))
+                let pepe = latitud
+                // Create a default Marker, colored black, rotated 45 degrees.
+                const marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
+                    .setLngLat([longitud, latitud])
+                    .addTo(map);
+
+                // console.log("este es LATITUD =    ", latitud)
+                // console.log("este es LATITUD =    ", typeof latitud)
+                // console.log("este es LONGITUD =    ", typeof longitud)
+                // console.log("este es LONGITUD =    ", longitud)
+                // console.log("pepe =    ", pepe)
+
+            });
+            // -56.727677,-34.346968
+
 
             // Crea una nueva instancia del geocodificador de Mapbox
             const geocoder = new MapboxGeocoder({
@@ -209,10 +244,24 @@ export const UploadImages = () => {
     }), [isLoading] // Se ejecuta cada vez que isLoading cambia
 
 
-
-
+    const misEstilos = {
+        display: "table",
+        position: "relative",
+        wordWrap: "anywhere",
+        whiteSpace: "pre - wrap",
+        margin: "0px auto",
+        padding: "10px",
+        border: "none",
+        borderRadius: "3px",
+        fontSize: "12px",
+        textAlign: "center",
+        color: "#222",
+        background: "#fff"
+    };
     return (
+
         <div className="d-flex flex-column mt-5 bg-celeste-claro">
+
             <button className="btn btn-primary mt-5 mx-auto" onClick={() => widgetRef.current.open()}>
                 SUBIR IMAGEN
             </button>
@@ -273,21 +322,16 @@ export const UploadImages = () => {
                 </div>
 
 
-
+                <pre id="info" style={misEstilos}></pre>
                 <div id="geocoder" className="  geocoder"></div>
-
-                <div className=' row col-12 ubumapa' id='mapi'
-                    style={{
-                        // backgroundColor: 'red',
-                        height: '500px',
-                        width: '100vw',
-
-                    }
-
-                    }>
-
-
-
+                <div className='row col-12 '>
+                    <div id='mapi'
+                        style={{
+                            // backgroundColor: 'red',
+                            height: '500px',
+                            width: '100vw',
+                        }}>
+                    </div>
                 </div>
                 <div className="w-50 d-flex justify-content-evenly mx-1 ">
                     <div className="mb-3 w-50 d-flex justify-content-around">

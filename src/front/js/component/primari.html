@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Place the geocoder input outside the map</title>
+<title>Get coordinates of the mouse pointer</title>
 <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
 <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
 <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
@@ -12,47 +12,49 @@ body { margin: 0; padding: 0; }
 </style>
 </head>
 <body>
-<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
-<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
- 
-<style>
-.geocoder {
-position: absolute;
-z-index: 1;
-width: 50%;
-left: 50%;
-margin-left: -25%;
-top: 10px;
-}
-.mapboxgl-ctrl-geocoder {
-min-width: 100%;
-}
-#map {
-margin-top: 75px;
+<style type="text/css">
+#info {
+display: table;
+position: relative;
+margin: 0px auto;
+word-wrap: anywhere;
+white-space: pre-wrap;
+padding: 10px;
+border: none;
+border-radius: 3px;
+font-size: 12px;
+text-align: center;
+color: #222;
+background: #fff;
 }
 </style>
- 
 <div id="map"></div>
- 
-<div id="geocoder" class="geocoder"></div>
- 
+<pre id="info"></pre>
 <script>
 	mapboxgl.accessToken = 'pk.eyJ1Ijoic2hvY2EiLCJhIjoiY2xvNXk5M21hMGVjNDJrbzhpYTB5cW43ciJ9.iT49l1qLEHHCoLTzaLqWPw';
 const map = new mapboxgl.Map({
-container: 'map',
+container: 'map', // container id
 // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
 style: 'mapbox://styles/mapbox/streets-v12',
-center: [-79.4512, 43.6568],
-zoom: 13
+center: [-74.5, 40], // starting position
+zoom: 9 // starting zoom
 });
  
-// Add the control to the map.
-const geocoder = new MapboxGeocoder({
-accessToken: mapboxgl.accessToken,
-mapboxgl: mapboxgl
+map.on('mousemove', (e) => {
+document.getElementById('info').innerHTML =
+JSON.stringify(e.point) +
+'<br />' +
+JSON.stringify(e.lngLat.wrap());
+
+let latitud = parseFloat(JSON.stringify(e.lngLat.wrap().lat))
+
+let longitud = parseFloat(JSON.stringify(e.lngLat.wrap().lng))
+let pepe = latitud + 10
+// Create a default Marker, colored black, rotated 45 degrees.
+const marker2 = new mapboxgl.Marker({ color: 'black', rotation: 45 })
+.setLngLat([longitud, latitud ])
+.addTo(map);
 });
- 
-document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
 </script>
  
 </body>
