@@ -106,6 +106,7 @@ export const UploadImages = () => {
     }
 
     const submitForm = values => {
+        values.preventDefault();
         const {
             categorySelected,
             wifiSelected,
@@ -165,85 +166,6 @@ export const UploadImages = () => {
     const cloudinaryRef = useRef();
     const widgetRef = useRef();
 
-
-    useEffect(() => {
-        cloudinaryRef.current = window.cloudinary;
-        widgetRef.current = cloudinaryRef.current.createUploadWidget({
-            cloudName: process.env.CLOUDNAME,
-            uploadPreset: process.env.UPLOAD_PRESET
-        }, function (error, result) {
-            if (result?.event === "success") {
-                setImagesUrl((imagesUrl) => {
-                    return [...imagesUrl, result.info.secure_url]
-                })
-            }
-        });
-    }, [])
-
-
-
-    const mapaDiv2 = useRef();
-
-    const { isLoading, userLocation } = useContext(Context)
-
-    useLayoutEffect(() => {
-        // verifica si "isLoading" es false para asegurarse de que los datos hayan terminado de cargar
-        if (!isLoading) {
-            // Crea una nueva instancia del mapa de Mapbox
-            const map = new mapboxgl.Map({
-                container: 'mapi',
-                style: 'mapbox://styles/mapbox/streets-v12',
-                center: [-56.712822, -34.340986], // Establece el centro del mapa en coordenadas específicas
-                zoom: 14
-            });
-
-            // Create a default Marker and add it to the map.
-            const marker1 = new mapboxgl.Marker()
-                .setLngLat([-56.712822, -34.340986])
-                .addTo(map);
-
-
-            map.on('click', (e) => {
-
-                document.getElementById('info').innerHTML =
-                    // `e.point` is the x, y coordinates of the `mousemove` event
-                    // relative to the top-left corner of the map.
-                    JSON.stringify(e.point.x + " . " + e.point.y) +
-
-                    '<br />' +
-                    // `e.lngLat` is the longitude, latitude geographical position of the event.
-                    JSON.stringify(e.lngLat.wrap().lng + "." + JSON.stringify(e.lngLat.wrap().lat));
-
-                let latitud = parseFloat(JSON.stringify(e.lngLat.wrap().lat))
-                let longitud = parseFloat(JSON.stringify(e.lngLat.wrap().lng))
-                let pepe = latitud
-                // Create a default Marker, colored black, rotated 45 degrees.
-                const marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
-                    .setLngLat([longitud, latitud])
-                    .addTo(map);
-
-                // console.log("este es LATITUD =    ", latitud)
-                // console.log("este es LATITUD =    ", typeof latitud)
-                // console.log("este es LONGITUD =    ", typeof longitud)
-                // console.log("este es LONGITUD =    ", longitud)
-                // console.log("pepe =    ", pepe)
-
-            });
-            // -56.727677,-34.346968
-
-
-            // Crea una nueva instancia del geocodificador de Mapbox
-            const geocoder = new MapboxGeocoder({
-                accessToken: mapboxgl.accessToken,
-                mapboxgl: mapboxgl
-            });
-
-            // Agrega el geocodificador al mapa
-            document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
-        }
-    }), [isLoading] // Se ejecuta cada vez que isLoading cambia
-
-
     const misEstilos = {
         display: "table",
         position: "relative",
@@ -258,6 +180,52 @@ export const UploadImages = () => {
         color: "#222",
         background: "#fff"
     };
+
+    const initializeMap = () => {
+        // Crea una nueva instancia de un mapa de Mapbox
+        const map = new mapboxgl.Map({
+            container: 'mapi', // Asocia el mapa al elemento con el ID 'mapi'
+            style: 'mapbox://styles/mapbox/streets-v12', // Usa el estilo de mapa predeterminado de Mapbox
+            center: [-56.712822, -34.340986], // Establece el centro del mapa en coordenadas específicas (longitud y latitud)
+            zoom: 14 // Establece el nivel de zoom inicial
+        });
+
+
+        // Define un evento que se activa cuando el mapa se hace clic
+        map.on('click', (e) => {
+            // Actualiza el contenido del elemento con ID 'info' con información sobre el clic
+            document.getElementById('info').innerHTML =
+                JSON.stringify(e.point.x + " . " + e.point.y) + // Coordenadas del clic en la pantalla
+                '<br />' +
+                JSON.stringify(e.lngLat.wrap().lng + "." + JSON.stringify(e.lngLat.wrap().lat)); // Coordenadas de longitud y latitud
+
+            // Extrae la latitud y longitud del evento de clic
+            let latitud = parseFloat(JSON.stringify(e.lngLat.wrap().lat))
+            let longitud = parseFloat(JSON.stringify(e.lngLat.wrap().lng))
+            let pepe = latitud
+
+            // Crea un nuevo marcador de color rojo en la ubicación del clic
+            const marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
+                .setLngLat([longitud, latitud])
+                .addTo(map);
+        });
+
+        // Crea una nueva instancia del geocodificador de Mapbox
+        const geocoder = new MapboxGeocoder({
+            accessToken: mapboxgl.accessToken, // Asigna el token de acceso de Mapbox
+            language: 'en-EN', // Establece el idioma del geocodificador (en inglés)
+            mapboxgl: mapboxgl // Asigna la biblioteca de Mapbox a utilizar
+        });
+
+        // Agrega el geocodificador al mapa
+        map.addControl(geocoder);
+    };
+
+    // Llama a la función de inicialización del mapa cuando el componente se monta
+    useEffect(() => {
+        initializeMap();
+    }, []);
+
     return (
 
         <div className="d-flex flex-column mt-5 bg-celeste-claro">
@@ -326,16 +294,17 @@ export const UploadImages = () => {
 
                 </div>
 
-
-                <pre id="info" style={misEstilos}></pre>
-                <div id="geocoder" className="  geocoder"></div>
-                <div className='row col-12 '>
-                    <div id='mapi'
-                        style={{
-                            // backgroundColor: 'red',
-                            height: '500px',
-                            width: '100vw',
-                        }}>
+                <div className='row col-12'>
+                    <pre id="info" style={misEstilos}></pre>
+                    {/* <div id="geocoder" className="  geocoder"></div> */}
+                    <div className='row col-12 '>
+                        <div id='mapi'
+                            style={{
+                                // backgroundColor: 'red',
+                                height: '500px',
+                                width: '100vw',
+                            }}>
+                        </div>
                     </div>
                 </div>
                 <div className="w-50 d-flex justify-content-evenly mx-1 ">
