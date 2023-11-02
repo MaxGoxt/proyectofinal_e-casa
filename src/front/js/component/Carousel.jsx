@@ -3,14 +3,6 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-let imagenes = [
-    "https://res.cloudinary.com/dslz0zdlc/image/upload/v1697546209/bdi1uli8yazfel8dnviq.png",
-    "https://res.cloudinary.com/dslz0zdlc/image/upload/v1697546209/iahed71dsabnjhdmeuzr.png",
-    "https://res.cloudinary.com/dslz0zdlc/image/upload/v1697546243/gqqq8lx98olzexq5q1tl.jpg",
-    "https://res.cloudinary.com/dslz0zdlc/image/upload/v1697546243/gqqq8lx98olzexq5q1tl.jpg",
-    "https://res.cloudinary.com/dslz0zdlc/image/upload/v1697546243/gqqq8lx98olzexq5q1tl.jpg"
-]
-
 export const Carousel = (props) => {
 
     return (

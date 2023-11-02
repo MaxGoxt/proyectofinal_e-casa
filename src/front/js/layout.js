@@ -23,7 +23,6 @@ import VistaFooter from "./pages/footertyc.jsx";
 import { Propiedades } from "./pages/propiedades.jsx";
 import { EditProp } from "./pages/edit_prop.jsx";
 import VistaTerminos from "./pages/vista_terminos.jsx";
-import {Carousel} from "./component/Carousel.jsx";
 import { UpgradePlan } from "./pages/UpgradePlan.jsx";
 import { Payments } from './pages/Payments.jsx';
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
@@ -47,7 +46,6 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
                         <Route element={<Home />} path="/" />
-                        <Route element={<Carousel />} path="/carousel" />
                         <Route element={<Demo />} path="/demo" />
                         <Route element={<Login />} path="/login" />
                         <Route element={<Single />} path="/single/:theid" />
