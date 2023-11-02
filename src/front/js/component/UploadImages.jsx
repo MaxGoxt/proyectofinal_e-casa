@@ -10,7 +10,7 @@ import { Map } from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '../../styles/prueba.css';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
-
+import { Carousel } from './Carousel.jsx';
 
 
 const schema = Yup.object().shape({
@@ -224,18 +224,24 @@ export const UploadImages = () => {
     // Llama a la función de inicialización del mapa cuando el componente se monta
     useEffect(() => {
         initializeMap();
+        cloudinaryRef.current = window.cloudinary;
+        widgetRef.current = cloudinaryRef.current.createUploadWidget({
+            cloudName: process.env.CLOUDNAME,
+            uploadPreset: process.env.UPLOAD_PRESET
+        }, function (error, result) {
+            if (result?.event === "success") {
+                setImagesUrl((imagesUrl) => {
+                    return [...imagesUrl, result.info.secure_url]
+                })
+            }
+        })
     }, []);
 
     return (
 
         <div className="d-flex flex-column mt-5 bg-celeste-claro">
-            <div>
-                {
-                    imagesUrl.map(item => (
-                        <img src={item} style={{ width: '250px' }} />
-                    ))}
-            </div>
-            <button className="btn btn-primary mt-5 mx-auto" onClick={() => widgetRef.current.open()}>
+            <Carousel imagesUrl={imagesUrl}/>
+            <button ref={widgetRef} className="btn btn-primary mt-5 mx-auto" onClick={() => widgetRef.current.open()}>
                 SUBIR IMAGEN
             </button>
             <p style={{ fontSize: "12px", color: "rgba(0, 0, 0, .6)" }} className="mx-auto">sube 5 imagenes o más</p>
