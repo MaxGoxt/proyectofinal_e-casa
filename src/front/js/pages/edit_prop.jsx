@@ -12,11 +12,13 @@ export const EditProp = () => {
 
     const cloudinaryRef = useRef();
     const widgetRef = useRef();
-
+    
+    let casa = store.casaPropietario[parseInt(param.id) -1]
+    let images = casa?.images.map((i)=>{return(i.url)})
     let alquilerBtn, ventaBtn = undefined
 
-    console.log("casaPropietario "+store.casaPropietario.map((i)=>{return(i)}));
     useEffect(() => {
+        actions.getMyCasas();
         cloudinaryRef.current = window.cloudinary;
         widgetRef.current = cloudinaryRef.current.createUploadWidget({
             cloudName: process.env.CLOUDNAME,
@@ -29,7 +31,6 @@ export const EditProp = () => {
             }
         });
     }, [])
-
 
     const title = useRef();
     const description = useRef();
@@ -126,7 +127,7 @@ export const EditProp = () => {
         <div className="d-flex flex-column mt-5 bg-celeste-claro">
             <h3 className="text-center pt-4">Acá puedes editar tu propiedad</h3>
             {store.auth ? <>
-                <Carousel imagesUrl={imagesUrl}/>
+                <Carousel imagesUrl={images}/>
                 <button className="btn btn-primary mt-5 mx-auto" onClick={() => widgetRef.current.open()}>
                     SUBIR IMAGEN
                 </button>

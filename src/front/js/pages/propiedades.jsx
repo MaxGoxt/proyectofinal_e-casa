@@ -17,6 +17,7 @@ export const Propiedades = () => {
 
 
     return (
+            store.auth? 
         <div className="pt-5 px-5 row">
             <h1 className="text-black my-5">Administrar mis Propiedades</h1>
             {store.casaPropietario?.map((item, index) => {
@@ -31,10 +32,11 @@ export const Propiedades = () => {
                         category={item.category}
                         parking={item.parking}
                         wifi={item.wifi}
-                        images={item.images['0']} />
+                        images={item.images} />
                 )
             })}
             <PanelCtrl />
         </div>
+            : <h1 className="text-danger mx-5 my-5">🚫INAUTORIZADO🚫</h1>
     );
 };

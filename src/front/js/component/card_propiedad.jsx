@@ -1,18 +1,25 @@
-import React, { useContext }  from "react";
+import React, { useContext, useEffect }  from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { Carousel } from "./Carousel.jsx";
 
 export const CardProp = (props) => {
     const { store, actions } = useContext(Context)
-
+    const navigate = useNavigate();
+    const param = useParams()
+    let images = props.images.map((i)=>{return(i.url)});
+    
     return (
+        store.auth? 
         <>
             <div className="col-12  my-2">
                 <div className="m-1 border border-2 rounded-3 row px-2 py-3">
                     <div className="d-flex">
-                        <img src={props.images.url} style={{objectFit: "contain"}} className="rounded rounded-4 col-4" alt="La imagen de su propiedad" />
-                        <div className="card-body pe-0 py-0 col-8">
+                        <div className="col-sm-12 col-lg-3">
+                            <Carousel imagesUrl={images}/>
+                        </div>
+                        <div className="card-body px-0 py-0 col-8">
                             <h4 className="fw-bold m-2">{props.title}</h4>
                             <p className="card-text m-2"><small>{props.description}</small></p>
                             <p className="card-text m-2">{props.wifi ? <small>Wifi: ✔️</small> : <small>Wifi: ✖️</small>}</p>
@@ -22,13 +29,15 @@ export const CardProp = (props) => {
                     <div className="d-flex justify-content-between px-3 float-end">
                         <div>
                             <p className="card-text col-10"><small className="text-body-secondary">{props.location}</small></p>
-                            <p className="card-text"><small className="text-body-secondary">
-                                {props.category} a </small>{props.category == "Venta" ? <small>USD${props.price}</small> : <small>${props.price}</small>}
+                            <p className="card-text">
+                                <small className="text-body-secondary">{props.category} a </small>{props.category == "Venta" ? 
+                                <small>USD${props.price}</small> : 
+                                <small>${props.price}</small>}
                             </p>
                         </div>
                         <div className="my-auto">
-                            <button className="btn">
-                                <Link to={"/editar/mis-propiedades/" + props.id}><i className="fa-solid fa-pencil"></i></Link>
+                            <button className="btn" onClick={()=>{navigate("/editar/mis-propiedades/" + props.id)}}>
+                                <i className="fa-solid fa-pencil"></i>
                             </button>
                             <button className="btn" onClick={async() => {await actions.deletePost(props.id), window.location.reload(true)}}>
                                 <i className="fa-solid fa-trash text-danger"></i>
@@ -38,6 +47,7 @@ export const CardProp = (props) => {
                 </div>
             </div>
         </>
+        : null
     );
 }
 
@@ -45,7 +55,7 @@ CardProp.propTypes = {
 
     location: PropTypes.string,
     id: PropTypes.number,
-    images: PropTypes.object,
+    images: PropTypes.array,
     title: PropTypes.string,
     description: PropTypes.string,
     category: PropTypes.string,
