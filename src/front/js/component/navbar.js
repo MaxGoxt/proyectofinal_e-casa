@@ -94,10 +94,14 @@ export const Navbar = () => {
 					}
 				</div>
 				<div className="ml-auto button-login-container">
-					<Link to="/login">
-						<button className="btn btn-primary">Iniciar sesión</button>
-					</Link>
-				</div>
+				{!store.auth && (
+              <div className="ml-auto">
+                <Link to="/login">
+                  <button className="btn btn-primary">Iniciar sesión</button>
+                </Link>
+              </div>
+            )}
+        </div>
 			</div>
 		</nav >
 	);
