@@ -73,11 +73,11 @@ export const Modal = () => {
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                    <h1 id="staticBackdropLabel" className='d-flex justify-content-start mb-4 azul-oscuro modal-title'>Regístrate</h1>
+                                    <h1 id="staticBackdropLabel" className='d-flex justify-content-start azul-oscuro modal-title'>Regístrate</h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <form className='container p-5 form-container' onSubmit={formik.handleSubmit}>
+                                <form className='container px-4 form-container' onSubmit={formik.handleSubmit}>
                                     <div className=''>
                                         <div className="row">
                                             <div className="mb-3 fw-bolder azul-oscuro col-12 col-sm-6">
@@ -135,7 +135,7 @@ export const Modal = () => {
                                             <GSignUp />
                                         </div>
                                         <div className="d-flex justify-content-center mx-auto mt-4">
-                                            <p>Ya tienes una cuenta?</p> <Link to={"/login"}><p className='fw-bolder azul-oscuro ms-2'> Ingresa</p></Link>
+                                            <p>Ya tienes una cuenta?</p> <Link to={"/login"}><p className='fw-bolder azul-oscuro ms-2' data-bs-dismiss="modal"> Ingresa</p></Link>
                                         </div>
                                     </div>
                                 </form>
