@@ -47,6 +47,8 @@ export const UploadImages = () => {
     const [isCategorySelected, setIsCategorySelected] = useState(true);
     const [isWifiSelected, setIsWifiSelected] = useState(true);
     const [isParkingSelected, setIsParkingSelected] = useState(true);
+    const [latitud1, setLatitud1] = useState("");
+    const [longitud1, setLongitud1] = useState("");
 
 
 
@@ -181,7 +183,17 @@ export const UploadImages = () => {
         background: "#fff"
     };
 
-    const initializeMap = () => {
+    function cargar_V(v1, v2) {
+        setLatitud1(v1)
+        setLongitud1(v2)
+        console.log("hasta aca llega")
+
+
+    }
+
+
+    const initializeMap = async () => {
+
         // Crea una nueva instancia de un mapa de Mapbox
         const map = new mapboxgl.Map({
             container: 'mapi', // Asocia el mapa al elemento con el ID 'mapi'
@@ -192,7 +204,8 @@ export const UploadImages = () => {
 
 
         // Define un evento que se activa cuando el mapa se hace clic
-        map.on('click', (e) => {
+        map.on('click', async (e) => {
+
             // Actualiza el contenido del elemento con ID 'info' con información sobre el clic
             document.getElementById('info').innerHTML =
                 JSON.stringify(e.point.x + " . " + e.point.y) + // Coordenadas del clic en la pantalla
@@ -200,15 +213,46 @@ export const UploadImages = () => {
                 JSON.stringify(e.lngLat.wrap().lng + "." + JSON.stringify(e.lngLat.wrap().lat)); // Coordenadas de longitud y latitud
 
             // Extrae la latitud y longitud del evento de clic
-            let latitud = parseFloat(JSON.stringify(e.lngLat.wrap().lat))
-            let longitud = parseFloat(JSON.stringify(e.lngLat.wrap().lng))
-            let pepe = latitud
 
-            // Crea un nuevo marcador de color rojo en la ubicación del clic
+            let latitud = JSON.stringify(e.lngLat.wrap().lat)
+            let longitud = JSON.stringify(e.lngLat.wrap().lng)
+            // let pepe = latitud
+
+            cargar_V(latitud, longitud)
             const marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
                 .setLngLat([longitud, latitud])
                 .addTo(map);
+
         });
+        console.log(latitud1)
+
+        // const moco1 = longitud1;
+        // const moco2 = latitud1;
+        // console.log(moco1);
+
+        // function pruebitauwu() {
+        //     if (moco1 === "" || moco2 === "") {
+        //         console.log("sin valores");
+        //     } else {
+        //         console.log("setsate = " + longitud1 + " y " + latitud1);
+
+        //         // Crea un nuevo marcador de color rojo en la ubicación del clic
+        //         const marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
+        //             .setLngLat([moco1, moco2])
+        //             .addTo(map);
+        //     }
+        // }
+
+
+
+
+
+
+
+
+
+
+
 
         // Crea una nueva instancia del geocodificador de Mapbox
         const geocoder = new MapboxGeocoder({
@@ -219,12 +263,16 @@ export const UploadImages = () => {
 
         // Agrega el geocodificador al mapa
         map.addControl(geocoder);
+
     };
 
     // Llama a la función de inicialización del mapa cuando el componente se monta
-    useEffect(() => {
+    useLayoutEffect(() => {
         initializeMap();
     }, []);
+
+
+
 
     return (
 
