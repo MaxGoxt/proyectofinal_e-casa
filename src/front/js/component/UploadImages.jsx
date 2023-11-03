@@ -47,7 +47,9 @@ export const UploadImages = () => {
     const [isCategorySelected, setIsCategorySelected] = useState(true);
     const [isWifiSelected, setIsWifiSelected] = useState(true);
     const [isParkingSelected, setIsParkingSelected] = useState(true);
-
+    const [lati, setLati] = useState(0.0)
+    const [long, setLong] = useState(0.0)
+    console.log(lati, long)
 
 
 
@@ -193,6 +195,16 @@ export const UploadImages = () => {
 
         // Define un evento que se activa cuando el mapa se hace clic
         map.on('click', (e) => {
+
+
+            function prueba() {
+                let marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
+                    .setLngLat([long, lati])
+                    .addTo(map);
+            }
+            // if (lati != "") {
+            //     marker2.remove()
+            // }
             // Actualiza el contenido del elemento con ID 'info' con información sobre el clic
             document.getElementById('info').innerHTML =
                 JSON.stringify(e.point.x + " . " + e.point.y) + // Coordenadas del clic en la pantalla
@@ -200,15 +212,37 @@ export const UploadImages = () => {
                 JSON.stringify(e.lngLat.wrap().lng + "." + JSON.stringify(e.lngLat.wrap().lat)); // Coordenadas de longitud y latitud
 
             // Extrae la latitud y longitud del evento de clic
-            let latitud = parseFloat(JSON.stringify(e.lngLat.wrap().lat))
-            let longitud = parseFloat(JSON.stringify(e.lngLat.wrap().lng))
-            let pepe = latitud
+            let latitud = ""
+            let longitud = ""
 
+            latitud = parseFloat(JSON.stringify(e.lngLat.wrap().lat))
+            longitud = parseFloat(JSON.stringify(e.lngLat.wrap().lng))
+            // const [latip, setLati] = useState(latitud)
+            // const [longp, setLong] = useState(longitud)
+            setLati(latitud)
+            setLong(longitud)
+
+            // let marker2 = undefined
             // Crea un nuevo marcador de color rojo en la ubicación del clic
-            const marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
-                .setLngLat([longitud, latitud])
-                .addTo(map);
+
+
+
+            // if (latitud != "") {
+            //     marker2.remove()
+
+            //     marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
+            //         .setLngLat([longitud, latitud])
+            //         .addTo(map);
+
+            // }
+
+
         });
+
+
+
+
+
 
         // Crea una nueva instancia del geocodificador de Mapbox
         const geocoder = new MapboxGeocoder({
@@ -219,10 +253,12 @@ export const UploadImages = () => {
 
         // Agrega el geocodificador al mapa
         map.addControl(geocoder);
+
     };
 
+
     // Llama a la función de inicialización del mapa cuando el componente se monta
-    useEffect(() => {
+    useLayoutEffect(() => {
         initializeMap();
         cloudinaryRef.current = window.cloudinary;
         widgetRef.current = cloudinaryRef.current.createUploadWidget({
@@ -236,11 +272,21 @@ export const UploadImages = () => {
             }
         })
     }, []);
+    // useLayoutEffect(() => {
+
+    // }, [lati]);
+
+    // useEffect(() => {
+
+    //     console.log(lati, long);
+    // }, [setLati])
+
+
 
     return (
 
         <div className="d-flex flex-column mt-5 bg-celeste-claro">
-            <Carousel imagesUrl={imagesUrl}/>
+            <Carousel imagesUrl={imagesUrl} />
             <button ref={widgetRef} className="btn btn-primary mt-5 mx-auto" onClick={() => widgetRef.current.open()}>
                 SUBIR IMAGEN
             </button>
