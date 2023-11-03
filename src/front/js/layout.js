@@ -26,6 +26,7 @@ import VistaTerminos from "./pages/vista_terminos.jsx";
 import { UpgradePlan } from "./pages/UpgradePlan.jsx";
 import { Payments } from './pages/Payments.jsx';
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import {Modal} from "./component/ModalLogin.jsx";
 
 //create your first component
 
@@ -44,6 +45,7 @@ const Layout = () => {
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
                     <Navbar />
+                    <Modal />
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Demo />} path="/demo" />

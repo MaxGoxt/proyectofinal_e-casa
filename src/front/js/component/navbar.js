@@ -16,22 +16,22 @@ export const Navbar = () => {
 		actions.getPerfil();
 	}, []);
 
-	
+
 
 	const mostrarAlerta = () => {
 		if (!store.auth) {
-		  const resultado = window.confirm("¡Regístrate para subir tu casa a E-CASA! ¿Deseas registrarte ahora?");
-		  if (resultado) {
-			// El usuario hizo clic en "Aceptar"
-			window.location.href = "/signup"; // Redirige al formulario de registro
-		  } else {
-			if (route.pathname !== "/upload") {
-			  // El usuario hizo clic en "Cancelar" y no está en la página "/upload"
-			  window.location.href = "/upload"; // Redirige a la página de subida
+			const resultado = window.confirm("¡Regístrate para subir tu casa a E-CASA! ¿Deseas registrarte ahora?");
+			if (resultado) {
+				// El usuario hizo clic en "Aceptar"
+				window.location.href = "/signup"; // Redirige al formulario de registro
+			} else {
+				if (route.pathname !== "/upload") {
+					// El usuario hizo clic en "Cancelar" y no está en la página "/upload"
+					window.location.href = "/upload"; // Redirige a la página de subida
+				}
 			}
-		  }
 		}
-	  };
+	};
 
 
 
@@ -44,7 +44,7 @@ export const Navbar = () => {
 				</Link>
 				<div className="d-flex align-items-center nav-setting-container">
 					<Link to="/upload" className="text-dark fw-bold text-decoration-none me-3 nav_upload_house">
-						<button type="button" className="btn btn-outline-success text-grey" style={{ fontSize: "16px" }} onClick={mostrarAlerta}>Sube tu casa a E-CASA</button>
+						<button type="button" className="btn btn-outline-success text-grey" style={{ fontSize: "16px" }} /*onClick={mostrarAlerta}*/ data-bs-toggle="modal" data-bs-target="#staticBackdrop">Sube tu casa a E-CASA</button>
 					</Link>
 					{store.auth
 						? <div className="btn-group">
@@ -98,6 +98,9 @@ export const Navbar = () => {
 						<button className="btn btn-primary">Iniciar sesión</button>
 					</Link>
 				</div>
+
+
+
 			</div>
 		</nav >
 	);
