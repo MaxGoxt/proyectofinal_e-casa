@@ -13,13 +13,13 @@ export const CardProp = (props) => {
     return (
         store.auth? 
         <>
-            <div className="col-12  my-2">
+            <div className="col-12 my-2">
                 <div className="m-1 border border-2 rounded-3 row px-2 py-3">
-                    <div className="d-flex">
-                        <div className="col-sm-12 col-lg-3">
+                    <div className="col-12">
+                        <div className="col-sm-12 col-xl-12">
                             <Carousel imagesUrl={images}/>
                         </div>
-                        <div className="card-body px-0 py-0 col-8">
+                        <div className="card-body px-0 py-0 col-sm-12 col-xl-12">
                             <h4 className="fw-bold m-2">{props.title}</h4>
                             <p className="card-text m-2"><small>{props.description}</small></p>
                             <p className="card-text m-2">{props.wifi ? <small>Wifi: ✔️</small> : <small>Wifi: ✖️</small>}</p>
