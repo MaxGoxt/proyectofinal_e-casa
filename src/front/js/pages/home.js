@@ -56,21 +56,22 @@ export const Home = () => {
     return (
         <div className="text-white my-5">
             <div className="position-relative">
-                <img src="https://img.freepik.com/free-photo/real-estate-concept-happy-young-man-searching-home-rent-holding-house-paper-maket-smiling-st_1258-180715.jpg?w=1380&t=st=1694889637~exp=1694890237~hmac=9412f7c3727bd8fbf35f49c5aa70dcf6ff5335c54788b14234e659e6a9d8144d" alt="banner" className="w-100 hero-image" style={{ height: "320px", objectFit: "cover", objectPosition: "top" }} />
+                <img src="https://img.freepik.com/free-photo/real-estate-concept-happy-young-man-searching-home-rent-holding-house-paper-maket-smiling-st_1258-180715.jpg?w=1380&t=st=1694889637~exp=1694890237~hmac=9412f7c3727bd8fbf35f49c5aa70dcf6ff5335c54788b14234e659e6a9d8144d" alt="banner" className="w-100 hero-image shadow-sm" style={{ height: "320px", objectFit: "cover", objectPosition: "top" }} />
                 <div className="d-flex position-absolute top-0 start-0 p-4 w-75 h-100">
                     <h2 className="azul-oscuro fs-1 fw-bolder">Encuentra tu lugar <br /> aquí</h2>
                     <div className="position-absolute m-5" style={{ width: '25%', minWidth: "100px"}}>
                         <Casitas />
+                        {/* <SelectCasita/> */}
                     </div>
                 </div>
             </div>
-            <ul className="nav-container nav nav-pills nav-justified mt-5" id="ex1" role="tablist">
+            <ul className="nav-container nav nav-pills nav-justified mt-5 bg-white p-3 rounded-top" id="ex1" role="tablist">
                 <li className="nav-item" role="presentation">
-                    <h2 className={"nav-link " + loginST} id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
+                    <h2 className={"bg-azul-oscuro rounded me-1 py-1 " + loginST} id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
                         aria-controls="pills-login" aria-selected="true" onClick={() => alquileres()}>Alquileres</h2>
                 </li>
                 <li className="nav-item" role="presentation">
-                    <h2 className={"nav-link " + registerST} id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab"
+                    <h2 className={"bg-azul-oscuro rounded ms-1 py-1 " + registerST} id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab"
                         aria-controls="pills-register" aria-selected="false" onClick={() => ventas()}>Ventas</h2>
                 </li>
             </ul>
@@ -81,7 +82,7 @@ export const Home = () => {
                         filter={filterRentByPrice}
                         maxValue={100000}
                     />
-                    <div className={"row"} id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+                    <div className={"row gap-1"} id="pills-login" role="tabpanel" aria-labelledby="tab-login">
                         {!showRentFilteredResults
                             ? store.alquileres.map(item => (
                                 <CardHouseFeed
@@ -108,7 +109,7 @@ export const Home = () => {
                         filter={filterSalesByPrice}
                         maxValue={1000000}
                     />
-                    <div className={"row"} id="pills-register" role="tabpanel" aria-labelledby="tab-register">
+                    <div className={"row gap-3"} id="pills-register" role="tabpanel" aria-labelledby="tab-register">
                         {!showSalesFilteredResults
                             ? store.ventas.map(item => (
                                 <CardHouseFeed

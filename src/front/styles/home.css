@@ -5,15 +5,81 @@
     one more css for each page that will contain the selected used 
     on that page only (the ones not reused in other pages).
 */
+
+/* ".inherited-styles-for-exported-element" is a generated class for the inherited styles of the exported element, feel free to rename it. */
+
+.inherited-styles-for-exported-element {
+    font-family: CerebriSans-Regular, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    font-size: 100%;
+    list-style: none;
+    text-align: center;
+  }
+  
+  .svg-inline--fa {
+    display: inline-block;
+    font-size: inherit;
+    height: 1em;
+    overflow: visible;
+    vertical-align: -.125em;
+  }
+  
+  .edit-btn {
+    background-color: #fff;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    box-shadow: rgba(0, 0, 0, .05) 0 1px 2px;
+    color: #374151;
+    display: inline-block;
+    line-height: .8;
+    padding: 11px 17px;
+  }
+  
+  .svg-inline--fa.fa-w-16 {
+    width: 1em;
+  }
+  
+  svg:not(:root).svg-inline--fa {
+    overflow: visible;
+  }
+  
+  .edit-btn svg {
+    margin-right: 8px;
+  }
+  
+  .edit-btn:hover {
+    background-color: #f9fafb;
+  }
+  
+
+@keyframes color {
+    0%   { color: #33CCCC; }
+    20%  { color: #0b409c; }
+    40%  { color: #f07000; }
+    60%  { color: #fdbe34 }
+    80%  { color: #0b409c; }
+    100% { color: #33CCCC; }
+  }
+  
+.colorido{
+    color: #33CCCC; /* Fallback*/ 
+    animation: color 15s infinite linear;
+}
+
 body{
     /*
     background-attachment: fixed;
     background-size: cover;
      background-image: url("https://d2p0bx8wfdkjkb.cloudfront.net/static/properties/TBCZYOYRXE/M9O3IRQ7R3/dnHhvJnfVK/2b3889fa-453f-4352-a98a-ba2563424788.jpeg");
     */
-    background-color: #f2f7ff;
-    font-family: 'Quicksand', sans-serif;
-}
+    /* background-color: #f2f7ff;*/
+    
+    font-family: 'Quicksand', sans-serif; 
+    background-color: #F2F7FF;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' x2='0' y1='1' y2='0' gradientTransform='rotate(126,0.5,0.5)'%3E%3Cstop offset='0' stop-color='%230FF'/%3E%3Cstop offset='1' stop-color='%23C8FFF6'/%3E%3C/linearGradient%3E%3ClinearGradient id='b' x1='0' x2='0' y1='0' y2='1' gradientTransform='rotate(181,0.5,0.5)'%3E%3Cstop offset='0' stop-color='%233265FF'/%3E%3Cstop offset='1' stop-color='%2359FFF6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg fill='%23FFF' fill-opacity='0' stroke-miterlimit='10'%3E%3Cg stroke='url(%23a)' stroke-width='5.28'%3E%3Cpath transform='translate(-57.4 -2) rotate(-5.300000000000001 1409 581) scale(0.9392180000000001)' d='M1409 581 1450.35 511 1490 581z'/%3E%3Ccircle stroke-width='1.7600000000000002' transform='translate(-89.5 49) rotate(1.1999999999999993 800 450) scale(0.9978569999999999)' cx='500' cy='100' r='40'/%3E%3Cpath transform='translate(0.9000000000000021 -25.5) rotate(-1.5 401 736) scale(0.9978569999999999)' d='M400.86 735.5h-83.73c0-23.12 18.74-41.87 41.87-41.87S400.86 712.38 400.86 735.5z'/%3E%3C/g%3E%3Cg stroke='url(%23b)' stroke-width='1.6'%3E%3Cpath transform='translate(294 7.399999999999999) rotate(-1.8499999999999996 150 345) scale(1.004406)' d='M149.8 345.2 118.4 389.8 149.8 434.4 181.2 389.8z'/%3E%3Crect stroke-width='3.5200000000000005' transform='translate(-47.5 -136) rotate(-18 1089 759)' x='1039' y='709' width='100' height='100'/%3E%3Cpath transform='translate(-142.8 33.2) rotate(-3 1400 132) scale(0.865)' d='M1426.8 132.4 1405.7 168.8 1363.7 168.8 1342.7 132.4 1363.7 96 1405.7 96z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-size: cover;
+
+} 
 
 .nav-container {
     box-sizing: border-box;
@@ -71,10 +137,13 @@ body{
 }
 
 .bg-azul-oscuro{
-    background-color: #0b409c;
+    background-color: #10316b;
 }
 
 .bg-azul-oscuro:hover {
+    background-color: #0b409c;
+}
+.footer{
     background-color: #10316b;
 }
 

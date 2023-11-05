@@ -18,8 +18,8 @@ export const Propiedades = () => {
 
     return (
             store.auth? 
-        <div className="pt-5 px-5 row">
-            <h1 className="text-black my-5">Administrar mis Propiedades</h1>
+        <div className="pt-5 px-5 row gap-1">
+            <h1 className="azul-oscuro my-5">Administrar mis Propiedades</h1>
             {store.casaPropietario?.map((item, index) => {
                 return (
                     <CardProp

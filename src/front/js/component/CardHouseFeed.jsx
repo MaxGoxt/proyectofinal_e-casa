@@ -5,6 +5,7 @@ import { Context } from "../store/appContext";
 import { useState, useEffect, useContext } from 'react';
 import "../../styles/card_feed_alq.css";
 
+
 export const CardHouseFeed = (props) => {
     const { store, actions } = useContext(Context)
 
@@ -29,15 +30,15 @@ export const CardHouseFeed = (props) => {
     };
 
     return (
-        <div className="text-decoration-none col-sm-6 col-md-4 col-lg-3 col-xl-3 mx-auto product"> 
+        <div className="bg-white text-decoration-none col-sm-6 col-md-4 col-lg-3 col-xl-3 mx-auto product shadow pt-3 rounded">
             <div className="thumbnail">
                 <i
                     onClick={() => toggleFavorito(props.id)}
                     className={
                         Array.isArray(store.favoritos) &&
                             store.favoritos.some((item) => item.houseId.id === props.id)
-                            ? "position-absolute fa-solid fa-heart m-2 text-danger bg-dark p-2 bg-opacity-75 rounded"
-                            : "position-absolute fa-regular fa-heart m-2 text-danger bg-dark p-2 bg-opacity-75 rounded"
+                            ? "position-absolute fa-solid fa-heart m-3 text-danger bg-dark p-2 bg-opacity-75 rounded-circle"
+                            : "position-absolute fa-regular fa-heart m-3 text-danger bg-dark p-2 bg-opacity-75 rounded-circle"
                     }
                     style={{ zIndex: "2", cursor: "pointer" }}
                 ></i>  

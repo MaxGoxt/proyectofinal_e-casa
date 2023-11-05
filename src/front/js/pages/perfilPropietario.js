@@ -44,7 +44,7 @@ function Perfilprop() {
 
     return (
 
-        <form className='container pb-3 bg-celeste-claro mt-5'>
+        <form className='container pb-3 mt-5'>
             <Link to={"/"}><button type="submit" className="btn text-white bg-azul-oscuro  rounded-pill  my-4"><i className="fa-solid fa-xmark"></i></button></Link>
             <div className='ms-3 d-flex  justify-content-center me-4'>
                 <div className=' justify-content-center'>
@@ -56,7 +56,7 @@ function Perfilprop() {
                     <strong><p className='registro'>{store.propietario?.email}</p></strong>
                 </div>
             </div>
-            <div className='row g-3'>
+            <div className='row bg-celeste-claro g-3'>
                 <div className="mb-3 azul-oscuro fw-bolder col-md-6">
                     <label htmlFor="exampleInputEmail1" className="form-label">Nombre </label>
                     <input type="nombre" className="form-control" disabled aria-describedby="emailHelp" value={store.propietario?.name} onChange={(e) => setFirstName(e.target.value)} />
@@ -80,13 +80,13 @@ function Perfilprop() {
                 </div>
             </div>
             <div className="text-white my-5">
-                <ul className="nav-container nav nav-pills nav-justified mt-5" id="ex1" role="tablist">
+                <ul className="nav-container nav nav-pills nav-justified mt-5 bg-celeste-claro" id="ex1" role="tablist">
                     <li className="nav-item" role="presentation">
-                        <h2 className={"nav-link " + loginST} id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
+                        <h2 className={"bg-azul-oscuro rounded me-1 py-1 " + loginST} id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
                             aria-controls="pills-login" aria-selected="true" onClick={() => alquileres()}>Alquileres</h2>
                     </li>
                     <li className="nav-item" role="presentation">
-                        <h2 className={"nav-link " + registerST} id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab"
+                        <h2 className={"bg-azul-oscuro rounded me-1 py-1 " + registerST} id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab"
                             aria-controls="pills-register" aria-selected="false" onClick={() => ventas()}>Ventas</h2>
                     </li>
                 </ul>

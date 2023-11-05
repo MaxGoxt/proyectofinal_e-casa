@@ -6,7 +6,7 @@ import { Context } from "../store/appContext";
 export const Carousel = (props) => {
 
   return (
-    <>
+    <div className='bg-white'>
       <div className="card-header bigger-screen d-flex" style={{ height: "430px" }}>
         {props.imagesUrl?.map((img, index) => (
           <img key={index} src={img} className="details-card-img" style={{ maxWidth: "100%", width: "20px", flexGrow: "1", objectFit: "cover", opacity: ".9", transition: ".5s ease" }} />
@@ -31,7 +31,7 @@ export const Carousel = (props) => {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

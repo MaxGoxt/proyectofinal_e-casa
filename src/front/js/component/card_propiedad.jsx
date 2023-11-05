@@ -13,8 +13,8 @@ export const CardProp = (props) => {
     return (
         store.auth? 
         <>
-            <div className="col-12 my-2">
-                <div className="m-1 border border-2 rounded-3 row px-2 py-3">
+            <div className="col-sm-12 col-md-12 col-lg-6 col-xl-5 mx-auto my-2 bg-white shadow border border-2 rounded-3 azul-oscuro">
+                <div className="m-1 row px-2 py-3">
                     <div className="col-12">
                         <div className="col-sm-12 col-xl-12">
                             <Carousel imagesUrl={images}/>
@@ -36,12 +36,15 @@ export const CardProp = (props) => {
                             </p>
                         </div>
                         <div className="my-auto">
-                            <button className="btn" onClick={()=>{navigate("/editar/mis-propiedades/" + props.id)}}>
+                            <button className="edit-btn m-1 col-12" onClick={()=>{navigate("/editar/mis-propiedades/" + props.id)}}>
                                 <i className="fa-solid fa-pencil"></i>
+                                <span> Editar</span>
                             </button>
-                            <button className="btn" onClick={async() => {await actions.deletePost(props.id), window.location.reload(true)}}>
+                            <button className="edit-btn m-1 col-12" onClick={async() => {await actions.deletePost(props.id), window.location.reload(true)}}>
                                 <i className="fa-solid fa-trash text-danger"></i>
+                                <span className="text-danger"> Eliminar</span>
                             </button>
+                            
                         </div>
                     </div>
                 </div>
