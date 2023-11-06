@@ -15,29 +15,29 @@ import { Carousel } from './Carousel.jsx';
 
 const schema = Yup.object().shape({
     title: Yup.string()
-        .min(40, 'Demasiado corto!')
+        .min(4, 'Demasiado corto!')
         .max(150, 'Demasiado largo!')
-        .required('Required'),
+        .required('Obligatorio'),
     description: Yup.string()
         .min(40, 'Demasiado corto!')
         .max(300, 'Demasiado largo!')
-        .required('Required'),
+        .required('Obligatorio'),
     location: Yup.string()
         .min(20, 'Demasiado corto!')
         .max(150, 'Demasiado largo!')
-        .required('Required'),
+        .required('Obligatorio'),
     numberOfRooms: Yup.number()
         .required("Conocer la cuartos es obligatorio")
         .positive("La cantidad de cuartos debe ser positiva")
-        .required('Required'),
+        .required('Obligatorio'),
     numberOfBathrooms: Yup.number()
         .required("Conocer la cantidad de cuartos es obligatorio")
-        .positive("La cantidad de baños debe ser positiva")
-        .required('Required'),
+        .positive("La cantidad de baños debe ser positiva"),
+        // .required('Obligatorio'),
     price: Yup.number()
         .required("Conocer el precio es obligatorio")
         .positive("El precio debe ser positivo")
-        .required('Required'),
+        .required('Obligatorio'),
 
 })
 

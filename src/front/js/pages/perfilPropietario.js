@@ -92,7 +92,7 @@ function Perfilprop() {
                 </ul>
                 <div className="tab-content container-alquileres">
                     <div className={"tab-pane fade " + login}>
-                        <div className={"row"} id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+                        <div className={"row gap-1"} id="pills-login" role="tabpanel" aria-labelledby="tab-login">
                             {store.casaPropietario?.map((item, index) => {
                                 return (
                                     item.category == "Alquiler" ?
@@ -105,7 +105,7 @@ function Perfilprop() {
                         </div>
                     </div>
                     <div className={"tab-pane fade" + register}>
-                        <div className={"row"} id="pills-register" role="tabpanel" aria-labelledby="tab-register">
+                        <div className={"row gap-1"} id="pills-register" role="tabpanel" aria-labelledby="tab-register">
                             {store.casaPropietario?.map((item, index) => {
                                 return (
                                     item.category == "Venta" ?
