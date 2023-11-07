@@ -47,9 +47,14 @@ export const UploadImages = () => {
     const [isCategorySelected, setIsCategorySelected] = useState(true);
     const [isWifiSelected, setIsWifiSelected] = useState(true);
     const [isParkingSelected, setIsParkingSelected] = useState(true);
-    const [lati, setLati] = useState(0.0)
-    const [long, setLong] = useState(0.0)
-    console.log(lati, long)
+    let mark = null
+    console.log("este", mark)
+    // const [long, setLong] = useState(0.0)
+    // console.log(lati, long)
+    // const [mapa, setMapa] = useState(null)
+    const mapa = useRef(null)
+    const mapaconteiner = useRef(null)
+
 
 
 
@@ -182,67 +187,27 @@ export const UploadImages = () => {
         color: "#222",
         background: "#fff"
     };
+    let lastMarker = ""
+
+
+    // console.log(mapa)
 
     const initializeMap = () => {
+
+        if (mapa.current) {
+            return
+
+        }
         // Crea una nueva instancia de un mapa de Mapbox
         const map = new mapboxgl.Map({
-            container: 'mapi', // Asocia el mapa al elemento con el ID 'mapi'
+            container: mapaconteiner.current, // Asocia el mapa al elemento con el ID 'mapi'
             style: 'mapbox://styles/mapbox/streets-v12', // Usa el estilo de mapa predeterminado de Mapbox
             center: [-56.712822, -34.340986], // Establece el centro del mapa en coordenadas específicas (longitud y latitud)
             zoom: 14 // Establece el nivel de zoom inicial
         });
 
 
-        // Define un evento que se activa cuando el mapa se hace clic
-        map.on('click', (e) => {
-
-
-            function prueba() {
-                let marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
-                    .setLngLat([long, lati])
-                    .addTo(map);
-            }
-            // if (lati != "") {
-            //     marker2.remove()
-            // }
-            // Actualiza el contenido del elemento con ID 'info' con información sobre el clic
-            document.getElementById('info').innerHTML =
-                JSON.stringify(e.point.x + " . " + e.point.y) + // Coordenadas del clic en la pantalla
-                '<br />' +
-                JSON.stringify(e.lngLat.wrap().lng + "." + JSON.stringify(e.lngLat.wrap().lat)); // Coordenadas de longitud y latitud
-
-            // Extrae la latitud y longitud del evento de clic
-            let latitud = ""
-            let longitud = ""
-
-            latitud = parseFloat(JSON.stringify(e.lngLat.wrap().lat))
-            longitud = parseFloat(JSON.stringify(e.lngLat.wrap().lng))
-            // const [latip, setLati] = useState(latitud)
-            // const [longp, setLong] = useState(longitud)
-            setLati(latitud)
-            setLong(longitud)
-
-            // let marker2 = undefined
-            // Crea un nuevo marcador de color rojo en la ubicación del clic
-
-
-
-            // if (latitud != "") {
-            //     marker2.remove()
-
-            //     marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
-            //         .setLngLat([longitud, latitud])
-            //         .addTo(map);
-
-            // }
-
-
-        });
-
-
-
-
-
+        mapa.current = map
 
         // Crea una nueva instancia del geocodificador de Mapbox
         const geocoder = new MapboxGeocoder({
@@ -256,10 +221,13 @@ export const UploadImages = () => {
 
     };
 
-
     // Llama a la función de inicialización del mapa cuando el componente se monta
-    useLayoutEffect(() => {
+    useEffect(() => {
+        if (!mapaconteiner.current) {
+            return
+        }
         initializeMap();
+
         cloudinaryRef.current = window.cloudinary;
         widgetRef.current = cloudinaryRef.current.createUploadWidget({
             cloudName: process.env.CLOUDNAME,
@@ -271,17 +239,58 @@ export const UploadImages = () => {
                 })
             }
         })
-    }, []);
-    // useLayoutEffect(() => {
-
-    // }, [lati]);
-
-    // useEffect(() => {
-
-    //     console.log(lati, long);
-    // }, [setLati])
+    }, [mapaconteiner.current]);
 
 
+    useEffect(() => {
+        console.log(mapa.current)
+        if (!mapa.current) {
+            return
+        }
+        function marcador(lat, lon, des) {
+
+
+            if (mark) {
+                console.log(mark)
+                mark.remove()
+            }
+
+            let marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
+                .setLngLat([lon, lat])
+
+            // lastMarker = marker2
+
+
+            marker2.addTo(mapa.current);
+            mark = marker2
+            console.log(lastMarker)
+
+        }
+
+
+
+        // Define un evento que se activa cuando el mapa se hace clic
+        mapa.current.on('click', (e) => {
+
+            // Actualiza el contenido del elemento con ID 'info' con información sobre el clic
+            document.getElementById('info').innerHTML =
+                JSON.stringify(e.point.x + " . " + e.point.y) + // Coordenadas del clic en la pantalla
+                '<br />' +
+                JSON.stringify(e.lngLat.wrap().lng + "." + JSON.stringify(e.lngLat.wrap().lat)); // Coordenadas de longitud y latitud
+
+            // Extrae la latitud y longitud del evento de clic
+            let latitud = ""
+            let longitud = ""
+
+            latitud = parseFloat(JSON.stringify(e.lngLat.wrap().lat))
+            longitud = parseFloat(JSON.stringify(e.lngLat.wrap().lng))
+
+            // Crea un nuevo marcador de color rojo en la ubicación del clic
+            marcador(latitud, longitud,)
+
+        });
+
+    }, [mark, mapa.current])
 
     return (
 
@@ -350,7 +359,7 @@ export const UploadImages = () => {
                     <pre id="info" style={misEstilos}></pre>
                     {/* <div id="geocoder" className="  geocoder"></div> */}
                     <div className='row col-12 '>
-                        <div id='mapi'
+                        <div id='mapi' ref={mapaconteiner}
                             style={{
                                 // backgroundColor: 'red',
                                 height: '500px',
