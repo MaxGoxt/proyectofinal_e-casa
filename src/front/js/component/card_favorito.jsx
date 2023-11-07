@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useState, useEffect, useContext } from 'react';
 import { Carousel } from "./Carousel.jsx";
@@ -8,10 +8,10 @@ import { Carousel } from "./Carousel.jsx";
 
 export const CardFav = (props) => {
     const { store, actions } = useContext(Context)
-
+    const nav = useNavigate()
     const [isFavorito, setIsFavorito] = useState(true);
 
-    let imagesUrl = props.images.map((i)=>{return i.url})
+    let imagesUrl = props.images.map((i) => { return i.url })
 
     const toggleFavorito = () => {
         setIsFavorito(!isFavorito);
@@ -47,11 +47,12 @@ export const CardFav = (props) => {
                                     <small>${props.price}</small>}
                             </p>
                         </div>
-                        <div className="my-auto">
+                        <div className="my-auto row">
                             <button onClick={toggleFavorito} className="btn m-0 p-0" > {isFavorito ?
                                 <i style={{ fontSize: "20px", color: "red" }} className="fa-solid fa-heart px-1 fs-3"></i> :
                                 <i style={{ fontSize: "20px", color: "red" }} className="fa-regular fa-heart px-1 fs-3"></i>
                             }</button>
+                            <button className="boton demo-boton second" onClick={() => nav("/details/" + props.id)}>Ver detalles</button>
                         </div>
                     </div>
                 </div>

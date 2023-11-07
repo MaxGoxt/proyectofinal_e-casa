@@ -70,14 +70,14 @@ export const Modal = () => {
     return (
         store.auth ? null :
             <div>
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
+                <div className="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabIndex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div className="modal-dialog">
+                        <div className="modal-content">
+                            <div className="modal-header">
                                     <h1 id="staticBackdropLabel" className='d-flex justify-content-start azul-oscuro modal-title'>Regístrate</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div class="modal-body">
+                            <div className="modal-body">
                                 <form className='container px-4 form-container' onSubmit={formik.handleSubmit}>
                                     <div className=''>
                                         <div className="row">
@@ -130,7 +130,7 @@ export const Modal = () => {
                                             ) : null}
                                         </div>
                                     </div>
-                                    <div class="modal-footer">
+                                    <div className="modal-footer">
                                         <button type="submit" className="btn sign-button text-white bg-azul-oscuro d-grid gap-2 mx-auto my-3">Continuar</button>
                                         <div className=" sign-button mx-auto">
                                             <GSignUp />
