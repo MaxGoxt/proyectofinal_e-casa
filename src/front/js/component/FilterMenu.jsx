@@ -44,9 +44,9 @@ export const FilterMenu = ({ setShowFilteredResults, filter, maxValue }) => {
     }
 
     return (
-        <div className="filter-container">
+        <div className="filter-container bg-white shadow-sm rounded-bottom p-3">
             <div className="text-dark">
-                <p className="my-2">Rango de precios</p>
+                <p className="py-2">Rango de precios</p>
                 <div className="row d-flex justify-content-between">
                     <div className="col-4">
                         <div className="d-flex my-2 col-12">

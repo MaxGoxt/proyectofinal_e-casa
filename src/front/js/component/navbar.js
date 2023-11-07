@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Context } from "../store/appContext";
-import logoecasa from "../../img/logoe-casa.png";
 import "../../styles/navbar.css";
+import { Logo } from "./Logo.jsx";
 
 const defaultUserImage = "https://www.svgrepo.com/show/335455/profile-default.svg"
 
@@ -16,35 +16,18 @@ export const Navbar = () => {
 		actions.getPerfil();
 	}, []);
 
-	
-
-	const mostrarAlerta = () => {
-		if (!store.auth) {
-		  const resultado = window.confirm("¡Regístrate para subir tu casa a E-CASA! ¿Deseas registrarte ahora?");
-		  if (resultado) {
-			// El usuario hizo clic en "Aceptar"
-			window.location.href = "/signup"; // Redirige al formulario de registro
-		  } else {
-			if (route.pathname !== "/upload") {
-			  // El usuario hizo clic en "Cancelar" y no está en la página "/upload"
-			  window.location.href = "/upload"; // Redirige a la página de subida
-			}
-		  }
-		}
-	  };
-
-
-
 	return (
-		!route.pathname.includes("signup") && !route.pathname.includes("login") && <nav className="fixed-top d-block navbar navbar-light bg-light">
+		!route.pathname.includes("signup") && !route.pathname.includes("login") && <nav className="fixed-top d-block navbar bg-celeste-claro shadow-sm">
 			<div className={`d-flex ${!route.pathname.includes("details") ? "otherplaces" : "container"} justify-content-between align-items-center`}>
 				<Link to="/" className="text-decoration-none text-dark d-flex align-items-end">
-					<img className="mx-2" src={logoecasa} alt="logo ecasa" style={{ width: "40px" }} />
-					<span className="fs-4">E-CASA</span>
+					<div>
+						<Logo />
+					</div>
+					<span className="fs-4 azul-oscuro mb-1">E-CASA</span>
 				</Link>
 				<div className="d-flex align-items-center nav-setting-container">
 					<Link to="/upload" className="text-dark fw-bold text-decoration-none me-3 nav_upload_house">
-						<button type="button" className="btn btn-outline-success text-grey" style={{ fontSize: "16px" }} onClick={mostrarAlerta}>Sube tu casa a E-CASA</button>
+						<button type="button" className="btn btn-outline-secondary text-grey" style={{ fontSize: "16px" }} data-bs-toggle="modal" data-bs-target="#staticBackdrop">Sube tu casa a E-CASA</button>
 					</Link>
 					{store.auth
 						? <div className="btn-group">
@@ -80,28 +63,29 @@ export const Navbar = () => {
 									</li>
 								}
 								<li>
-									<Link onClick={() => actions.logout()} to="/login" className="dropdown-item text-decoration-none">
+									<Link onClick={() => actions.logout()} to="/login" className="dropdown-item text-decoration-none text-danger">
 										Cerrar sesión
+										<i class="fa-solid fa-right-from-bracket ms-4"></i>
 									</Link>
 								</li>
 							</ul>
 						</div>
 						: <div className="ml-auto">
 							<Link to="/login">
-								<button className="btn btn-primary">Iniciar sesión</button>
+								<button className="btn bg-azul-oscuro text-white">Iniciar sesión</button>
 							</Link>
 						</div>
 					}
 				</div>
 				<div className="ml-auto button-login-container">
-				{!store.auth && (
-              <div className="ml-auto">
-                <Link to="/login">
-                  <button className="btn btn-primary">Iniciar sesión</button>
-                </Link>
-              </div>
-            )}
-        </div>
+					{!store.auth && (
+						<div className="ml-auto">
+							<Link to="/login">
+								<button className="btn bg-azul-oscuro text-white">Iniciar sesión</button>
+							</Link>
+						</div>
+					)}
+				</div>
 			</div>
 		</nav >
 	);

@@ -24,16 +24,16 @@ export const Favoritos = () => {
     }, [])
 
     return (
-        <div className="mt-5 pt-3 container">
+        <div className="mt-5 pt-3">
             { store.auth ? 
             <>
-                <h2 className="text-black">Tus favoritos</h2>
+                <h2 className="azul-oscuro">Tus favoritos</h2>
                 {store.favoritos == "No tienes favoritos ingresados" || store.favoritos.length == 0
                     ? <div className="no-favorites-container">
                         <img className="" src="https://res.cloudinary.com/dslz0zdlc/image/upload/v1695155559/Miroodles_-_Color_Comp_sptmxy.png" height="400" />
-                        <p className="fs-1 col-4 my-auto">No tienes favoritos ingresados</p>
+                        <h3 className="colorido fs-1 col-4 my-auto">No tienes favoritos ingresados</h3>
                     </div>
-                    : <div className="row justify-content-center">
+                    : <div className="row gap-1 d-flex justify-content-center">
                         {store.favoritos?.map((item, index) => (
                                 <CardFav
                                     key={index}
@@ -43,6 +43,7 @@ export const Favoritos = () => {
                                     images={item.houseId.images}
                                     price={item.houseId.price}
                                     category={item.houseId.category}
+                                    description={item.houseId.description}
                                     />
                             )
                         )}

@@ -78,3 +78,72 @@
     padding: 0 !important;
   }
 }
+
+
+
+
+
+
+
+/* ".inherited-styles-for-exported-element" is a generated class for the inherited styles of the exported element, feel free to rename it. */
+
+.inherited-styles-for-exported-element {
+  font-family: CerebriSans-Regular, -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+  font-size: 100%;
+}
+
+.svg-inline--fa {
+  display: inline-block;
+  font-size: inherit;
+  height: 1em;
+  overflow: visible;
+  vertical-align: -.125em;
+}
+
+.boton {
+  border: 1px solid #eee;
+  border-radius: 50px;
+  box-shadow: rgba(0, 12, 32, .04) 0 0 1px 0, rgba(10, 31, 68, .1) 0 3px 4px 0;
+  height: 50px;
+  line-height: 50px;
+  margin-top: .7em;
+  padding: 0 25px;
+  text-decoration: none;
+  will-change: transform;
+}
+
+.demo-boton {
+  cursor: pointer;
+  display: none;
+  transition: all 200ms;
+  transition-behavior: normal;
+}
+
+@media screen and (min-width: 350px) {
+  .demo-boton {
+    display: inline-block;
+  }
+}
+
+.boton svg {
+  margin-right: .5em;
+}
+
+.demo-boton:hover {
+  background-color: #afe6c3;
+  transform: scale(1.05);
+}
+
+.demo-boton.second {
+  background-color: #10316b;
+  color: #fff;
+  margin-left: 0;
+}
+
+.svg-inline--fa.fa-w-18 {
+  width: 1.125em;
+}
+
+svg:not(:root).svg-inline--fa {
+  overflow: visible;
+}
