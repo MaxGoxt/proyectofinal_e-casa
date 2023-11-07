@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useState, useEffect, useContext } from 'react';
 import "../../styles/card_feed_alq.css";
@@ -8,6 +8,7 @@ import "../../styles/card_feed_alq.css";
 
 export const CardHouseFeed = (props) => {
     const { store, actions } = useContext(Context)
+    const nav = useNavigate()
 
     const [isFavorito, setIsFavorito] = useState(
         Array.isArray(store.favoritos) && store.favoritos.some((item) => item.houseId.id === props.id)
@@ -32,16 +33,15 @@ export const CardHouseFeed = (props) => {
     return (
         <div className="bg-white text-decoration-none col-sm-6 col-md-4 col-lg-3 col-xl-3 mx-auto product shadow pt-3 rounded">
             <div className="thumbnail">
-                <i
-                    onClick={() => toggleFavorito(props.id)}
+                <button className="position-absolute btn rounded-circle demo-boton bg-dark opacity-75" style={{ zIndex: "2", cursor: "pointer" }} onClick={() => toggleFavorito(props.id)}><i
                     className={
                         Array.isArray(store.favoritos) &&
                             store.favoritos.some((item) => item.houseId.id === props.id)
-                            ? "position-absolute fa-solid fa-heart m-3 text-danger bg-dark p-2 bg-opacity-75 rounded-circle"
-                            : "position-absolute fa-regular fa-heart m-3 text-danger bg-dark p-2 bg-opacity-75 rounded-circle"
+                            ? " fa-solid fa-heart text-danger"
+                            : " fa-regular fa-heart text-danger"
                     }
-                    style={{ zIndex: "2", cursor: "pointer" }}
-                ></i>  
+                    
+                ></i></button>  
                 <div id={"carouselExampleControls" + props.id} className="carousel slide" data-bs-ride="carousel" data-bs-interval="false" data-interval="false" data-mdb-interval="false">
                     <div className="carousel-indicators">
                         <button type="button" data-bs-target={"#carouselExampleControls" + props.id} data-bs-slide-to="0" className="active" aria-current="true" aria-label="Slide 1"></button>
@@ -74,7 +74,7 @@ export const CardHouseFeed = (props) => {
                 <div className="d-flex justify-content-between px-1">
                     <p className="card-text"><small className="text-body-secondary">
                         </small>{props.category == "Venta" ? <small>US${props.price}</small> : <small>${props.price}</small>}</p>
-                    <Link to={"/details/" + props.id} style={{ textDecoration: "underline" }}>Ver detalles</Link>
+                    <button className="boton demo-boton second" onClick={()=>nav("/details/" + props.id)}>Ver detalles</button>
                 </div>
             </div>
         </div>
