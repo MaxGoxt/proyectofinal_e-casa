@@ -21,7 +21,7 @@ export const Navbar = () => {
 			<div className={`d-flex ${!route.pathname.includes("details") ? "otherplaces" : "container"} justify-content-between align-items-center`}>
 				<Link to="/" className="text-decoration-none text-dark d-flex align-items-end">
 					<div>
-						<Logo/>
+						<Logo />
 					</div>
 					<span className="fs-4 azul-oscuro mb-1">E-CASA</span>
 				</Link>
@@ -63,8 +63,9 @@ export const Navbar = () => {
 									</li>
 								}
 								<li>
-									<Link onClick={() => actions.logout()} to="/login" className="dropdown-item text-decoration-none">
+									<Link onClick={() => actions.logout()} to="/login" className="dropdown-item text-decoration-none text-danger">
 										Cerrar sesión
+										<i class="fa-solid fa-right-from-bracket ms-4"></i>
 									</Link>
 								</li>
 							</ul>
@@ -77,13 +78,14 @@ export const Navbar = () => {
 					}
 				</div>
 				<div className="ml-auto button-login-container">
-					<Link to="/login">
-						<button className="btn bg-azul-oscuro text-white">Iniciar sesión</button>
-					</Link>
+					{!store.auth && (
+						<div className="ml-auto">
+							<Link to="/login">
+								<button className="btn bg-azul-oscuro text-white">Iniciar sesión</button>
+							</Link>
+						</div>
+					)}
 				</div>
-
-
-
 			</div>
 		</nav >
 	);

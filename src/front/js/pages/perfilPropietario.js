@@ -76,7 +76,7 @@ function Perfilprop() {
 
                 <div className="mb-3 azul-oscuro fw-bolder col-md-6">
                     <label htmlFor="exampleInputPassword1" className="form-label">Descripción</label>
-                    <textarea type="text" style={{height:"100px"}} className="form-control" disabled value='Descripcion' />
+                    <textarea type="text" style={{ height: "100px" }} className="form-control" disabled value='Descripcion' />
                 </div>
             </div>
             <div className="text-white my-5">
@@ -96,10 +96,14 @@ function Perfilprop() {
                             {store.casaPropietario?.map((item, index) => {
                                 return (
                                     item.category == "Alquiler" ?
-                                        <CardHouseFeed key={index} location={item.location}
+                                        <CardHouseFeed
+                                            key={index}
+                                            location={item.location}
                                             price={item.price}
                                             id={item.id}
-                                            images={item.images} />
+                                            images={item.images} 
+                                            title={item.title}
+                                            />
                                         : null)
                             })}
                         </div>
@@ -109,9 +113,12 @@ function Perfilprop() {
                             {store.casaPropietario?.map((item, index) => {
                                 return (
                                     item.category == "Venta" ?
-                                        <CardHouseFeed key={index} location={item.location}
+                                        <CardHouseFeed
+                                            key={index}
+                                            location={item.location}
                                             price={item.price}
                                             id={item.id}
+                                            title={item.title}
                                             images={item.images} />
                                         : null)
                             })}

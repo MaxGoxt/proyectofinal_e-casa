@@ -76,7 +76,7 @@ export const CardHouseFeed = (props) => {
                             <small>${props.price}</small>}
                     </p>
                 </div>
-                <button className="boton demo-boton second col-5 ms-3 mb-4" onClick={() => nav("/details/" + props.id)}>Ver detalles</button>
+                <button className="boton demo-boton second col-5 ms-3 mb-4 p-0" onClick={() => nav("/details/" + props.id)}>Ver detalles</button>
             </div>
         </div>
     );
