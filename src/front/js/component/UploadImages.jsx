@@ -33,7 +33,7 @@ const schema = Yup.object().shape({
     numberOfBathrooms: Yup.number()
         .required("Conocer la cantidad de cuartos es obligatorio")
         .positive("La cantidad de baños debe ser positiva"),
-        // .required('Obligatorio'),
+    // .required('Obligatorio'),
     price: Yup.number()
         .required("Conocer el precio es obligatorio")
         .positive("El precio debe ser positivo")
@@ -113,7 +113,7 @@ export const UploadImages = () => {
     }
 
     const submitForm = values => {
-        values.preventDefault();
+        // values.preventDefault();
         const {
             categorySelected,
             wifiSelected,
