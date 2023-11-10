@@ -332,7 +332,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 			},
-			getMyCasas: async (id) => {
+			getMyCasas: async () => {
 				try {
 					let data = await axios.get(process.env.BACKEND_URL + '/api/user/houses/' + localStorage.getItem('user_id'))
 					setStore({ casaPropietario: data.data.results });
