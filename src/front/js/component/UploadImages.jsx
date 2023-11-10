@@ -106,7 +106,6 @@ export const UploadImages = () => {
     }
 
     const submitForm = values => {
-        values.preventDefault();
         const {
             categorySelected,
             wifiSelected,
@@ -121,6 +120,8 @@ export const UploadImages = () => {
                 category: categorySelected,
                 description: values.description,
                 location: values.location,
+                //latitud: "-34.004",
+                //longitud: "-34.0043244444444444324324324324324",
                 number_of_rooms: Number(values.numberOfRooms),
                 number_of_bathrooms: Number(values.numberOfBathrooms),
                 parking: parkingSelected,

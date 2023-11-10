@@ -65,7 +65,7 @@ export const Navbar = () => {
 								<li>
 									<Link onClick={() => actions.logout()} to="/login" className="dropdown-item text-decoration-none text-danger">
 										Cerrar sesión
-										<i class="fa-solid fa-right-from-bracket ms-4"></i>
+										<i className="fa-solid fa-right-from-bracket ms-4"></i>
 									</Link>
 								</li>
 							</ul>

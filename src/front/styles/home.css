@@ -214,6 +214,24 @@ body{
     left: 0;
     text-decoration: underline;
   }
-  
+
+.tracking-in-expand-forward-top{
+    animation:tracking-in-expand-forward-top 1s linear both
+}
  
+@keyframes 
+tracking-in-expand-forward-top{
+    0%{
+        letter-spacing:-.4em;
+        transform:translateZ(-700px) translateY(-100px);
+        opacity:0
+    }
+    40%{
+        opacity:.6
+    }
+    100%{
+        transform:translateZ(0) translateY(0);
+        opacity:1
+    }
+}
 

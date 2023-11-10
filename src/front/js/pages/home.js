@@ -60,7 +60,7 @@ export const Home = () => {
                 style={{ height: "320px", objectFit: "cover", objectPosition: "top" }} 
                 />
                 <div className="d-flex position-absolute top-0 start-0 p-4 w-75 h-100">
-                    <h2 className="azul-oscuro fs-1 fw-bolder">Encuentra tu lugar <br /> aquí</h2>
+                    <h2 className="azul-oscuro fs-1 fw-bolder tracking-in-expand-forward-top">Encuentra tu lugar <br /> aquí</h2>
                     <div className="position-absolute m-5" style={{ width: '25%', minWidth: "100px"}}>
                         <Casitas />
                         {/* <SelectCasita/> */}
