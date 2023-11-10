@@ -65,8 +65,8 @@ class House(db.Model):
     description = db.Column(db.String(300), nullable=False)
     category = db.Column(db.String(10), nullable=False)
     location = db.Column(db.String(150), nullable=False)
-    longitud = db.Column(db.String(30), nullable=False)
-    latitud = db.Column(db.String(30), nullable=False)
+    latitud = db.Column(db.String(100), nullable=False)
+    longitud = db.Column(db.String(100), nullable=False)
     number_of_rooms = db.Column(db.Integer, nullable=False)
     number_of_bathrooms = db.Column(db.Integer, nullable=False)
     parking = db.Column(db.Boolean(), nullable=False)
@@ -93,7 +93,7 @@ class House(db.Model):
             "category": self.category,
             "info_propietario": {"user_id":info_user.serialize()["id"],"name":info_user.serialize()["name"], "lastname":info_user.serialize()["lastname"],"description":info_user.serialize()["description"], "account_creation_date":info_user.serialize()["accountCreationDate"], "profile_picture":info_user.serialize()["profile_picture"]},#list(map(lambda item: item.serialize(),self.user)),
             "location": self.location,
-            "location": self.location,
+            "latitud": self.latitud,
             "longitud": self.longitud,
             "numberOfRooms": self.number_of_rooms,
             "numberOfBathrooms": self.number_of_bathrooms,
