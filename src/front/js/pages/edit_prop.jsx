@@ -12,10 +12,11 @@ export const EditProp = () => {
 
     const cloudinaryRef = useRef();
     const widgetRef = useRef();
-    
-    let casa = store.casaPropietario[parseInt(param.id) -1]
-    let images = casa?.images.map((i)=>{return(i.url)})
+
+    let casa = store.casaPropietario[parseInt(param.id) - 1]
+    let images = casa?.images.map((i) => { return (i.url) })
     let alquilerBtn, ventaBtn = undefined
+    console.log(casa)
 
     useEffect(() => {
         actions.getMyCasas();
@@ -41,6 +42,8 @@ export const EditProp = () => {
     const parking = useRef();
     const wifi = useRef();
     const price = useRef();
+    const mapa = useRef(null)
+    const mapaconteiner = useRef(null)
 
     const checkRadioButtons = () => {
         let categorySelected = undefined;
@@ -123,11 +126,81 @@ export const EditProp = () => {
         }
     }
 
+
+    const initializeMap = () => {
+
+        if (mapa.current) {
+            return
+
+        }
+        // Crea una nueva instancia de un mapa de Mapbox
+        const map = new mapboxgl.Map({
+            container: mapaconteiner.current, // Asocia el mapa al elemento con el ID 'mapi'
+            style: 'mapbox://styles/mapbox/streets-v12', // Usa el estilo de mapa predeterminado de Mapbox
+            center: [-56.712822, -34.340986], // Establece el centro del mapa en coordenadas específicas (longitud y latitud)
+            zoom: 14 // Establece el nivel de zoom inicial
+        });
+
+
+        mapa.current = map
+
+    }
+    // useLayoutEffect(() => {
+    //   if (!isLoading) {
+    //     const map = new Map({
+    //       container: mapaDiv2.current, // container ID
+    //       style: 'mapbox://styles/mapbox/streets-v12', // style URL
+    //       center: [-55.568654, -30.884951], // starting position [lng, lat]
+    //       zoom: 20, // starting zoom
+
+
+    //     });
+
+    //     let marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
+    //       .setLngLat([store.casa?.longitud, store.casa?.latitud])
+
+    //     marker2.addTo(map.current);
+
+
+
+    //   }
+    // }), [isLoading]
+
+    useEffect(() => {
+        if (!mapaconteiner.current) {
+            return
+        }
+        initializeMap();
+
+    }, [mapaconteiner.current]);
+
+
+    useEffect(() => {
+        if (!mapa.current) {
+            return;
+        }
+
+        const longitud = parseFloat(store.casa?.longitud);
+        const latitud = parseFloat(store.casa?.latitud);
+
+        // Verificar si las coordenadas son números válidos
+        if (!isNaN(longitud) && !isNaN(latitud)) {
+            console.log("Coordenadas válidas:", longitud, latitud);
+
+            // Crear el marcador solo si las coordenadas son válidas
+            let marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
+                .setLngLat([longitud, latitud])
+                .addTo(mapa.current);
+        } else {
+            console.log("Coordenadas no válidas");
+        }
+    }, [mapa.current, store.casa?.longitud, store.casa?.latitud]);
+
     return (
         <div className="d-flex flex-column mt-5 bg-celeste-claro">
             <h3 className="text-center pt-4">Acá puedes editar tu propiedad</h3>
             {store.auth ? <>
-                <Carousel imagesUrl={images}/>
+                <Carousel imagesUrl={images} />
                 <button className="btn btn-primary mt-5 mx-auto" onClick={() => widgetRef.current.open()}>
                     SUBIR IMAGEN
                 </button>
@@ -163,6 +236,20 @@ export const EditProp = () => {
                         <label htmlFor="location" className="form-label azul-oscuro fw-bolder">Ubicación</label>
                         <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="location" aria-describedby="emailHelp" ref={location} />
                     </div>
+
+                    {/* <div className='row col-12'> */}
+                    {/* <pre id="info" style={misEstilos}></pre> */}
+                    {/* <div id="geocoder" className="  geocoder"></div> */}
+                    <div className='row col-12 '>
+                        <div id='mapi' ref={mapaconteiner}
+                            style={{
+                                // backgroundColor: 'red',
+                                height: '500px',
+                                width: '100vw',
+                            }}>
+                        </div>
+                    </div>
+                    {/* </div> */}
                     <div className="w-50 d-flex justify-content-evenly mx-1 ">
                         <div className="mb-3 w-50 d-flex justify-content-around">
                             <div className="w-30 ">
