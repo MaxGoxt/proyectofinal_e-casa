@@ -8,7 +8,7 @@ import "../../styles/home.css";
 
 const Nosotros = () => {
   return (
-    <div className= "container bg-azul-oscuro py-4 px-4 rounded" style= {{ maxWidth: "600px"}}>
+    <div className= "container footer py-4 px-4 rounded" style= {{ maxWidth: "600px"}}>
       <h1 className= "texto-amarillo d-flex justify-content-center py-3 mx-5 border-bottom border-3 border-warning">
         Sobre Nosotros
       </h1>

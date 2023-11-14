@@ -1,88 +1,69 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect }  from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
+import { Carousel } from "./Carousel.jsx";
 
 export const CardProp = (props) => {
-  const { store, actions } = useContext(Context);
-
-  return (
-    <div className="col-12 col-md-6 col-lg-4 col-xl-3 my-2">
-      <div className="m-1 border border-2 rounded-3 p-2">
-        <div className="d-flex flex-column-reverse flex-md-row">
-          <img
-            src={props.images.url}
-            style={{ objectFit: "contain" }}
-            className="rounded rounded-4 col-12 col-md-4"
-            alt="La imagen de su propiedad"
-          />
-          <div className="card-body pe-0 py-0 col-12 col-md-8">
-            <h4 className="fw-bold m-2">{props.title}</h4>
-            <p className="card-text m-2">
-              <small>{props.description}</small>
-            </p>
-            <p className="card-text m-2">
-              {props.wifi ? (
-                <small>Wifi: ✔️</small>
-              ) : (
-                <small>Wifi: ✖️</small>
-              )}
-            </p>
-            <p className="card-text m-2">
-              {props.parking ? (
-                <small>Estacionamiento: ✔️</small>
-              ) : (
-                <small>Estacionamiento: ✖️</small>
-              )}
-            </p>
-          </div>
-        </div>
-        <div className="d-flex justify-content-between px-3 float-end">
-          <div>
-            <p className="card-text">
-              <small className="text-body-secondary">{props.location}</small>
-            </p>
-            <p className="card-text">
-              <small className="text-body-secondary">
-                {props.category} a{" "}
-              </small>
-              {props.category === "Venta" ? (
-                <small>USD ${props.price}</small>
-              ) : (
-                <small>${props.price}</small>
-              )}
-            </p>
-          </div>
-          <div className="my-auto">
-            <button className="btn">
-              <Link to={"/editar/mis-propiedades/" + props.id}>
-                <i className="fa-solid fa-pencil"></i>
-              </Link>
-            </button>
-            <button
-              className="btn"
-              onClick={async () => {
-                await actions.deletePost(props.id);
-                window.location.reload(true);
-              }}
-            >
-              <i className="fa-solid fa-trash text-danger"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+    const { store, actions } = useContext(Context)
+    const navigate = useNavigate();
+    const param = useParams()
+    let images = props.images.map((i)=>{return(i.url)});
+    
+    return (
+        store.auth? 
+        <>
+            <div className="col-sm-12 col-md-12 col-lg-6 col-xl-5 mx-auto my-2 bg-white shadow border border-2 rounded-3 azul-oscuro">
+                <div className="m-1 row px-2 py-3">
+                    <div className="col-12">
+                        <div className="col-sm-12 col-xl-12">
+                            <Carousel imagesUrl={images}/>
+                        </div>
+                        <div className="card-body px-0 py-0 col-sm-12 col-xl-12">
+                            <h4 className="fw-bold m-2">{props.title}</h4>
+                            <p className="card-text m-2"><small>{props.description}</small></p>
+                            <p className="card-text m-2">{props.wifi ? <small>Wifi: ✔️</small> : <small>Wifi: ✖️</small>}</p>
+                            <p className="card-text m-2">{props.parking ? <small>Estacionamiento: ✔️</small> : <small>Estacionamiento: ✖️</small>}</p>
+                        </div>
+                    </div>
+                    <div className="d-flex justify-content-between px-3 float-end">
+                        <div>
+                            <p className="card-text col-10"><small className="text-body-secondary">{props.location}</small></p>
+                            <p className="card-text">
+                                <small className="text-body-secondary">{props.category} a </small>{props.category == "Venta" ? 
+                                <small>USD${props.price}</small> : 
+                                <small>${props.price}</small>}
+                            </p>
+                        </div>
+                        <div className="my-auto">
+                            <button className="edit-btn m-1 col-12" onClick={()=>{navigate("/editar/mis-propiedades/" + props.id)}}>
+                                <i className="fa-solid fa-pencil"></i>
+                                <span> Editar</span>
+                            </button>
+                            <button className="edit-btn m-1 col-12" onClick={async() => {await actions.deletePost(props.id), window.location.reload(true)}}>
+                                <i className="fa-solid fa-trash text-danger"></i>
+                                <span className="text-danger"> Eliminar</span>
+                            </button>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </>
+        : null
+    );
+}
 
 CardProp.propTypes = {
-  location: PropTypes.string,
-  id: PropTypes.number,
-  images: PropTypes.object,
-  title: PropTypes.string,
-  description: PropTypes.string,
-  category: PropTypes.string,
-  price: PropTypes.number,
-  parking: PropTypes.bool,
-  wifi: PropTypes.bool,
+
+    location: PropTypes.string,
+    id: PropTypes.number,
+    images: PropTypes.array,
+    title: PropTypes.string,
+    description: PropTypes.string,
+    category: PropTypes.string,
+    price: PropTypes.number,
+    parking: PropTypes.bool,
+    wifi: PropTypes.bool,
+
 };
