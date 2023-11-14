@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import { Context } from "../store/appContext";
 import { useParams, useNavigate } from 'react-router-dom';
+import { Carousel } from '../component/Carousel.jsx';
 
 export const EditProp = () => {
     const { store, actions } = useContext(Context);
@@ -12,9 +13,12 @@ export const EditProp = () => {
     const cloudinaryRef = useRef();
     const widgetRef = useRef();
 
+    let casa = store.casaPropietario[parseInt(param.id) - 1]
+    let images = casa?.images.map((i) => { return (i.url) })
     let alquilerBtn, ventaBtn = undefined
 
     useEffect(() => {
+        actions.getMyCasas();
         cloudinaryRef.current = window.cloudinary;
         widgetRef.current = cloudinaryRef.current.createUploadWidget({
             cloudName: process.env.CLOUDNAME,
@@ -30,8 +34,6 @@ export const EditProp = () => {
         console.log("HOLAAAAAAAAAAAA");
 
     }, [])
-
-
 
     const title = useRef();
     const description = useRef();
@@ -128,6 +130,7 @@ export const EditProp = () => {
         <div className="d-flex flex-column mt-5 bg-celeste-claro">
             <h3 className="text-center pt-4">Acá puedes editar tu propiedad</h3>
             {store.auth ? <>
+                <Carousel imagesUrl={images} />
                 <button className="btn btn-primary mt-5 mx-auto" onClick={() => widgetRef.current.open()}>
                     SUBIR IMAGEN
                 </button>
