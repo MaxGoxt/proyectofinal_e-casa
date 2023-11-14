@@ -2,6 +2,13 @@ import React, { useState, useRef, useEffect, useContext } from 'react';
 import { Context } from "../store/appContext";
 import { useParams, useNavigate } from 'react-router-dom';
 import { Carousel } from '../component/Carousel.jsx';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
+import { Map } from 'mapbox-gl';
+// import { Loading } from './'
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import '../../styles/prueba.css';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
 export const EditProp = () => {
     const { store, actions } = useContext(Context);
@@ -42,8 +49,33 @@ export const EditProp = () => {
     const parking = useRef();
     const wifi = useRef();
     const price = useRef();
-    const mapa = useRef(null)
-    const mapaconteiner = useRef(null)
+
+
+
+    //-------------Mapbox-------------//
+    const mapaEdit = useRef(null)
+    const mapaconteinerEdit = useRef(null)
+    let markEdit = null
+    const [longituEdit, setLongituEdit] = useState()
+    const [latituEdit, setLatituEdit] = useState()
+
+    const misEstilos = {
+        display: "table",
+        position: "relative",
+        wordWrap: "anywhere",
+        whiteSpace: "pre - wrap",
+        margin: "0px auto",
+        padding: "10px",
+        border: "none",
+        borderRadius: "3px",
+        fontSize: "12px",
+        textAlign: "center",
+        color: "#222",
+        background: "#fff"
+    };
+
+
+
 
     const checkRadioButtons = () => {
         let categorySelected = undefined;
@@ -102,6 +134,8 @@ export const EditProp = () => {
             category: categorySelected,
             description: description.current.value,
             location: location.current.value,
+            latitud: latituEdit,
+            longitud: longituEdit,
             number_of_rooms: number_of_rooms.current.value,
             number_of_bathrooms: number_of_bathrooms.current.value,
             wifi: wifiSelected,
@@ -127,74 +161,169 @@ export const EditProp = () => {
     }
 
 
+    // const initializeMap = () => {
+
+    //     if (mapa.current) {
+    //         return
+
+    //     }
+    //     // Crea una nueva instancia de un mapa de Mapbox
+    //     const map = new mapboxgl.Map({
+    //         container: mapaconteiner.current, // Asocia el mapa al elemento con el ID 'mapi'
+    //         style: 'mapbox://styles/mapbox/streets-v12', // Usa el estilo de mapa predeterminado de Mapbox
+    //         center: [-56.712822, -34.340986], // Establece el centro del mapa en coordenadas específicas (longitud y latitud)
+    //         zoom: 14 // Establece el nivel de zoom inicial
+    //     });
+
+
+    //     mapa.current = map
+
+    // }
+    // // useLayoutEffect(() => {
+    // //   if (!isLoading) {
+    // //     const map = new Map({
+    // //       container: mapaDiv2.current, // container ID
+    // //       style: 'mapbox://styles/mapbox/streets-v12', // style URL
+    // //       center: [-55.568654, -30.884951], // starting position [lng, lat]
+    // //       zoom: 20, // starting zoom
+
+
+    // //     });
+
+    // //     let marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
+    // //       .setLngLat([store.casa?.longitud, store.casa?.latitud])
+
+    // //     marker2.addTo(map.current);
+
+
+
+    // //   }
+    // // }), [isLoading]
+
+    // useEffect(() => {
+    //     if (!mapaconteiner.current) {
+    //         return
+    //     }
+    //     initializeMap();
+
+    // }, [mapaconteiner.current]);
+
+
+    // useEffect(() => {
+    //     if (!mapa.current) {
+    //         return;
+    //     }
+
+    //     const longitud = parseFloat(store.casa?.longitud);
+    //     const latitud = parseFloat(store.casa?.latitud);
+
+    //     // Verificar si las coordenadas son números válidos
+    //     if (!isNaN(longitud) && !isNaN(latitud)) {
+    //         console.log("Coordenadas válidas:", longitud, latitud);
+
+    //         // Crear el marcador solo si las coordenadas son válidas
+    //         let marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
+    //             .setLngLat([longitud, latitud])
+    //             .addTo(mapa.current);
+    //     } else {
+    //         console.log("Coordenadas no válidas");
+    //     }
+    // }, [mapa.current, store.casa?.longitud, store.casa?.latitud]);
+
     const initializeMap = () => {
 
-        if (mapa.current) {
+        if (mapaEdit.current) {
             return
 
         }
         // Crea una nueva instancia de un mapa de Mapbox
         const map = new mapboxgl.Map({
-            container: mapaconteiner.current, // Asocia el mapa al elemento con el ID 'mapi'
+            container: mapaconteinerEdit.current, // Asocia el mapa al elemento con el ID 'mapi'
             style: 'mapbox://styles/mapbox/streets-v12', // Usa el estilo de mapa predeterminado de Mapbox
             center: [-56.712822, -34.340986], // Establece el centro del mapa en coordenadas específicas (longitud y latitud)
             zoom: 14 // Establece el nivel de zoom inicial
         });
 
 
-        mapa.current = map
+        mapaEdit.current = map
 
-    }
-    // useLayoutEffect(() => {
-    //   if (!isLoading) {
-    //     const map = new Map({
-    //       container: mapaDiv2.current, // container ID
-    //       style: 'mapbox://styles/mapbox/streets-v12', // style URL
-    //       center: [-55.568654, -30.884951], // starting position [lng, lat]
-    //       zoom: 20, // starting zoom
+        // Crea una nueva instancia del geocodificador de Mapbox
+        const geocoder = new MapboxGeocoder({
+            accessToken: mapboxgl.accessToken, // Asigna el token de acceso de Mapbox
+            language: 'en-EN', // Establece el idioma del geocodificador (en inglés)
+            mapboxgl: mapboxgl // Asigna la biblioteca de Mapbox a utilizar
+        });
 
+        // Agrega el geocodificador al mapa
+        map.addControl(geocoder);
 
-    //     });
+    };
 
-    //     let marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
-    //       .setLngLat([store.casa?.longitud, store.casa?.latitud])
-
-    //     marker2.addTo(map.current);
-
-
-
-    //   }
-    // }), [isLoading]
-
+    // Llama a la función de inicialización del mapa cuando el componente se monta
     useEffect(() => {
-        if (!mapaconteiner.current) {
+        if (!mapaconteinerEdit.current) {
             return
         }
         initializeMap();
 
-    }, [mapaconteiner.current]);
+
+    }, [mapaconteinerEdit.current]);
 
 
     useEffect(() => {
-        if (!mapa.current) {
-            return;
+        console.log(mapaEdit.current)
+        if (!mapaEdit.current) {
+            return
+        }
+        function marcador(lat, lon, des) {
+
+
+            if (markEdit) {
+                console.log(markEdit)
+                markEdit.remove()
+            }
+
+            let marker2Edit = new mapboxgl.Marker({ color: 'red', rotation: 0 })
+                .setLngLat([lon, lat])
+
+            // lastMarker = marker2
+            setLatituEdit(lat.toString())
+            setLongituEdit(lon.toString())
+
+            marker2Edit.addTo(mapaEdit.current);
+            markEdit = marker2Edit
+            console.log(lastMarker)
+
         }
 
-        const longitud = parseFloat(store.casa?.longitud);
-        const latitud = parseFloat(store.casa?.latitud);
 
-        // Verificar si las coordenadas son números válidos
-        if (!isNaN(longitud) && !isNaN(latitud)) {
-            console.log("Coordenadas válidas:", longitud, latitud);
 
-            // Crear el marcador solo si las coordenadas son válidas
-            let marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
-                .setLngLat([longitud, latitud])
-                .addTo(mapa.current);
-        } else {
-            console.log("Coordenadas no válidas");
-        }
-    }, [mapa.current, store.casa?.longitud, store.casa?.latitud]);
+        // Define un evento que se activa cuando el mapa se hace clic
+        mapaEdit.current.on('click', (e) => {
+
+            // Actualiza el contenido del elemento con ID 'info' con información sobre el clic
+            document.getElementById('info').innerHTML =
+                JSON.stringify(e.point.x + " . " + e.point.y) + // Coordenadas del clic en la pantalla
+                '<br />' +
+                JSON.stringify(e.lngLat.wrap().lng + "." + JSON.stringify(e.lngLat.wrap().lat)); // Coordenadas de longitud y latitud
+
+            // Extrae la latitud y longitud del evento de clic
+            let latitud = ""
+            let longitud = ""
+
+            latitud = parseFloat(JSON.stringify(e.lngLat.wrap().lat))
+            longitud = parseFloat(JSON.stringify(e.lngLat.wrap().lng))
+
+            // Crea un nuevo marcador de color rojo en la ubicación del clic
+            marcador(latitud, longitud)
+
+
+        });
+
+    }, [markEdit, mapaEdit.current])
+
+
+
 
     return (
         <div className="d-flex flex-column mt-5 bg-celeste-claro">
@@ -237,19 +366,19 @@ export const EditProp = () => {
                         <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="location" aria-describedby="emailHelp" ref={location} />
                     </div>
 
-                    {/* <div className='row col-12'> */}
-                    {/* <pre id="info" style={misEstilos}></pre> */}
-                    {/* <div id="geocoder" className="  geocoder"></div> */}
-                    <div className='row col-12 '>
-                        <div id='mapi' ref={mapaconteiner}
-                            style={{
-                                // backgroundColor: 'red',
-                                height: '500px',
-                                width: '100vw',
-                            }}>
+                    <div className='row col-12'>
+                        <pre id="info" style={misEstilos}></pre>
+                        <div id="geocoder" className="  geocoder"></div>
+                        <div className='row col-12 '>
+                            <div id='mapi' ref={mapaconteinerEdit}
+                                style={{
+                                    // backgroundColor: 'red',
+                                    height: '500px',
+                                    width: '100vw',
+                                }}>
+                            </div>
                         </div>
                     </div>
-                    {/* </div> */}
                     <div className="w-50 d-flex justify-content-evenly mx-1 ">
                         <div className="mb-3 w-50 d-flex justify-content-around">
                             <div className="w-30 ">
