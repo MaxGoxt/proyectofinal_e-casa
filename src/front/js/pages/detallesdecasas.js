@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext, useRef, useLayoutEffect } from 'react';
 
+import React, { useState, useEffect, useContext, useRef, useLayoutEffect } from 'react';
 
 import { Context } from "../store/appContext";
 import { useParams, useLocation, Link } from 'react-router-dom';
@@ -11,35 +11,26 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
 import { Map } from 'mapbox-gl';
 // import { Loading } from './'
-
 function Details() {
-
   const defaultUserImage = "https://www.svgrepo.com/show/335455/profile-default.svg"
-
   const { store, actions } = useContext(Context)
   let param = useParams()
   useEffect(() => {
     actions.getDetalles(param.id)
     actions.getPerfilProp(store.casa.info_propietario?.user_id)
   }, [])
-
   // console.log("es esteeee", store.casa?.longitud, store.casa?.latitud)
-
   // const mapDiv = useRef < HTMLDivElement > (null);
   // const mapaDiv2 = useRef();
   const mapa = useRef(null)
   const mapaconteiner = useRef(null)
 
-
   const { isLoading, userLocation } = useContext(Context)
   //api de clave de mapbox
 
-
   const initializeMap = () => {
-
     if (mapa.current) {
       return
-
     }
     // Crea una nueva instancia de un mapa de Mapbox
     const map = new mapboxgl.Map({
@@ -49,9 +40,7 @@ function Details() {
       zoom: 14 // Establece el nivel de zoom inicial
     });
 
-
     mapa.current = map
-
   }
   // useLayoutEffect(() => {
   //   if (!isLoading) {
@@ -61,39 +50,29 @@ function Details() {
   //       center: [-55.568654, -30.884951], // starting position [lng, lat]
   //       zoom: 20, // starting zoom
 
-
   //     });
-
   //     let marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
   //       .setLngLat([store.casa?.longitud, store.casa?.latitud])
-
   //     marker2.addTo(map.current);
-
 
 
   //   }
   // }), [isLoading]
-
   useEffect(() => {
     if (!mapaconteiner.current) {
       return
     }
     initializeMap();
-
   }, [mapaconteiner.current]);
-
   useEffect(() => {
     if (!mapa.current) {
       return;
     }
-
     const longitud = parseFloat(store.casa?.longitud);
     const latitud = parseFloat(store.casa?.latitud);
-
     // Verificar si las coordenadas son números válidos
     if (!isNaN(longitud) && !isNaN(latitud)) {
       console.log("Coordenadas válidas:", longitud, latitud);
-
       // Crear el marcador solo si las coordenadas son válidas
       let marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
         .setLngLat([longitud, latitud])
@@ -102,7 +81,6 @@ function Details() {
       console.log("Coordenadas no válidas");
     }
   }, [mapa.current, store.casa?.longitud, store.casa?.latitud]);
-
 
   return (
     <div className='details-container container mx-auto row d-flex cuerpo mt-5'>
@@ -141,11 +119,8 @@ function Details() {
               // backgroundColor: 'red',
               height: '300px',
               width: '100vw',
-
             }
-
             }>
-
           </div>
           <p className='detalle'>{store.casa.numberOfRooms} Habitaciones - {store.casa.numberOfBathrooms} Baños - 250mt2 </p>
         </div>
@@ -169,7 +144,6 @@ function Details() {
               : <img src={store.casa.info_propietario?.profile_picture} style={{ width: "50px", height: "50px" }} className="rounded-circle " alt="profile picture" />
             }
           </div>
-
           <li className="list-group-item details-list-group bg-celeste-claro ps-0 ms-0 mt-4">
             {store.casa.info_propietario?.description}
           </li>
@@ -190,7 +164,6 @@ function Details() {
     </div>
   );
 };
-
 
 
 

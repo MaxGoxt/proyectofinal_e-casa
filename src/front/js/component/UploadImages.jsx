@@ -200,6 +200,7 @@ export const UploadImages = () => {
 
     // console.log(mapa)
 
+
     const initializeMap = () => {
 
         if (mapa.current) {
@@ -216,6 +217,8 @@ export const UploadImages = () => {
 
 
         mapa.current = map
+
+
 
         // Crea una nueva instancia del geocodificador de Mapbox
         const geocoder = new MapboxGeocoder({
@@ -251,7 +254,7 @@ export const UploadImages = () => {
 
 
     useEffect(() => {
-        console.log(mapa.current)
+        // console.log(mapa.current)
         if (!mapa.current) {
             return
         }
