@@ -31,7 +31,7 @@ export const EditProp = () => {
             }
         });
         actions.getMyCasas()
-        console.log("HOLAAAAAAAAAAAA");
+        console.log(casa);
 
     }, [])
 
@@ -137,11 +137,11 @@ export const EditProp = () => {
                 <form onSubmit={(e) => { e.preventDefault(); uploadImage(param.id); navigate("/mis-propiedades/" + localStorage.getItem("user_id")) }} className="d-flex flex-column align-items-center mt-4">
                     <div className="mb-3 w-50">
                         <label htmlFor="title" className="form-label azul-oscuro fw-bolder">Titulo</label>
-                        <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="title" aria-describedby="emailHelp" ref={title} />
+                        <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="title" aria-describedby="emailHelp" value={casa?.title} ref={title} />
                     </div>
                     <div className="mb-3 w-50">
                         <label htmlFor="description" className="form-label azul-oscuro fw-bolder">Descripción</label>
-                        <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="description" aria-describedby="emailHelp" ref={description} />
+                        <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="description" aria-describedby="emailHelp" value={casa?.description} ref={description} />
                     </div>
                     <div className="mb-3 w-50 d-flex justify-content-center">
                         <div className="w-30">
@@ -164,7 +164,7 @@ export const EditProp = () => {
                     </div>
                     <div className="mb-3 w-50">
                         <label htmlFor="location" className="form-label azul-oscuro fw-bolder">Ubicación</label>
-                        <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="location" aria-describedby="emailHelp" ref={location} />
+                        <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="location" aria-describedby="emailHelp" value={casa?.location} ref={location} />
                     </div>
                     <div className="w-50 d-flex justify-content-evenly mx-1 ">
                         <div className="mb-3 w-50 d-flex justify-content-around">
@@ -208,15 +208,15 @@ export const EditProp = () => {
                     </div>
                     <div className="mb-3 w-50">
                         <label htmlFor="number_of_rooms" className="form-label azul-oscuro fw-bolder">N° de cuartos</label>
-                        <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="number_of_rooms" aria-describedby="emailHelp" ref={number_of_rooms} />
+                        <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="number_of_rooms" aria-describedby="emailHelp" value={casa?.numberOfRooms} ref={number_of_rooms} />
                     </div>
                     <div className="mb-3 w-50">
                         <label htmlFor="number_of_bathrooms" className="form-label azul-oscuro fw-bolder">N° de baños</label>
-                        <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="number_of_bathrooms" aria-describedby="emailHelp" ref={number_of_bathrooms} />
+                        <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="number_of_bathrooms" aria-describedby="emailHelp" value={casa?.numberOfBathrooms} ref={number_of_bathrooms} />
                     </div>
                     <div className="mb-3 w-50">
                         <label htmlFor="price" className="form-label azul-oscuro fw-bolder">Precio</label>
-                        <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="price" aria-describedby="emailHelp" ref={price} />
+                        <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="price" aria-describedby="emailHelp" value={casa?.price} ref={price} />
                     </div>
                     <button type='submit' className="btn btn-primary">Editar casa</button>
                 </form>
