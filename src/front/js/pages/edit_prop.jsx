@@ -26,7 +26,11 @@ export const EditProp = () => {
                 })
             }
         });
+        actions.getMyCasas()
+        console.log("HOLAAAAAAAAAAAA");
+
     }, [])
+
 
 
     const title = useRef();
@@ -127,7 +131,7 @@ export const EditProp = () => {
                 <button className="btn btn-primary mt-5 mx-auto" onClick={() => widgetRef.current.open()}>
                     SUBIR IMAGEN
                 </button>
-                <form onSubmit={(e) => { e.preventDefault(); uploadImage(param.id); navigate("/mis-propiedades/" + localStorage.getItem("user_id"))}} className="d-flex flex-column align-items-center mt-4">
+                <form onSubmit={(e) => { e.preventDefault(); uploadImage(param.id); navigate("/mis-propiedades/" + localStorage.getItem("user_id")) }} className="d-flex flex-column align-items-center mt-4">
                     <div className="mb-3 w-50">
                         <label htmlFor="title" className="form-label azul-oscuro fw-bolder">Titulo</label>
                         <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="title" aria-describedby="emailHelp" ref={title} />
