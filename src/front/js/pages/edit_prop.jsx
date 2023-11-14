@@ -1,21 +1,30 @@
+
 import React, { useState, useRef, useEffect, useContext } from 'react';
 import { Context } from "../store/appContext";
 import { useParams, useNavigate } from 'react-router-dom';
 import { Carousel } from '../component/Carousel.jsx';
-
+import 'mapbox-gl/dist/mapbox-gl.css';
+import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
+import { Map } from 'mapbox-gl';
+// import { Loading } from './'
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import '../../styles/prueba.css';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 export const EditProp = () => {
     const { store, actions } = useContext(Context);
     const navigate = useNavigate();
     const param = useParams()
-
     const [imagesUrl, setImagesUrl] = useState([]);
-
     const cloudinaryRef = useRef();
     const widgetRef = useRef();
+<<<<<<< HEAD
 
+=======
+>>>>>>> cda70dfdd531346436e871c7373c989ac75271a7
     let casa = store.casaPropietario[parseInt(param.id) - 1]
     let images = casa?.images.map((i) => { return (i.url) })
     let alquilerBtn, ventaBtn = undefined
+    console.log("E", store.casaPropietario[parseInt(param.id) - 1])
 
     useEffect(() => {
         actions.getMyCasas();
@@ -34,7 +43,6 @@ export const EditProp = () => {
         console.log(casa);
 
     }, [])
-
     const title = useRef();
     const description = useRef();
     const category = useRef();
@@ -45,56 +53,70 @@ export const EditProp = () => {
     const wifi = useRef();
     const price = useRef();
 
+
+    //-------------Mapbox-------------//
+    const mapaEdit = useRef(null)
+    const mapaconteinerEdit = useRef(null)
+    let markEdit = null
+    const [longituEdit, setLongituEdit] = useState()
+    const [latituEdit, setLatituEdit] = useState()
+    const misEstilos = {
+        display: "table",
+        position: "relative",
+        wordWrap: "anywhere",
+        whiteSpace: "pre - wrap",
+        margin: "0px auto",
+        padding: "10px",
+        border: "none",
+        borderRadius: "3px",
+        fontSize: "12px",
+        textAlign: "center",
+        color: "#222",
+        background: "#fff"
+    };
+
+
+
     const checkRadioButtons = () => {
         let categorySelected = undefined;
         let wifiSelected = false;
         let parkingSelected = false;
-
         // CATEGORY
         alquilerBtn = category.current.childNodes[0].childNodes[0];
         ventaBtn = category.current.childNodes[1].childNodes[0];
-
         if (alquilerBtn.checked) {
             categorySelected = alquilerBtn.value;
         } else if (ventaBtn.checked) {
             categorySelected = ventaBtn.value;
         }
-
         // WIFI
         const wifiTrueBtn = wifi.current.childNodes[0].childNodes[0];
         const wifiFalseBtn = wifi.current.childNodes[1].childNodes[0];
-
         if (wifiTrueBtn.checked) {
             wifiSelected = true;
         } else if (wifiFalseBtn.checked) {
             wifiSelected = false;
         }
-
         // PARKING
         const parkingTrueBtn = parking.current.childNodes[0].childNodes[0];
         const parkingFalseBtn = parking.current.childNodes[1].childNodes[0];
-
         if (parkingTrueBtn.checked) {
             parkingSelected = true;
         } else if (parkingFalseBtn.checked) {
             parkingSelected = false;
         }
-
         return {
             categorySelected,
             wifiSelected,
             parkingSelected
         }
     }
-
     const uploadImage = (id) => {
-
         const {
             categorySelected,
             wifiSelected,
             parkingSelected
         } = checkRadioButtons();
-
         const formData = new FormData();
         formData.append('json_data', JSON.stringify({
             imagesUrl: imagesUrl,
@@ -102,6 +124,8 @@ export const EditProp = () => {
             category: categorySelected,
             description: description.current.value,
             location: location.current.value,
+            latitud: latituEdit,
+            longitud: longituEdit,
             number_of_rooms: number_of_rooms.current.value,
             number_of_bathrooms: number_of_bathrooms.current.value,
             wifi: wifiSelected,
@@ -109,13 +133,11 @@ export const EditProp = () => {
             price: price.current.value,
             // virified_account: true,
         }));
-
         const options = {
             body: formData,
             headers: { "Authorization": "Bearer " + localStorage.getItem('token') },
             method: "PUT",
         }
-
         try {
             const uploadProp = async () => {
                 let response = await fetch(process.env.BACKEND_URL + "/api/post/" + id, options)
@@ -125,6 +147,81 @@ export const EditProp = () => {
             console.log(error);
         }
     }
+
+
+
+
+    const initializeMap = () => {
+        if (mapaEdit.current) {
+            return
+        }
+        // Crea una nueva instancia de un mapa de Mapbox
+        const map = new mapboxgl.Map({
+            container: mapaconteinerEdit.current, // Asocia el mapa al elemento con el ID 'mapi'
+            style: 'mapbox://styles/mapbox/streets-v12', // Usa el estilo de mapa predeterminado de Mapbox
+            center: [-56.712822, -34.340986], // Establece el centro del mapa en coordenadas específicas (longitud y latitud)
+            zoom: 14 // Establece el nivel de zoom inicial
+        });
+
+        mapaEdit.current = map
+        // Crea una nueva instancia del geocodificador de Mapbox
+        const geocoder = new MapboxGeocoder({
+            accessToken: mapboxgl.accessToken, // Asigna el token de acceso de Mapbox
+            language: 'en-EN', // Establece el idioma del geocodificador (en inglés)
+            mapboxgl: mapboxgl // Asigna la biblioteca de Mapbox a utilizar
+        });
+        // Agrega el geocodificador al mapa
+        map.addControl(geocoder);
+    };
+    // Llama a la función de inicialización del mapa cuando el componente se monta
+    useEffect(() => {
+        if (!mapaconteinerEdit.current) {
+            return
+        }
+        initializeMap();
+
+    }, [mapaconteinerEdit.current]);
+
+    useEffect(() => {
+        // console.log(mapaEdit.current)
+        if (!mapaEdit.current) {
+            return
+        }
+        function marcador(lat, lon, des) {
+
+            if (markEdit) {
+                console.log(markEdit)
+                markEdit.remove()
+            }
+            let marker2Edit = new mapboxgl.Marker({ color: 'red', rotation: 0 })
+                .setLngLat([lon, lat])
+            // lastMarker = marker2
+            setLatituEdit(lat.toString())
+            setLongituEdit(lon.toString())
+            marker2Edit.addTo(mapaEdit.current);
+            markEdit = marker2Edit
+            // console.log(lastMarker)
+        }
+
+
+        // Define un evento que se activa cuando el mapa se hace clic
+        mapaEdit.current.on('click', (e) => {
+            // Actualiza el contenido del elemento con ID 'info' con información sobre el clic
+            document.getElementById('info').innerHTML =
+                JSON.stringify(e.point.x + " . " + e.point.y) + // Coordenadas del clic en la pantalla
+                '<br />' +
+                JSON.stringify(e.lngLat.wrap().lng + "." + JSON.stringify(e.lngLat.wrap().lat)); // Coordenadas de longitud y latitud
+            // Extrae la latitud y longitud del evento de clic
+            let latitud = ""
+            let longitud = ""
+            latitud = parseFloat(JSON.stringify(e.lngLat.wrap().lat))
+            longitud = parseFloat(JSON.stringify(e.lngLat.wrap().lng))
+            // Crea un nuevo marcador de color rojo en la ubicación del clic
+            marcador(latitud, longitud)
+
+        });
+    }, [markEdit, mapaEdit.current])
+
 
     return (
         <div className="d-flex flex-column mt-5 bg-celeste-claro">
@@ -165,6 +262,19 @@ export const EditProp = () => {
                     <div className="mb-3 w-50">
                         <label htmlFor="location" className="form-label azul-oscuro fw-bolder">Ubicación</label>
                         <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="location" aria-describedby="emailHelp" value={casa?.location} ref={location} />
+                    </div>
+                    <div className='row col-12'>
+                        <pre id="info" style={misEstilos}></pre>
+                        <div id="geocoder" className="  geocoder"></div>
+                        <div className='row col-12 '>
+                            <div id='mapi' ref={mapaconteinerEdit}
+                                style={{
+                                    // backgroundColor: 'red',
+                                    height: '500px',
+                                    width: '100vw',
+                                }}>
+                            </div>
+                        </div>
                     </div>
                     <div className="w-50 d-flex justify-content-evenly mx-1 ">
                         <div className="mb-3 w-50 d-flex justify-content-around">

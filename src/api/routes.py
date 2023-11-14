@@ -388,6 +388,10 @@ def editar_posteos(house_id):
             db.session.commit()
     if "location" in json_data:
         post_query.location = json_data["location"]
+    if "latitud" in json_data:
+        post_query.location = json_data["latitud"]
+    if "longitud" in json_data:
+        post_query.location = json_data["longitud"]
     if "number_of_rooms" in json_data:
         post_query.number_of_rooms = json_data["number_of_rooms"]
     if "number_of_bathrooms" in json_data:
