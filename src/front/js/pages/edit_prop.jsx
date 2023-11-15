@@ -83,8 +83,8 @@ export const EditProp = () => {
     const mapaEdit = useRef(null)
     const mapaconteinerEdit = useRef(null)
     let markEdit = null
-    const [longituEdit, setLongituEdit] = useState()
-    const [latituEdit, setLatituEdit] = useState()
+    const [longituEdit, setLongituEdit] = useState(0)
+    const [latituEdit, setLatituEdit] = useState(0)
     const misEstilos = {
         display: "table",
         position: "relative",
@@ -190,9 +190,6 @@ export const EditProp = () => {
 
         mapaEdit.current = map
 
-        let marker2Edit = new mapboxgl.Marker({ color: 'red', rotation: 0 })
-            .setLngLat([lon, lat])
-        markEdit = marker2Edit
         // Crea una nueva instancia del geocodificador de Mapbox
         const geocoder = new MapboxGeocoder({
             accessToken: mapboxgl.accessToken, // Asigna el token de acceso de Mapbox
@@ -201,6 +198,28 @@ export const EditProp = () => {
         });
         // Agrega el geocodificador al mapa
         map.addControl(geocoder);
+
+
+        if (!isNaN(casa?.longitud) && !isNaN(casa?.latitud)) {
+            console.log("Coordenadas válidas:", casa.longitud, casa.latitud);
+            // Crear el marcador solo si las coordenadas son válidas
+            // if (latituEdit != 0) {
+            let marker2Edit = new mapboxgl.Marker({ color: 'red', rotation: 0 })
+                .setLngLat([casa.longitud, casa.latitud])
+                .addTo(mapaEdit.current);
+            markEdit = marker2Edit
+            // } else {
+            //     let marker2Edit = new mapboxgl.Marker({ color: 'red', rotation: 0 })
+            //         .setLngLat([casa.longitud, casa.latitud])
+            //         .addTo(mapaEdit.current);
+            //     markEdit = marker2Edit
+            // }
+
+        } else {
+            console.log("Coordenadas no válidas");
+        }
+
+
     };
     // Llama a la función de inicialización del mapa cuando el componente se monta
     useEffect(() => {
