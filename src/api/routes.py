@@ -38,7 +38,7 @@ def preference():
         "email": "test_user_17805074@testuser.com"
     },
         "back_urls": {
-            "success": "https://e-casa.onrender.com",
+            "success": "http://localhost:3000",
             "failure": "https://e-casa.onrender.com",
             "pending": "https://e-casa.onrender.com"
     },
