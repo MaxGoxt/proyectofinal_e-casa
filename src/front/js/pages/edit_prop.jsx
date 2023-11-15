@@ -11,16 +11,19 @@ import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '../../styles/prueba.css';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 export const EditProp = () => {
+
     const { store, actions } = useContext(Context);
     const navigate = useNavigate();
     const param = useParams()
     const [imagesUrl, setImagesUrl] = useState([]);
     const cloudinaryRef = useRef();
     const widgetRef = useRef();
+
+
     let casa = store.casaPropietario[parseInt(param.id) - 1]
     let images = casa?.images.map((i) => { return (i.url) })
     let alquilerBtn, ventaBtn = undefined
-    console.log("E", store.casaPropietario[parseInt(param.id) - 1])
+    console.log("E", casa)
 
     useEffect(() => {
         actions.getMyCasas();
@@ -157,6 +160,10 @@ export const EditProp = () => {
         });
 
         mapaEdit.current = map
+
+        let marker2Edit = new mapboxgl.Marker({ color: 'red', rotation: 0 })
+            .setLngLat([lon, lat])
+        markEdit = marker2Edit
         // Crea una nueva instancia del geocodificador de Mapbox
         const geocoder = new MapboxGeocoder({
             accessToken: mapboxgl.accessToken, // Asigna el token de acceso de Mapbox
@@ -195,6 +202,7 @@ export const EditProp = () => {
             markEdit = marker2Edit
             // console.log(lastMarker)
         }
+
 
 
         // Define un evento que se activa cuando el mapa se hace clic
