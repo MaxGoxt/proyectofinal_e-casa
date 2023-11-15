@@ -38,7 +38,7 @@ def preference():
         "email": "test_user_17805074@testuser.com"
     },
         "back_urls": {
-            "success": "https://e-casa.onrender.com",
+            "success": "http://localhost:3000",
             "failure": "https://e-casa.onrender.com",
             "pending": "https://e-casa.onrender.com"
     },
@@ -389,9 +389,9 @@ def editar_posteos(house_id):
     if "location" in json_data:
         post_query.location = json_data["location"]
     if "latitud" in json_data:
-        post_query.location = json_data["latitud"]
+        post_query.latitud = json_data["latitud"]
     if "longitud" in json_data:
-        post_query.location = json_data["longitud"]
+        post_query.longitud = json_data["longitud"]
     if "number_of_rooms" in json_data:
         post_query.number_of_rooms = json_data["number_of_rooms"]
     if "number_of_bathrooms" in json_data:
