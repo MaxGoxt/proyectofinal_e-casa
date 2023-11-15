@@ -125,10 +125,10 @@ export const EditProp = () => {
 
     return (
         <div className="d-flex flex-column mt-5 bg-celeste-claro">
-            <h3 className="text-center pt-4">Acá puedes editar tu propiedad</h3>
+            <h3 className="text-center pt-4 azul-oscuro my-4 fs-1 bold">Acá puedes editar tu propiedad</h3>
             {store.auth ? <>
                 <Carousel imagesUrl={images}/>
-                <button className="btn btn-primary mt-5 mx-auto" onClick={() => widgetRef.current.open()}>
+                <button className="btn bg-azul-oscuro text-white mt-5 mx-auto" onClick={() => widgetRef.current.open()}>
                     SUBIR IMAGEN
                 </button>
                 <form onSubmit={(e) => { e.preventDefault(); uploadImage(param.id); navigate("/mis-propiedades/" + localStorage.getItem("user_id")) }} className="d-flex flex-column align-items-center mt-4">
@@ -215,7 +215,7 @@ export const EditProp = () => {
                         <label htmlFor="price" className="form-label azul-oscuro fw-bolder">Precio</label>
                         <input type="text" className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="price" aria-describedby="emailHelp" ref={price} />
                     </div>
-                    <button type='submit' className="btn btn-primary">Editar casa</button>
+                    <button type='submit' className="btn bg-azul-oscuro text-white">Editar casa</button>
                 </form>
                 <div className="d-flex justify-content-center">
                 </div></>

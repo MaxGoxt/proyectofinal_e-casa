@@ -32,15 +32,15 @@ export const CardFav = (props) => {
                             <Carousel imagesUrl={imagesUrl} />
                         </div>
                         <div className="card-body px-0 py-0 col-sm-12 col-xl-12">
-                            <h4 className="fw-bold m-2">{props.title}</h4>
-                            <p className="card-text m-2"><small>{props.description}</small></p>
+                            <h4 className="fw-bold m-2" style={{overflow:"hidden",textOverflow: "ellipsis", whiteSpace:"nowrap"}}>{props.title}</h4>
+                            <p className="card-text m-2" style={{overflow:"hidden",textOverflow: "ellipsis", whiteSpace:"nowrap"}}><small>{props.description}</small></p>
                             <p className="card-text m-2">{props.wifi ? <small>Wifi: ✔️</small> : <small>Wifi: ✖️</small>}</p>
                             <p className="card-text m-2">{props.parking ? <small>Estacionamiento: ✔️</small> : <small>Estacionamiento: ✖️</small>}</p>
                         </div>
                     </div>
                     <div className="d-flex justify-content-between px-3 float-end">
                         <div>
-                            <p className="card-text col-10"><small className="text-body-secondary">{props.location}</small></p>
+                            <p className="card-text col-10" style={{overflow:"hidden",textOverflow: "ellipsis", whiteSpace:"nowrap"}}><small className="text-body-secondary text-break">{props.location}</small></p>
                             <p className="card-text">
                                 <small className="text-body-secondary">{props.category} a </small>{props.category == "Venta" ?
                                     <small>USD${props.price}</small> :

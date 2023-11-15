@@ -51,6 +51,8 @@ export const Home = () => {
         setSalesFilteredResults(true);
     }
 
+
+    
     return (
         <div className="text-white my-5">
             <div className="position-relative">
@@ -60,14 +62,14 @@ export const Home = () => {
                 style={{ height: "320px", objectFit: "cover", objectPosition: "top" }} 
                 />
                 <div className="d-flex position-absolute top-0 start-0 p-4 w-75 h-100">
-                    <h2 className="azul-oscuro fs-1 fw-bolder tracking-in-expand-forward-top">Encuentra tu lugar <br /> aquí</h2>
+                    <h2 className="azul-oscuro fs-1 fw-bolder animated animatedFadeInUp fadeInUp">Encuentra tu lugar <br /> aquí</h2>
                     <div className="position-absolute m-5" style={{ width: '25%', minWidth: "100px"}}>
                         <Casitas />
                         {/* <SelectCasita/> */}
                     </div>
                 </div>
             </div>
-            <ul className="nav-container nav nav-pills nav-justified mt-5 bg-white p-3 rounded-top" id="ex1" role="tablist">
+            <ul className="animated animatedFadeInDown fadeInDown nav-container nav nav-pills nav-justified mt-5 bg-white p-3 rounded-top" id="ex1" role="tablist">
                 <li className="nav-item" role="presentation">
                     <h2 className={"bg-azul-oscuro rounded me-1 py-1 " + loginST} id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
                         aria-controls="pills-login" aria-selected="true" onClick={() => alquileres()}>Alquileres</h2>
@@ -77,13 +79,13 @@ export const Home = () => {
                         aria-controls="pills-register" aria-selected="false" onClick={() => ventas()}>Ventas</h2>
                 </li>
             </ul>
-            <div className="tab-content container-alquileres">
+            <div className="tab-content container-alquileres animated animatedFadeInDown fadeInDown">
                 <div className={"tab-pane fade " + login}>
                     <FilterMenu
                         setShowFilteredResults={setRentFilteredResults}
                         filter={filterRentByPrice}
                         maxValue={100000}
-                    />
+                        />
                     <div className={"row gap-1"} id="pills-login" role="tabpanel" aria-labelledby="tab-login">
                         {!showRentFilteredResults
                             ? store.alquileres.map(item => (

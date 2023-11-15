@@ -30,7 +30,7 @@ export const CardHouseFeed = (props) => {
 
     };
     return (
-        <div className="bg-white mb-5 text-decoration-none col-sm-6 col-md-4 col-lg-3 col-xl-3 mx-auto product shadow pb-1 px-2 rounded">
+        <div className="pb-4 animated animatedFadeInUp fadeInUp bg-white mb-5 text-decoration-none col-sm-6 col-md-4 col-lg-3 col-xl-3 mx-auto product shadow pb-1 px-2 rounded">
             <div className="thumbnail">
                 <button className="position-absolute btn demo-boton border-0 rounded-circle second mt-2" style={{ zIndex: "2", cursor: "pointer" }} onClick={() => toggleFavorito(props.id)}><i
                     className={
@@ -67,9 +67,9 @@ export const CardHouseFeed = (props) => {
                 </div>
             </div>
             <div className="azul-oscuro rounded-bottom row">
-                <h5 className="card-title f-bold col-12 mb-4">{props.title}</h5>
+                <h5 className="card-title f-bold col-12 mb-4" style={{overflow:"hidden",textOverflow: "ellipsis", whiteSpace:"nowrap"}}>{props.title}</h5>
                 <div className="col-6">
-                <p><small className="text-body-secondary">{props.location}</small></p>
+                <p style={{overflow:"hidden",textOverflow: "ellipsis", whiteSpace:"nowrap"}}><small className="text-body-secondary">{props.location}</small></p>
                     <p className="card-text">
                         {props.category == "Venta" ?
                             <small>US${props.price}</small> :
