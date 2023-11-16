@@ -44,20 +44,20 @@ const getState = ({ getStore, getActions, setStore }) => {
 			casaPropietario: [],
 			upgradePlans: [
 				{
-				  typeOfPlan: "Starter",
-				  priceAMonth: 10,
-				  benefit1: "Mayor visibilidad (7 días)",
-				  benefit2: "Publica hasta 10 fotos",
-				  benefit3: "Soporte por correo electrónico",
-				  planValue: 1,
+					typeOfPlan: "Starter",
+					priceAMonth: 10,
+					benefit1: "Mayor visibilidad (7 días)",
+					benefit2: "Publica hasta 10 fotos",
+					benefit3: "Soporte por correo electrónico",
+					planValue: 1,
 				},
 				{
-				  typeOfPlan: "Pro",
-				  priceAMonth: 20,
-				  benefit1: "Mayor visibilidad (1 mes)",
-				  benefit2: "Publica hasta 15 fotos",
-				  benefit3: "Soporte por correo electrónico",
-				  planValue: 2,
+					typeOfPlan: "Pro",
+					priceAMonth: 20,
+					benefit1: "Mayor visibilidad (1 mes)",
+					benefit2: "Publica hasta 15 fotos",
+					benefit3: "Soporte por correo electrónico",
+					planValue: 2,
 				},
 			]
 		},
@@ -336,6 +336,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				try {
 					let data = await axios.get(process.env.BACKEND_URL + '/api/user/houses/' + localStorage.getItem('user_id'))
 					setStore({ casaPropietario: data.data.results });
+
 				} catch (error) {
 					console.log(error);
 					return false
@@ -401,13 +402,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			editProfilePic: async (picture_url) => {
 				const options = {
-					body: JSON.stringify({picture_url}),
+					body: JSON.stringify({ picture_url }),
 					headers: { Authorization: "Bearer " + localStorage.getItem('token') },
 					method: "POST",
 				}
 				try {
-						await fetch(process.env.BACKEND_URL + "/api/profile_picture", options)
-					}
+					await fetch(process.env.BACKEND_URL + "/api/profile_picture", options)
+				}
 				catch (error) {
 					console.log(error);
 				}

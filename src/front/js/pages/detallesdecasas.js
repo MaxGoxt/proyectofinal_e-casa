@@ -1,6 +1,5 @@
+
 import React, { useState, useEffect, useContext, useRef, useLayoutEffect } from 'react';
-
-
 import { Context } from "../store/appContext";
 import { useParams, useLocation, Link } from 'react-router-dom';
 import diego from "../../img/diego.jpg";
@@ -10,38 +9,124 @@ import "../../styles/Details.css";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
 import { Map } from 'mapbox-gl';
+import { placeholder } from '@mapbox/mapbox-gl-geocoder/lib/localization.js';
+// import PlacesContext from '../context';
 // import { Loading } from './'
-
 function Details() {
-
   const defaultUserImage = "https://www.svgrepo.com/show/335455/profile-default.svg"
-
   const { store, actions } = useContext(Context)
+  const { isLoading, setLoading } = useContext(Context);
   let param = useParams()
   useEffect(() => {
     actions.getDetalles(param.id)
     actions.getPerfilProp(store.casa.info_propietario?.user_id)
   }, [])
-
+  // console.log("es esteeee", store.casa?.longitud, store.casa?.latitud)
   // const mapDiv = useRef < HTMLDivElement > (null);
-  const mapaDiv2 = useRef();
-
-
-  const { isLoading, userLocation } = useContext(Context)
+  // const mapaDiv2 = useRef();
+  const mapa = useRef(null)
+  const mapaconteiner = useRef(null)
+  let markDetalle = null
+  const [longituddeta, setLongituddeta] = useState(0)
+  const [latituddeta, setLatitudeta] = useState(0)
+  // const { isLoading, userLocation } = useState(Context)
   //api de clave de mapbox
 
-  useLayoutEffect(() => {
-    if (!isLoading) {
-      const map = new Map({
-        container: mapaDiv2.current, // container ID
-        style: 'mapbox://styles/mapbox/streets-v12', // style URL
-        center: [-55.568654, -30.884951], // starting position [lng, lat]
-        zoom: 20, // starting zoom
+
+  const longitud = parseFloat(store.casa?.longitud);
+  const latitud = parseFloat(store.casa?.latitud);
+
+  useEffect(() => {
+    if (store.casa?.longitud && store.casa?.latitud) {
+      setLongituddeta(parseFloat(store.casa.longitud));
+      setLatitudeta(parseFloat(store.casa.latitud));
+      console.log("funca")
+    }
+  }, [store.casa]);
+
+  // const initializeMap = () => {
+  //   if (mapa.current) {
+
+  //     return
+  //   }
+  //   // Crea una nueva instancia de un mapa de Mapbox
+  //   const map = new mapboxgl.Map({
+  //     container: mapaconteiner.current, // Asocia el mapa al elemento con el ID 'mapi'
+  //     style: 'mapbox://styles/mapbox/streets-v12', // Usa el estilo de mapa predeterminado de Mapbox
+  //     center: [-56.712822, -34.340986], // Establece el centro del mapa en coordenadas específicas (longitud y latitud)
+  //     zoom: 14 // Establece el nivel de zoom inicial
+  //   });
+  //   // if (markDetalle) {
+  //   //   console.log("detalle  ", markDetalle)
+  //   //   markDetalle.remove()
+  //   // }
+
+  //   mapa.current = map
+
+  // }
+
+  // useEffect(() => {
+
+  //   if (!mapaconteiner.current) {
+  //     return
+  //   }
+
+  //   initializeMap();
+
+  //   if (markDetalle) {
+  //     console.log(markDetalle)
+  //     markDetalle.remove()
+  //   }
+  // }, [mapaconteiner.current, isLoading, longituddeta, latituddeta]);
+
+  useEffect(() => {
+    if (!mapaconteiner.current || !store.casa || isNaN(longitud) || isNaN(latitud)) return;
+
+    const initializeMap = () => {
+      const newMap = new mapboxgl.Map({
+        container: mapaconteiner.current,
+        style: 'mapbox://styles/mapbox/streets-v12',
+        center: [longitud, latitud],
+        zoom: 12,
       });
 
-    }
-  }), [isLoading]
+      mapa.current = newMap;
+    };
 
+    initializeMap();
+
+    return () => {
+      if (mapa.current) {
+        mapa.current.remove(); // Eliminar el mapa antes de re-crear uno nuevo
+      }
+    };
+  }, [store.casa]);
+
+  useEffect(() => {
+    if (!mapa.current) {
+      return;
+
+    }
+    if (markDetalle) {
+      console.log(markDetalle)
+      markDetalle.remove()
+    }
+
+    // Verificar si las coordenadas son números válidos
+
+    if (!isNaN(longitud) && !isNaN(latitud)) {
+      console.log("Coordenadas válidas:", longitud, latitud);
+      // Crear el marcador solo si las coordenadas son válidas
+
+      let marker2Detalle = new mapboxgl.Marker({ color: 'red', rotation: 0 })
+        .setLngLat([longitud, latitud])
+        .addTo(mapa.current);
+      // markDetalle = marker2Detalle
+      // markDetalle.remove()
+    } else {
+      console.log("Coordenadas no válidas");
+    }
+  }, [mapa.current, store.casa?.longitud, store.casa?.latitud, store.casa],);
   return (
     <div className='details-container container mx-auto row d-flex cuerpo mt-5'>
       <Link to={"/"} className="text-decoration-none my-2 continue-navigation"><span className="text-dark w-25 my-4"><i className="fa-solid fa-arrow-left-long me-2"></i><span>Seguir navegando</span></span></Link>
@@ -74,16 +159,13 @@ function Details() {
           <h2 className="card-title">{store.casa.title}</h2>
           <p className="text-white bg-azul-oscuro d-flex details-btn justify-content-center btn my-4">{store.casa.category}</p>
           <h6 className='disponible'>Localización: {store.casa.location}</h6>
-          <div className='ubumapa' ref={mapaDiv2} id='map2'
+          <div className='ubumapa' ref={mapaconteiner} id='map2'
             style={{
               // backgroundColor: 'red',
               height: '300px',
               width: '100vw',
-
             }
-
             }>
-
           </div>
           <p className='detalle'>{store.casa.numberOfRooms} Habitaciones - {store.casa.numberOfBathrooms} Baños - 250mt2 </p>
         </div>
@@ -107,7 +189,6 @@ function Details() {
               : <img src={store.casa.info_propietario?.profile_picture} style={{ width: "50px", height: "50px" }} className="rounded-circle " alt="profile picture" />
             }
           </div>
-
           <li className="list-group-item details-list-group bg-celeste-claro ps-0 ms-0 mt-4">
             {store.casa.info_propietario?.description}
           </li>
@@ -128,8 +209,6 @@ function Details() {
     </div>
   );
 };
-
-
 
 
 
