@@ -20,15 +20,15 @@ export const CardProp = (props) => {
                             <Carousel imagesUrl={images}/>
                         </div>
                         <div className="card-body px-0 py-0 col-sm-12 col-xl-12">
-                            <h4 className="fw-bold m-2">{props.title}</h4>
-                            <p className="card-text m-2"><small>{props.description}</small></p>
+                            <h4 className="fw-bold m-2 text-break">{props.title}</h4>
+                            <p className="card-text m-2 text-break"><small>{props.description}</small></p>
                             <p className="card-text m-2">{props.wifi ? <small>Wifi: ✔️</small> : <small>Wifi: ✖️</small>}</p>
                             <p className="card-text m-2">{props.parking ? <small>Estacionamiento: ✔️</small> : <small>Estacionamiento: ✖️</small>}</p>
                         </div>
                     </div>
                     <div className="d-flex justify-content-between px-3 float-end">
                         <div>
-                            <p className="card-text col-10"><small className="text-body-secondary">{props.location}</small></p>
+                            <p className="card-text col-10"><small className="text-body-secondary text-break">{props.location}</small></p>
                             <p className="card-text">
                                 <small className="text-body-secondary">{props.category} a </small>{props.category == "Venta" ? 
                                 <small>USD${props.price}</small> : 
@@ -40,9 +40,9 @@ export const CardProp = (props) => {
                                 <i className="fa-solid fa-pencil"></i>
                                 <span> Editar</span>
                             </button>
-                            <button className="edit-btn m-1 col-12" onClick={async() => {await actions.deletePost(props.id), window.location.reload(true)}}>
-                                <i className="fa-solid fa-trash text-danger"></i>
-                                <span className="text-danger"> Eliminar</span>
+                            <button className="btn btn-danger m-1 col-12" onClick={async() => {await actions.deletePost(props.id), window.location.reload(true)}}>
+                                <i className="fa-solid fa-trash"></i>
+                                <span> Eliminar</span>
                             </button>
                             
                         </div>

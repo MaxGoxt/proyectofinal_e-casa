@@ -12,7 +12,6 @@ import '../../styles/prueba.css';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { Carousel } from './Carousel.jsx';
 
-
 const schema = Yup.object().shape({
     title: Yup.string()
         .min(4, 'Demasiado corto!')
@@ -311,11 +310,13 @@ export const UploadImages = () => {
     return (
 
         <div className="d-flex flex-column mt-5 bg-celeste-claro">
+            <h3 className="text-center pt-4 azul-oscuro my-4 fs-1 bold">Acá puedes publicar tu propiedad</h3>
             <Carousel imagesUrl={imagesUrl} />
-            <button ref={widgetRef} className="btn btn-primary mt-5 mx-auto" onClick={() => widgetRef.current.open()}>
+            <button ref={widgetRef} className="btn bg-azul-oscuro text-white mx-auto mt-5" onClick={() => widgetRef.current.open()}>
                 SUBIR IMAGEN
             </button>
-            <p style={{ fontSize: "12px", color: "rgba(0, 0, 0, .6)" }} className="mx-auto">sube 5 imagenes o más</p>
+
+            <span style={{ fontSize: "12px", color: "rgba(0, 0, 0, .6)" }} className="mx-auto">sube 5 imagenes o más</span>
             <form
                 onSubmit={handleSubmit}
                 className="d-flex flex-column align-items-center mt-4">
@@ -358,7 +359,6 @@ export const UploadImages = () => {
                         {!isCategorySelected && <span className="mx-auto" style={{ margin: "-12px" }}>Selecciona una categoria</span>}
                     </div>
                 </div>
-
                 <div className="mb-3 w-50">
                     <label htmlFor="location" className="form-label azul-oscuro fw-bolder">Ubicación</label>
                     <input type="text"
@@ -459,7 +459,7 @@ export const UploadImages = () => {
                         id="price"
                         aria-describedby="emailHelp" />
                 </div>
-                <button type='submit' className="btn btn-primary">Subir casa</button>
+                <button type='submit' className="btn bg-azul-oscuro text-white">Subir casa</button>
             </form>
             <div className="d-flex justify-content-center">
             </div>

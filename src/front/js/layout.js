@@ -9,7 +9,6 @@ import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 import { Login } from "./pages/login.jsx";
 import Details from "./pages/detallesdecasas";
-import Detailsventas from "./pages/detalle_casas_venta";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import Perfil from "./pages/perfilUsuario";
@@ -56,7 +55,6 @@ const Layout = () => {
                         <Route element={<Details />} path="/details/:id" />
                         <Route element={<Upload />} path="/upload" />
                         <Route element={<EditUserView />} path="/edituser" />
-                        <Route element={<Detailsventas />} path="/detailsventas/:id" />
                         <Route element={<Perfil />} path="/perfil" />
                         <Route element={<Favoritos />} path="/favoritos" />
                         <Route element={<PerfilProp />} path="/perfilprop" />
