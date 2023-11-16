@@ -48,7 +48,13 @@ export const UploadImages = () => {
     const [isParkingSelected, setIsParkingSelected] = useState(true);
     let mark = null
     console.log("este", mark)
-    // const [long, setLong] = useState(0.0)
+    const [longituD, setLongituD] = useState()
+    const [latituD, setLatituD] = useState()
+
+
+
+
+    console.log(longituD, latituD)
     // console.log(lati, long)
     // const [mapa, setMapa] = useState(null)
     const mapa = useRef(null)
@@ -127,8 +133,8 @@ export const UploadImages = () => {
                 category: categorySelected,
                 description: values.description,
                 location: values.location,
-                latitud: '-34.333333333333333333333333333333',
-                longitud: '-34.33333333333333333333333333333',
+                latitud: latituD,
+                longitud: longituD,
                 number_of_rooms: Number(values.numberOfRooms),
                 number_of_bathrooms: Number(values.numberOfBathrooms),
                 parking: parkingSelected,
@@ -193,6 +199,7 @@ export const UploadImages = () => {
 
     // console.log(mapa)
 
+
     const initializeMap = () => {
 
         if (mapa.current) {
@@ -209,6 +216,8 @@ export const UploadImages = () => {
 
 
         mapa.current = map
+
+
 
         // Crea una nueva instancia del geocodificador de Mapbox
         const geocoder = new MapboxGeocoder({
@@ -244,7 +253,7 @@ export const UploadImages = () => {
 
 
     useEffect(() => {
-        console.log(mapa.current)
+        // console.log(mapa.current)
         if (!mapa.current) {
             return
         }
@@ -260,7 +269,8 @@ export const UploadImages = () => {
                 .setLngLat([lon, lat])
 
             // lastMarker = marker2
-
+            setLatituD(lat.toString())
+            setLongituD(lon.toString())
 
             marker2.addTo(mapa.current);
             mark = marker2
@@ -288,6 +298,7 @@ export const UploadImages = () => {
 
             // Crea un nuevo marcador de color rojo en la ubicación del clic
             marcador(latitud, longitud,)
+
 
         });
 
