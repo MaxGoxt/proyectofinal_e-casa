@@ -38,7 +38,7 @@ export const CarouselPRO = () => {
       const baseURL = window.location.origin;
       const { activeSlide, prevSlide, sliderReady } = this.state;
       return /*#__PURE__*/(
-        React.createElement("div", { className: classNames('slider', { 's--ready': sliderReady }), style: { height: "500" } }, /*#__PURE__*/
+        React.createElement("div", { className: classNames('slider', { 's--ready': sliderReady }), style:{fontFamily:"Roboto"} }, /*#__PURE__*/
           React.createElement("p", { className: "slider__top-heading azul-oscuro", }, "E-Casa"), /*#__PURE__*/
           React.createElement("div", { className: "slider__slides" },
             this.props.slides.map((slide, index) => /*#__PURE__*/
@@ -70,7 +70,7 @@ export const CarouselPRO = () => {
     {
       city: 'tu lugar',
       country: 'Encuentra aquí',
-      img: 'https://res.cloudinary.com/dbviwbvqr/image/upload/v1699984470/e-casa/gabix0gloufz5lewgb3b.jpg'
+      img: 'https://res.cloudinary.com/dbviwbvqr/image/upload/v1700156194/uuscgazeavpf7epy2oao.jpg'
     },
 
   ];
