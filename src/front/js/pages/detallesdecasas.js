@@ -27,48 +27,81 @@ function Details() {
   const mapa = useRef(null)
   const mapaconteiner = useRef(null)
   let markDetalle = null
-  const longitud = parseFloat(store.casa?.longitud);
-  const latitud = parseFloat(store.casa?.latitud);
+  const [longituddeta, setLongituddeta] = useState(0)
+  const [latituddeta, setLatitudeta] = useState(0)
   // const { isLoading, userLocation } = useState(Context)
   //api de clave de mapbox
 
-  const initializeMap = () => {
-    if (mapa.current) {
-      return
-    }
-    // Crea una nueva instancia de un mapa de Mapbox
-    const map = new mapboxgl.Map({
-      container: mapaconteiner.current, // Asocia el mapa al elemento con el ID 'mapi'
-      style: 'mapbox://styles/mapbox/streets-v12', // Usa el estilo de mapa predeterminado de Mapbox
-      center: [-56.712822, -34.340986], // Establece el centro del mapa en coordenadas específicas (longitud y latitud)
-      zoom: 14 // Establece el nivel de zoom inicial
-    });
-    // if (markDetalle) {
-    //   console.log("detalle  ", markDetalle)
-    //   markDetalle.remove()
-    // }
-    mapa.current = map
-  }
-  // useLayoutEffect(() => {
-  //   if (!isLoading) {
-  //     const map = new Map({
-  //       container: mapaDiv2.current, // container ID
-  //       style: 'mapbox://styles/mapbox/streets-v12', // style URL
-  //       center: [-55.568654, -30.884951], // starting position [lng, lat]
-  //       zoom: 20, // starting zoom
-  //     });
-  //     let marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
-  //       .setLngLat([store.casa?.longitud, store.casa?.latitud])
-  //     marker2.addTo(map.current);
 
-  //   }
-  // }), [isLoading]
+  const longitud = parseFloat(store.casa?.longitud);
+  const latitud = parseFloat(store.casa?.latitud);
+
   useEffect(() => {
-    if (!mapaconteiner.current) {
-      return
+    if (store.casa?.longitud && store.casa?.latitud) {
+      setLongituddeta(parseFloat(store.casa.longitud));
+      setLatitudeta(parseFloat(store.casa.latitud));
+      console.log("funca")
     }
+  }, [store.casa]);
+
+  // const initializeMap = () => {
+  //   if (mapa.current) {
+
+  //     return
+  //   }
+  //   // Crea una nueva instancia de un mapa de Mapbox
+  //   const map = new mapboxgl.Map({
+  //     container: mapaconteiner.current, // Asocia el mapa al elemento con el ID 'mapi'
+  //     style: 'mapbox://styles/mapbox/streets-v12', // Usa el estilo de mapa predeterminado de Mapbox
+  //     center: [-56.712822, -34.340986], // Establece el centro del mapa en coordenadas específicas (longitud y latitud)
+  //     zoom: 14 // Establece el nivel de zoom inicial
+  //   });
+  //   // if (markDetalle) {
+  //   //   console.log("detalle  ", markDetalle)
+  //   //   markDetalle.remove()
+  //   // }
+
+  //   mapa.current = map
+
+  // }
+
+  // useEffect(() => {
+
+  //   if (!mapaconteiner.current) {
+  //     return
+  //   }
+
+  //   initializeMap();
+
+  //   if (markDetalle) {
+  //     console.log(markDetalle)
+  //     markDetalle.remove()
+  //   }
+  // }, [mapaconteiner.current, isLoading, longituddeta, latituddeta]);
+
+  useEffect(() => {
+    if (!mapaconteiner.current || !store.casa || isNaN(longitud) || isNaN(latitud)) return;
+
+    const initializeMap = () => {
+      const newMap = new mapboxgl.Map({
+        container: mapaconteiner.current,
+        style: 'mapbox://styles/mapbox/streets-v12',
+        center: [longitud, latitud],
+        zoom: 12,
+      });
+
+      mapa.current = newMap;
+    };
+
     initializeMap();
-  }, [mapaconteiner.current, isLoading]);
+
+    return () => {
+      if (mapa.current) {
+        mapa.current.remove(); // Eliminar el mapa antes de re-crear uno nuevo
+      }
+    };
+  }, [store.casa]);
+
   useEffect(() => {
     if (!mapa.current) {
       return;
@@ -93,7 +126,7 @@ function Details() {
     } else {
       console.log("Coordenadas no válidas");
     }
-  }, [mapa.current, store.casa?.longitud, store.casa?.latitud],);
+  }, [mapa.current, store.casa?.longitud, store.casa?.latitud, store.casa],);
   return (
     <div className='details-container container mx-auto row d-flex cuerpo mt-5'>
       <Link to={"/"} className="text-decoration-none my-2 continue-navigation"><span className="text-dark w-25 my-4"><i className="fa-solid fa-arrow-left-long me-2"></i><span>Seguir navegando</span></span></Link>

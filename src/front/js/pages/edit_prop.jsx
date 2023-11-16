@@ -174,17 +174,20 @@ export const EditProp = () => {
     }
 
 
+    const longitud = parseFloat(store.casa?.longitud);
+    const latitud = parseFloat(store.casa?.latitud);
 
 
     const initializeMap = () => {
         if (mapaEdit.current) {
             return
         }
+        if (isNaN(casa?.longitud) || isNaN(casa?.latitud)) return;
         // Crea una nueva instancia de un mapa de Mapbox
         const map = new mapboxgl.Map({
             container: mapaconteinerEdit.current, // Asocia el mapa al elemento con el ID 'mapi'
             style: 'mapbox://styles/mapbox/streets-v12', // Usa el estilo de mapa predeterminado de Mapbox
-            center: [-56.712822, -34.340986], // Establece el centro del mapa en coordenadas específicas (longitud y latitud)
+            center: [casa?.longitud, casa?.latitud], // Establece el centro del mapa en coordenadas específicas (longitud y latitud)
             zoom: 14 // Establece el nivel de zoom inicial
         });
 
