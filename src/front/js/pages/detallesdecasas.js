@@ -1,6 +1,5 @@
 
 import React, { useState, useEffect, useContext, useRef, useLayoutEffect } from 'react';
-
 import { Context } from "../store/appContext";
 import { useParams, useLocation, Link } from 'react-router-dom';
 import diego from "../../img/diego.jpg";
@@ -10,10 +9,13 @@ import "../../styles/Details.css";
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
 import { Map } from 'mapbox-gl';
+import { placeholder } from '@mapbox/mapbox-gl-geocoder/lib/localization.js';
+// import PlacesContext from '../context';
 // import { Loading } from './'
 function Details() {
   const defaultUserImage = "https://www.svgrepo.com/show/335455/profile-default.svg"
   const { store, actions } = useContext(Context)
+  const { isLoading, setLoading } = useContext(Context);
   let param = useParams()
   useEffect(() => {
     actions.getDetalles(param.id)
@@ -24,64 +26,107 @@ function Details() {
   // const mapaDiv2 = useRef();
   const mapa = useRef(null)
   const mapaconteiner = useRef(null)
-
-  const { isLoading, userLocation } = useContext(Context)
+  let markDetalle = null
+  const [longituddeta, setLongituddeta] = useState(0)
+  const [latituddeta, setLatitudeta] = useState(0)
+  // const { isLoading, userLocation } = useState(Context)
   //api de clave de mapbox
 
-  const initializeMap = () => {
-    if (mapa.current) {
-      return
-    }
-    // Crea una nueva instancia de un mapa de Mapbox
-    const map = new mapboxgl.Map({
-      container: mapaconteiner.current, // Asocia el mapa al elemento con el ID 'mapi'
-      style: 'mapbox://styles/mapbox/streets-v12', // Usa el estilo de mapa predeterminado de Mapbox
-      center: [-56.712822, -34.340986], // Establece el centro del mapa en coordenadas específicas (longitud y latitud)
-      zoom: 14 // Establece el nivel de zoom inicial
-    });
 
-    mapa.current = map
-  }
-  // useLayoutEffect(() => {
-  //   if (!isLoading) {
-  //     const map = new Map({
-  //       container: mapaDiv2.current, // container ID
-  //       style: 'mapbox://styles/mapbox/streets-v12', // style URL
-  //       center: [-55.568654, -30.884951], // starting position [lng, lat]
-  //       zoom: 20, // starting zoom
+  const longitud = parseFloat(store.casa?.longitud);
+  const latitud = parseFloat(store.casa?.latitud);
 
-  //     });
-  //     let marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
-  //       .setLngLat([store.casa?.longitud, store.casa?.latitud])
-  //     marker2.addTo(map.current);
-
-
-  //   }
-  // }), [isLoading]
   useEffect(() => {
-    if (!mapaconteiner.current) {
-      return
+    if (store.casa?.longitud && store.casa?.latitud) {
+      setLongituddeta(parseFloat(store.casa.longitud));
+      setLatitudeta(parseFloat(store.casa.latitud));
+      console.log("funca")
     }
+  }, [store.casa]);
+
+  // const initializeMap = () => {
+  //   if (mapa.current) {
+
+  //     return
+  //   }
+  //   // Crea una nueva instancia de un mapa de Mapbox
+  //   const map = new mapboxgl.Map({
+  //     container: mapaconteiner.current, // Asocia el mapa al elemento con el ID 'mapi'
+  //     style: 'mapbox://styles/mapbox/streets-v12', // Usa el estilo de mapa predeterminado de Mapbox
+  //     center: [-56.712822, -34.340986], // Establece el centro del mapa en coordenadas específicas (longitud y latitud)
+  //     zoom: 14 // Establece el nivel de zoom inicial
+  //   });
+  //   // if (markDetalle) {
+  //   //   console.log("detalle  ", markDetalle)
+  //   //   markDetalle.remove()
+  //   // }
+
+  //   mapa.current = map
+
+  // }
+
+  // useEffect(() => {
+
+  //   if (!mapaconteiner.current) {
+  //     return
+  //   }
+
+  //   initializeMap();
+
+  //   if (markDetalle) {
+  //     console.log(markDetalle)
+  //     markDetalle.remove()
+  //   }
+  // }, [mapaconteiner.current, isLoading, longituddeta, latituddeta]);
+
+  useEffect(() => {
+    if (!mapaconteiner.current || !store.casa || isNaN(longitud) || isNaN(latitud)) return;
+
+    const initializeMap = () => {
+      const newMap = new mapboxgl.Map({
+        container: mapaconteiner.current,
+        style: 'mapbox://styles/mapbox/streets-v12',
+        center: [longitud, latitud],
+        zoom: 12,
+      });
+
+      mapa.current = newMap;
+    };
+
     initializeMap();
-  }, [mapaconteiner.current]);
+
+    return () => {
+      if (mapa.current) {
+        mapa.current.remove(); // Eliminar el mapa antes de re-crear uno nuevo
+      }
+    };
+  }, [store.casa]);
+
   useEffect(() => {
     if (!mapa.current) {
       return;
+
     }
-    const longitud = parseFloat(store.casa?.longitud);
-    const latitud = parseFloat(store.casa?.latitud);
+    if (markDetalle) {
+      console.log(markDetalle)
+      markDetalle.remove()
+    }
+
     // Verificar si las coordenadas son números válidos
+
     if (!isNaN(longitud) && !isNaN(latitud)) {
       console.log("Coordenadas válidas:", longitud, latitud);
       // Crear el marcador solo si las coordenadas son válidas
-      let marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
+
+      let marker2Detalle = new mapboxgl.Marker({ color: 'red', rotation: 0 })
         .setLngLat([longitud, latitud])
         .addTo(mapa.current);
+      // markDetalle = marker2Detalle
+      // markDetalle.remove()
     } else {
       console.log("Coordenadas no válidas");
     }
-  }, [mapa.current, store.casa?.longitud, store.casa?.latitud]);
-
+  }, [mapa.current, store.casa?.longitud, store.casa?.latitud, store.casa],);
   return (
     <div className='details-container container mx-auto row d-flex cuerpo mt-5'>
       <Link to={"/"} className="text-decoration-none my-2 continue-navigation"><span className="text-dark w-25 my-4"><i className="fa-solid fa-arrow-left-long me-2"></i><span>Seguir navegando</span></span></Link>
@@ -164,7 +209,6 @@ function Details() {
     </div>
   );
 };
-
 
 
 
