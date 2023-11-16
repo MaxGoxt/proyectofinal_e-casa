@@ -128,9 +128,10 @@ function Details() {
     }
   }, [mapa.current, store.casa?.longitud, store.casa?.latitud, store.casa],);
   return (
-    <div className='details-container container mx-auto row d-flex cuerpo mt-5'>
-      <Link to={"/"} className="text-decoration-none my-2 continue-navigation"><span className="text-dark w-25 my-4"><i className="fa-solid fa-arrow-left-long me-2"></i><span>Seguir navegando</span></span></Link>
-      <div className="details-card-container col-12">
+    <div className='details-container mx-auto row d-flex cuerpo mt-5'>
+      <div className="details-card-container col-12 mt-5">
+      <Link to={"/"} className="text-decoration-none my-2 continue-navigation">
+        <span className="text-dark w-25 my-4 fs-4"><i className="fa-solid fa-arrow-left-long me-2"></i>Seguir navegando</span></Link>
         <div className="card-header bigger-screen d-flex" style={{ height: "430px" }}>
           {store.casa?.images?.map((img, index) => (
             <img key={index} src={img.url} className="details-card-img" style={{ maxWidth: "100%", width: "20px", flexGrow: "1", objectFit: "cover", opacity: ".9", transition: ".5s ease" }} />
