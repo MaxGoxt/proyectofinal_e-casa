@@ -12,7 +12,6 @@ import '../../styles/prueba.css';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { Carousel } from './Carousel.jsx';
 
-
 const schema = Yup.object().shape({
     title: Yup.string()
         .min(4, 'Demasiado corto!')
@@ -305,6 +304,7 @@ export const UploadImages = () => {
             <button ref={widgetRef} className="btn bg-azul-oscuro text-white mx-auto mt-5" onClick={() => widgetRef.current.open()}>
                 SUBIR IMAGEN
             </button>
+
             <span style={{ fontSize: "12px", color: "rgba(0, 0, 0, .6)" }} className="mx-auto">sube 5 imagenes o más</span>
             <form
                 onSubmit={handleSubmit}
@@ -348,7 +348,6 @@ export const UploadImages = () => {
                         {!isCategorySelected && <span className="mx-auto" style={{ margin: "-12px" }}>Selecciona una categoria</span>}
                     </div>
                 </div>
-
                 <div className="mb-3 w-50">
                     <label htmlFor="location" className="form-label azul-oscuro fw-bolder">Ubicación</label>
                     <input type="text"
