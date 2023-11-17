@@ -39,7 +39,7 @@ export const CarouselPRO = () => {
       const { activeSlide, prevSlide, sliderReady } = this.state;
       return /*#__PURE__*/(
         React.createElement("div", { className: classNames('slider', { 's--ready': sliderReady }), style:{fontFamily:"Roboto"} }, /*#__PURE__*/
-          React.createElement("p", { className: "slider__top-heading azul-oscuro", }, "E-Casa"), /*#__PURE__*/
+          React.createElement("p", { className: "slider__top-heading azul-oscuro fs-4", }, "E-Casa"), /*#__PURE__*/
           React.createElement("div", { className: "slider__slides" },
             this.props.slides.map((slide, index) => /*#__PURE__*/
               React.createElement("div", {
@@ -50,7 +50,7 @@ export const CarouselPRO = () => {
                   React.createElement("h3", { className: "slider__slide-subheading footer p-3 rounded" }, slide.country || slide.city), /*#__PURE__*/
                   React.createElement("h2", { className: "slider__slide-heading" },
                     slide.city.split('').map(l => /*#__PURE__*/React.createElement("span", { className: "footer p-3" }, l))), /*#__PURE__*/
-                  React.createElement("a", { className: "slider__slide-readmore text-white", href: baseURL + "/comp-nosotros" }, "Más detalles")), /*#__PURE__*/
+                  React.createElement("a", { className: "slider__slide-subheading azul-oscuro bg-white rounded py-2 px-3 fs-4", href: baseURL + "/comp-nosotros" }, "conocer más")), /*#__PURE__*/
                 React.createElement("div", { className: "slider__slide-parts" },
                   [...Array(this.IMAGE_PARTS).fill()].map((x, i) => /*#__PURE__*/
                     React.createElement("div", { className: "slider__slide-part", key: i }, /*#__PURE__*/
