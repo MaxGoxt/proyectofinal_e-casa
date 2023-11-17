@@ -428,7 +428,7 @@ export const UploadImages = () => {
                 </div>
 
 
-                <div className="mb-3 w-50">
+                <div className="mb-3 w-50 mt-3">
                     <label htmlFor="number_of_rooms" className="form-label azul-oscuro fw-bolder">N° de cuartos</label>
                     <input type="text"
                         name="numberOfRooms"
