@@ -1,7 +1,6 @@
 import React, { useState, useRef, useContext, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Context } from '../store/appContext';
-import { Link } from 'react-router-dom';
 const defaultUserImage = "https://www.svgrepo.com/show/335455/profile-default.svg"
 
 
@@ -43,7 +42,7 @@ function Perfil() {
         const options = {
             method: "POST",
             headers: { "Authorization": "Bearer " + localStorage.getItem('token') },
-            body: JSON.stringify({picture_url}),
+            body: JSON.stringify({ picture_url }),
         }
         try {
             const saveImage = async () => {
@@ -58,23 +57,21 @@ function Perfil() {
 
     return (
         <form className='container pb-3 bg-celeste-claro mt-5' onSubmit={handleSubmit}>
-            <Link to={"/"}><button type="submit" className="btn text-white bg-azul-oscuro  rounded-pill  my-4"><i className="fa-solid fa-xmark"></i></button></Link>
-            <div className='ms-3 d-flex  justify-content-center me-4'>
-                <div>
-                    <div className='justify-content-center'>
-                        <label id="profile_input" onClick={() => widgetRef.current.open()}>
-                            {store.perfil.profile_picture == "" ? <img src={defaultUserImage} style={{ width: "100px", height: "100px" }} className="rounded-circle " alt="..." /> :
-                                <img src={store.perfil.profile_picture} style={{ width: "100px", height: "100px" }} className="rounded-circle " alt="..." />}
-                        </label>
-                        <input id="profile_input" className="invisible d-none" type="file" onChange={e => setFiles(e.target.files)} />
-                    </div>
+            <button onClick={() => { navigate("/") }} className="btn text-white bg-azul-oscuro rounded-pill my-4"><i className="fa-solid fa-xmark"></i></button>
+            <div className='ms-3 d-flex justify-content-center me-4'>
+                <div className='text-center'>
+                    <label id="profile_input" onClick={() => widgetRef.current.open()}>
+                        {store.perfil.profile_picture == "" ? <img src={defaultUserImage} style={{ width: "100px", height: "100px" }} className="rounded-circle " alt="..." /> :
+                            <img src={store.perfil.profile_picture} style={{ width: "100px", height: "100px" }} className="rounded-circle " alt="..." />}
+                    </label>
+                    <input id="profile_input" className="invisible d-none" type="file" onChange={e => setFiles(e.target.files)} />
                     <strong><p className='m-auto'>{store.perfil.name}</p></strong>
                     <strong><p className='registro'>{store.perfil.email}</p></strong>
                 </div>
-                <div className='ms-3   justify-content-center mt-5'>
+                <div className='ms-3  justify-content-center mt-1'>
                     <li className="list-group-item duenio">
-                        <Link to={"/favoritos"}><i className="fa-regular fa-heart"></i></Link><br />
-                        <Link to={"/editarperfil"}><i className="fa-solid fa-gears my-3"></i></Link>
+                        <i onClick={() => { navigate("/favoritos") }} className="fa-solid fa-heart btn mb-2 p-3 btn-outline-secondary rounded-circle"></i><br />
+                        <i onClick={() => { navigate("/editarperfil") }} className="fa-solid fa-gears btn p-3 btn-outline-secondary rounded-circle"></i>
                     </li>
                 </div>
             </div>
@@ -87,21 +84,21 @@ function Perfil() {
                     <label htmlFor="exampleInputPassword1" className="form-label">Apellido</label>
                     <input type="apellido" className="form-control" disabled value={store.perfil.lastname} onChange={(e) => setLastName(e.target.value)} />
                 </div>
-                <div className="mb-3 azul-oscuro fw-bolder col-md-6">
+                <div className="mb-3 azul-oscuro fw-bolder col-md-4">
                     <label htmlFor="exampleInputPassword1" className="form-label">Email</label>
                     <input type="email" className="form-control" disabled value={store.perfil.email} onChange={(e) => setEmail(e.target.value)} />
                 </div>
-                <div className="mb-3 azul-oscuro fw-bolder col-md-6">
+                <div className="mb-3 azul-oscuro fw-bolder col-md-4">
                     <label htmlFor="exampleInputPassword1" className="form-label">Telefono de contacto</label>
                     <input type="contacto" className="form-control" disabled value={store.perfil.phoneNumber} onChange={(e) => setPhone(e.target.value)} />
                 </div>
-                <div className="mb-3 azul-oscuro fw-bolder col-md-6">
+                <div className="mb-3 azul-oscuro fw-bolder col-md-4">
                     <label htmlFor="exampleInputPassword1" className="form-label">Contraseña</label>
                     <input type="password" className="form-control" disabled value={store.perfil.password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
-                <div className="mb-3 azul-oscuro fw-bolder col-md-6">
+                <div className="mb-3 azul-oscuro fw-bolder col-md-12">
                     <label htmlFor="exampleInputPassword1" className="form-label" >Descripción</label>
-                    <textarea type="text" className="form-control" style={{height:"100px"}} disabled value={store.perfil.description} onChange={(e) => setConfpassword(e.target.value)} />
+                    <textarea type="text" className="form-control" style={{ height: "100px" }} disabled value={store.perfil.description} onChange={(e) => setConfpassword(e.target.value)} />
                 </div>
                 <button type="submit" className="text-white btn btn-danger d-grid gap-2 col-6 mx-auto" >Eliminar cuenta</button> <br />
             </div>

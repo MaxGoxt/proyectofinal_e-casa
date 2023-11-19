@@ -95,7 +95,7 @@ function Editarperfil() {
 
                 <div className="mb-3 azul-oscuro fw-bolder ">
                     <label htmlFor="description" className="form-label">Descripción</label>
-                    <textarea type="description" id="description" name="description" className="form-control w-50" style={{height:"100px"}} onChange={formik.handleChange}
+                    <textarea type="description" id="description" name="description" className="form-control w-100" style={{height:"100px"}} onChange={formik.handleChange}
                         value={formik.values.description} />
                     {formik.touched.description && formik.errors.description ? (
                         <div className='text-danger'>{formik.errors.description}</div>
