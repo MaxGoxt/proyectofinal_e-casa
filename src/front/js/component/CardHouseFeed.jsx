@@ -44,8 +44,10 @@ export const CardHouseFeed = (props) => {
                 }
 
             ></i></button>
-            <img src="https://res.cloudinary.com/dbviwbvqr/image/upload/v1700156194/uuscgazeavpf7epy2oao.jpg"
-                alt="pr-sample15" />
+            {/* {props.images?.map((i)=>(
+                <img src={i.url} alt="" />
+            ))} */}
+            
             <div className="image">
                 <div id={"carouselExampleControls" + props.id} className="carousel slide" data-bs-ride="carousel" data-bs-interval="false" data-interval="false" data-mdb-interval="false">
                     <div className="carousel-indicators">
