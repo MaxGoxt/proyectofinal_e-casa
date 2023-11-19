@@ -75,8 +75,8 @@ export const CardHouseFeed = (props) => {
                 </div>
             </div>
             <figcaption>
-                <h3 className="mb-3">{props.title}</h3>
-                <p className="mb-4" style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{props.location}.</p>
+                <h3 className="mb-3 mt-2">{props.title}</h3>
+                <p className="mb-3" style={{ overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{props.location}.</p>
                     {props.category == "Venta" ?
                         <p className="card-text">US${props.price}</p> :
                         <p className="card-text">${props.price}</p>}
