@@ -306,14 +306,12 @@ export const UploadImages = () => {
 
 
     return (
-
         <div className="d-flex flex-column mt-5 bg-celeste-claro">
             <h3 className="text-center pt-4 azul-oscuro my-4 fs-1 bold">Acá puedes publicar tu propiedad</h3>
             <Carousel imagesUrl={imagesUrl} />
             <button ref={widgetRef} className="btn bg-azul-oscuro text-white mx-auto mt-5" onClick={() => widgetRef.current.open()}>
                 SUBIR IMAGEN
             </button>
-
             <span style={{ fontSize: "12px", color: "rgba(0, 0, 0, .6)" }} className="mx-auto">sube 5 imagenes o más</span>
             <form
                 onSubmit={handleSubmit}
@@ -342,13 +340,13 @@ export const UploadImages = () => {
                         <p className="text-center azul-oscuro fw-bolder mx-5 px-5">Categoria</p>
                         <div className="d-flex justify-content-around" ref={category}>
                             <div className="form-check">
-                                <input style={{scale:"2"}} className="form-check-input" type="radio" name="category" value="Alquiler" id="flexRadioDefault1" />
+                                <input style={{ scale: "2" }} className="form-check-input" type="radio" name="category" value="Alquiler" id="flexRadioDefault1" />
                                 <label className="form-check-label" htmlFor="flexRadioDefault1">
                                     Alquiler
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input style={{scale:"2"}}  className="form-check-input" type="radio" name="category" value="Venta" id="flexRadioDefault2" />
+                                <input style={{ scale: "2" }} className="form-check-input" type="radio" name="category" value="Venta" id="flexRadioDefault2" />
                                 <label className="form-check-label" htmlFor="flexRadioDefault2">
                                     Venta
                                 </label>
@@ -366,9 +364,7 @@ export const UploadImages = () => {
                         id="location"
                         aria-describedby="emailHelp" />
                     {errors.location && <span className="text-danger fw-bold">{errors.location}</span>}
-
                 </div>
-
                 <div className='row col-12'>
                     <pre id="info" style={misEstilos}></pre>
                     {/* <div id="geocoder" className="  geocoder"></div> */}
@@ -382,59 +378,31 @@ export const UploadImages = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-50 d-flex justify-content-evenly mx-1 mt-3 flex-column flex-sm-row">
-                    <div className="mb-3 w-50 d-flex justify-content-around">
-                        <div className="w-30">
-                            <p className="text-center azul-oscuro fw-bolder">¿Tiene wifi?</p>
-                            <div className="d-flex justify-content-center" ref={wifi}>
-                                {/* <div className="form-check me-3">
-                                    <input className="form-check-input" type="radio" value="Si" name="wifi" id="siradio" />
-                                    <label className="form-check-label" value="No" htmlFor="siradio">
-                                        <p>Si</p>
-                                    </label>
-                                </div> */}
-                                <div className="checkbox-wrapper-10">
-                                    <input className="tgl tgl-flip" id="wifi" type="checkbox" />
-                                    <label style={{scale:"1.5"}}  className="tgl-btn" data-tg-off="No" data-tg-on="Si" htmlFor="wifi"></label>
-                                </div>
-                                {/* <div className="form-check">
-                                    <input className="form-check-input" type="radio" value="No" name="wifi" id="noradio" />
-                                    <label className="form-check-label" htmlFor="noradio">
-                                        No
-                                    </label>
-                                </div> */}
+                <div className="row w-75 mt-5 mb-2">
+                    <div className="mb-3 col-md-6">
+                        <p className="text-center azul-oscuro fw-bolder">¿Tiene wifi?</p>
+                        <div className="d-flex justify-content-center" ref={wifi}>
+                            <div className="checkbox-wrapper-10">
+                                <input className="tgl tgl-flip" id="wifi" type="checkbox" />
+                                <label style={{ scale: "1.5" }} className="tgl-btn" data-tg-off="No" data-tg-on="Si" htmlFor="wifi"></label>
                             </div>
                             {!isWifiSelected && <span className="mx-auto" style={{ margin: "-12px" }}>Selecciona una opción</span>}
                         </div>
                     </div>
-                    <div className="w-50 d-flex justify-content-evenly mx-1 flex-column flex-sm-row">
-                        <div className="w-30">
-                            <p className="azul-oscuro fw-bolder">¿Tiene estacionamiento?</p>
-                            <div className="d-flex justify-content-center" ref={parking}>
-                                <div className="form-check me-3">
+                    <div className="mb-3 col-md-6">
+                        <p className="text-center azul-oscuro fw-bolder">¿Tiene estacionamiento?</p>
+                        <div className="d-flex justify-content-center" ref={parking}>
+                            <div className="form-check me-3">
                                 <div className="checkbox-wrapper-10">
                                     <input className="tgl tgl-flip" id="parking" type="checkbox" />
-                                    <label style={{scale:"1.5"}}  className="tgl-btn" data-tg-off="No" data-tg-on="Si" htmlFor="parking"></label>
-                                </div>
-                                    {/* <input className="form-check-input" type="radio" value="Si" name="parking" id="siradio2" />
-                                    <label className="form-check-label" value="No" htmlFor="siradio2">
-                                        Si
-                                    </label>
-                                </div>
-                                <div className="form-check">
-                                    <input className="form-check-input" type="radio" value="No" name="parking" id="noradio2" />
-                                    <label className="form-check-label" htmlFor="noradio2">
-                                        No
-                                    </label> */}
+                                    <label style={{ scale: "1.5" }} className="tgl-btn" data-tg-off="No" data-tg-on="Si" htmlFor="parking"></label>
                                 </div>
                             </div>
                             {!isParkingSelected && <span className="mx-auto" style={{ margin: "-12px" }}>Selecciona un opción</span>}
                         </div>
                     </div>
                 </div>
-
-
-                <div className="mb-3 w-50 mt-3">
+                <div className="mb-3 w-50">
                     <label htmlFor="number_of_rooms" className="form-label azul-oscuro fw-bolder">N° de cuartos</label>
                     <input type="text"
                         name="numberOfRooms"
@@ -469,7 +437,6 @@ export const UploadImages = () => {
             </form>
             <div className="d-flex justify-content-center">
             </div>
-
         </div>
     );
 }
