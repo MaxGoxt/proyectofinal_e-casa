@@ -173,7 +173,7 @@ function Details() {
             <div className='px-3 mt-2 row'>
               <p className="bg-celeste-claro mt-4 col-md-10">{store.casa.description}</p>
               <div className='col-md-2 mb-5'>
-                <li className="list-group-item border-0 bg-celeste-claro"><strong>${store.casa.price} Mensual </strong></li>
+                <li className="list-group-item border-0 bg-celeste-claro"><strong>${store.casa.price} {store.casa.category == "Alquiler" ? "Mensual" : null} </strong></li>
                 <li className='list-group-item bg-celeste-claro border-0'>Disponible ahora</li>
               </div>
               <div className='text-center col-md-3'>

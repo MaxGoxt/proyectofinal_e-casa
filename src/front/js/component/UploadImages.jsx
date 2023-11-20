@@ -87,24 +87,22 @@ export const UploadImages = () => {
         }
 
         // WIFI
-        const wifiTrueBtn = wifi.current.childNodes[0].childNodes[0];
-        const wifiFalseBtn = wifi.current.childNodes[1].childNodes[0];
+        const wifiBtn = wifi.current.childNodes[0].childNodes[0];
 
-        if (wifiTrueBtn.checked) {
+        if (wifiBtn.checked) {
             wifiSelected = true;
-        } else if (wifiFalseBtn.checked) {
+        } else if (!wifiBtn.checked) {
             wifiSelected = false;
         } else {
             setIsWifiSelected(false);
         }
 
         // PARKING
-        const parkingTrueBtn = parking.current.childNodes[0].childNodes[0];
-        const parkingFalseBtn = parking.current.childNodes[1].childNodes[0];
+        const parkingBtn = parking.current.childNodes[0].childNodes[0];
 
-        if (parkingTrueBtn.checked) {
+        if (parkingBtn.checked) {
             parkingSelected = true;
-        } else if (parkingFalseBtn.checked) {
+        } else if (!parkingBtn.checked) {
             parkingSelected = false;
         } else {
             setIsParkingSelected(false);
@@ -327,7 +325,7 @@ export const UploadImages = () => {
                         name="title"
                         onChange={handleChange}
                         className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="title" aria-describedby="emailHelp" />
-                    {errors.title && <span>{errors.title}</span>}
+                    {errors.title && <span className="text-danger fw-bold">{errors.title}</span>}
                 </div>
                 <div className="mb-3 w-50">
                     <label htmlFor="description" className="form-label azul-oscuro fw-bolder">Descripción</label>
@@ -337,26 +335,26 @@ export const UploadImages = () => {
                         onChange={handleChange}
                         className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="description"
                         aria-describedby="emailHelp" />
-                    {errors.description && <span>{errors.description}</span>}
+                    {errors.description && <span className="text-danger fw-bold">{errors.description}</span>}
                 </div>
-                <div className="mb-3 w-50 d-flex justify-content-center">
-                    <div className="w-30">
-                        <p className="text-center azul-oscuro fw-bolder">Categoria</p>
-                        <div className="d-flex justify-content-center" ref={category}>
-                            <div className="form-check me-3">
-                                <input className="form-check-input" type="radio" name="category" value="Alquiler" id="flexRadioDefault1" />
+                <div className="mb-3 d-flex justify-content-center">
+                    <div className='w-100'>
+                        <p className="text-center azul-oscuro fw-bolder mx-5 px-5">Categoria</p>
+                        <div className="d-flex justify-content-around" ref={category}>
+                            <div className="form-check">
+                                <input style={{scale:"2"}} className="form-check-input" type="radio" name="category" value="Alquiler" id="flexRadioDefault1" />
                                 <label className="form-check-label" htmlFor="flexRadioDefault1">
                                     Alquiler
                                 </label>
                             </div>
                             <div className="form-check">
-                                <input className="form-check-input" type="radio" name="category" value="Venta" id="flexRadioDefault2" />
+                                <input style={{scale:"2"}}  className="form-check-input" type="radio" name="category" value="Venta" id="flexRadioDefault2" />
                                 <label className="form-check-label" htmlFor="flexRadioDefault2">
                                     Venta
                                 </label>
                             </div>
                         </div>
-                        {!isCategorySelected && <span className="mx-auto" style={{ margin: "-12px" }}>Selecciona una categoria</span>}
+                        {!isCategorySelected && <span className="text-danger fw-bold mx-auto" style={{ margin: "-12px" }}>Selecciona una categoria</span>}
                     </div>
                 </div>
                 <div className="mb-3 w-50">
@@ -367,7 +365,7 @@ export const UploadImages = () => {
                         className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0"
                         id="location"
                         aria-describedby="emailHelp" />
-                    {errors.location && <span>{errors.location}</span>}
+                    {errors.location && <span className="text-danger fw-bold">{errors.location}</span>}
 
                 </div>
 
@@ -384,23 +382,27 @@ export const UploadImages = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-50 d-flex justify-content-evenly mx-1 ">
+                <div className="w-50 d-flex justify-content-evenly mx-1 mt-5 mb-2">
                     <div className="mb-3 w-50 d-flex justify-content-around">
                         <div className="w-30">
                             <p className="text-center azul-oscuro fw-bolder">¿Tiene wifi?</p>
                             <div className="d-flex justify-content-center" ref={wifi}>
-                                <div className="form-check me-3">
+                                {/* <div className="form-check me-3">
                                     <input className="form-check-input" type="radio" value="Si" name="wifi" id="siradio" />
                                     <label className="form-check-label" value="No" htmlFor="siradio">
                                         <p>Si</p>
                                     </label>
+                                </div> */}
+                                <div className="checkbox-wrapper-10">
+                                    <input className="tgl tgl-flip" id="wifi" type="checkbox" />
+                                    <label style={{scale:"1.5"}}  className="tgl-btn" data-tg-off="No" data-tg-on="Si" htmlFor="wifi"></label>
                                 </div>
-                                <div className="form-check">
+                                {/* <div className="form-check">
                                     <input className="form-check-input" type="radio" value="No" name="wifi" id="noradio" />
                                     <label className="form-check-label" htmlFor="noradio">
                                         No
                                     </label>
-                                </div>
+                                </div> */}
                             </div>
                             {!isWifiSelected && <span className="mx-auto" style={{ margin: "-12px" }}>Selecciona una opción</span>}
                         </div>
@@ -410,7 +412,11 @@ export const UploadImages = () => {
                             <p className="text-center azul-oscuro fw-bolder">¿Tiene estacionamiento?</p>
                             <div className="d-flex justify-content-center" ref={parking}>
                                 <div className="form-check me-3">
-                                    <input className="form-check-input" type="radio" value="Si" name="parking" id="siradio2" />
+                                <div className="checkbox-wrapper-10">
+                                    <input className="tgl tgl-flip" id="parking" type="checkbox" />
+                                    <label style={{scale:"1.5"}}  className="tgl-btn" data-tg-off="No" data-tg-on="Si" htmlFor="parking"></label>
+                                </div>
+                                    {/* <input className="form-check-input" type="radio" value="Si" name="parking" id="siradio2" />
                                     <label className="form-check-label" value="No" htmlFor="siradio2">
                                         Si
                                     </label>
@@ -419,7 +425,7 @@ export const UploadImages = () => {
                                     <input className="form-check-input" type="radio" value="No" name="parking" id="noradio2" />
                                     <label className="form-check-label" htmlFor="noradio2">
                                         No
-                                    </label>
+                                    </label> */}
                                 </div>
                             </div>
                             {!isParkingSelected && <span className="mx-auto" style={{ margin: "-12px" }}>Selecciona un opción</span>}
@@ -435,7 +441,7 @@ export const UploadImages = () => {
                         onChange={handleChange}
                         className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="number_of_rooms"
                         aria-describedby="emailHelp" />
-                    {errors.numberOfRooms && <span>{errors.numberOfRooms}</span>}
+                    {errors.numberOfRooms && <span className="text-danger fw-bold">{errors.numberOfRooms}</span>}
                 </div>
                 <div className="mb-3 w-50">
                     <label htmlFor="number_of_bathrooms" className="form-label azul-oscuro fw-bolder">N° de baños</label>
@@ -446,7 +452,7 @@ export const UploadImages = () => {
                         className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0"
                         id="number_of_bathrooms"
                         aria-describedby="emailHelp" />
-                    {errors.numberOfBathrooms && <span>{errors.numberOfBathrooms}</span>}
+                    {errors.numberOfBathrooms && <span className="text-danger fw-bold">{errors.numberOfBathrooms}</span>}
                 </div>
 
                 <div className="mb-3 w-50">

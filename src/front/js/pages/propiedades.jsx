@@ -9,7 +9,6 @@ import { PanelCtrl } from "../component/panel_control.jsx";
 export const Propiedades = () => {
     const { store, actions } = useContext(Context)
     const param = useParams()
-
     useEffect( () => {
         actions.getMyPerfil(param)
         actions.getMyCasas()
@@ -18,8 +17,8 @@ export const Propiedades = () => {
 
     return (
             store.auth? 
-        <div className="pt-5 px-5 row gap-1">
-            <h1 className="azul-oscuro my-5">Administrar mis Propiedades</h1>
+        <div className="pt-5 row gap-1">
+            <h1 className="azul-oscuro text-center my-5">Administrar mis Propiedades</h1>
             {store.casaPropietario?.map((item, index) => {
                 return (
                     <CardProp
