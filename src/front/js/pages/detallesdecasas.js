@@ -86,7 +86,7 @@ function Details() {
       const newMap = new mapboxgl.Map({
         container: mapaconteiner.current,
         style: 'mapbox://styles/mapbox/streets-v12',
-        center: [longitud, latitud],
+        center: [store.casa?.longitud, store.casa?.latitud],
         zoom: 12,
       });
 

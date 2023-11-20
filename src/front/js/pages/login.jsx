@@ -43,6 +43,10 @@ export const Login = () => {
         },
     })
 
+    function cargar_casas() {
+        actions.getMyCasas();
+    }
+
     return (
         <div className="sing-up-container father-login-container d-flex justify-content-center align-items-center">
             <div className="d-flex bg-white align-items-center">
@@ -74,7 +78,7 @@ export const Login = () => {
                         </div>
                         <div className="mb-3 form-check">
                         </div>
-                        <button type="submit" className="btn text-white bg-azul-oscuro col-12 mx-auto">Entrar</button>
+                        <button type="submit" className="btn text-white bg-azul-oscuro col-12 mx-auto" onClick={cargar_casas()}>Entrar</button>
                     </form>
                     <div className="container">
                         {/* <p id="emailHelp" className="form-text my-3 d-flex justify-content-center">iniciar con Google</p> */}

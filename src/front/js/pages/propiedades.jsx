@@ -10,33 +10,34 @@ export const Propiedades = () => {
     const { store, actions } = useContext(Context)
     const param = useParams()
 
-    useEffect( () => {
-        actions.getMyPerfil(param)
+    useEffect(() => {
+        actions.getMyPerfil(param.user)
         actions.getMyCasas()
+        console.log("pepe", param)
     }, [])
 
-
+    // console.log(store.casaPropietario)
     return (
-            store.auth? 
-        <div className="pt-5 px-5 row gap-1">
-            <h1 className="azul-oscuro my-5">Administrar mis Propiedades</h1>
-            {store.casaPropietario?.map((item, index) => {
-                return (
-                    <CardProp
-                        key={index}
-                        title={item.title}
-                        location={item.location}
-                        price={item.price}
-                        id={item.id}
-                        description={item.description}
-                        category={item.category}
-                        parking={item.parking}
-                        wifi={item.wifi}
-                        images={item.images} />
-                )
-            })}
-            <PanelCtrl />
-        </div>
+        store.auth ?
+            <div className="pt-5 px-5 row gap-1">
+                <h1 className="azul-oscuro my-5">Administrar mis Propiedades</h1>
+                {store.casaPropietario?.map((item, index) => {
+                    return (
+                        <CardProp
+                            key={index}
+                            title={item.title}
+                            location={item.location}
+                            price={item.price}
+                            id={item.id}
+                            description={item.description}
+                            category={item.category}
+                            parking={item.parking}
+                            wifi={item.wifi}
+                            images={item.images} />
+                    )
+                })}
+                <PanelCtrl />
+            </div>
             : <h1 className="text-danger mx-5 my-5">🚫INAUTORIZADO🚫</h1>
     );
 };
