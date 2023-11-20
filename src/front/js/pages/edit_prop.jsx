@@ -115,19 +115,17 @@ export const EditProp = () => {
             categorySelected = ventaBtn.value;
         }
         // WIFI
-        const wifiTrueBtn = wifi.current.childNodes[0].childNodes[0];
-        const wifiFalseBtn = wifi.current.childNodes[1].childNodes[0];
-        if (wifiTrueBtn.checked) {
+        const wifiBtn = wifi.current.childNodes[0].childNodes[0];
+        if (wifiBtn.checked) {
             wifiSelected = true;
-        } else if (wifiFalseBtn.checked) {
+        } else if (!wifiBtn.checked) {
             wifiSelected = false;
         }
         // PARKING
-        const parkingTrueBtn = parking.current.childNodes[0].childNodes[0];
-        const parkingFalseBtn = parking.current.childNodes[1].childNodes[0];
-        if (parkingTrueBtn.checked) {
+        const parkingBtn = parking.current.childNodes[0].childNodes[0];
+        if (parkingBtn.checked) {
             parkingSelected = true;
-        } else if (parkingFalseBtn.checked) {
+        } else if (!parkingBtn.checked) {
             parkingSelected = false;
         }
         return {
@@ -276,14 +274,14 @@ export const EditProp = () => {
 
 
     return (
-        <div className="d-flex flex-column mt-5 bg-celeste-claro">
+        <div className="d-flex flex-column mt-5 text-center bg-celeste-claro">
             <h3 className="text-center pt-4 azul-oscuro my-4 fs-1 bold">Acá puedes editar tu propiedad</h3>
             {store.auth ? <>
-                <Carousel imagesUrl={images}/>
+                <Carousel imagesUrl={images} />
                 <button className="btn bg-azul-oscuro text-white mt-5 mx-auto" onClick={() => widgetRef.current.open()}>
                     SUBIR IMAGEN
                 </button>
-                <form onSubmit={(e) => { e.preventDefault(); uploadImage(param.id); navigate("/mis-propiedades/" + localStorage.getItem("user_id")) }} className="d-flex flex-column align-items-center mt-4">
+                <form onSubmit={(e) => { e.preventDefault(); uploadImage(param.id); navigate("/"/*mis-propiedades/" + localStorage.getItem("user_id")*/) }} className="d-flex flex-column align-items-center mt-4">
                     <div className="mb-3 w-50">
                         <label htmlFor="title" className="form-label azul-oscuro fw-bolder">Titulo</label>
                         <input type="text" name='title' className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="title" aria-describedby="emailHelp" value={inputValues.title} onChange={handleInputChange} ref={title} />
@@ -292,18 +290,18 @@ export const EditProp = () => {
                         <label htmlFor="description" className="form-label azul-oscuro fw-bolder">Descripción</label>
                         <input type="text" name='description' className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="description" aria-describedby="emailHelp" value={inputValues.description} onChange={handleInputChange} ref={description} />
                     </div>
-                    <div className="mb-3 w-50 d-flex justify-content-center">
-                        <div className="w-30">
-                            <p className="text-center azul-oscuro fw-bolder">Categoría</p>
-                            <div className="d-flex justify-content-center" ref={category}>
-                                <div className="form-check me-3">
-                                    <input className="form-check-input" type="radio" name="category" value="Alquiler" id="flexRadioDefault1" />
+                    <div className="mb-3 d-flex justify-content-center">
+                        <div className='w-100'>
+                            <p className="text-center azul-oscuro fw-bolder mx-5 px-5">Categoría</p>
+                            <div className="d-flex justify-content-around" ref={category}>
+                                <div className="form-check">
+                                    <input style={{ scale: "2" }} className="form-check-input" type="radio" name="category" value="Alquiler" id="flexRadioDefault1" />
                                     <label className="form-check-label" htmlFor="flexRadioDefault1">
                                         Alquiler
                                     </label>
                                 </div>
                                 <div className="form-check">
-                                    <input className="form-check-input" type="radio" name="category" value="Venta" id="flexRadioDefault2" />
+                                    <input style={{ scale: "2" }} className="form-check-input" type="radio" name="category" value="Venta" id="flexRadioDefault2" />
                                     <label className="form-check-label" htmlFor="flexRadioDefault2">
                                         Venta
                                     </label>
@@ -328,42 +326,22 @@ export const EditProp = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="w-50 d-flex justify-content-evenly mx-1 ">
-                        <div className="mb-3 w-50 d-flex justify-content-around">
-                            <div className="w-30 ">
-                                <p className="text-center azul-oscuro fw-bolder ">¿Tiene wifi?</p>
-                                <div className="d-flex justify-content-center" ref={wifi}>
-                                    <div className="form-check me-3">
-                                        <input className="form-check-input" type="radio" value="Si" name="wifi" id="siradio" onChange={handleInputChange} />
-                                        <label className="form-check-label" value="No" htmlFor="siradio">
-                                            <p>Si</p>
-                                        </label>
-                                    </div>
-                                    <div className="form-check">
-                                        <input className="form-check-input" type="radio" value="No" name="wifi" id="noradio" onChange={handleInputChange} />
-                                        <label className="form-check-label" htmlFor="noradio">
-                                            No
-                                        </label>
-                                    </div>
+                    <div className="row w-75 mt-5 mb-2">
+                        <div className="mb-3 col-md-6">
+                            <p className="text-center azul-oscuro fw-bolder ">¿Tiene wifi?</p>
+                            <div className="d-flex justify-content-center" ref={wifi}>
+                                <div className="checkbox-wrapper-10">
+                                    <input className="tgl tgl-flip" id="wifi" type="checkbox" />
+                                    <label style={{ scale: "1.5" }} className="tgl-btn" data-tg-off="No" data-tg-on="Si" htmlFor="wifi"></label>
                                 </div>
                             </div>
                         </div>
-                        <div className="mb-3 w-50 d-flex">
-                            <div className="w-30">
-                                <p className="text-center azul-oscuro fw-bolder">¿Tiene estacionamiento?</p>
-                                <div className="d-flex justify-content-center" ref={parking}>
-                                    <div className="form-check me-3">
-                                        <input className="form-check-input" type="radio" value="Si" name="parking" id="siradio2" onChange={handleInputChange} />
-                                        <label className="form-check-label" value="No" htmlFor="siradio2">
-                                            Si
-                                        </label>
-                                    </div>
-                                    <div className="form-check">
-                                        <input className="form-check-input" type="radio" value="No" name="parking" id="noradio2" onChange={handleInputChange} />
-                                        <label className="form-check-label" htmlFor="noradio2">
-                                            No
-                                        </label>
-                                    </div>
+                        <div className="mb-3 col-md-6">
+                            <p className="text-center azul-oscuro fw-bolder">¿Tiene estacionamiento?</p>
+                            <div className="d-flex justify-content-center" ref={parking}>
+                                <div className="checkbox-wrapper-10">
+                                    <input className="tgl tgl-flip" id="parking" type="checkbox" />
+                                    <label style={{ scale: "1.5" }} className="tgl-btn" data-tg-off="No" data-tg-on="Si" htmlFor="parking"></label>
                                 </div>
                             </div>
                         </div>
