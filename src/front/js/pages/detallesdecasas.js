@@ -131,8 +131,7 @@ function Details() {
   return (
     <div className='details-container mx-auto row d-flex cuerpo mt-5 azul-oscuro bg-celeste-claro'>
       <div className="details-card-container col-12 mt-4">
-        <Link to={"/"} className="text-decoration-none btn my-2 continue-navigation">
-          <span className="azul-oscuro w-25 my-5 pb-3 fs-4"><i className="fa-solid fa-arrow-left-long me-2"></i>Seguir navegando</span></Link>
+      {/* <button onClick={()=>{navigate("/")}} className="btn btn-outline-secondary rounded-pill my-4"><span class="w-25 my-5 pb-3 fs-4"><i class="fa-solid fa-arrow-left-long me-2"></i>Seguir navegando</span></button> */}
         <div className="card-header bigger-screen d-flex" style={{ height: "430px" }}>
           {store.casa?.images?.map((img, index) => (
             <img key={index} src={img.url} className="details-card-img" style={{ maxWidth: "100%", width: "20px", flexGrow: "1", objectFit: "cover", opacity: ".9", transition: ".5s ease" }} />
@@ -147,11 +146,11 @@ function Details() {
                 </div>
               ))}
             </div>
-            <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <button className="carousel-control-prev bg-black" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
               <span className="carousel-control-prev-icon" aria-hidden="true"></span>
               <span className="visually-hidden">Previous</span>
             </button>
-            <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <button className="carousel-control-next bg-black" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
               <span className="carousel-control-next-icon" aria-hidden="true"></span>
               <span className="visually-hidden">Next</span>
             </button>

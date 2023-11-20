@@ -56,8 +56,8 @@ function Perfil() {
     }
 
     return (
-        <form className='container pb-3 bg-celeste-claro mt-5' onSubmit={handleSubmit}>
-            <button onClick={() => { navigate("/") }} className="btn text-white bg-azul-oscuro rounded-pill my-4"><i className="fa-solid fa-xmark"></i></button>
+        <form className='container pb-3 bg-celeste-claro mt-5 pt-5' onSubmit={handleSubmit}>
+            {/* <button onClick={() => { navigate("/") }} className="btn text-white bg-azul-oscuro rounded-pill my-4"><i className="fa-solid fa-xmark"></i></button> */}
             <div className='ms-3 d-flex justify-content-center me-4'>
                 <div className='text-center'>
                     <label id="profile_input" onClick={() => widgetRef.current.open()}>

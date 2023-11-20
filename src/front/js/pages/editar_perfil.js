@@ -50,14 +50,14 @@ function Editarperfil() {
     return (
 
         <form className='container pb-3 bg-celeste-claro mt-5' onSubmit={formik.handleSubmit}>
-            <Link to={"/perfil"}><button className="btn text-white bg-azul-oscuro  rounded-pill  my-4"><i className="fa-solid fa-xmark"></i></button></Link>
-            <div className='ms-3 d-flex  justify-content-center me-4'>
-                <div className=' justify-content-center'>
-                    {store.perfil.profile_picture == "" ? <img src={defaultUserImage} style={{ width: "100px", height: "100px" }} className="rounded-circle " alt="..." /> :
-                    <img src={store.perfil.profile_picture} style={{ width: "100px", height: "100px" }} className="rounded-circle " alt="..." />}
-                    <strong><p className='m-auto'>{store.perfil.name}</p></strong>
-                    <strong><p className='registro'>{store.perfil.email}</p></strong>
-                </div>
+            <button onClick={() => { navigate("/perfil") }} className="btn text-white bg-azul-oscuro rounded-circle my-4"><i className="fa-solid fa-xmark"></i></button>
+            <div className='text-center'>
+                {store.perfil.profile_picture == "" ?
+                    <img src={defaultUserImage} style={{ width: "100px", height: "100px" }} className="rounded-circle m-auto" alt="..." /> :
+                    <img src={store.perfil.profile_picture} style={{ width: "100px", height: "100px" }} className="rounded-circle m-auto" alt="..." />
+                }
+                <strong><p className='m-auto'>{store.perfil.name}</p></strong>
+                <strong><p className='registro'>{store.perfil.email}</p></strong>
             </div>
             <div className='row g-3'>
                 <div className="mb-3 azul-oscuro fw-bolder col-md-6">
@@ -95,7 +95,7 @@ function Editarperfil() {
 
                 <div className="mb-3 azul-oscuro fw-bolder ">
                     <label htmlFor="description" className="form-label">Descripción</label>
-                    <textarea type="description" id="description" name="description" className="form-control w-100" style={{height:"100px"}} onChange={formik.handleChange}
+                    <textarea type="description" id="description" name="description" className="form-control w-100" style={{ height: "100px" }} onChange={formik.handleChange}
                         value={formik.values.description} />
                     {formik.touched.description && formik.errors.description ? (
                         <div className='text-danger'>{formik.errors.description}</div>
