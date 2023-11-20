@@ -382,7 +382,7 @@ export const UploadImages = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-50 d-flex justify-content-evenly mx-1 mt-5 mb-2">
+                <div className="w-50 d-flex justify-content-evenly mx-1 mt-3 flex-column flex-sm-row">
                     <div className="mb-3 w-50 d-flex justify-content-around">
                         <div className="w-30">
                             <p className="text-center azul-oscuro fw-bolder">¿Tiene wifi?</p>
@@ -407,9 +407,9 @@ export const UploadImages = () => {
                             {!isWifiSelected && <span className="mx-auto" style={{ margin: "-12px" }}>Selecciona una opción</span>}
                         </div>
                     </div>
-                    <div className="mb-3 w-50 d-flex justify-content-center">
+                    <div className="w-50 d-flex justify-content-evenly mx-1 flex-column flex-sm-row">
                         <div className="w-30">
-                            <p className="text-center azul-oscuro fw-bolder">¿Tiene estacionamiento?</p>
+                            <p className="azul-oscuro fw-bolder">¿Tiene estacionamiento?</p>
                             <div className="d-flex justify-content-center" ref={parking}>
                                 <div className="form-check me-3">
                                 <div className="checkbox-wrapper-10">
@@ -434,7 +434,7 @@ export const UploadImages = () => {
                 </div>
 
 
-                <div className="mb-3 w-50">
+                <div className="mb-3 w-50 mt-3">
                     <label htmlFor="number_of_rooms" className="form-label azul-oscuro fw-bolder">N° de cuartos</label>
                     <input type="text"
                         name="numberOfRooms"
