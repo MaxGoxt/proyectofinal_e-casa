@@ -10,10 +10,10 @@ export const Propiedades = () => {
     const { store, actions } = useContext(Context)
     const param = useParams()
     useEffect( () => {
-        actions.getMyPerfil(param)
+        // actions.getMyPerfil(param.id) estaba ahí pero causa error
         actions.getMyCasas()
     }, [])
-
+    console.log(store.casaPropietario);
 
     return (
             store.auth? 
@@ -26,7 +26,7 @@ export const Propiedades = () => {
                         title={item.title}
                         location={item.location}
                         price={item.price}
-                        id={item.id}
+                        id={index+1}
                         description={item.description}
                         category={item.category}
                         parking={item.parking}
