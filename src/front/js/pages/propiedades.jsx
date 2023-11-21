@@ -27,7 +27,7 @@ export const Propiedades = () => {
                         title={item.title}
                         location={item.location}
                         price={item.price}
-                        id={item.id}
+                        id={index+1}
                         description={item.description}
                         category={item.category}
                         parking={item.parking}
