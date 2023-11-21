@@ -18,7 +18,7 @@ export const Navbar = () => {
 
 	return (
 		!route.pathname.includes("signup") && !route.pathname.includes("login") && <nav className="fixed-top d-block navbar bg-celeste-claro shadow-sm">
-			<div className={`d-flex ${!route.pathname.includes("details") ? "otherplaces" : "container"} justify-content-between align-items-center`}>
+			<div className={`d-flex container justify-content-between align-items-center`}>
 				<Link to="/" className="text-decoration-none text-dark d-flex align-items-end">
 					<div>
 						<Logo />

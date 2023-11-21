@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useContext, useRef, useLayoutEffect } from 'react';
 import { Context } from "../store/appContext";
-import { useParams, useLocation, Link } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import diego from "../../img/diego.jpg";
 import { Comentarios } from '../component/comentarios_casas.jsx';
 import { PanelCtrl } from "../component/panel_control.jsx";
@@ -13,6 +13,7 @@ import { placeholder } from '@mapbox/mapbox-gl-geocoder/lib/localization.js';
 // import PlacesContext from '../context';
 // import { Loading } from './'
 function Details() {
+  const nav = useNavigate()
   const defaultUserImage = "https://www.svgrepo.com/show/335455/profile-default.svg"
   const { store, actions } = useContext(Context)
   const { isLoading, setLoading } = useContext(Context);
@@ -128,10 +129,9 @@ function Details() {
     }
   }, [mapa.current, store.casa?.longitud, store.casa?.latitud, store.casa],);
   return (
-    <div className='details-container mx-auto row d-flex cuerpo mt-5'>
-      <div className="details-card-container col-12 mt-5">
-      <Link to={"/"} className="text-decoration-none my-2 continue-navigation">
-        <span className="text-dark w-25 my-4 fs-4"><i className="fa-solid fa-arrow-left-long me-2"></i>Seguir navegando</span></Link>
+    <div className='details-container mx-auto row d-flex cuerpo mt-5 azul-oscuro bg-celeste-claro'>
+      <div className="details-card-container col-12 mt-4">
+      {/* <button onClick={()=>{navigate("/")}} className="btn btn-outline-secondary rounded-pill my-4"><span class="w-25 my-5 pb-3 fs-4"><i class="fa-solid fa-arrow-left-long me-2"></i>Seguir navegando</span></button> */}
         <div className="card-header bigger-screen d-flex" style={{ height: "430px" }}>
           {store.casa?.images?.map((img, index) => (
             <img key={index} src={img.url} className="details-card-img" style={{ maxWidth: "100%", width: "20px", flexGrow: "1", objectFit: "cover", opacity: ".9", transition: ".5s ease" }} />
@@ -146,54 +146,49 @@ function Details() {
                 </div>
               ))}
             </div>
-            <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <button className="carousel-control-prev bg-black" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
               <span className="carousel-control-prev-icon" aria-hidden="true"></span>
               <span className="visually-hidden">Previous</span>
             </button>
-            <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <button className="carousel-control-next bg-black" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
               <span className="carousel-control-next-icon" aria-hidden="true"></span>
               <span className="visually-hidden">Next</span>
             </button>
           </div>
         </div>
         <div className="card-body details-card-body">
-          <h2 className="card-title">{store.casa.title}</h2>
-          <p className="text-white bg-azul-oscuro d-flex details-btn justify-content-center btn my-4">{store.casa.category}</p>
+          <h2 className="mb-3">{store.casa.title}</h2>
+          <p className="text-white footer col-12 text-center p-2 rounded mb-5">{store.casa.category}</p>
           <h6 className='disponible'>Localización: {store.casa.location}</h6>
           <div className='ubumapa' ref={mapaconteiner} id='map2'
             style={{
               // backgroundColor: 'red',
               height: '300px',
-              width: '100vw',
+              width: '100%',
             }
             }>
           </div>
           <p className='detalle'>{store.casa.numberOfRooms} Habitaciones - {store.casa.numberOfBathrooms} Baños - 250mt2 </p>
+          <ul className="list-group list-group-flush azul-oscuro">
+            <div className='px-3 mt-2 row'>
+              <p className="bg-celeste-claro mt-4 col-md-10">{store.casa.description}</p>
+              <div className='col-md-2 mb-5'>
+                <li className="list-group-item border-0 bg-celeste-claro"><strong>${store.casa.price} {store.casa.category == "Alquiler" ? "Mensual" : null} </strong></li>
+                <li className='list-group-item bg-celeste-claro border-0'>Disponible ahora</li>
+              </div>
+              <div className='text-center col-md-3'>
+                {store.casa.info_propietario?.profile_picture == ""
+                  ? <img src={defaultUserImage} style={{ width: "50px", height: "50px" }} className="rounded-circle my-3 mx-5" alt="profile picture" />
+                  : <img src={store.casa.info_propietario?.profile_picture} style={{ width: "50px", height: "50px" }} className="rounded-circle my-3 mx-5" alt="profile picture" />
+                }
+                <li className='list-group-item border-0 bg-celeste-claro'>{store.casa.info_propietario?.name} {store.casa.info_propietario?.lastname}</li>
+                <li className='list-group-item border-0 bg-celeste-claro'>{store.casa.info_propietario?.account_creation_date}</li>
+                <button onClick={() => { nav("/perfilprop") }} className="text-white bg-azul-oscuro btn my-auto px-5">Contacto</button>
+              </div>
+              <li className="list-group-item bg-celeste-claro border-0 col-md-9 m-auto">{store.casa.info_propietario?.description}</li>
+            </div>
+          </ul>
         </div>
-        <ul className="list-group details-list-group list-group-flush">
-          <div className='d-flex justify-content-between'>
-            <div>
-              <p className='mb-0'><strong>${store.casa.price} Mensual </strong></p>
-              <p className='disponible mb-0'>Disponible ahora</p>
-            </div>
-            <button type="submit" className="text-white bg-azul-oscuro d-flex details-btn justify-content-center btn my-4 "><Link to={"/perfilprop"} style={{ color: '#ffffff', textDecoration: 'none' }}>Contacto</Link></button>
-          </div>
-          <li className="list-group-item details-list-group bg-celeste-claro mt-4 ms-0 ps-0"><p className="ps-0 ms-0">{store.casa.description}</p></li>
-          <div className='d-flex mt-2 '>
-            <div className=''>
-              <li className="list-group-item details-list-group duenio"><p>{store.casa.info_propietario?.name} {store.casa.info_propietario?.lastname}</p> <br />
-                <p className='registro'>{store.casa.info_propietario?.account_creation_date}</p>
-              </li>
-            </div>
-            {store.casa.info_propietario?.profile_picture == ""
-              ? <img src={defaultUserImage} style={{ width: "50px", height: "50px" }} className="rounded-circle " alt="profile picture" />
-              : <img src={store.casa.info_propietario?.profile_picture} style={{ width: "50px", height: "50px" }} className="rounded-circle " alt="profile picture" />
-            }
-          </div>
-          <li className="list-group-item details-list-group bg-celeste-claro ps-0 ms-0 mt-4">
-            {store.casa.info_propietario?.description}
-          </li>
-        </ul>
         {/* <h5 className='mt-3 mb-2 comments'>Comentarios:</h5> */}
         {/* <div className="comments d-flex " style={{ overflowX: 'scroll', scrollSnapType: 'x mandatory' }}>
           <Comentarios />

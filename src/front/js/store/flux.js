@@ -293,7 +293,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			},
 
-			getPerfilProp: async (id) => {
+			getPerfilProp: async (id) => { //se usa en perfilPropietario.js
 				if (id) {
 					localStorage.setItem("prop_id", getStore().casa.info_propietario?.user_id)
 				}
@@ -307,7 +307,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 
 			},
-			getCasasProp: async (id) => {
+			getCasasProp: async (id) => { //se usa en perfilPropietario.js
 				try {
 					let data = await axios.get(process.env.BACKEND_URL + '/api/user/houses/' + localStorage.getItem('prop_id'))
 					setStore({ casaPropietario: data.data.results });
@@ -318,7 +318,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			},
 
-			getMyPerfil: async (id) => {
+			getMyPerfil: async (id) => { //se usa en propiedades.jsx//card_propiedad
 				if (id) {
 					localStorage.setItem("prop_id", getStore().casa.info_propietario?.user_id)
 				}
