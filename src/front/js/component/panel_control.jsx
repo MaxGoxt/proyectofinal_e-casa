@@ -25,6 +25,12 @@ export const PanelCtrl = () => {
                                 <li><Link style={{textDecoration:"none"}} to={"/mis-propiedades/" + localStorage.getItem("user_id")}><p className="dropdown-item m-0">Ver mis propiedades<i className="fa-solid fa-gears ms-1"></i></p></Link></li>
                                 <li><Link style={{textDecoration:"none"}} to={"/upload"}><p className="dropdown-item m-0">Ofrece una propiedad nueva</p></Link></li>
                                 <li><Link style={{textDecoration:"none"}} to={"/upgradeplan"}><p className="dropdown-item m-0">Planes</p></Link></li>
+                                <li>
+									<Link onClick={() => actions.logout()} to="/login" className="dropdown-item text-decoration-none text-danger">
+										Cerrar sesión
+										<i className="fa-solid fa-right-from-bracket ms-4"></i>
+									</Link>
+								</li>
                             </ul> :
                             <ul className="dropdown-menu">
                                 <li><Link style={{textDecoration:"none"}} to={"/upload"}><p className="dropdown-item m-0">Ofrece tu propiedad</p></Link></li>
