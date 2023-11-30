@@ -209,7 +209,9 @@ export const UploadImages = () => {
             container: mapaconteiner.current, // Asocia el mapa al elemento con el ID 'mapi'
             style: 'mapbox://styles/mapbox/streets-v12', // Usa el estilo de mapa predeterminado de Mapbox
             center: [-56.712822, -34.340986], // Establece el centro del mapa en coordenadas específicas (longitud y latitud)
-            zoom: 14 // Establece el nivel de zoom inicial
+            zoom: 14, // Establece el nivel de zoom inicial
+            cooperativeGestures: true
+
         });
 
 

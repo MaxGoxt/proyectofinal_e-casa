@@ -12,9 +12,10 @@ import { Map } from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '../../styles/prueba.css';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
-import { element } from "prop-types";
+import PropTypes from "prop-types";
 
-export const MapaHome = () => {
+
+export const MapaHome = (props) => {
 
     const { store, actions } = useContext(Context)
     const navigate = useNavigate();
@@ -48,7 +49,8 @@ export const MapaHome = () => {
         color: "#222",
         background: "#fff"
     };
-    let lastMarker = ""
+    let lastMarker = null
+    let lastMarker2 = null
 
 
     // console.log(mapa)
@@ -64,7 +66,9 @@ export const MapaHome = () => {
             container: mapaconteiner.current, // Asocia el mapa al elemento con el ID 'mapi'
             style: 'mapbox://styles/mapbox/streets-v12', // Usa el estilo de mapa predeterminado de Mapbox
             center: [-56.712822, -34.340986], // Establece el centro del mapa en coordenadas específicas (longitud y latitud)
-            zoom: 14 // Establece el nivel de zoom inicial
+            zoom: 1, // Establece el nivel de zoom inicial
+            // cooperativeGestures: true
+
         });
 
 
@@ -90,7 +94,7 @@ export const MapaHome = () => {
             return
         }
         initializeMap();
-    }, [mapaconteiner.current]);
+    }, [mapaconteiner.current, props.Datos_Casas]);
 
 
     useLayoutEffect(() => {
@@ -99,34 +103,82 @@ export const MapaHome = () => {
             return
         }
         function marcador(lat, lon, des) {
-
+            const popup = new mapboxgl.Popup({ offset: 25 }).setText(
+                'Construction on the Washington Monument began in 1848.'
+            );
 
             // if (mark) {
             //     console.log(mark)
             //     mark.remove()
             // }
 
-            let marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
-                .setLngLat([lon, lat])
+            if (des == "Alquiler") {
+                if (lastMarker) {
+                    lastMarker.remove()
 
-            // // lastMarker = marker2
-            // setLatituD(lat.toString())
-            // setLongituD(lon.toString())
+                }
 
-            marker2.addTo(mapa.current);
-            // mark = marker2
-            // console.log(lastMarker)
+                if (lastMarker2) {
+                    lastMarker2.remove()
+                }
+
+                let marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
+                    .setLngLat([lon, lat])
+                    .setPopup(popup)
+
+                lastMarker2 = marker2
+                // setLatituD(lat.toString())
+                // setLongituD(lon.toString())
+
+                marker2.addTo(mapa.current);
+                // mark = marker2
+                // console.log(lastMarker)
+            } else {
+
+
+                if (lastMarker2) {
+                    lastMarker2.remove()
+
+                }
+                if (lastMarker) {
+                    lastMarker.remove()
+
+                }
+
+                let marker1 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
+                    .setLngLat([lon, lat])
+                    .setPopup(popup)
+
+                lastMarker = marker1
+                // setLatituD(lat.toString())
+                // setLongituD(lon.toString())
+
+                marker1.addTo(mapa.current);
+                // mark = marker2
+                // console.log(lastMarker)
+            }
+
+
 
         }
-        if (store.alquileres) {
+        if (props.Datos_Casas) {
             let pepe = []
+            if (props.Datos_Casas.category = "Alquiler") {
+                const alquileres_casas = props.Datos_Casas?.map((item, index) => {
+                    pepe.push(item)
+                    console.log(item.longitud, item.latitud, item.category)
+                    marcador(item.longitud, item.latitud, item.category)
 
-            const demo = store.alquileres?.map((item, index) => {
-                pepe.push(item)
-                console.log(item)
-                marcador(item.longitud, item.latitud)
+                });
+            } else {
+                const ventas_casas = props.Datos_Casas?.map((item, index) => {
+                    pepe.push(item)
+                    console.log(item.longitud, item.latitud, item.category)
+                    marcador(item.longitud, item.latitud, item.category)
 
-            });
+                });
+            }
+
             console.log("prueñashe ", pepe)
 
         }
@@ -160,8 +212,14 @@ export const MapaHome = () => {
 
         // });
 
-    }, [mark, mapa.current, store.alquileres])
+    }, [mark, mapa.current, store.alquileres, props.Datos_Casas])
 
+    function name() {
+        //   if (mark) {
+        // console.log(mark)
+        lastMarker.remove()
+        // }
+    }
 
     return (
 
@@ -182,5 +240,15 @@ export const MapaHome = () => {
         </div>
     )
 }
+
+
+
+
+MapaHome.propTypes = {
+
+    Datos_Casas: PropTypes.array,
+
+
+};
 
 export default MapaHome;

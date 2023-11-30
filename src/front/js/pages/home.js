@@ -16,6 +16,7 @@ export const Home = () => {
     const [loginST, setLoginST] = useState("active");
     const [register, setRegister] = useState("");
     const [registerST, setRegisterST] = useState("");
+    const [casas_datos, setCasas_datos] = useState([]);
 
     const [showRentFilteredResults, setRentFilteredResults] = useState(false);
     const [showSalesFilteredResults, setSalesFilteredResults] = useState(false);
@@ -31,6 +32,8 @@ export const Home = () => {
             setLoginST("active")
             setRegister("")
             setRegisterST("")
+            setCasas_datos([])
+            setCasas_datos(store.alquileres)
         }
     }
 
@@ -40,8 +43,13 @@ export const Home = () => {
             setRegisterST("active")
             setLogin("")
             setLoginST("")
+            setCasas_datos([])
+            setCasas_datos(store.ventas)
         }
     }
+
+
+    
     console.log("alquileres ", store.alquileres)
     const filterRentByPrice = (minPriceSlider, maxPriceSlider) => {
         actions.filterRentByPrice(minPriceSlider, maxPriceSlider);
@@ -54,7 +62,7 @@ export const Home = () => {
     }
 
 
-
+    console.log("props ", casas_datos)
     return (
         <div className="text-white my-5">
             <div className="position-relative">
@@ -72,9 +80,9 @@ export const Home = () => {
                     </div>
                 </div>
             </div>
-
-            <MapaHome />
-
+            <div className="div_Mapa_Home">
+                <MapaHome Datos_Casas={casas_datos} />
+            </div>
             <ul className="animated animatedFadeInDown fadeInDown nav-container nav nav-pills nav-justified mt-5 bg-white p-3 rounded-top" id="ex1" role="tablist">
                 <li className="nav-item" role="presentation">
                     <h2 className={"bg-azul-oscuro rounded me-1 py-1 " + loginST} id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
@@ -151,6 +159,8 @@ export const Home = () => {
                 </div>
             </div>
             <PanelCtrl />
-        </div>
+        </div >
     );
 };
+
+
