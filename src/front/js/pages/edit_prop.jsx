@@ -273,6 +273,7 @@ export const EditProp = () => {
     }, [markEdit, mapaEdit.current])
 
 
+
     return (
         <div className="d-flex flex-column mt-5 text-center bg-celeste-claro">
             <h3 className="text-center pt-4 azul-oscuro my-4 fs-1 bold">Acá puedes editar tu propiedad</h3>
@@ -281,7 +282,7 @@ export const EditProp = () => {
                 <button className="btn bg-azul-oscuro text-white mt-5 mx-auto" onClick={() => widgetRef.current.open()}>
                     SUBIR IMAGEN
                 </button>
-                <form onSubmit={(e) => { e.preventDefault(); uploadImage(param.id); navigate("/"/*mis-propiedades/" + localStorage.getItem("user_id")*/) }} className="d-flex flex-column align-items-center mt-4">
+                <form onSubmit={async (e) => { e.preventDefault(); uploadImage(param.id); await actions.getMyCasas(); navigate("/mis-propiedades/" + localStorage.getItem("user_id")) }} className="d-flex flex-column align-items-center mt-4">
                     <div className="mb-3 w-50">
                         <label htmlFor="title" className="form-label azul-oscuro fw-bolder">Titulo</label>
                         <input type="text" name='title' className="form-control bg-celeste-claro border-bottom border-top-0 border-end-0 border-start-0" id="title" aria-describedby="emailHelp" value={inputValues.title} onChange={handleInputChange} ref={title} />
@@ -363,6 +364,6 @@ export const EditProp = () => {
                 <div className="d-flex justify-content-center">
                 </div></>
                 : <h2 className='text-danger m-auto mt-5'>🚫INAUTORIZADO🚫</h2>}
-        </div>
+        </div >
     );
 }

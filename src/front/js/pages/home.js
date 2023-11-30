@@ -7,8 +7,8 @@ import { CardHouseFeed } from "../component/CardHouseFeed.jsx";
 import { FilterMenu } from "../component/FilterMenu.jsx";
 import Casitas from "../component/Casitas.jsx";
 import SelectCasita from "../component/SelectCasita.jsx";
-import {CarouselPRO} from '../component/Carrousel2/carouselPRO.jsx'
-
+import { CarouselPRO } from '../component/Carrousel2/carouselPRO.jsx'
+import MapaHome from '../component/mapaHome.jsx'
 
 export const Home = () => {
     const { store, actions } = useContext(Context);
@@ -42,7 +42,7 @@ export const Home = () => {
             setLoginST("")
         }
     }
-
+    console.log("alquileres ", store.alquileres)
     const filterRentByPrice = (minPriceSlider, maxPriceSlider) => {
         actions.filterRentByPrice(minPriceSlider, maxPriceSlider);
         setRentFilteredResults(true);
@@ -54,7 +54,7 @@ export const Home = () => {
     }
 
 
-    
+
     return (
         <div className="text-white my-5">
             <div className="position-relative">
@@ -63,15 +63,18 @@ export const Home = () => {
                 className="w-100 hero-image shadow-lg" 
                 style={{ height: "320px", objectFit: "cover", objectPosition: "top" }} 
                 /> */}
-                <CarouselPRO/>
+                <CarouselPRO />
                 <div className="d-flex position-absolute top-0 start-0 p-4 w-75 h-100">
                     {/* <h2 className="azul-oscuro fs-1 fw-bolder animated animatedFadeInUp fadeInUp">Encuentra tu lugar <br /> aquí</h2> */}
-                    <div className="position-absolute m-5" style={{ width: '25%', minWidth: "100px"}}>
+                    <div className="position-absolute m-5" style={{ width: '25%', minWidth: "100px" }}>
                         {/* <Casitas /> */}
                         {/* <SelectCasita/> */}
                     </div>
                 </div>
             </div>
+
+            <MapaHome />
+
             <ul className="animated animatedFadeInDown fadeInDown nav-container nav nav-pills nav-justified mt-5 bg-white p-3 rounded-top" id="ex1" role="tablist">
                 <li className="nav-item" role="presentation">
                     <h2 className={"bg-azul-oscuro rounded me-1 py-1 " + loginST} id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
@@ -88,7 +91,7 @@ export const Home = () => {
                         setShowFilteredResults={setRentFilteredResults}
                         filter={filterRentByPrice}
                         maxValue={100000}
-                        />
+                    />
                     <div className={"row gap-1"} id="pills-login" role="tabpanel" aria-labelledby="tab-login">
                         {!showRentFilteredResults
                             ? store.alquileres.map(item => (
@@ -97,9 +100,9 @@ export const Home = () => {
                                     location={item.location}
                                     price={item.price}
                                     id={item.id}
-                                    images={item.images} 
+                                    images={item.images}
                                     title={item.title}
-                                    />
+                                />
                             ))
                             : store.filterRent.map(item => (
                                 <CardHouseFeed
@@ -107,10 +110,10 @@ export const Home = () => {
                                     location={item.location}
                                     price={item.price}
                                     id={item.id}
-                                    images={item.images} 
+                                    images={item.images}
                                     title={item.title}
-                                    />
-                                    
+                                />
+
                             ))
                         }
                     </div>
@@ -131,7 +134,7 @@ export const Home = () => {
                                     id={item.id}
                                     images={item.images}
                                     title={item.title}
-                                     />
+                                />
                             ))
                             : store.filterSales.map(item => (
                                 <CardHouseFeed
@@ -139,9 +142,9 @@ export const Home = () => {
                                     location={item.location}
                                     price={item.price}
                                     id={item.id}
-                                    images={item.images} 
+                                    images={item.images}
                                     title={item.title}
-                                    />
+                                />
                             ))
                         }
                     </div>
