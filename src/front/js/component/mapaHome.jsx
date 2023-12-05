@@ -24,15 +24,19 @@ export const MapaHome = (props) => {
     // console.log("este", mark)
     const [longituD, setLongituD] = useState()
     const [latituD, setLatituD] = useState()
+    const [prueba, setPrueba] = useState()
 
 
 
 
-    console.log(longituD, latituD)
+
+    // console.log(longituD, latituD)
     // console.log(lati, long)
     // const [mapa, setMapa] = useState(null)
     const mapa = useRef(null)
     const mapaconteiner = useRef(null)
+
+    // console.log("propsHome ", props.Datos_Casas)
 
 
     const misEstilos = {
@@ -49,12 +53,39 @@ export const MapaHome = (props) => {
         color: "#222",
         background: "#fff"
     };
-    let lastMarker = null
-    let lastMarker2 = null
+    // let lastMarker = null
+    // let lastMarker2 = null
+    const [lastMarker, setLastMarker] = useState(null)
+    const [lastMarker2, setLastMarker2] = useState(null)
 
-
+    useEffect(() => {
+        setPrueba(props.Datos_Casas)
+    }, [props.Datos_Casas]);
     // console.log(mapa)
 
+
+    useEffect(() => {
+
+        if (lastMarker != null) {
+            lastMarker.remove()
+
+        }
+
+    }, [lastMarker2]);
+    // console.log(mapa)
+
+
+    useEffect(() => {
+
+        if (lastMarker2 != null) {
+            lastMarker2.remove()
+        }
+
+    }, [lastMarker]);
+    // console.log(mapa)
+
+
+    // console.log("maxi_no_sabe ", prueba)
     const initializeMap = () => {
 
         if (mapa.current) {
@@ -99,6 +130,8 @@ export const MapaHome = (props) => {
 
     useLayoutEffect(() => {
         // console.log(mapa.current)
+
+
         if (!mapa.current) {
             return
         }
@@ -107,79 +140,98 @@ export const MapaHome = (props) => {
                 'Construction on the Washington Monument began in 1848.'
             );
 
-            // if (mark) {
-            //     console.log(mark)
-            //     mark.remove()
+            // if (lastMarker) {
+            //     // console.log(mark)
+            //     lastMarker.remove()
+
+            // }
+
+            // if (lastMarker2) {
+            //     // console.log(mark)
+            //     lastMarker2.remove()
             // }
 
             if (des == "Alquiler") {
-                if (lastMarker) {
-                    lastMarker.remove()
+                // console.log(lastMarker, lastMarker2)
 
-                }
+                // lastMarker = null
+                // if (lastMarker) {
+                //     lastMarker.remove()
 
-                if (lastMarker2) {
-                    lastMarker2.remove()
-                }
+                // }
+
+                // if (lastMarker2) {
+                //     lastMarker2.remove()
+                // }
 
                 let marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
                     .setLngLat([lon, lat])
                     .setPopup(popup)
 
-                lastMarker2 = marker2
                 // setLatituD(lat.toString())
                 // setLongituD(lon.toString())
+
+
 
                 marker2.addTo(mapa.current);
                 // mark = marker2
                 // console.log(lastMarker)
+                setLastMarker2(marker2)
             } else {
+                // console.log(lastMarker, lastMarker2)
+                // lastMarker2 = null
 
+                // if (lastMarker2) {
+                //     lastMarker2.remove()
 
-                if (lastMarker2) {
-                    lastMarker2.remove()
+                // }
+                // if (lastMarker) {
+                //     lastMarker.remove()
 
-                }
-                if (lastMarker) {
-                    lastMarker.remove()
-
-                }
+                // }
 
                 let marker1 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
                     .setLngLat([lon, lat])
                     .setPopup(popup)
 
-                lastMarker = marker1
+
+
+
                 // setLatituD(lat.toString())
                 // setLongituD(lon.toString())
 
                 marker1.addTo(mapa.current);
                 // mark = marker2
                 // console.log(lastMarker)
+                setLastMarker(marker1)                // lastMarker.remove()
+                console.log("s", lastMarker)
             }
 
 
 
         }
+
+
+
         if (props.Datos_Casas) {
             let pepe = []
-            if (props.Datos_Casas.category = "Alquiler") {
+            if (props.Datos_Casas[0]?.category == "Alquiler") {
                 const alquileres_casas = props.Datos_Casas?.map((item, index) => {
                     pepe.push(item)
-                    console.log(item.longitud, item.latitud, item.category)
+                    // console.log(item.longitud, item.latitud, item.category)
                     marcador(item.longitud, item.latitud, item.category)
 
                 });
             } else {
                 const ventas_casas = props.Datos_Casas?.map((item, index) => {
                     pepe.push(item)
-                    console.log(item.longitud, item.latitud, item.category)
+                    // console.log(item.longitud, item.latitud, item.category)
                     marcador(item.longitud, item.latitud, item.category)
 
                 });
             }
 
-            console.log("prueñashe ", pepe)
+            // console.log("prueñashe ", pepe)
 
         }
 
@@ -189,7 +241,7 @@ export const MapaHome = (props) => {
         //     return pepe
         // })
 
-
+        console.log("propsHome ", props.Datos_Casas[0]?.category)
         // // Define un evento que se activa cuando el mapa se hace clic
         // mapa.current.on('click', (e) => {
 
@@ -211,8 +263,8 @@ export const MapaHome = (props) => {
 
 
         // });
-
-    }, [mark, mapa.current, store.alquileres, props.Datos_Casas])
+        // initializeMap();
+    }, [mark, mapa.current, store.alquileres, props.Datos_Casas[0]?.category])
 
     function name() {
         //   if (mark) {
@@ -223,17 +275,18 @@ export const MapaHome = (props) => {
 
     return (
 
-        <div>
-            <div className='row col-12'>
+        <div className=" ">
+            <div className=''>
                 <pre id="info" style={misEstilos}></pre>
                 {/* <div id="geocoder" className="  geocoder"></div> */}
-                <div className='row col-12 '>
+                <div className='col-12 '>
                     <div id='mapi' ref={mapaconteiner}
                         style={{
                             // backgroundColor: 'red',
                             height: '500px',
                             width: '100vw',
-                        }}>
+                        }}
+                    >
                     </div>
                 </div>
             </div>

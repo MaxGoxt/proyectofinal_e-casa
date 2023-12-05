@@ -274,7 +274,7 @@ export const UploadImages = () => {
 
             marker2.addTo(mapa.current);
             mark = marker2
-            console.log(lastMarker)
+           
 
         }
 

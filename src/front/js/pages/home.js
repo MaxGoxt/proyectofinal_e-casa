@@ -32,6 +32,8 @@ export const Home = () => {
             setLoginST("active")
             setRegister("")
             setRegisterST("")
+            // casas_datos.splice(0, casas_datos.length);
+
             setCasas_datos([])
             setCasas_datos(store.alquileres)
         }
@@ -43,14 +45,16 @@ export const Home = () => {
             setRegisterST("active")
             setLogin("")
             setLoginST("")
+            // casas_datos.splice(0, casas_datos.length);
+
             setCasas_datos([])
             setCasas_datos(store.ventas)
         }
     }
 
 
-    
-    console.log("alquileres ", store.alquileres)
+    console.log("casaYeeHome ", casas_datos)
+    // console.log("alquileres ", store.alquileres)
     const filterRentByPrice = (minPriceSlider, maxPriceSlider) => {
         actions.filterRentByPrice(minPriceSlider, maxPriceSlider);
         setRentFilteredResults(true);
@@ -62,7 +66,7 @@ export const Home = () => {
     }
 
 
-    console.log("props ", casas_datos)
+    // console.log("props ", casas_datos)
     return (
         <div className="text-white my-5">
             <div className="position-relative">
