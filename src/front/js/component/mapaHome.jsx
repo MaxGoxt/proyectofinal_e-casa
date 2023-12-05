@@ -16,7 +16,9 @@ import PropTypes from "prop-types";
 
 
 export const MapaHome = (props) => {
+    // useEffect(() => {
 
+    // }, []);
     const { store, actions } = useContext(Context)
     const navigate = useNavigate();
 
@@ -25,7 +27,6 @@ export const MapaHome = (props) => {
     const [longituD, setLongituD] = useState()
     const [latituD, setLatituD] = useState()
     const [prueba, setPrueba] = useState()
-
 
 
 
@@ -53,10 +54,10 @@ export const MapaHome = (props) => {
         color: "#222",
         background: "#fff"
     };
-    // let lastMarker = null
-    // let lastMarker2 = null
-    const [lastMarker, setLastMarker] = useState(null)
-    const [lastMarker2, setLastMarker2] = useState(null)
+    let lastMarker = null
+    const lastMarker2 = null
+    // const [lastMarker, setLastMarker] = useState(null)
+    // const [lastMarker2, setLastMarker2] = useState(null)
 
     useEffect(() => {
         setPrueba(props.Datos_Casas)
@@ -64,26 +65,29 @@ export const MapaHome = (props) => {
     // console.log(mapa)
 
 
-    useEffect(() => {
 
-        if (lastMarker != null) {
-            lastMarker.remove()
+    // useEffect(() => {
 
-        }
+    //     if (lastMarker != null) {
+    //         lastMarker.remove()
 
-    }, [lastMarker2]);
-    // console.log(mapa)
+    //     }
+
+    // }, [lastMarker2]);
+    // // console.log(mapa)
 
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (lastMarker2 != null) {
-            lastMarker2.remove()
-        }
+    //     if (lastMarker2 != null) {
+    //         lastMarker2.remove()
+    //     }
 
-    }, [lastMarker]);
-    // console.log(mapa)
-
+    // }, [lastMarker]);
+    // // console.log(mapa)
+    if (props.marcador) {
+        props.marcador.remove()
+    }
 
     // console.log("maxi_no_sabe ", prueba)
     const initializeMap = () => {
@@ -135,77 +139,47 @@ export const MapaHome = (props) => {
         if (!mapa.current) {
             return
         }
-        function marcador(lat, lon, des) {
+        function marcador(lat, lon) {
+            console.log(lat, lon)
+
             const popup = new mapboxgl.Popup({ offset: 25 }).setText(
                 'Construction on the Washington Monument began in 1848.'
             );
-
-            // if (lastMarker) {
-            //     // console.log(mark)
-            //     lastMarker.remove()
-
-            // }
+            if (props.marcador) {
+                props.marcador.remove()
+            }
 
             // if (lastMarker2) {
-            //     // console.log(mark)
             //     lastMarker2.remove()
+
+            let marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
+                .setLngLat([lon, lat])
+                .setPopup(popup)
+
+
+            marker2.addTo(mapa.current);
+
+            props.añadirmark(marker2)
+            // setTimeout(() => {
+
+
+            // }, 3000);
+            // } else {
+
+            //     let marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
+            //         .setLngLat([lon, lat])
+            //         .setPopup(popup)
+
+
+            //     marker2.addTo(mapa.current);
+
+            //     lastMarker2 = marker2
+
             // }
 
-            if (des == "Alquiler") {
-                // console.log(lastMarker, lastMarker2)
-
-                // lastMarker = null
-                // if (lastMarker) {
-                //     lastMarker.remove()
-
-                // }
-
-                // if (lastMarker2) {
-                //     lastMarker2.remove()
-                // }
-
-                let marker2 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
-                    .setLngLat([lon, lat])
-                    .setPopup(popup)
-
-                // setLatituD(lat.toString())
-                // setLongituD(lon.toString())
 
 
 
-                marker2.addTo(mapa.current);
-                // mark = marker2
-                // console.log(lastMarker)
-                setLastMarker2(marker2)
-            } else {
-                // console.log(lastMarker, lastMarker2)
-                // lastMarker2 = null
-
-                // if (lastMarker2) {
-                //     lastMarker2.remove()
-
-                // }
-                // if (lastMarker) {
-                //     lastMarker.remove()
-
-                // }
-
-                let marker1 = new mapboxgl.Marker({ color: 'red', rotation: 0 })
-                    .setLngLat([lon, lat])
-                    .setPopup(popup)
-
-
-
-
-                // setLatituD(lat.toString())
-                // setLongituD(lon.toString())
-
-                marker1.addTo(mapa.current);
-                // mark = marker2
-                // console.log(lastMarker)
-                setLastMarker(marker1)                // lastMarker.remove()
-                console.log("s", lastMarker)
-            }
 
 
 
@@ -215,21 +189,14 @@ export const MapaHome = (props) => {
 
         if (props.Datos_Casas) {
             let pepe = []
-            if (props.Datos_Casas[0]?.category == "Alquiler") {
-                const alquileres_casas = props.Datos_Casas?.map((item, index) => {
-                    pepe.push(item)
-                    // console.log(item.longitud, item.latitud, item.category)
-                    marcador(item.longitud, item.latitud, item.category)
 
-                });
-            } else {
-                const ventas_casas = props.Datos_Casas?.map((item, index) => {
-                    pepe.push(item)
-                    // console.log(item.longitud, item.latitud, item.category)
-                    marcador(item.longitud, item.latitud, item.category)
+            const alquileres_casas = props.Datos_Casas?.map((item, index) => {
+                pepe.push(item)
+                // console.log(item.longitud, item.latitud, item.category)
+                return marcador(item.longitud, item.latitud, item.category)
 
-                });
-            }
+            });
+
 
             // console.log("prueñashe ", pepe)
 
@@ -264,7 +231,7 @@ export const MapaHome = (props) => {
 
         // });
         // initializeMap();
-    }, [mark, mapa.current, store.alquileres, props.Datos_Casas[0]?.category])
+    }, [mapa.current, store.alquileres, props.Datos_Casas[0]?.category])
 
     function name() {
         //   if (mark) {
@@ -272,6 +239,8 @@ export const MapaHome = (props) => {
         lastMarker.remove()
         // }
     }
+
+
 
     return (
 
@@ -300,6 +269,7 @@ export const MapaHome = (props) => {
 MapaHome.propTypes = {
 
     Datos_Casas: PropTypes.array,
+
 
 
 };

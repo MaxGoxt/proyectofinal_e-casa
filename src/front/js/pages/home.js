@@ -9,6 +9,7 @@ import Casitas from "../component/Casitas.jsx";
 import SelectCasita from "../component/SelectCasita.jsx";
 import { CarouselPRO } from '../component/Carrousel2/carouselPRO.jsx'
 import MapaHome from '../component/mapaHome.jsx'
+import { Marker } from "mapbox-gl";
 
 export const Home = () => {
     const { store, actions } = useContext(Context);
@@ -17,14 +18,23 @@ export const Home = () => {
     const [register, setRegister] = useState("");
     const [registerST, setRegisterST] = useState("");
     const [casas_datos, setCasas_datos] = useState([]);
+    const [lastMarker, setLastMarker] = useState(null)
+
 
     const [showRentFilteredResults, setRentFilteredResults] = useState(false);
     const [showSalesFilteredResults, setSalesFilteredResults] = useState(false);
+
 
     useEffect(() => {
         actions.getAlquileres();
         actions.getVentas();
     }, [])
+
+    function añadirmark(mark) {
+        console.log(mark)
+        setLastMarker(mark)
+
+    }
 
     function alquileres() {
         if (login == "") {
@@ -85,7 +95,7 @@ export const Home = () => {
                 </div>
             </div>
             <div className="div_Mapa_Home">
-                <MapaHome Datos_Casas={casas_datos} />
+                <MapaHome Datos_Casas={casas_datos} añadirmark={(mark) => añadirmark(mark)} marcador={lastMarker} />
             </div>
             <ul className="animated animatedFadeInDown fadeInDown nav-container nav nav-pills nav-justified mt-5 bg-white p-3 rounded-top" id="ex1" role="tablist">
                 <li className="nav-item" role="presentation">
