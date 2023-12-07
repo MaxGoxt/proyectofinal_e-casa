@@ -9,7 +9,12 @@ import Casitas from "../component/Casitas.jsx";
 import SelectCasita from "../component/SelectCasita.jsx";
 import { CarouselPRO } from '../component/Carrousel2/carouselPRO.jsx'
 import MapaHome from '../component/mapaHome.jsx'
-import { Marker } from "mapbox-gl";
+import { Marker, remove } from "mapbox-gl";
+import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+
+
 
 export const Home = () => {
     const { store, actions } = useContext(Context);
@@ -19,7 +24,7 @@ export const Home = () => {
     const [registerST, setRegisterST] = useState("");
     const [casas_datos, setCasas_datos] = useState([]);
     const [lastMarker, setLastMarker] = useState(null)
-
+    console.log("prueba home", lastMarker)
 
     const [showRentFilteredResults, setRentFilteredResults] = useState(false);
     const [showSalesFilteredResults, setSalesFilteredResults] = useState(false);
@@ -30,6 +35,14 @@ export const Home = () => {
         actions.getVentas();
     }, [])
 
+
+
+    // useEffect(() => {
+    //     if (lastMarker != null) {
+    //         lastMarker.remove()
+    //     }
+    // }, [lastMarker])
+
     function añadirmark(mark) {
         console.log(mark)
         setLastMarker(mark)
@@ -38,26 +51,26 @@ export const Home = () => {
 
     function alquileres() {
         if (login == "") {
+            setCasas_datos([])
             setLogin("show active")
             setLoginST("active")
             setRegister("")
             setRegisterST("")
             // casas_datos.splice(0, casas_datos.length);
 
-            setCasas_datos([])
+
             setCasas_datos(store.alquileres)
         }
     }
 
     function ventas() {
         if (register == "") {
+            setCasas_datos([])
             setRegister("show active")
             setRegisterST("active")
             setLogin("")
             setLoginST("")
             // casas_datos.splice(0, casas_datos.length);
-
-            setCasas_datos([])
             setCasas_datos(store.ventas)
         }
     }
@@ -95,7 +108,7 @@ export const Home = () => {
                 </div>
             </div>
             <div className="div_Mapa_Home">
-                <MapaHome Datos_Casas={casas_datos} añadirmark={(mark) => añadirmark(mark)} marcador={lastMarker} />
+                <MapaHome Datos_Casas={casas_datos} añadir_marcador={(mark) => añadirmark(mark)} marcador={lastMarker} />
             </div>
             <ul className="animated animatedFadeInDown fadeInDown nav-container nav nav-pills nav-justified mt-5 bg-white p-3 rounded-top" id="ex1" role="tablist">
                 <li className="nav-item" role="presentation">
