@@ -131,7 +131,7 @@ function Details() {
   return (
     <div className='details-container mx-auto row d-flex cuerpo mt-5 azul-oscuro bg-celeste-claro'>
       <div className="details-card-container col-12 mt-4">
-      {/* <button onClick={()=>{navigate("/")}} className="btn btn-outline-secondary rounded-pill my-4"><span class="w-25 my-5 pb-3 fs-4"><i class="fa-solid fa-arrow-left-long me-2"></i>Seguir navegando</span></button> */}
+        {/* <button onClick={()=>{navigate("/")}} className="btn btn-outline-secondary rounded-pill my-4"><span class="w-25 my-5 pb-3 fs-4"><i class="fa-solid fa-arrow-left-long me-2"></i>Seguir navegando</span></button> */}
         <div className="card-header bigger-screen d-flex" style={{ height: "430px" }}>
           {store.casa?.images?.map((img, index) => (
             <img key={index} src={img.url} className="details-card-img" style={{ maxWidth: "100%", width: "20px", flexGrow: "1", objectFit: "cover", opacity: ".9", transition: ".5s ease" }} />
