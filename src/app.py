@@ -13,8 +13,7 @@ from api.admin import setup_admin
 from api.commands import setup_commands
 from flask_jwt_extended import JWTManager
 from flask_bcrypt import Bcrypt
-
-
+from auth import auth_required
 
 #from models import Person
 
@@ -59,6 +58,7 @@ def handle_invalid_usage(error):
 
 # generate sitemap with all your endpoints
 @app.route('/')
+@auth_required
 def sitemap():
     if ENV == "development":
         return generate_sitemap(app)
@@ -66,6 +66,7 @@ def sitemap():
 
 # any other endpoint will try to serve it like a static file
 @app.route('/<path:path>', methods=['GET'])
+@auth_required
 def serve_any_other_file(path):
     if not os.path.isfile(os.path.join(static_file_dir, path)):
         path = 'index.html'

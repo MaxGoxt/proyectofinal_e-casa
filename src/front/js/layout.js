@@ -9,7 +9,6 @@ import { Single } from "./pages/single";
 import injectContext from "./store/appContext";
 import { Login } from "./pages/login.jsx";
 import Details from "./pages/detallesdecasas";
-import Detailsventas from "./pages/detalle_casas_venta";
 import { Navbar } from "./component/navbar";
 import { Footer } from "./component/footer";
 import Perfil from "./pages/perfilUsuario";
@@ -20,13 +19,13 @@ import PerfilProp from "./pages/perfilPropietario";
 import VistaNosotros from "./pages/vista_nosotros.jsx";
 import Editarperfil from "./pages/editar_perfil";
 import VistaFooter from "./pages/footertyc.jsx";
-import {Propiedades} from "./pages/propiedades.jsx";
+import { Propiedades } from "./pages/propiedades.jsx";
 import { EditProp } from "./pages/edit_prop.jsx";
 import VistaTerminos from "./pages/vista_terminos.jsx";
-
 import { UpgradePlan } from "./pages/UpgradePlan.jsx";
 import { Payments } from './pages/Payments.jsx';
 import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import {Modal} from "./component/ModalLogin.jsx";
 
 //create your first component
 
@@ -37,6 +36,7 @@ const Layout = () => {
 
     if (!process.env.BACKEND_URL || process.env.BACKEND_URL == "") return <BackendURL />;
 
+
     return (
         <PayPalScriptProvider options={{
             "clientId": process.env.PAYPAL_CLIENT_ID
@@ -44,6 +44,7 @@ const Layout = () => {
             <BrowserRouter basename={basename}>
                 <ScrollToTop>
                     <Navbar />
+                    <Modal />
                     <Routes>
                         <Route element={<Home />} path="/" />
                         <Route element={<Demo />} path="/demo" />
@@ -54,7 +55,6 @@ const Layout = () => {
                         <Route element={<Details />} path="/details/:id" />
                         <Route element={<Upload />} path="/upload" />
                         <Route element={<EditUserView />} path="/edituser" />
-                        <Route element={<Detailsventas />} path="/detailsventas/:id" />
                         <Route element={<Perfil />} path="/perfil" />
                         <Route element={<Favoritos />} path="/favoritos" />
                         <Route element={<PerfilProp />} path="/perfilprop" />

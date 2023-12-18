@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Context } from "../store/appContext";
-import logoecasa from "../../img/logoe-casa.png";
 import "../../styles/navbar.css";
+import { Logo } from "./Logo.jsx";
 
 const defaultUserImage = "https://www.svgrepo.com/show/335455/profile-default.svg"
 
@@ -11,20 +11,23 @@ export const Navbar = () => {
 
 	const route = useLocation();
 
+
 	useEffect(() => {
 		actions.getPerfil();
 	}, []);
 
 	return (
-		!route.pathname.includes("signup") && !route.pathname.includes("login") && <nav className="fixed-top d-block navbar navbar-light bg-light">
-			<div className={`d-flex ${!route.pathname.includes("details") ? "otherplaces" : "container"} justify-content-between align-items-center`}>
+		!route.pathname.includes("signup") && !route.pathname.includes("login") && <nav className="fixed-top d-block navbar bg-celeste-claro shadow-sm">
+			<div className={`d-flex container justify-content-between align-items-center`}>
 				<Link to="/" className="text-decoration-none text-dark d-flex align-items-end">
-					<img className="mx-2" src={logoecasa} alt="logo ecasa" style={{ width: "40px" }} />
-					<span className="fs-4">E-CASA</span>
+					<div>
+						<Logo />
+					</div>
+					<span className="fs-4 azul-oscuro mb-1">E-CASA</span>
 				</Link>
 				<div className="d-flex align-items-center nav-setting-container">
 					<Link to="/upload" className="text-dark fw-bold text-decoration-none me-3 nav_upload_house">
-						<button type="button" className="btn btn-outline-success text-grey" style={{ fontSize: "16px" }}>Subé tu casa a E-CASA</button>
+						<button type="button" className="btn btn-outline-secondary text-grey" style={{ fontSize: "16px" }} data-bs-toggle="modal" data-bs-target="#staticBackdrop">Sube tu casa a E-CASA</button>
 					</Link>
 					{store.auth
 						? <div className="btn-group">
@@ -42,7 +45,7 @@ export const Navbar = () => {
 								</li>
 								{store.perfil.is_admin &&
 									<li>
-										<Link to={"/mis-propiedades/" + localStorage.getItem("user_id")}  className="dropdown-item text-decoration-none">
+										<Link to={"/mis-propiedades/" + localStorage.getItem("user_id")} className="dropdown-item text-decoration-none">
 											Ver mis propiedades
 										</Link>
 									</li>
@@ -60,25 +63,31 @@ export const Navbar = () => {
 									</li>
 								}
 								<li>
-									<Link onClick={() => actions.logout()} to="/login" className="dropdown-item text-decoration-none">
+									<Link onClick={() => actions.logout()} to="/login" className="dropdown-item text-decoration-none text-danger">
 										Cerrar sesión
+										<i className="fa-solid fa-right-from-bracket ms-4"></i>
 									</Link>
 								</li>
 							</ul>
 						</div>
 						: <div className="ml-auto">
 							<Link to="/login">
-								<button className="btn btn-primary">Iniciar sesión</button>
+								<button className="btn bg-azul-oscuro text-white">Iniciar sesión</button>
 							</Link>
 						</div>
 					}
 				</div>
 				<div className="ml-auto button-login-container">
-					<Link to="/login">
-						<button className="btn btn-primary">Iniciar sesión</button>
-					</Link>
+					{!store.auth && (
+						<div className="ml-auto">
+							<Link to="/login">
+								<button className="btn bg-azul-oscuro text-white">Iniciar sesión</button>
+							</Link>
+						</div>
+					)}
 				</div>
 			</div>
 		</nav >
 	);
 };
+

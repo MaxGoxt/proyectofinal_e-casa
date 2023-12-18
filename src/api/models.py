@@ -15,7 +15,8 @@ class User(db.Model):
     premium_level = db.Column(db.Integer, nullable=False)
     is_admin = db.Column(db.Boolean(), nullable=False)
     description = db.Column(db.String(500), nullable=True)
-    usuario_favoritos = db.relationship('Favorites', backref='user', lazy=True)
+    # lo de abajo genera error de que un propietario no puede poner su propia casa en favoritos
+    # usuario_favoritos = db.relationship('Favorites', backref='user', lazy=True)
     
     houses = db.relationship('House', backref='user', lazy=True)
     # house_id = db.Column(db.Integer, db.ForeignKey('house.id'))
@@ -36,7 +37,8 @@ class User(db.Model):
             "is_admin": self.is_admin,
             "accountCreationDate": self.account_creation_date,
             "description": self.description,
-            "usuario_favoritos": list(map(lambda item: item.serialize(),self.usuario_favoritos))
+            # serializar lo de abajo genera un bucle infinito lo que genera el error de que un propietario no puede poner su propia casa en sus favoritos
+            # "usuario_favoritos": list(map(lambda item: item.serialize(),self.usuario_favoritos)) 
             # do not serialize the password, its a security breach
         }
 
@@ -65,6 +67,8 @@ class House(db.Model):
     description = db.Column(db.String(300), nullable=False)
     category = db.Column(db.String(10), nullable=False)
     location = db.Column(db.String(150), nullable=False)
+    latitud = db.Column(db.String(100), nullable=False)
+    longitud = db.Column(db.String(100), nullable=False)
     number_of_rooms = db.Column(db.Integer, nullable=False)
     number_of_bathrooms = db.Column(db.Integer, nullable=False)
     parking = db.Column(db.Boolean(), nullable=False)
@@ -91,6 +95,8 @@ class House(db.Model):
             "category": self.category,
             "info_propietario": {"user_id":info_user.serialize()["id"],"name":info_user.serialize()["name"], "lastname":info_user.serialize()["lastname"],"description":info_user.serialize()["description"], "account_creation_date":info_user.serialize()["accountCreationDate"], "profile_picture":info_user.serialize()["profile_picture"]},#list(map(lambda item: item.serialize(),self.user)),
             "location": self.location,
+            "latitud": self.latitud,
+            "longitud": self.longitud,
             "numberOfRooms": self.number_of_rooms,
             "numberOfBathrooms": self.number_of_bathrooms,
             "parking": self.parking,
@@ -129,8 +135,6 @@ class Favorites(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     house_id = db.Column(db.Integer, db.ForeignKey('house.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    
-
 
     # userId = db.relationship("User")
     houseId = db.relationship("House")
@@ -144,5 +148,4 @@ class Favorites(db.Model):
             "id": self.id,
             "userId": self.user_id,
             "houseId": None if self.houseId is None else self.houseId.serialize(),
-
         }

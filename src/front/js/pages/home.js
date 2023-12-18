@@ -5,6 +5,10 @@ import "../../styles/home.css";
 import { PanelCtrl } from "../component/panel_control.jsx";
 import { CardHouseFeed } from "../component/CardHouseFeed.jsx";
 import { FilterMenu } from "../component/FilterMenu.jsx";
+import Casitas from "../component/Casitas.jsx";
+import SelectCasita from "../component/SelectCasita.jsx";
+import { CarouselPRO } from '../component/Carrousel2/carouselPRO.jsx'
+import { MapaHome } from '../component/mapaHome.jsx'
 
 export const Home = () => {
     const { store, actions } = useContext(Context);
@@ -12,6 +16,8 @@ export const Home = () => {
     const [loginST, setLoginST] = useState("active");
     const [register, setRegister] = useState("");
     const [registerST, setRegisterST] = useState("");
+    const [bannerVisibility, setBannerVisibility] = useState("");
+    const [mapaVisibility, setMapaVisibility] = useState("d-none");
 
     const [showRentFilteredResults, setRentFilteredResults] = useState(false);
     const [showSalesFilteredResults, setSalesFilteredResults] = useState(false);
@@ -20,8 +26,6 @@ export const Home = () => {
         actions.getAlquileres();
         actions.getVentas();
     }, [])
-    
-
 
     function alquileres() {
         if (login == "") {
@@ -29,6 +33,7 @@ export const Home = () => {
             setLoginST("active")
             setRegister("")
             setRegisterST("")
+
         }
     }
 
@@ -40,7 +45,7 @@ export const Home = () => {
             setLoginST("")
         }
     }
-
+    console.log("alquileres ", store.alquileres)
     const filterRentByPrice = (minPriceSlider, maxPriceSlider) => {
         actions.filterRentByPrice(minPriceSlider, maxPriceSlider);
         setRentFilteredResults(true);
@@ -51,32 +56,52 @@ export const Home = () => {
         setSalesFilteredResults(true);
     }
 
+
+
     return (
         <div className="text-white my-5">
-            <div className="position-relative">
-                <img src="https://img.freepik.com/free-photo/real-estate-concept-happy-young-man-searching-home-rent-holding-house-paper-maket-smiling-st_1258-180715.jpg?w=1380&t=st=1694889637~exp=1694890237~hmac=9412f7c3727bd8fbf35f49c5aa70dcf6ff5335c54788b14234e659e6a9d8144d" alt="banner" className="w-100 hero-image" style={{ height: "320px", objectFit: "cover", objectPosition: "top" }} />
-                <div className="position-absolute top-0 start-0 p-5 w-75 h-100">
-                    <h2 className="azul-oscuro fs-1 fw-bolder">Encuentra tu lugar <br/> aquí ⬇️</h2>
-                </div>
-            </div>
-            <ul className="nav-container nav nav-pills nav-justified mt-5" id="ex1" role="tablist">
+            {/* <img src="https://img.freepik.com/free-photo/real-estate-concept-happy-young-man-searching-home-rent-holding-house-paper-maket-smiling-st_1258-180715.jpg?w=1380&t=st=1694889637~exp=1694890237~hmac=9412f7c3727bd8fbf35f49c5aa70dcf6ff5335c54788b14234e659e6a9d8144d" 
+        alt="banner" 
+        className="w-100 hero-image shadow-lg" 
+        style={{ height: "320px", objectFit: "cover", objectPosition: "top" }} 
+    /> */}
+            {/* <div className="d-flex position-absolute top-0 start-0 p-4 w-75 h-100"> */}
+            {/* <h2 className="azul-oscuro fs-1 fw-bolder animated animatedFadeInUp fadeInUp">Encuentra tu lugar <br /> aquí</h2> */}
+            {/* <div className="position-absolute m-5" style={{ width: '25%', minWidth: "100px" }}> */}
+            {/* <Casitas /> */}
+            {/* <SelectCasita/> */}
+            {/* </div> */}
+            {/* </div> */}
+            <CarouselPRO className={bannerVisibility + " pt-4 mt-5"} />
+            <MapaHome mapaVisibility={mapaVisibility + " mt-5 pt-4"} />
+            <ul className="animated animatedFadeInDown fadeInDown nav-container nav nav-pills nav-justified mt-5 bg-white p-3 rounded-top" id="ex1" role="tablist">
                 <li className="nav-item" role="presentation">
-                    <h2 className={"nav-link " + loginST} id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
-                        aria-controls="pills-login" aria-selected="true" onClick={() => alquileres()}>Alquileres</h2>
+                    <h2 className={"bg-azul-oscuro rounded me-1 py-1 " + loginST} id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
+                        aria-controls="pills-login" aria-selected="true"
+                        onClick={() => {
+                            alquileres(),
+                            setMapaVisibility("")
+                            setBannerVisibility("d-none")
+                        }}>Alquileres</h2>
                 </li>
                 <li className="nav-item" role="presentation">
-                    <h2 className={"nav-link " + registerST} id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab"
-                        aria-controls="pills-register" aria-selected="false" onClick={() => ventas()}>Ventas</h2>
+                    <h2 className={"bg-azul-oscuro rounded ms-1 py-1 " + registerST} id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab"
+                        aria-controls="pills-register" aria-selected="false" 
+                        onClick={() => {
+                            ventas(),
+                            setMapaVisibility("")
+                            setBannerVisibility("d-none")
+                        }}>Ventas</h2>
                 </li>
             </ul>
-            <div className="tab-content container-alquileres">
+            <div className="tab-content container-alquileres animated animatedFadeInDown fadeInDown">
                 <div className={"tab-pane fade " + login}>
                     <FilterMenu
                         setShowFilteredResults={setRentFilteredResults}
                         filter={filterRentByPrice}
                         maxValue={100000}
                     />
-                    <div className={"row"} id="pills-login" role="tabpanel" aria-labelledby="tab-login">
+                    <div className={"row gap-1"} id="pills-login" role="tabpanel" aria-labelledby="tab-login">
                         {!showRentFilteredResults
                             ? store.alquileres.map(item => (
                                 <CardHouseFeed
@@ -84,7 +109,9 @@ export const Home = () => {
                                     location={item.location}
                                     price={item.price}
                                     id={item.id}
-                                    images={item.images} />
+                                    images={item.images}
+                                    title={item.title}
+                                />
                             ))
                             : store.filterRent.map(item => (
                                 <CardHouseFeed
@@ -92,7 +119,10 @@ export const Home = () => {
                                     location={item.location}
                                     price={item.price}
                                     id={item.id}
-                                    images={item.images} />
+                                    images={item.images}
+                                    title={item.title}
+                                />
+
                             ))
                         }
                     </div>
@@ -103,7 +133,7 @@ export const Home = () => {
                         filter={filterSalesByPrice}
                         maxValue={1000000}
                     />
-                    <div className={"row"} id="pills-register" role="tabpanel" aria-labelledby="tab-register">
+                    <div className={"row gap-3"} id="pills-register" role="tabpanel" aria-labelledby="tab-register">
                         {!showSalesFilteredResults
                             ? store.ventas.map(item => (
                                 <CardHouseFeed
@@ -111,7 +141,9 @@ export const Home = () => {
                                     location={item.location}
                                     price={item.price}
                                     id={item.id}
-                                    images={item.images} />
+                                    images={item.images}
+                                    title={item.title}
+                                />
                             ))
                             : store.filterSales.map(item => (
                                 <CardHouseFeed
@@ -119,7 +151,9 @@ export const Home = () => {
                                     location={item.location}
                                     price={item.price}
                                     id={item.id}
-                                    images={item.images} />
+                                    images={item.images}
+                                    title={item.title}
+                                />
                             ))
                         }
                     </div>

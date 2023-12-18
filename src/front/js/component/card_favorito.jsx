@@ -1,67 +1,75 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
 import { useState, useEffect, useContext } from 'react';
+import { Carousel } from "./Carousel.jsx";
 
 
 export const CardFav = (props) => {
     const { store, actions } = useContext(Context)
-
+    const nav = useNavigate()
     const [isFavorito, setIsFavorito] = useState(true);
 
-    
+    let imagesUrl = props.images.map((i) => { return i.url })
 
     const toggleFavorito = () => {
         setIsFavorito(!isFavorito);
         if (isFavorito) {
             // Llama a la función para eliminar el favorito
             actions.deleteFavoritos(props.id);
-        }else{
+        } else {
             actions.createFavoritos(props.id)
         }
     };
 
     return (
         <>
-            <div className="col-12 col-md-6 col-xl-4">
-                <div className="m-1 border border-2 rounded-3 row px-2 py-3">
-                    <div className="d-flex mb-3">
-                        <img src={props.images[0].url} className="rounded rounded-4" style={{ width: "80px", height: "60px", objectFit: "cover" }} alt="..." />
-                        <div className="mt-0 p-0 ms-4">
-                            <p className="m-0  fw-bold fs-5">{props.title}</p>
+            <div className="col-sm-12 col-md-12 col-lg-6 col-xl-5 mx-auto my-2 bg-white shadow border border-2 rounded-3 azul-oscuro">
+                <div className="m-1 row px-2 py-3">
+                    <div className="col-12">
+                        <div className="col-sm-12 col-xl-12">
+                            <Carousel imagesUrl={imagesUrl} />
+                        </div>
+                        <div className="card-body px-0 py-0 col-sm-12 col-xl-12">
+                            <h4 className="fw-bold m-2" style={{overflow:"hidden",textOverflow: "ellipsis", whiteSpace:"nowrap"}}>{props.title}</h4>
+                            <p className="card-text m-2" style={{overflow:"hidden",textOverflow: "ellipsis", whiteSpace:"nowrap"}}><small>{props.description}</small></p>
+                            <p className="card-text m-2">{props.wifi ? <small>Wifi: ✔️</small> : <small>Wifi: ✖️</small>}</p>
+                            <p className="card-text m-2">{props.parking ? <small>Estacionamiento: ✔️</small> : <small>Estacionamiento: ✖️</small>}</p>
                         </div>
                     </div>
-                    <div className="d-flex justify-content-between float-end">
-                        <p className="m-0" style={{ textDecoration: "underline" }}>{props.location}</p>
-                        <button onClick={toggleFavorito} className="btn m-0 p-0" > {isFavorito ?
-                            <i style={{ fontSize: "20px", color: "red" }} className="fa-solid fa-heart px-1 fs-3"></i> :
-                            <i style={{ fontSize: "20px", color: "red" }} className="fa-regular fa-heart px-1 fs-3"></i>
-                        }</button>
+                    <div className="d-flex justify-content-between px-3 float-end">
+                        <div>
+                            <p className="card-text col-10" style={{overflow:"hidden",textOverflow: "ellipsis", whiteSpace:"nowrap"}}><small className="text-body-secondary text-break">{props.location}</small></p>
+                            <p className="card-text">
+                                <small className="text-body-secondary">{props.category} a </small>{props.category == "Venta" ?
+                                    <small>USD${props.price}</small> :
+                                    <small>${props.price}</small>}
+                            </p>
+                        </div>
+                        <div className="my-auto row">
+                            <button onClick={toggleFavorito} className="btn m-0 p-0" > {isFavorito ?
+                                <i style={{ fontSize: "20px", color: "red" }} className="fa-solid fa-heart px-1 fs-3"></i> :
+                                <i style={{ fontSize: "20px", color: "red" }} className="fa-regular fa-heart px-1 fs-3"></i>
+                            }</button>
+                            <button className="boton demo-boton second" onClick={() => nav("/details/" + props.id)}>Ver detalles</button>
+                        </div>
                     </div>
-                    <div className="d-flex justify-content-between px-1">
-                    <p className="card-text"><small className="text-body-secondary">
-                        </small>{props.category == "Venta" ? <small>USD${props.price}</small> : <small>${props.price}</small>}</p>
-                    <Link to={"/details/" + props.id} style={{ textDecoration: "underline" }}>Ver detalles</Link>
-                </div>
                 </div>
             </div>
         </>
-
-
-
-
     );
 }
 
 CardFav.propTypes = {
 
-    ubicacion: PropTypes.string,
+    location: PropTypes.string,
     id: PropTypes.number,
-    imageUrl: PropTypes.string,
+    imageUrl: PropTypes.array,
     titulo: PropTypes.string,
     price: PropTypes.number,
     category: PropTypes.string,
+    description: PropTypes.string
 
 };
 
