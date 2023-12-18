@@ -1,7 +1,8 @@
 import React from 'react';
 import "./style.css";
+import PropTypes from "prop-types";
 
-export const CarouselPRO = () => {
+export const CarouselPRO = (props) => {
 
   class CitiesSlider extends React.Component {
     constructor(props) {
@@ -77,6 +78,6 @@ export const CarouselPRO = () => {
   ];
 
   return (
-    <div id="carrouse-pro">{React.createElement(CitiesSlider, { slides: slides})}</div>
+    <div className={props.className} id="carrouse-pro">{React.createElement(CitiesSlider, { slides: slides})}</div>
   );
 };

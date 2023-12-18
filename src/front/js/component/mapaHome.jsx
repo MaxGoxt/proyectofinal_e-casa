@@ -12,9 +12,10 @@ import { Map } from 'mapbox-gl';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '../../styles/prueba.css';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
-import { element } from "prop-types";
+// import { element } from "prop-types";
+import PropTypes from "prop-types";
 
-export const MapaHome = () => {
+export const MapaHome = (props) => {
 
     const { store, actions } = useContext(Context)
     const navigate = useNavigate();
@@ -53,7 +54,8 @@ export const MapaHome = () => {
 
     // console.log(mapa)
 
-    const initializeMap = () => {
+    const initializeMap = (props) => {
+
 
         if (mapa.current) {
             return
@@ -165,22 +167,20 @@ export const MapaHome = () => {
 
     return (
 
-        <div>
-            <div className='row col-12'>
-                <pre id="info" style={misEstilos}></pre>
-                {/* <div id="geocoder" className="  geocoder"></div> */}
-                <div className='row col-12 '>
-                    <div id='mapi' ref={mapaconteiner}
-                        style={{
-                            // backgroundColor: 'red',
-                            height: '500px',
-                            width: '100vw',
-                        }}>
-                    </div>
-                </div>
+        <div className={props.mapaVisibility}>
+            {/* <div id="geocoder" className="  geocoder"></div> */}
+            <div id='mapi' ref={mapaconteiner}
+                style={{
+                    // backgroundColor: 'red',
+                    height: '700px',
+                    width: '100%',
+                }}>
             </div>
         </div>
     )
 }
 
-export default MapaHome;
+MapaHome.propTypes = {
+    mapaVisibility: PropTypes.string,
+};
+

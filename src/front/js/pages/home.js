@@ -8,7 +8,7 @@ import { FilterMenu } from "../component/FilterMenu.jsx";
 import Casitas from "../component/Casitas.jsx";
 import SelectCasita from "../component/SelectCasita.jsx";
 import { CarouselPRO } from '../component/Carrousel2/carouselPRO.jsx'
-import MapaHome from '../component/mapaHome.jsx'
+import { MapaHome } from '../component/mapaHome.jsx'
 
 export const Home = () => {
     const { store, actions } = useContext(Context);
@@ -16,6 +16,8 @@ export const Home = () => {
     const [loginST, setLoginST] = useState("active");
     const [register, setRegister] = useState("");
     const [registerST, setRegisterST] = useState("");
+    const [bannerVisibility, setBannerVisibility] = useState("");
+    const [mapaVisibility, setMapaVisibility] = useState("d-none");
 
     const [showRentFilteredResults, setRentFilteredResults] = useState(false);
     const [showSalesFilteredResults, setSalesFilteredResults] = useState(false);
@@ -31,6 +33,7 @@ export const Home = () => {
             setLoginST("active")
             setRegister("")
             setRegisterST("")
+
         }
     }
 
@@ -57,32 +60,38 @@ export const Home = () => {
 
     return (
         <div className="text-white my-5">
-            <div className="position-relative">
-                {/* <img src="https://img.freepik.com/free-photo/real-estate-concept-happy-young-man-searching-home-rent-holding-house-paper-maket-smiling-st_1258-180715.jpg?w=1380&t=st=1694889637~exp=1694890237~hmac=9412f7c3727bd8fbf35f49c5aa70dcf6ff5335c54788b14234e659e6a9d8144d" 
-                alt="banner" 
-                className="w-100 hero-image shadow-lg" 
-                style={{ height: "320px", objectFit: "cover", objectPosition: "top" }} 
-                /> */}
-                <CarouselPRO />
-                <div className="d-flex position-absolute top-0 start-0 p-4 w-75 h-100">
-                    {/* <h2 className="azul-oscuro fs-1 fw-bolder animated animatedFadeInUp fadeInUp">Encuentra tu lugar <br /> aquí</h2> */}
-                    <div className="position-absolute m-5" style={{ width: '25%', minWidth: "100px" }}>
-                        {/* <Casitas /> */}
-                        {/* <SelectCasita/> */}
-                    </div>
-                </div>
-            </div>
-
-            <MapaHome />
-
+            {/* <img src="https://img.freepik.com/free-photo/real-estate-concept-happy-young-man-searching-home-rent-holding-house-paper-maket-smiling-st_1258-180715.jpg?w=1380&t=st=1694889637~exp=1694890237~hmac=9412f7c3727bd8fbf35f49c5aa70dcf6ff5335c54788b14234e659e6a9d8144d" 
+        alt="banner" 
+        className="w-100 hero-image shadow-lg" 
+        style={{ height: "320px", objectFit: "cover", objectPosition: "top" }} 
+    /> */}
+            {/* <div className="d-flex position-absolute top-0 start-0 p-4 w-75 h-100"> */}
+            {/* <h2 className="azul-oscuro fs-1 fw-bolder animated animatedFadeInUp fadeInUp">Encuentra tu lugar <br /> aquí</h2> */}
+            {/* <div className="position-absolute m-5" style={{ width: '25%', minWidth: "100px" }}> */}
+            {/* <Casitas /> */}
+            {/* <SelectCasita/> */}
+            {/* </div> */}
+            {/* </div> */}
+            <CarouselPRO className={bannerVisibility + " pt-4 mt-5"} />
+            <MapaHome mapaVisibility={mapaVisibility + " mt-5 pt-4"} />
             <ul className="animated animatedFadeInDown fadeInDown nav-container nav nav-pills nav-justified mt-5 bg-white p-3 rounded-top" id="ex1" role="tablist">
                 <li className="nav-item" role="presentation">
                     <h2 className={"bg-azul-oscuro rounded me-1 py-1 " + loginST} id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
-                        aria-controls="pills-login" aria-selected="true" onClick={() => alquileres()}>Alquileres</h2>
+                        aria-controls="pills-login" aria-selected="true"
+                        onClick={() => {
+                            alquileres(),
+                            setMapaVisibility("")
+                            setBannerVisibility("d-none")
+                        }}>Alquileres</h2>
                 </li>
                 <li className="nav-item" role="presentation">
                     <h2 className={"bg-azul-oscuro rounded ms-1 py-1 " + registerST} id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab"
-                        aria-controls="pills-register" aria-selected="false" onClick={() => ventas()}>Ventas</h2>
+                        aria-controls="pills-register" aria-selected="false" 
+                        onClick={() => {
+                            ventas(),
+                            setMapaVisibility("")
+                            setBannerVisibility("d-none")
+                        }}>Ventas</h2>
                 </li>
             </ul>
             <div className="tab-content container-alquileres animated animatedFadeInDown fadeInDown">
