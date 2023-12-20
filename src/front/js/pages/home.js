@@ -60,7 +60,7 @@ export const Home = () => {
 
     return (
         <div className="text-white my-5">
-            {/*<img src="https://img.freepik.com/free-photo/real-estate-concept-happy-young-man-searching-home-rent-holding-house-paper-maket-smiling-st_1258-180715.jpg?w=1380&t=st=1694889637~exp=1694890237~hmac=9412f7c3727bd8fbf35f49c5aa70dcf6ff5335c54788b14234e659e6a9d8144d" 
+            {/* <img src="https://img.freepik.com/free-photo/real-estate-concept-happy-young-man-searching-home-rent-holding-house-paper-maket-smiling-st_1258-180715.jpg?w=1380&t=st=1694889637~exp=1694890237~hmac=9412f7c3727bd8fbf35f49c5aa70dcf6ff5335c54788b14234e659e6a9d8144d" 
         alt="banner" 
         className="w-100 hero-image shadow-lg" 
         style={{ height: "320px", objectFit: "cover", objectPosition: "top" }} 
